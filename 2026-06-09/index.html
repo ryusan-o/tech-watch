@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Weekly Tech Watch — 2026-06-09</title>
+<style>
+:root {
+  --bg: #f8fafc;
+  --bg-card: #ffffff;
+  --bg-highlight: #eff6ff;
+  --text: #1e293b;
+  --text-muted: #64748b;
+  --text-light: #94a3b8;
+  --accent: #3b82f6;
+  --border: #e2e8f0;
+  --shadow: 0 1px 3px rgba(0,0,0,.08);
+  --badge-changelog: #3b82f6;
+  --badge-mcp: #8b5cf6;
+  --badge-trending: #f59e0b;
+  --badge-plugin: #10b981;
+  --badge-awesome: #f43f5e;
+  --badge-skills: #06b6d4;
+}
+@media(prefers-color-scheme:dark){
+:root {
+  --bg: #0f172a;
+  --bg-card: #1e293b;
+  --bg-highlight: #1e3a5f;
+  --text: #e2e8f0;
+  --text-muted: #94a3b8;
+  --text-light: #64748b;
+  --accent: #60a5fa;
+  --border: #334155;
+  --shadow: 0 1px 3px rgba(0,0,0,.3);
+}}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  background:var(--bg);color:var(--text);
+  line-height:1.6;padding:16px;
+}
+.container{max-width:760px;margin:0 auto}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* Header */
+.header{text-align:center;padding:32px 0 24px}
+.header h1{font-size:1.5rem;font-weight:700;letter-spacing:-.02em}
+.header .date-range{color:var(--text-muted);font-size:.875rem;margin-top:4px}
+
+/* Stats */
+.stat-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));
+  gap:8px;margin:0 0 32px;
+}
+.stat-card{
+  background:var(--bg-card);border:1px solid var(--border);border-radius:8px;
+  padding:12px;text-align:center;box-shadow:var(--shadow);
+}
+.stat-card .num{font-size:1.5rem;font-weight:700;color:var(--accent)}
+.stat-card .label{font-size:.75rem;color:var(--text-muted);margin-top:2px}
+
+/* Section heading */
+.section-heading{
+  font-size:1.125rem;font-weight:700;margin:32px 0 16px;
+  padding-bottom:8px;border-bottom:2px solid var(--accent);
+}
+
+/* Highlight cards */
+.highlight-card{
+  background:var(--bg-highlight);border:1px solid var(--border);
+  border-radius:12px;padding:20px;margin-bottom:16px;
+  border-left:4px solid var(--accent);
+}
+.highlight-card .hl-title{font-size:1rem;font-weight:700;margin-bottom:8px}
+.highlight-card .hl-title a{color:var(--text)}
+.highlight-card .hl-desc{font-size:.875rem;color:var(--text-muted);margin-bottom:12px}
+.highlight-card .hl-scenario{
+  font-size:.875rem;line-height:1.7;
+  background:var(--bg-card);border-radius:8px;padding:12px;margin-bottom:8px;
+}
+.highlight-card .hl-action{
+  font-size:.8125rem;color:var(--accent);font-weight:600;
+}
+.highlight-card .hl-action::before{content:"→ "}
+
+/* Topic section */
+.topic{
+  background:var(--bg-card);border:1px solid var(--border);
+  border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:var(--shadow);
+}
+.topic-title{font-size:1rem;font-weight:700;margin-bottom:4px}
+.topic-summary{font-size:.8125rem;color:var(--text-muted);margin-bottom:16px}
+
+/* Item list */
+.item{
+  padding:10px 0;border-bottom:1px solid var(--border);
+  display:flex;gap:10px;align-items:flex-start;
+}
+.item:last-child{border-bottom:none;padding-bottom:0}
+.badge{
+  display:inline-block;font-size:.625rem;font-weight:700;
+  color:#fff;padding:2px 8px;border-radius:10px;white-space:nowrap;
+  flex-shrink:0;margin-top:3px;text-transform:uppercase;letter-spacing:.03em;
+}
+.badge-changelog{background:var(--badge-changelog)}
+.badge-mcp{background:var(--badge-mcp)}
+.badge-trending{background:var(--badge-trending)}
+.badge-plugin{background:var(--badge-plugin)}
+.badge-awesome{background:var(--badge-awesome)}
+.badge-skills{background:var(--badge-skills)}
+.item-body{flex:1;min-width:0}
+.item-title{font-size:.875rem;font-weight:600}
+.item-desc{font-size:.8125rem;color:var(--text-muted);margin-top:2px}
+.item-meta{font-size:.75rem;color:var(--text-light);margin-top:4px}
+.item-meta .stars::before{content:"\2B50 "}
+
+/* Footer */
+.footer{
+  text-align:center;color:var(--text-light);font-size:.75rem;
+  padding:32px 0 16px;border-top:1px solid var(--border);margin-top:32px;
+}
+
+/* No items */
+.empty{color:var(--text-light);font-style:italic;font-size:.875rem;padding:8px 0}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header class="header">
+  <h1>Weekly Tech Watch</h1>
+  <div class="date-range">2026-06-02 ~ 2026-06-09</div>
+</header>
+
+<div class="stat-grid">
+<div class="stat-card"><div class="num">7</div><div class="label">Claude Code</div></div>
+<div class="stat-card"><div class="num">10</div><div class="label">Trending</div></div>
+<div class="stat-card"><div class="num">1</div><div class="label">Skills</div></div>
+</div>
+
+<h2 class="section-heading">Highlights</h2>
+<div class="highlight-card">
+  <div class="hl-title"><a href="https://code.claude.com/docs/en/changelog">Claude Code v2.1.169</a></div>
+  <div class="hl-desc">Added --safe-mode flag (and CLAUDE_CODE_SAFE_MODE) to start Claude Code with all customizations (CLAUDE.md, plugins, skills, hooks, MCP servers) disabled for troubleshooting</div>
+  <div class="hl-scenario">Claude Codeの`--safe-mode`フラグは、Claude Codeをメインで使うりゅうさんにとって、カスタマイズ起因の不具合切り分けを容易にし、「分解と再構築」の思考をAIツールにも適用できます。これにより、PersonalOSやDevLogSNSなどの開発・運用におけるデバッグ時間を短縮し、実行のスピードアップに貢献します。また、AI経営スキル講座の受講者やWONDAYコンサルティングのクライアントがClaude Codeを導入・カスタマイズする際に、予期せぬ問題発生時の自己解決能力を高めるツールとして提案可能です。WONDAY-OSやクライアント導入標準パッケージにおいて、提供するカスタマイズが原因で不具合が生じた際の診断プロセスに組み込み、HealthCheckの精度向上にも繋がります。</div>
+  <div class="hl-action">次回Claude Codeで不具合発生時、`claude-code --safe-mode`で起動し原因切り分けを試す。</div>
+</div>
+<div class="highlight-card">
+  <div class="hl-title"><a href="https://code.claude.com/docs/en/changelog">Claude Code v2.1.162</a></div>
+  <div class="hl-desc">Improved background service startup and claude update verification to wait out endpoint-security scanning of new binaries instead of failing after 5 seconds</div>
+  <div class="hl-scenario">Claude Codeをメインに活用するりゅうさんにとって、RyuThinkなどのローカル環境での起動やアップデート時の安定性が向上し、日々の開発ワークフローがよりスムーズになります。特に「完璧主義で着手が遅れる」という課題に対し、ツールの安定稼働はストレス軽減に直結し、DevLogSNSやPersonalOSの開発効率向上に貢献します。また、AI経営スキル講座の受講者や、不動産屋向け電子契約サービス選定コンサルのようなセキュリティ意識の高いクライアントに対し、Claude Codeの信頼性と安定性をアピールする材料として活用できます。WONDAY-OSの基盤としてのClaude Codeの安定性向上は、サービス全体の品質向上にも繋がります。</div>
+  <div class="hl-action">AI経営スキル講座の資料にClaude Codeの安定性向上（セキュリティスキャン対応）を追記し、クライアントへの安心材料として活用する。</div>
+</div>
+<div class="highlight-card">
+  <div class="hl-title"><a href="https://github.com/Egonex-AI/Understand-Anything">GitHub: Egonex-AI/Understand-Anything</a></div>
+  <div class="hl-desc">Graphs that teach &gt; graphs that impress. Turn any code into an interactive knowledge graph you can explore, search, and ask questions about. Works with Claude Code, Codex, Cursor, Copilot, Gemini CLI...</div>
+  <div class="hl-scenario">「プログラミング経験はほぼなく「超初心者」を自認」するりゅうさんにとって、「Understand-Anything」は「Claude Code / 開発環境」で書かれたコードや「DevLogSNS」のコードベースを知識グラフ化し、コード理解のハードルを下げ「完璧主義で着手が遅れる」課題克服に直結します。また、「WONDAYコンサルティング（Claude Code最適化）」のクライアントや「AI経営スキル講座」の受講者に対し、導入したAIツールのコードを可視化し、内製化や保守・改善を促進する具体的なソリューションとして提案可能。「WONDAY-OS（AI運用基盤）」の拡張性・保守性向上にも寄与し、クライアント導入標準パッケージの価値を高めます。</div>
+  <div class="hl-action">自身の「Claude Code / 開発環境」にUnderstand-Anythingをインストールし、既存のPythonスクリプトで知識グラフ生成を試す。</div>
+</div>
+
+<h2 class="section-heading">Topics</h2>
+<div class="topic">
+  <div class="topic-title">Claude Code機能強化</div>
+  <div class="topic-summary">Claude Codeの最新バージョンにおけるセーフモード、フォールバックモデル、バージョン管理、エージェント機能などの新機能と改善。</div>
+<div class="item">
+  <span class="badge badge-changelog">CHANGELOG</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://code.claude.com/docs/en/changelog">v2.1.169</a></div>
+    <div class="item-desc">Added --safe-mode flag (and CLAUDE_CODE_SAFE_MODE) to start Claude Code with all customizations (CLAUDE.md, plugins, skills, hooks, MCP servers) disabled for troubleshooting, Added /cd command to move a session to a new working directory without breaking the prompt cache mid-session, Added a disableBundledSkills setting and CLAUDE_CODE_DISABLE_BUNDLED_SKILLS environment variable to hide bundled skills, workflows, and built-in slash commands from the model</div>
+    <div class="item-meta">June 8, 2026</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-changelog">CHANGELOG</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://code.claude.com/docs/en/changelog">v2.1.166</a></div>
+    <div class="item-desc">Added fallbackModel setting to configure up to three fallback models tried in order when the primary model is overloaded or unavailable; --fallback-model now also applies to interactive sessions, Added glob pattern support in deny rule tool-name position (&quot;*&quot; denies all tools); allow rules reject non-MCP globs, and unknown tool names in deny rules warn at startup, Hardened cross-session messaging: messages relayed via SendMessage from other Claude sessions no longer carry user authority — receivers refuse relayed permission requests, and auto mode blocks them</div>
+    <div class="item-meta">June 6, 2026</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-changelog">CHANGELOG</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://code.claude.com/docs/en/changelog">v2.1.163</a></div>
+    <div class="item-desc">Added requiredMinimumVersion and requiredMaximumVersion managed settings — Claude Code refuses to start if its version is outside the allowed range and directs the user to an approved version, Added /plugin list command to list installed plugins, with --enabled/--disabled filters, Added a “c to copy” shortcut to /btw that copies the raw markdown answer to the clipboard, preserving formatting when pasted elsewhere</div>
+    <div class="item-meta">June 4, 2026</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-changelog">CHANGELOG</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://code.claude.com/docs/en/changelog">v2.1.162</a></div>
+    <div class="item-desc">claude agents --json now includes waitingFor showing what a waiting session is blocked on (e.g. permission prompt), --tools: explicitly listing Grep/Glob now provides the dedicated search tools on native builds with embedded search (previously these names were silently ignored), /effort now confirms when your chosen level will persist as the default for new sessions</div>
+    <div class="item-meta">June 3, 2026</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-skills">SKILLS</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/anthropics/skills/commit/c30d329">Update claude-api skill: auth, cloud providers, Managed Agents fixes, token coun</a></div>
+    <div class="item-meta">2026-06-07</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">AIエージェント開発基盤</div>
+  <div class="topic-summary">AIエージェントの構築、管理、機能拡張を支援するプラットフォーム、ツールキット、スキルライブラリの紹介。</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/github/github-mcp-server">github/github-mcp-server</a></div>
+    <div class="item-desc">GitHub&#x27;s official MCP Server</div>
+    <div class="item-meta"><span class="stars">30536</span></div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/ComposioHQ/composio">ComposioHQ/composio</a></div>
+    <div class="item-desc">Composio powers 1000+ toolkits, tool search, context management, authentication, and a sandboxed workbench to help you build AI agents that turn intent into action.</div>
+    <div class="item-meta"><span class="stars">28700</span></div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/K-Dense-AI/scientific-agent-skills">K-Dense-AI/scientific-agent-skills</a></div>
+    <div class="item-desc">Turn any AI agent into an AI Scientist. The #1 Agent Skills library for science, used by 160,000+ scientists worldwide. 140 ready-to-use skills plus 100+ scientific databases covering biology, chemistry, medicine, and drug discovery. Compatible with Cursor, Claude Code, Codex, Antigravity, and the open Agent Skills standard.</div>
+    <div class="item-meta"><span class="stars">27728</span></div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/oraios/serena">oraios/serena</a></div>
+    <div class="item-desc">A powerful MCP toolkit for coding, providing semantic retrieval and editing capabilities  - the IDE for your agent</div>
+    <div class="item-meta"><span class="stars">25150</span></div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">特殊AIソリューション</div>
+  <div class="topic-summary">コードを知識グラフ化するツール、AIモデルAPIプロキシ、ベクトルレスRAG、ローカルAIエージェントなど、多様なAI応用例。</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/Egonex-AI/Understand-Anything">Egonex-AI/Understand-Anything</a></div>
+    <div class="item-desc">Graphs that teach &gt; graphs that impress. Turn any code into an interactive knowledge graph you can explore, search, and ask questions about. Works with Claude Code, Codex, Cursor, Copilot, Gemini CLI, and more.</div>
+    <div class="item-meta"><span class="stars">55744</span></div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/router-for-me/CLIProxyAPI">router-for-me/CLIProxyAPI</a></div>
+    <div class="item-desc">Wrap Gemini CLI, Antigravity, ChatGPT Codex, Claude Code, Grok Build as an OpenAI/Gemini/Claude/Codex compatible API service, allowing you to enjoy the free Gemini 3.1 Pro, GPT 5.5, Grok 4.3, Claude model through API</div>
+    <div class="item-meta"><span class="stars">36940</span></div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/VectifyAI/PageIndex">VectifyAI/PageIndex</a></div>
+    <div class="item-desc">📑 PageIndex: Document Index for Vectorless, Reasoning-based RAG</div>
+    <div class="item-meta"><span class="stars">32806</span></div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/nanocoai/nanoclaw">nanocoai/nanoclaw</a></div>
+    <div class="item-desc">A lightweight alternative to OpenClaw that runs in containers for security. Connects to WhatsApp, Telegram, Slack, Discord, Gmail and other messaging apps,, has memory, scheduled jobs, and runs directly on Anthropic&#x27;s Agents SDK</div>
+    <div class="item-meta"><span class="stars">29760</span></div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/Fosowl/agenticSeek">Fosowl/agenticSeek</a></div>
+    <div class="item-desc">Fully Local Manus AI. No APIs, No $200 monthly bills. Enjoy an autonomous agent that thinks, browses the web, and code for the sole cost of electricity. 🔔 Official updates only via twitter @Martin993886460 (Beware of fake account)</div>
+    <div class="item-meta"><span class="stars">26491</span></div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">ソフトウェア安定性向上</div>
+  <div class="topic-summary">複数のバージョンにわたるバグ修正と信頼性向上に焦点を当てた、ソフトウェアの一般的なメンテナンス更新。</div>
+<div class="item">
+  <span class="badge badge-changelog">CHANGELOG</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://code.claude.com/docs/en/changelog">v2.1.168</a></div>
+    <div class="item-desc">Bug fixes and reliability improvements</div>
+    <div class="item-meta">June 6, 2026</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-changelog">CHANGELOG</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://code.claude.com/docs/en/changelog">v2.1.167</a></div>
+    <div class="item-desc">Bug fixes and reliability improvements</div>
+    <div class="item-meta">June 6, 2026</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-changelog">CHANGELOG</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://code.claude.com/docs/en/changelog">v2.1.165</a></div>
+    <div class="item-desc">Bug fixes and reliability improvements</div>
+    <div class="item-meta">June 5, 2026</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">AIエージェント学習</div>
+  <div class="topic-summary">Hugging Faceが提供するAIエージェント技術に関する学習コースや教育コンテンツ。</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/huggingface/agents-course">huggingface/agents-course</a></div>
+    <div class="item-desc">This repository contains the Hugging Face Agents Course. </div>
+    <div class="item-meta"><span class="stars">29231</span></div>
+  </div>
+</div>
+</div>
+
+<footer class="footer">
+  Generated at 2026-06-09 23:42 JST<br>
+  Sources: Claude Code CHANGELOG, GitHub Releases, awesome-claude-code,
+  anthropics/skills, PulseMCP, Claude Plugins, GitHub Trending
+</footer>
+
+</div>
+</body>
+</html>
