@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Weekly Tech Watch — 2026-06-12</title>
+<style>
+:root {
+  --bg: #f8fafc;
+  --bg-card: #ffffff;
+  --bg-highlight: #eff6ff;
+  --text: #1e293b;
+  --text-muted: #64748b;
+  --text-light: #94a3b8;
+  --accent: #3b82f6;
+  --border: #e2e8f0;
+  --shadow: 0 1px 3px rgba(0,0,0,.08);
+  --badge-changelog: #3b82f6;
+  --badge-mcp: #8b5cf6;
+  --badge-trending: #f59e0b;
+  --badge-plugin: #10b981;
+  --badge-awesome: #f43f5e;
+  --badge-skills: #06b6d4;
+}
+@media(prefers-color-scheme:dark){
+:root {
+  --bg: #0f172a;
+  --bg-card: #1e293b;
+  --bg-highlight: #1e3a5f;
+  --text: #e2e8f0;
+  --text-muted: #94a3b8;
+  --text-light: #64748b;
+  --accent: #60a5fa;
+  --border: #334155;
+  --shadow: 0 1px 3px rgba(0,0,0,.3);
+}}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  background:var(--bg);color:var(--text);
+  line-height:1.6;padding:16px;
+}
+.container{max-width:760px;margin:0 auto}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* Header */
+.header{text-align:center;padding:32px 0 24px}
+.header h1{font-size:1.5rem;font-weight:700;letter-spacing:-.02em}
+.header .date-range{color:var(--text-muted);font-size:.875rem;margin-top:4px}
+
+/* Stats */
+.stat-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));
+  gap:8px;margin:0 0 32px;
+}
+.stat-card{
+  background:var(--bg-card);border:1px solid var(--border);border-radius:8px;
+  padding:12px;text-align:center;box-shadow:var(--shadow);
+}
+.stat-card .num{font-size:1.5rem;font-weight:700;color:var(--accent)}
+.stat-card .label{font-size:.75rem;color:var(--text-muted);margin-top:2px}
+
+/* Section heading */
+.section-heading{
+  font-size:1.125rem;font-weight:700;margin:32px 0 16px;
+  padding-bottom:8px;border-bottom:2px solid var(--accent);
+}
+
+/* Highlight cards */
+.highlight-card{
+  background:var(--bg-highlight);border:1px solid var(--border);
+  border-radius:12px;padding:20px;margin-bottom:16px;
+  border-left:4px solid var(--accent);
+}
+.highlight-card .hl-title{font-size:1rem;font-weight:700;margin-bottom:8px}
+.highlight-card .hl-title a{color:var(--text)}
+.highlight-card .hl-desc{font-size:.875rem;color:var(--text-muted);margin-bottom:12px}
+.highlight-card .hl-scenario{
+  font-size:.875rem;line-height:1.7;
+  background:var(--bg-card);border-radius:8px;padding:12px;margin-bottom:8px;
+}
+.highlight-card .hl-action{
+  font-size:.8125rem;color:var(--accent);font-weight:600;
+}
+.highlight-card .hl-action::before{content:"→ "}
+
+/* Topic section */
+.topic{
+  background:var(--bg-card);border:1px solid var(--border);
+  border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:var(--shadow);
+}
+.topic-title{font-size:1rem;font-weight:700;margin-bottom:4px}
+.topic-summary{font-size:.8125rem;color:var(--text-muted);margin-bottom:16px}
+
+/* Item list */
+.item{
+  padding:10px 0;border-bottom:1px solid var(--border);
+  display:flex;gap:10px;align-items:flex-start;
+}
+.item:last-child{border-bottom:none;padding-bottom:0}
+.badge{
+  display:inline-block;font-size:.625rem;font-weight:700;
+  color:#fff;padding:2px 8px;border-radius:10px;white-space:nowrap;
+  flex-shrink:0;margin-top:3px;text-transform:uppercase;letter-spacing:.03em;
+}
+.badge-changelog{background:var(--badge-changelog)}
+.badge-mcp{background:var(--badge-mcp)}
+.badge-trending{background:var(--badge-trending)}
+.badge-plugin{background:var(--badge-plugin)}
+.badge-awesome{background:var(--badge-awesome)}
+.badge-skills{background:var(--badge-skills)}
+.item-body{flex:1;min-width:0}
+.item-title{font-size:.875rem;font-weight:600}
+.item-desc{font-size:.8125rem;color:var(--text-muted);margin-top:2px}
+.item-meta{font-size:.75rem;color:var(--text-light);margin-top:4px}
+.item-meta .stars::before{content:"\2B50 "}
+
+/* Footer */
+.footer{
+  text-align:center;color:var(--text-light);font-size:.75rem;
+  padding:32px 0 16px;border-top:1px solid var(--border);margin-top:32px;
+}
+
+/* No items */
+.empty{color:var(--text-light);font-style:italic;font-size:.875rem;padding:8px 0}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header class="header">
+  <h1>Weekly Tech Watch</h1>
+  <div class="date-range">2026-06-10 ~ 2026-06-12</div>
+</header>
+
+<div class="stat-grid">
+<div class="stat-card"><div class="num">1</div><div class="label">Claude Code</div></div>
+<div class="stat-card"><div class="num">10</div><div class="label">Trending</div></div>
+</div>
+
+<h2 class="section-heading">Highlights</h2>
+<div class="highlight-card">
+  <div class="hl-title"><a href="https://github.com/router-for-me/CLIProxyAPI">GitHub: router-for-me/CLIProxyAPI</a></div>
+  <div class="hl-desc">Wrap Gemini CLI, Antigravity, ChatGPT Codex, Claude Code, Grok Build as an OpenAI/Gemini/Claude/Codex compatible API service, allowing you to enjoy the free Gemini 3.1 Pro, GPT 5.5, Grok 4.3, Claude...</div>
+  <div class="hl-scenario">複数のLLMを使い分けるりゅうさんにとって、このCLIProxyAPIは無料版Gemini 3.1 ProやGPT 5.5などをAPI経由で利用可能にし、開発環境 `{{AI_ROOT}}` でのプロトタイプ開発や「APICostPatrol」プロジェクトにおけるAPIコスト削減に直結します。AI経営スキル講座の受講者やPUMPGYMジュンさんのようなAI導入支援クライアントに対し、初期のPoCフェーズでAPIコストを抑えつつ複数モデルを試せるソリューションとして提案可能。WONDAY-OSやクライアント導入標準パッケージにおいて、バックエンドLLMの柔軟な切り替えを可能にし、NOT-DOリスト #11に掲げる「メソッド優位」の事業構造を強化できます。</div>
+  <div class="hl-action">CLIProxyAPIを `{{AI_ROOT}}/tools/` にクローンし、無料版Gemini 3.1 ProのAPI利用をテストする。</div>
+</div>
+<div class="highlight-card">
+  <div class="hl-title"><a href="https://github.com/luongnv89/claude-howto">GitHub: luongnv89/claude-howto</a></div>
+  <div class="hl-desc">A visual, example-driven guide to Claude Code — from basic concepts to advanced agents, with copy-paste templates that bring immediate value.</div>
+  <div class="hl-scenario">りゅうさん自身は「超初心者」と自認しつつClaude Codeをメインに据えているため、本ガイドは「WONDAYコンサルティング（Claude Code最適化）」の自身のスキル向上に直結します。視覚的な説明とコピペテンプレートは、「完璧主義で着手が遅れる」という課題に対し、MVPサイクルでの迅速なプロトタイプ作成を後押しします。また、「AI経営スキル講座」の受講者やPUMPGYMジュンさんのようなAI導入支援クライアントに対し、Claude Codeの具体的な活用例やテンプレートとして「やってみせて、自走させる」ための効果的な教材として提案可能です。さらに、「PersonalOS」や「DevLogSNS」といったWONDAYサービスのエージェント開発において、高度なエージェント設計の参考として、より洗練された仕組み化に貢献できます。</div>
+  <div class="hl-action">GitHubリポジトリをクローンし、`WONDAYコンサルティング（Claude Code最適化）` のテンプレートとして活用できるか評価する。</div>
+</div>
+<div class="highlight-card">
+  <div class="hl-title"><a href="https://github.com/cjpais/Handy">GitHub: cjpais/Handy</a></div>
+  <div class="hl-desc">A free, open source, and extensible speech-to-text application that works completely offline.</div>
+  <div class="hl-scenario">りゅうさん自身は、オフライン音声認識アプリ「Handy」を「MeetingMinutes（議事録自動化）」プロジェクトの補完として活用し、インターネット接続に依存しない安定した議事録作成や音声メモを実現できます。特に機密性の高い情報を含む会議や、移動中のアイデア記録に役立ちます。既存クライアントでは、学童運営NPO法人やPUMPGYMジュンさんのような、情報セキュリティを重視する企業に対し、オフラインでの会議録作成やアイデア整理ツールとして提案可能です。クラウドへの情報漏洩懸念を解消し、AI導入のハードルを下げられます。WONDAYサービスとしては、「AI経営スキル講座」のカリキュラムにオフラインAIツールの選択肢として組み込み、多様なクライアントニーズに対応するソリューション提供力を強化します。また「PersonalOS」の音声入力モジュールとして、りゅうさん自身の思考整理・タスク管理の自動化を加速します。</div>
+  <div class="hl-action">RyuThinkにHandyをインストールし、`MeetingMinutes`のオフライン音声認識精度を検証する。</div>
+</div>
+
+<h2 class="section-heading">Topics</h2>
+<div class="topic">
+  <div class="topic-title">AIエージェント開発</div>
+  <div class="topic-summary">AIエージェントの構築、デプロイ、管理、および関連プラットフォームに関する情報とチュートリアル。</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/OthmanAdi/planning-with-files">OthmanAdi/planning-with-files</a></div>
+    <div class="item-desc">Persistent file-based planning for long-running agentic tasks. Crash-proof markdown plans, deterministic completion gate, multi-agent shared state on disk. Works with Claude Code, Codex CLI, Cursor, Hermes agent, Pi, Kiro, OpenCode and 60+ agents via the SKILL.md standard.</div>
+    <div class="item-meta"><span class="stars">23048</span></div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/activepieces/activepieces">activepieces/activepieces</a></div>
+    <div class="item-desc">AI Agents &amp; MCPs &amp; AI Workflow Automation • (~400 MCP servers for AI agents) • AI Automation / AI Agent with MCPs • AI Workflows &amp; AI Agents • MCPs for AI Agents</div>
+    <div class="item-meta"><span class="stars">22713</span></div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/NirDiamant/GenAI_Agents">NirDiamant/GenAI_Agents</a></div>
+    <div class="item-desc">50+ tutorials and implementations for Generative AI Agent techniques, from basic conversational bots to complex multi-agent systems.</div>
+    <div class="item-meta"><span class="stars">22509</span></div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/JimLiu/baoyu-skills">JimLiu/baoyu-skills</a></div>
+    <div class="item-meta"><span class="stars">21260</span></div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/1Panel-dev/MaxKB">1Panel-dev/MaxKB</a></div>
+    <div class="item-desc">🔥 MaxKB is an open-source platform for building enterprise-grade agents.  强大易用的开源企业级智能体平台。</div>
+    <div class="item-meta"><span class="stars">21216</span></div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/NirDiamant/agents-towards-production">NirDiamant/agents-towards-production</a></div>
+    <div class="item-desc">End-to-end, code-first tutorials for building production-grade GenAI agents. From prototype to enterprise deployment.</div>
+    <div class="item-meta"><span class="stars">20697</span></div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">LLM連携・API</div>
+  <div class="topic-summary">複数の大規模言語モデルを統合し、互換性のあるAPIサービスやワークフロー連携を提供するツール。</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/router-for-me/CLIProxyAPI">router-for-me/CLIProxyAPI</a></div>
+    <div class="item-desc">Wrap Gemini CLI, Antigravity, ChatGPT Codex, Claude Code, Grok Build as an OpenAI/Gemini/Claude/Codex compatible API service, allowing you to enjoy the free Gemini 3.1 Pro, GPT 5.5, Grok 4.3, Claude model through API</div>
+    <div class="item-meta"><span class="stars">37228</span></div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/czlonkowski/n8n-mcp">czlonkowski/n8n-mcp</a></div>
+    <div class="item-desc">A MCP for Claude Desktop / Claude Code / Windsurf / Cursor to build n8n workflows for you </div>
+    <div class="item-meta"><span class="stars">21681</span></div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">特定LLM活用・更新</div>
+  <div class="topic-summary">Fable 5やClaude Codeなど、特定のLLMの利用ガイド、機能更新、およびモデルに関する情報。</div>
+<div class="item">
+  <span class="badge badge-changelog">CHANGELOG</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://code.claude.com/docs/en/changelog">v2.1.173</a></div>
+    <div class="item-desc">Fixed Fable 5 model names with a [1m] suffix not being normalized — Fable 5 includes 1M context by default, so the suffix is now stripped automatically, Fixed a spurious “sandbox dependencies missing” startup warning on Windows when sandbox was enabled in settings</div>
+    <div class="item-meta">June 11, 2026</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/luongnv89/claude-howto">luongnv89/claude-howto</a></div>
+    <div class="item-desc">A visual, example-driven guide to Claude Code — from basic concepts to advanced agents, with copy-paste templates that bring immediate value.</div>
+    <div class="item-meta"><span class="stars">36874</span></div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">音声認識アプリ</div>
+  <div class="topic-summary">オフラインで動作するオープンソースの音声テキスト変換アプリケーション。</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/cjpais/Handy">cjpais/Handy</a></div>
+    <div class="item-desc">A free, open source, and extensible speech-to-text application that works completely offline.</div>
+    <div class="item-meta"><span class="stars">23547</span></div>
+  </div>
+</div>
+</div>
+
+<footer class="footer">
+  Generated at 2026-06-12 07:55 JST<br>
+  Sources: Claude Code CHANGELOG, GitHub Releases, awesome-claude-code,
+  anthropics/skills, PulseMCP, Claude Plugins, GitHub Trending
+</footer>
+
+</div>
+</body>
+</html>
