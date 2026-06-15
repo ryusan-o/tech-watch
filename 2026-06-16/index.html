@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Weekly Tech Watch — 2026-06-16</title>
+<style>
+:root {
+  --bg: #f8fafc;
+  --bg-card: #ffffff;
+  --bg-highlight: #eff6ff;
+  --text: #1e293b;
+  --text-muted: #64748b;
+  --text-light: #94a3b8;
+  --accent: #3b82f6;
+  --border: #e2e8f0;
+  --shadow: 0 1px 3px rgba(0,0,0,.08);
+  --badge-changelog: #3b82f6;
+  --badge-mcp: #8b5cf6;
+  --badge-trending: #f59e0b;
+  --badge-plugin: #10b981;
+  --badge-awesome: #f43f5e;
+  --badge-skills: #06b6d4;
+}
+@media(prefers-color-scheme:dark){
+:root {
+  --bg: #0f172a;
+  --bg-card: #1e293b;
+  --bg-highlight: #1e3a5f;
+  --text: #e2e8f0;
+  --text-muted: #94a3b8;
+  --text-light: #64748b;
+  --accent: #60a5fa;
+  --border: #334155;
+  --shadow: 0 1px 3px rgba(0,0,0,.3);
+}}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  background:var(--bg);color:var(--text);
+  line-height:1.6;padding:16px;
+}
+.container{max-width:760px;margin:0 auto}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* Header */
+.header{text-align:center;padding:32px 0 24px}
+.header h1{font-size:1.5rem;font-weight:700;letter-spacing:-.02em}
+.header .date-range{color:var(--text-muted);font-size:.875rem;margin-top:4px}
+
+/* Stats */
+.stat-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));
+  gap:8px;margin:0 0 32px;
+}
+.stat-card{
+  background:var(--bg-card);border:1px solid var(--border);border-radius:8px;
+  padding:12px;text-align:center;box-shadow:var(--shadow);
+}
+.stat-card .num{font-size:1.5rem;font-weight:700;color:var(--accent)}
+.stat-card .label{font-size:.75rem;color:var(--text-muted);margin-top:2px}
+
+/* Section heading */
+.section-heading{
+  font-size:1.125rem;font-weight:700;margin:32px 0 16px;
+  padding-bottom:8px;border-bottom:2px solid var(--accent);
+}
+
+/* Highlight cards */
+.highlight-card{
+  background:var(--bg-highlight);border:1px solid var(--border);
+  border-radius:12px;padding:20px;margin-bottom:16px;
+  border-left:4px solid var(--accent);
+}
+.highlight-card .hl-title{font-size:1rem;font-weight:700;margin-bottom:8px}
+.highlight-card .hl-title a{color:var(--text)}
+.highlight-card .hl-desc{font-size:.875rem;color:var(--text-muted);margin-bottom:12px}
+.highlight-card .hl-scenario{
+  font-size:.875rem;line-height:1.7;
+  background:var(--bg-card);border-radius:8px;padding:12px;margin-bottom:8px;
+}
+.highlight-card .hl-action{
+  font-size:.8125rem;color:var(--accent);font-weight:600;
+}
+.highlight-card .hl-action::before{content:"→ "}
+
+/* Topic section */
+.topic{
+  background:var(--bg-card);border:1px solid var(--border);
+  border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:var(--shadow);
+}
+.topic-title{font-size:1rem;font-weight:700;margin-bottom:4px}
+.topic-summary{font-size:.8125rem;color:var(--text-muted);margin-bottom:16px}
+
+/* Item list */
+.item{
+  padding:10px 0;border-bottom:1px solid var(--border);
+  display:flex;gap:10px;align-items:flex-start;
+}
+.item:last-child{border-bottom:none;padding-bottom:0}
+.badge{
+  display:inline-block;font-size:.625rem;font-weight:700;
+  color:#fff;padding:2px 8px;border-radius:10px;white-space:nowrap;
+  flex-shrink:0;margin-top:3px;text-transform:uppercase;letter-spacing:.03em;
+}
+.badge-changelog{background:var(--badge-changelog)}
+.badge-mcp{background:var(--badge-mcp)}
+.badge-trending{background:var(--badge-trending)}
+.badge-plugin{background:var(--badge-plugin)}
+.badge-awesome{background:var(--badge-awesome)}
+.badge-skills{background:var(--badge-skills)}
+.item-body{flex:1;min-width:0}
+.item-title{font-size:.875rem;font-weight:600}
+.item-desc{font-size:.8125rem;color:var(--text-muted);margin-top:2px}
+.item-meta{font-size:.75rem;color:var(--text-light);margin-top:4px}
+.item-meta .stars::before{content:"\2B50 "}
+
+/* Footer */
+.footer{
+  text-align:center;color:var(--text-light);font-size:.75rem;
+  padding:32px 0 16px;border-top:1px solid var(--border);margin-top:32px;
+}
+
+/* No items */
+.empty{color:var(--text-light);font-style:italic;font-size:.875rem;padding:8px 0}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header class="header">
+  <h1>Weekly Tech Watch</h1>
+  <div class="date-range">2026-06-14 ~ 2026-06-16</div>
+</header>
+
+<div class="stat-grid">
+<div class="stat-card"><div class="num">1</div><div class="label">Claude Code</div></div>
+<div class="stat-card"><div class="num">27</div><div class="label">MCP</div></div>
+<div class="stat-card"><div class="num">10</div><div class="label">Trending</div></div>
+<div class="stat-card"><div class="num">2</div><div class="label">Plugins</div></div>
+</div>
+
+<h2 class="section-heading">Highlights</h2>
+<div class="highlight-card">
+  <div class="hl-title"><a href="https://code.claude.com/docs/en/changelog">Claude Code v2.1.178</a></div>
+  <div class="hl-desc">Added Tool(param:value) syntax for permission rules to match a tool’s input parameters (with * wildcard), e.g. Agent(model:opus) to block Opus subagents</div>
+  <div class="hl-scenario">りゅうさん自身はClaude Codeをメインに利用しており、この新機能は高価なOpusモデルの意図しないサブエージェント利用を `Agent(model:opus)` でブロックし、`APICostPatrol` と連携したAPIコスト管理を強化できます。これにより、`WONDAY-OS` のAI運用基盤におけるAIの挙動制御とガバナンスが向上します。クライアント向けには、`AI経営スキル講座` の受講者や `PUMPGYMジュンさん` のようなAI導入支援において、AIエージェントのコスト最適化やセキュリティリスク低減策として具体的な提案が可能です。`WONDAYコンサルティング` のサービス強化として、AIシステムの安全かつ効率的な運用設計に組み込めます。</div>
+  <div class="hl-action">Claude CodeでサブエージェントがOpusモデルを使用しないよう `Agent(model:opus)` のパーミッションルールをテストし、`APICostPatrol` のコスト監視に連携を検討する。</div>
+</div>
+<div class="highlight-card">
+  <div class="hl-title"><a href="https://www.pulsemcp.com/servers/abidoo22-pixelorama">MCP: Pixelorama</a></div>
+  <div class="hl-desc">Bridges AI assistants with the Pixelorama pixel art editor, enabling natural language sprite creation and image import with 35+ drawing and canvas manipulation tools.</div>
+  <div class="hl-scenario">りゅうさん自身は、プログラミング知識がなくても自然言語でピクセルアートを生成できるため、自身のX「@ryusan_wonday」やInstagram「@wonday.okinawa」でAI活用事例として紹介し、AIの多様な可能性を示すコンテンツとして活用できます。また、「AI経営スキル講座」の受講者やデザインリソースが限られる中小企業（飲食/サロン/建築不動産など）に対し、店舗ロゴやイベント告知画像をピクセルアート風に作成し、SNSでの差別化を図る新たな提案ネタとして活用可能です。将来的には「DevLogSNS」でAIによるデザインプロセスを自動記録・発信する機能拡張の可能性も探れます。</div>
+  <div class="hl-action">Pixeloramaのウェブサイトを確認し、AIアシスタント連携機能のデモを試す。</div>
+</div>
+<div class="highlight-card">
+  <div class="hl-title"><a href="https://www.pulsemcp.com/servers/404kidwiz-fl-studio">MCP: FL Studio</a></div>
+  <div class="hl-desc">Control FL Studio music production software with 121 tools for transport, mixing, and algorithmic composition.</div>
+  <div class="hl-scenario">りゅうさん自身、ヘルシービストロりゅうさんちの「非日常の食」体験を向上させるため、FL StudioのAI作曲機能を活用し、季節やメニューに合わせたオーダーメイドBGMの生成を試すことで、「感動を作るおもてなし」を音楽面でも表現できるか検証できます。既存クライアントでは、AIコンサル受講者や、妻のAimer Okinawaのような店舗型ビジネスに対し、AIによる店舗BGM生成を新たな付加価値として提案する可能性を探れます。WONDAYサービス強化としては、WONDAY SNS発信プロジェクトやYouTubeAnalysisにおいて、動画コンテンツのBGMをFL StudioのAI機能で生成し、コンテンツ制作の効率化と独自性の向上を図ることで、りゅうさんの「AIに対するスタンス」を聴覚でも表現できます。</div>
+  <div class="hl-action">FL StudioのAI作曲機能の無料トライアルを試すか、関連チュートリアルを視聴し、りゅうさんちのBGM生成でのMVP導入可能性を`01_Projects/WeeklyTechWatch`に記録する。</div>
+</div>
+
+<h2 class="section-heading">Topics</h2>
+<div class="topic">
+  <div class="topic-title">AIエージェント基盤</div>
+  <div class="topic-summary">AIエージェントの構築、デプロイ、管理、セキュリティ、接続性、および開発を支援するツールとプラットフォーム。</div>
+<div class="item">
+  <span class="badge badge-changelog">CHANGELOG</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://code.claude.com/docs/en/changelog">v2.1.178</a></div>
+    <div class="item-desc">Added Tool(param:value) syntax for permission rules to match a tool’s input parameters (with * wildcard), e.g. Agent(model:opus) to block Opus subagents, Skills in nested .claude/skills directories now load when working on files there; on a name clash, the nested skill appears as &lt;dir&gt;:&lt;name&gt; so both stay available, Nested .claude/ directories: the agent, workflow, and output-style closest to the working directory now wins when names collide; project-scope workflow saves now target the closest existing .claude/workflows/</div>
+    <div class="item-meta">June 15, 2026</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-mcp">MCP</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://www.pulsemcp.com/servers/171county-modwrench">ModWrench</a></div>
+    <div class="item-desc">MCP server for mod platforms and local modding diagnostics with no data retention.</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-mcp">MCP</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://www.pulsemcp.com/servers/1claw">1Claw Vault</a></div>
+    <div class="item-desc">HSM-backed vault for AI agent secrets with just-in-time credential fetching and prompt injection scanning.</div>
+    <div class="item-meta"><span class="stars">2</span></div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-mcp">MCP</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://www.pulsemcp.com/servers/2001adarsh-jenkins-go">Jenkins Go</a></div>
+    <div class="item-desc">Go-based MCP server for Jenkins automation with 30+ tools for console logs, pipeline inspection, build comparison, and test reports.</div>
+    <div class="item-meta"><span class="stars">3</span></div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-mcp">MCP</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://www.pulsemcp.com/servers/a2al">A2AL Daemon</a></div>
+    <div class="item-desc">Make any AI agent globally reachable and discoverable without cloud infrastructure, domains, or port forwarding.</div>
+    <div class="item-meta"><span class="stars">1</span></div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-mcp">MCP</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://www.pulsemcp.com/servers/aartintelligent-fastly">Fastly MCP Server</a></div>
+    <div class="item-desc">Read-only MCP server exposing 30 tools for inspecting and auditing Fastly&#x27;s management API from LLM agents.</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-mcp">MCP</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://www.pulsemcp.com/servers/aatirnadim-getme">GetMe</a></div>
+    <div class="item-desc">Exposes a persistent key-value store as MCP tools, enabling AI clients to perform put, get, and delete operations on a Bitcask-inspired database.</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-mcp">MCP</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://www.pulsemcp.com/servers/aayuushh365-claw-memory">Claw Memory</a></div>
+    <div class="item-desc">MCP server for persistent memory storage by appending entries to an Obsidian vault hosted on GitHub.</div>
+    <div class="item-meta"><span class="stars">1</span></div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-mcp">MCP</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://www.pulsemcp.com/servers/ab0t-com-easymcp">EasyMCP</a></div>
+    <div class="item-desc">Control plane that converts OpenAPI services, existing stdio MCP servers, and local CLIs into managed MCP instances with intent-based discovery and agent integration.</div>
+    <div class="item-meta"><span class="stars">3</span></div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-mcp">MCP</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://www.pulsemcp.com/servers/abhiyoheswaran1-agentloopkit">AgentLoopKit</a></div>
+    <div class="item-desc">Read-only MCP access to AgentLoopKit tasks, policies, reports, handoffs, and agent status.</div>
+    <div class="item-meta"><span class="stars">1</span></div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-mcp">MCP</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://www.pulsemcp.com/servers/abrarwarunkar-autofabric">AutoFabric MCP Server</a></div>
+    <div class="item-desc">Agent orchestration platform with MCP server integration providing tool interfaces via stdio and direct connections using the official MCP Python SDK.</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/Yeachan-Heo/oh-my-claudecode">Yeachan-Heo/oh-my-claudecode</a></div>
+    <div class="item-desc">Teams-first Multi-agent orchestration for Claude Code</div>
+    <div class="item-meta"><span class="stars">36443</span></div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/vectorize-io/hindsight">vectorize-io/hindsight</a></div>
+    <div class="item-desc">Hindsight: Agent Memory That  Learns</div>
+    <div class="item-meta"><span class="stars">16451</span></div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/triggerdotdev/trigger.dev">triggerdotdev/trigger.dev</a></div>
+    <div class="item-desc">Trigger.dev – build and deploy fully‑managed AI agents and workflows</div>
+    <div class="item-meta"><span class="stars">15355</span></div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/yusufkaraaslan/Skill_Seekers">yusufkaraaslan/Skill_Seekers</a></div>
+    <div class="item-desc">Convert documentation websites, GitHub repositories, and PDFs into Claude AI skills with automatic conflict detection</div>
+    <div class="item-meta"><span class="stars">14095</span></div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/NevaMind-AI/memU">NevaMind-AI/memU</a></div>
+    <div class="item-desc">The memory harness for proactive AI agents — structured storage, intent capture, 10x token reduction.</div>
+    <div class="item-meta"><span class="stars">13862</span></div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-plugin">PLUGIN</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://lovable.dev">lovable</a></div>
+    <div class="item-desc">Build, iterate on, deploy, and manage Lovable apps from Claude Code. Bundles the official Lovable MCP server (remote, OAuth 2.1) and adds focused commands for the common build/iterate/database workflows, with credit- and publish-safety prompts.</div>
+    <div class="item-meta">development</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">専門ソフト連携</div>
+  <div class="topic-summary">特定の専門ソフトウェアや産業用システムをAIエージェントで制御・自動化し、タスクを効率化するソリューション。</div>
+<div class="item">
+  <span class="badge badge-mcp">MCP</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://www.pulsemcp.com/servers/123pc-geogebra">GeoGebra</a></div>
+    <div class="item-desc">Controls GeoGebra math visualization software for creating geometry, 3D models, and animations via 15+ tools.</div>
+    <div class="item-meta"><span class="stars">2</span></div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-mcp">MCP</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://www.pulsemcp.com/servers/404kidwiz-fl-studio">FL Studio</a></div>
+    <div class="item-desc">Control FL Studio music production software with 121 tools for transport, mixing, and algorithmic composition.</div>
+    <div class="item-meta"><span class="stars">4</span></div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-mcp">MCP</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://www.pulsemcp.com/servers/a4webdev-tiacommander">TIA Commander</a></div>
+    <div class="item-desc">Automate and control Siemens TIA Portal projects via AI coding assistants.</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-mcp">MCP</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://www.pulsemcp.com/servers/abelduarte-gimp">GIMP</a></div>
+    <div class="item-desc">MCP server and GIMP 3.x plugin exposing image editing and automation to AI assistants via a local Unix socket.</div>
+    <div class="item-meta"><span class="stars">2</span></div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-mcp">MCP</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://www.pulsemcp.com/servers/abidoo22-pixelorama">Pixelorama</a></div>
+    <div class="item-desc">Bridges AI assistants with the Pixelorama pixel art editor, enabling natural language sprite creation and image import with 35+ drawing and canvas manipulation tools.</div>
+    <div class="item-meta"><span class="stars">10</span></div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-plugin">PLUGIN</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://boltz.bio">boltz</a></div>
+    <div class="item-desc">Predict structures, screen molecules and proteins, and design binders with Boltz from Claude Code.</div>
+    <div class="item-meta">development</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">データ連携サービス</div>
+  <div class="topic-summary">公共機関、専門分野、または特定の業界が提供する多様なデータセットへのAIエージェントによるアクセスを可能にするサービス。</div>
+<div class="item">
+  <span class="badge badge-mcp">MCP</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://www.pulsemcp.com/servers/3121n-kartverket">Kartverket</a></div>
+    <div class="item-desc">Norwegian mapping authority data via MCP including topographic data, cadastral info, and coordinate systems.</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-mcp">MCP</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://www.pulsemcp.com/servers/3121n-nve">NVE</a></div>
+    <div class="item-desc">Norwegian Water Resources and Energy Directorate data via MCP for hydrological and energy datasets.</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-mcp">MCP</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://www.pulsemcp.com/servers/3121n-statfin">Statistics Finland</a></div>
+    <div class="item-desc">Statistics Finland data via MCP for demographic, economic, and social statistics datasets.</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-mcp">MCP</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://www.pulsemcp.com/servers/3121n-udir">UDIR School Registry</a></div>
+    <div class="item-desc">Access Norwegian school and kindergarten registry data from NSR and NBR via UDIR&#x27;s open APIs.</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-mcp">MCP</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://www.pulsemcp.com/servers/7mza-geolocation">IP Geolocation</a></div>
+    <div class="item-desc">Fast and up-to-date IP geolocation data for AI agents via OCI container.</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-mcp">MCP</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://www.pulsemcp.com/servers/aa0101181514-taiwan-legal-rag">Taiwan Legal RAG</a></div>
+    <div class="item-desc">MCP server for querying Taiwanese legal documents and judicial decisions using a hosted RAG endpoint with OAuth authentication.</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-mcp">MCP</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://www.pulsemcp.com/servers/abgeordnetenwatch">Abgeordnetenwatch</a></div>
+    <div class="item-desc">Search German federal, state, and EU parliament politician profiles and legislative voting records.</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/open-metadata/OpenMetadata">open-metadata/OpenMetadata</a></div>
+    <div class="item-desc">The Open Context Layer for Data and AI ,  OpenMetadata is the open platform for building trusted data context and business semantics for humans, AI assistants, and agents.</div>
+    <div class="item-meta"><span class="stars">14201</span></div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">ビジネス効率化</div>
+  <div class="topic-summary">主要なビジネスアプリケーション、生産性スイート、およびマーケティングツールとAIエージェントを統合し、業務効率を向上させる。</div>
+<div class="item">
+  <span class="badge badge-mcp">MCP</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://www.pulsemcp.com/servers/0xka13b-outlook">Microsoft Outlook</a></div>
+    <div class="item-desc">Access Microsoft SharePoint sites, lists, and documents through the Microsoft Graph API.</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-mcp">MCP</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://www.pulsemcp.com/servers/abhinav-ranish-canvas">Canvas LMS</a></div>
+    <div class="item-desc">MCP server exposing Canvas LMS functionality including courses, assignments, submissions, grades, and deadlines to AI clients.</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-mcp">MCP</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://www.pulsemcp.com/servers/abm">ABM</a></div>
+    <div class="item-desc">Account-based marketing data enrichment — enrich contacts, research companies, and manage LinkedIn interactions for AI agents.</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/teng-lin/notebooklm-py">teng-lin/notebooklm-py</a></div>
+    <div class="item-desc">Unofficial Python API and agentic skill for Google NotebookLM. Full programmatic access to NotebookLM&#x27;s features—including capabilities the web UI doesn&#x27;t expose—via Python, CLI, and AI agents like Claude Code, Codex, and OpenClaw.</div>
+    <div class="item-meta"><span class="stars">16475</span></div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/eigent-ai/eigent">eigent-ai/eigent</a></div>
+    <div class="item-desc">Eigent: The Open Source Cowork Desktop to Unlock Your Exceptional Productivity. Local and Free Alternative to Claude Cowork.</div>
+    <div class="item-meta"><span class="stars">14288</span></div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">AIモデルと応用</div>
+  <div class="topic-summary">複数のAIモデルへのアクセス、汎用AI機能、および特定のウェブサービスやエンターテイメントプラットフォームとの連携を可能にする。</div>
+<div class="item">
+  <span class="badge badge-mcp">MCP</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://www.pulsemcp.com/servers/370ai">370.ai AI Gateway</a></div>
+    <div class="item-desc">One key, 100+ models — chat with any LLM and generate video, images, and speech.</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-mcp">MCP</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://www.pulsemcp.com/servers/abyssfall">Abyssfall</a></div>
+    <div class="item-desc">Abyssfall game platform — retrieve game info, manage newsletter subscriptions, and access merch store.</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/Imbad0202/academic-research-skills">Imbad0202/academic-research-skills</a></div>
+    <div class="item-desc">Academic Research Skills for Claude Code: research → write → review → revise → finalize</div>
+    <div class="item-meta"><span class="stars">31728</span></div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/xpzouying/xiaohongshu-mcp">xpzouying/xiaohongshu-mcp</a></div>
+    <div class="item-desc">MCP for xiaohongshu.com</div>
+    <div class="item-meta"><span class="stars">14179</span></div>
+  </div>
+</div>
+</div>
+
+<footer class="footer">
+  Generated at 2026-06-16 07:56 JST<br>
+  Sources: Claude Code CHANGELOG, GitHub Releases, awesome-claude-code,
+  anthropics/skills, PulseMCP, Claude Plugins, GitHub Trending
+</footer>
+
+</div>
+</body>
+</html>
