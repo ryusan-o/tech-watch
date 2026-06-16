@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Weekly Tech Watch — 2026-06-17</title>
+<style>
+:root {
+  --bg: #f8fafc;
+  --bg-card: #ffffff;
+  --bg-highlight: #eff6ff;
+  --text: #1e293b;
+  --text-muted: #64748b;
+  --text-light: #94a3b8;
+  --accent: #3b82f6;
+  --border: #e2e8f0;
+  --shadow: 0 1px 3px rgba(0,0,0,.08);
+  --badge-changelog: #3b82f6;
+  --badge-mcp: #8b5cf6;
+  --badge-trending: #f59e0b;
+  --badge-plugin: #10b981;
+  --badge-awesome: #f43f5e;
+  --badge-skills: #06b6d4;
+}
+@media(prefers-color-scheme:dark){
+:root {
+  --bg: #0f172a;
+  --bg-card: #1e293b;
+  --bg-highlight: #1e3a5f;
+  --text: #e2e8f0;
+  --text-muted: #94a3b8;
+  --text-light: #64748b;
+  --accent: #60a5fa;
+  --border: #334155;
+  --shadow: 0 1px 3px rgba(0,0,0,.3);
+}}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  background:var(--bg);color:var(--text);
+  line-height:1.6;padding:16px;
+}
+.container{max-width:760px;margin:0 auto}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* Header */
+.header{text-align:center;padding:32px 0 24px}
+.header h1{font-size:1.5rem;font-weight:700;letter-spacing:-.02em}
+.header .date-range{color:var(--text-muted);font-size:.875rem;margin-top:4px}
+
+/* Stats */
+.stat-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));
+  gap:8px;margin:0 0 32px;
+}
+.stat-card{
+  background:var(--bg-card);border:1px solid var(--border);border-radius:8px;
+  padding:12px;text-align:center;box-shadow:var(--shadow);
+}
+.stat-card .num{font-size:1.5rem;font-weight:700;color:var(--accent)}
+.stat-card .label{font-size:.75rem;color:var(--text-muted);margin-top:2px}
+
+/* Section heading */
+.section-heading{
+  font-size:1.125rem;font-weight:700;margin:32px 0 16px;
+  padding-bottom:8px;border-bottom:2px solid var(--accent);
+}
+
+/* Highlight cards */
+.highlight-card{
+  background:var(--bg-highlight);border:1px solid var(--border);
+  border-radius:12px;padding:20px;margin-bottom:16px;
+  border-left:4px solid var(--accent);
+}
+.highlight-card .hl-title{font-size:1rem;font-weight:700;margin-bottom:8px}
+.highlight-card .hl-title a{color:var(--text)}
+.highlight-card .hl-desc{font-size:.875rem;color:var(--text-muted);margin-bottom:12px}
+.highlight-card .hl-scenario{
+  font-size:.875rem;line-height:1.7;
+  background:var(--bg-card);border-radius:8px;padding:12px;margin-bottom:8px;
+}
+.highlight-card .hl-action{
+  font-size:.8125rem;color:var(--accent);font-weight:600;
+}
+.highlight-card .hl-action::before{content:"→ "}
+
+/* Topic section */
+.topic{
+  background:var(--bg-card);border:1px solid var(--border);
+  border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:var(--shadow);
+}
+.topic-title{font-size:1rem;font-weight:700;margin-bottom:4px}
+.topic-summary{font-size:.8125rem;color:var(--text-muted);margin-bottom:16px}
+
+/* Item list */
+.item{
+  padding:10px 0;border-bottom:1px solid var(--border);
+  display:flex;gap:10px;align-items:flex-start;
+}
+.item:last-child{border-bottom:none;padding-bottom:0}
+.badge{
+  display:inline-block;font-size:.625rem;font-weight:700;
+  color:#fff;padding:2px 8px;border-radius:10px;white-space:nowrap;
+  flex-shrink:0;margin-top:3px;text-transform:uppercase;letter-spacing:.03em;
+}
+.badge-changelog{background:var(--badge-changelog)}
+.badge-mcp{background:var(--badge-mcp)}
+.badge-trending{background:var(--badge-trending)}
+.badge-plugin{background:var(--badge-plugin)}
+.badge-awesome{background:var(--badge-awesome)}
+.badge-skills{background:var(--badge-skills)}
+.item-body{flex:1;min-width:0}
+.item-title{font-size:.875rem;font-weight:600}
+.item-desc{font-size:.8125rem;color:var(--text-muted);margin-top:2px}
+.item-meta{font-size:.75rem;color:var(--text-light);margin-top:4px}
+.item-meta .stars::before{content:"\2B50 "}
+
+/* Footer */
+.footer{
+  text-align:center;color:var(--text-light);font-size:.75rem;
+  padding:32px 0 16px;border-top:1px solid var(--border);margin-top:32px;
+}
+
+/* No items */
+.empty{color:var(--text-light);font-style:italic;font-size:.875rem;padding:8px 0}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header class="header">
+  <h1>Weekly Tech Watch</h1>
+  <div class="date-range">2026-06-15 ~ 2026-06-17</div>
+</header>
+
+<div class="stat-grid">
+<div class="stat-card"><div class="num">1</div><div class="label">Claude Code</div></div>
+<div class="stat-card"><div class="num">1</div><div class="label">MCP</div></div>
+<div class="stat-card"><div class="num">10</div><div class="label">Trending</div></div>
+<div class="stat-card"><div class="num">1</div><div class="label">Plugins</div></div>
+</div>
+
+<h2 class="section-heading">Highlights</h2>
+<div class="highlight-card">
+  <div class="hl-title"><a href="https://code.claude.com/docs/en/changelog">Claude Code v2.1.179</a></div>
+  <div class="hl-desc">Improved plugin loading performance in remote sessions</div>
+  <div class="hl-scenario">りゅうさん自身はClaude Codeをメインにクロージングを進めるため、リモートセッションでのプラグイン読み込み性能向上は、「WONDAYコンサルティング（Claude Code最適化）」や「AI経営スキル講座」の教材開発で、PJ切り替え時の待ち時間短縮と実行速度向上に直結します。クライアント向けには、「PUMPGYMジュンさん AI導入支援」のような新規事業でAIツールを試行錯誤する際、リモート開発環境の応答性向上をメリットとして提案できます。WONDAYサービス強化としては、「WONDAY-OS」や「DevLogSNS」のAI運用基盤がより安定し、ストレスフリーな自動化を推進できるでしょう。</div>
+  <div class="hl-action">Claude Codeのリモートセッションで「WONDAYコンサルティング」関連PJ作業時にプラグイン読み込み速度を体感確認する。</div>
+</div>
+<div class="highlight-card">
+  <div class="hl-title"><a href="https://www.pulsemcp.com/servers/accrue">MCP: Accrue</a></div>
+  <div class="hl-desc">Stablecoin yield platform providing 14 read-only MCP tools for querying protocol data, vault positions, and yield opportunities across Ethereum, Base, and Arbitrum.</div>
+  <div class="hl-scenario">りゅうさんの「労働集約型からの脱却」と「外貨獲得」目標に対し、自己資産の効率的な運用先としてステーブルコインのイールドファーミングを情報収集するツールとして活用可能です。リードオンリーのため、リスクを抑えつつEthereum, Base, Arbitrum上の利回り機会を把握し、自身の「APICostPatrol」のように金融資産の動向を監視する仕組みを検討する際の参考になります。既存クライアントへの直接提案は難しいですが、「AI経営スキル講座」受講者など、将来的な資産運用に関心を持つ経営者へDeFi市場の情報収集の選択肢として共有する際の参考情報となり得ます。将来的には「WONDAY-OS」の一部として、Accrueから得られるデータをPythonやn8nで連携し、利回り機会の自動監視システム構築も検討できます。</div>
+  <div class="hl-action">Pulsemcp.comのAccrueページを確認し、提供データやAPI連携の可能性を調査。「APICostPatrol」への連携可否を検討する。</div>
+</div>
+<div class="highlight-card">
+  <div class="hl-title"><a href="https://github.com/casdoor/casdoor">GitHub: casdoor/casdoor</a></div>
+  <div class="hl-desc">An open-source Agent-first Identity and Access Management (IAM) /LLM MCP &amp; agent gateway and auth server with web UI supporting OpenClaw, MCP, OAuth, OIDC, SAML, CAS, LDAP, SCIM, WebAuthn, TOTP, MFA,...</div>
+  <div class="hl-scenario">複数のAIプラットフォーム（Claude, Gemini, ChatGPT）を連携させるりゅうさんのワークフローにおいて、Casdoorは「LLM MCP &amp; agent gateway」としてAIエージェントの認証・アクセス管理を一元化し、WONDAY-OSのセキュリティと運用効率を向上させる可能性を秘めます。これにより、「やらなきゃいけないこと」である認証管理を自動化し、「ストレスフリーな社会を作る」という理念に貢献。また、AI導入を進める「AI経営スキル講座」の受講者や「PUMPGYMジュンさん」のようなクライアントに対し、AI活用時のセキュリティとガバナンス強化策として、Casdoorによる認証基盤構築を提案する具体的なネタとなります。「PersonalOS」の認証基盤強化にも寄与し、WONDAYサービスの信頼性を高めるでしょう。</div>
+  <div class="hl-action">CasdoorのGitHubリポジトリを詳細調査し、自身の「WONDAY-OS」におけるAIエージェント認証基盤としてのPoCを検討、`APICostPatrol`との連携可能性も確認する。</div>
+</div>
+
+<h2 class="section-heading">Topics</h2>
+<div class="topic">
+  <div class="topic-title">AIエージェント開発</div>
+  <div class="topic-summary">AIエージェントの構築、管理、機能拡張を支援するフレームワーク、ツール、ライブラリ群。</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/casdoor/casdoor">casdoor/casdoor</a></div>
+    <div class="item-desc">An open-source Agent-first Identity and Access Management (IAM) /LLM MCP &amp; agent gateway and auth server with web UI supporting OpenClaw, MCP, OAuth, OIDC, SAML, CAS, LDAP, SCIM, WebAuthn, TOTP, MFA, Face ID, Google Workspace, Azure AD</div>
+    <div class="item-meta"><span class="stars">13785</span></div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/wanshuiyin/Auto-claude-code-research-in-sleep">wanshuiyin/Auto-claude-code-research-in-sleep</a></div>
+    <div class="item-desc">ARIS ⚔️ (Auto-Research-In-Sleep) — Lightweight Markdown-only skills for autonomous ML research: cross-model review loops, idea discovery, and experiment automation. No framework, no lock-in — works with Claude Code, Codex, OpenClaw, or any LLM agent.</div>
+    <div class="item-meta"><span class="stars">12192</span></div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/superset-sh/superset">superset-sh/superset</a></div>
+    <div class="item-desc">Code Editor for the AI Agents Era - Run an army of Claude Code, Codex, etc. on your machine</div>
+    <div class="item-meta"><span class="stars">11888</span></div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/microsoft/agent-framework">microsoft/agent-framework</a></div>
+    <div class="item-desc">A framework for building, orchestrating and deploying AI agents and multi-agent workflows with support for Python and .NET.</div>
+    <div class="item-meta"><span class="stars">11396</span></div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/Orchestra-Research/AI-Research-SKILLs">Orchestra-Research/AI-Research-SKILLs</a></div>
+    <div class="item-desc">Comprehensive open-source library of AI research and engineering skills for any AI model. Package the skills and your claude code/codex/gemini agent will be an AI research agent with full horsepower. Maintained by Orchestra Research.</div>
+    <div class="item-meta"><span class="stars">9764</span></div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-plugin">PLUGIN</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://confidence.spotify.com">confidence</a></div>
+    <div class="item-desc">Access Confidence feature flags, experiments, and migration tools directly from Claude Code.</div>
+    <div class="item-meta">development</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">音声処理技術</div>
+  <div class="topic-summary">音声認識、テキスト読み上げ、音声分離など、高度な音声処理を実現するツールキットとライブラリ。</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/k2-fsa/sherpa-onnx">k2-fsa/sherpa-onnx</a></div>
+    <div class="item-desc">Speech-to-text, text-to-speech, speaker diarization, speech enhancement, source separation, and VAD using next-gen Kaldi with onnxruntime without Internet connection. Support embedded systems, Android, iOS, HarmonyOS, Raspberry Pi, RISC-V, RK NPU, Axera NPU, Ascend NPU, x86_64 servers, websocket server/client, support 12 programming languages</div>
+    <div class="item-meta"><span class="stars">13022</span></div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/speechbrain/speechbrain">speechbrain/speechbrain</a></div>
+    <div class="item-desc">A PyTorch-based Speech Toolkit</div>
+    <div class="item-meta"><span class="stars">11626</span></div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/Uberi/speech_recognition">Uberi/speech_recognition</a></div>
+    <div class="item-desc">Speech recognition module for Python, supporting several engines and APIs, online and offline.</div>
+    <div class="item-meta"><span class="stars">8970</span></div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">ウェブ管理ツール</div>
+  <div class="topic-summary">Nginxの管理UIなど、ウェブサーバーの効率的な運用を支援するツール。</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/0xJacky/nginx-ui">0xJacky/nginx-ui</a></div>
+    <div class="item-desc">Yet another WebUI for Nginx</div>
+    <div class="item-meta"><span class="stars">11215</span></div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">データ収集・分析</div>
+  <div class="topic-summary">ソーシャルメディアからの情報収集や、DeFiプロトコルデータの分析を支援するツール。</div>
+<div class="item">
+  <span class="badge badge-mcp">MCP</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://www.pulsemcp.com/servers/accrue">Accrue</a></div>
+    <div class="item-desc">Stablecoin yield platform providing 14 read-only MCP tools for querying protocol data, vault positions, and yield opportunities across Ethereum, Base, and Arbitrum.</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/JoeanAmier/XHS-Downloader">JoeanAmier/XHS-Downloader</a></div>
+    <div class="item-desc">小红书（XiaoHongShu、RedNote）链接提取/作品采集工具：提取账号发布、收藏、点赞、专辑作品链接；提取搜索结果作品、用户链接；采集小红书作品信息；提取小红书作品下载地址；下载小红书作品文件</div>
+    <div class="item-meta"><span class="stars">11576</span></div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">ソフトウェア安定性向上</div>
+  <div class="topic-summary">接続の切断やエラー発生時の挙動を改善し、ソフトウェアの信頼性を高める更新。</div>
+<div class="item">
+  <span class="badge badge-changelog">CHANGELOG</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://code.claude.com/docs/en/changelog">v2.1.179</a></div>
+    <div class="item-desc">Fixed mid-stream connection drops: partial responses are now preserved instead of showing a raw error, and the spinner no longer gets stuck at “running tool”, Fixed mouse-wheel scrolling in WSL2 under Windows Terminal and VS Code (regression in 2.1.172), Fixed a sandbox denyRead/allowRead glob over a large directory tree making the Bash tool description enormous and the session unusable on Linux</div>
+    <div class="item-meta">June 16, 2026</div>
+  </div>
+</div>
+</div>
+
+<footer class="footer">
+  Generated at 2026-06-17 07:56 JST<br>
+  Sources: Claude Code CHANGELOG, GitHub Releases, awesome-claude-code,
+  anthropics/skills, PulseMCP, Claude Plugins, GitHub Trending
+</footer>
+
+</div>
+</body>
+</html>
