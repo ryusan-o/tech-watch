@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Weekly Tech Watch — 2026-06-18</title>
+<style>
+:root {
+  --bg: #f8fafc;
+  --bg-card: #ffffff;
+  --bg-highlight: #eff6ff;
+  --text: #1e293b;
+  --text-muted: #64748b;
+  --text-light: #94a3b8;
+  --accent: #3b82f6;
+  --border: #e2e8f0;
+  --shadow: 0 1px 3px rgba(0,0,0,.08);
+  --badge-changelog: #3b82f6;
+  --badge-mcp: #8b5cf6;
+  --badge-trending: #f59e0b;
+  --badge-plugin: #10b981;
+  --badge-awesome: #f43f5e;
+  --badge-skills: #06b6d4;
+}
+@media(prefers-color-scheme:dark){
+:root {
+  --bg: #0f172a;
+  --bg-card: #1e293b;
+  --bg-highlight: #1e3a5f;
+  --text: #e2e8f0;
+  --text-muted: #94a3b8;
+  --text-light: #64748b;
+  --accent: #60a5fa;
+  --border: #334155;
+  --shadow: 0 1px 3px rgba(0,0,0,.3);
+}}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  background:var(--bg);color:var(--text);
+  line-height:1.6;padding:16px;
+}
+.container{max-width:760px;margin:0 auto}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* Header */
+.header{text-align:center;padding:32px 0 24px}
+.header h1{font-size:1.5rem;font-weight:700;letter-spacing:-.02em}
+.header .date-range{color:var(--text-muted);font-size:.875rem;margin-top:4px}
+
+/* Stats */
+.stat-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));
+  gap:8px;margin:0 0 32px;
+}
+.stat-card{
+  background:var(--bg-card);border:1px solid var(--border);border-radius:8px;
+  padding:12px;text-align:center;box-shadow:var(--shadow);
+}
+.stat-card .num{font-size:1.5rem;font-weight:700;color:var(--accent)}
+.stat-card .label{font-size:.75rem;color:var(--text-muted);margin-top:2px}
+
+/* Section heading */
+.section-heading{
+  font-size:1.125rem;font-weight:700;margin:32px 0 16px;
+  padding-bottom:8px;border-bottom:2px solid var(--accent);
+}
+
+/* Highlight cards */
+.highlight-card{
+  background:var(--bg-highlight);border:1px solid var(--border);
+  border-radius:12px;padding:20px;margin-bottom:16px;
+  border-left:4px solid var(--accent);
+}
+.highlight-card .hl-title{font-size:1rem;font-weight:700;margin-bottom:8px}
+.highlight-card .hl-title a{color:var(--text)}
+.highlight-card .hl-desc{font-size:.875rem;color:var(--text-muted);margin-bottom:12px}
+.highlight-card .hl-scenario{
+  font-size:.875rem;line-height:1.7;
+  background:var(--bg-card);border-radius:8px;padding:12px;margin-bottom:8px;
+}
+.highlight-card .hl-action{
+  font-size:.8125rem;color:var(--accent);font-weight:600;
+}
+.highlight-card .hl-action::before{content:"→ "}
+
+/* Topic section */
+.topic{
+  background:var(--bg-card);border:1px solid var(--border);
+  border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:var(--shadow);
+}
+.topic-title{font-size:1rem;font-weight:700;margin-bottom:4px}
+.topic-summary{font-size:.8125rem;color:var(--text-muted);margin-bottom:16px}
+
+/* Item list */
+.item{
+  padding:10px 0;border-bottom:1px solid var(--border);
+  display:flex;gap:10px;align-items:flex-start;
+}
+.item:last-child{border-bottom:none;padding-bottom:0}
+.badge{
+  display:inline-block;font-size:.625rem;font-weight:700;
+  color:#fff;padding:2px 8px;border-radius:10px;white-space:nowrap;
+  flex-shrink:0;margin-top:3px;text-transform:uppercase;letter-spacing:.03em;
+}
+.badge-changelog{background:var(--badge-changelog)}
+.badge-mcp{background:var(--badge-mcp)}
+.badge-trending{background:var(--badge-trending)}
+.badge-plugin{background:var(--badge-plugin)}
+.badge-awesome{background:var(--badge-awesome)}
+.badge-skills{background:var(--badge-skills)}
+.item-body{flex:1;min-width:0}
+.item-title{font-size:.875rem;font-weight:600}
+.item-desc{font-size:.8125rem;color:var(--text-muted);margin-top:2px}
+.item-meta{font-size:.75rem;color:var(--text-light);margin-top:4px}
+.item-meta .stars::before{content:"\2B50 "}
+
+/* Footer */
+.footer{
+  text-align:center;color:var(--text-light);font-size:.75rem;
+  padding:32px 0 16px;border-top:1px solid var(--border);margin-top:32px;
+}
+
+/* No items */
+.empty{color:var(--text-light);font-style:italic;font-size:.875rem;padding:8px 0}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header class="header">
+  <h1>Weekly Tech Watch</h1>
+  <div class="date-range">2026-06-16 ~ 2026-06-18</div>
+</header>
+
+<div class="stat-grid">
+<div class="stat-card"><div class="num">1</div><div class="label">Claude Code</div></div>
+<div class="stat-card"><div class="num">10</div><div class="label">Trending</div></div>
+<div class="stat-card"><div class="num">4</div><div class="label">Plugins</div></div>
+</div>
+
+<h2 class="section-heading">Highlights</h2>
+<div class="highlight-card">
+  <div class="hl-title"><a href="https://code.claude.com/docs/en/changelog">Claude Code v2.1.181</a></div>
+  <div class="hl-desc">Added /config key=value syntax to set any setting from the prompt (e.g. /config thinking=false) — works in interactive, -p, and Remote Control</div>
+  <div class="hl-scenario">りゅうさん自身は、Claude Codeでのプロトタイピングや実行速度向上のために、`/config thinking=false` を活用し、思考プロセスをスキップして直接アウトプットを得ることで、「完璧主義で着手が遅れる」という課題を克服し、`DevLogSNS` の投稿品質改善や `PersonalOS` の提案資料作成を加速できます。また、`AI経営スキル講座` の受講者には、AIの挙動をプロンプトから直接制御する具体的なテクニックとして紹介し、クライアントのAI活用における「分解と再構築」の力をインストールする一助となります。さらに、`WONDAY-OS` のようなAI運用基盤において、AIの応答速度と精度を向上させる動的な制御機能として組み込むことで、サービス全体の強化に繋がります。</div>
+  <div class="hl-action">次回Claude Code利用時に `/config thinking=false` を試し、`01_Projects/WONDAYConsulting/claude_code_tips.md` に活用例を追記する。</div>
+</div>
+<div class="highlight-card">
+  <div class="hl-title"><a href="https://github.com/debpalash/OmniVoice-Studio">GitHub: debpalash/OmniVoice-Studio</a></div>
+  <div class="hl-desc">The open-source ElevenLabs alternative for local voice cloning, design, create, dubbing and dictation Desktop App</div>
+  <div class="hl-scenario">このオープンソースの音声クローンツールは、りゅうさんのSNS発信（@wonday.okinawa）におけるリール動画やYouTubeコンテンツのナレーション作成を効率化し、「やらなきゃいけないこと」であるコンテンツ制作の手間を削減します。ローカル動作のためAPIコストを抑えつつ、高品質な音声コンテンツを量産できる点が強みです。クライアント向けには、「PUMPGYMジュンさん」のようなAI導入支援クライアントに対し、トレーニング動画のナレーションやプロモーション音声の自動生成を提案できます。また、「学童運営NPO法人」には、子供向け教材や保護者向け説明の音声コンテンツ作成支援として活用を提案可能です。WONDAYサービス強化としては、「MeetingMinutes」プロジェクトにおいて、ディクテーション機能で議事録の文字起こし精度向上を検討。特に `clients/wonday.yaml` に記載の「既知のWhisper誤認識パターン」対策として、ローカルでの高精度音声認識を試すことで、議事録作成の品質と効率を向上させる可能性があります。</div>
+  <div class="hl-action">OmniVoice-Studioをダウンロードし、自身のSNSコンテンツ（@wonday.okinawa）のリール動画のナレーション作成に試用する。</div>
+</div>
+<div class="highlight-card">
+  <div class="hl-title"><a href="https://github.com/nexu-io/html-anything">GitHub: nexu-io/html-anything</a></div>
+  <div class="hl-desc">✨ The agentic HTML editor — your local AI agent writes the HTML, you ship it. 🚀 75 Skills × 9 Surfaces (magazine · deck · poster · XHS / tweet · prototype · data report · Hyperframes) 🛡️ Sandboxed pr...</div>
+  <div class="hl-scenario">りゅうさん自身は、「完璧主義で着手が遅れる」課題に対し、本ツールでPersonalOS提案資料やWONDAYコンサルティングのLPプロトタイプをHTMLで迅速に生成し、「全体設計してから走る。ただし完璧は待たない」原則を実践できます。既存クライアント、特に「10名以下の事業会社」をターゲットとするAIコンサル受講者には、Webサイトやマーケティング資料（デッキ、ポスター）の初期プロトタイプをAIで素早く作成するソリューションとして提案し、IT導入の障壁を下げられます。WONDAYサービス強化としては、DevLogSNSやWONDAY SNS発信プロジェクト2026のコンテンツ作成で、多様なフォーマットのHTMLコンテンツを効率的に生成し、AI経営スキル講座のカリキュラムに実践ワークショップとして組み込むことで、「AIで経営を仕組み化」する具体的なスキルを提供できます。</div>
+  <div class="hl-action">ローカル環境に `nexu-io/html-anything` をインストールし、PersonalOS提案資料のHTMLプロトタイプ作成で試す。</div>
+</div>
+
+<h2 class="section-heading">Topics</h2>
+<div class="topic">
+  <div class="topic-title">AIエージェントとスキル</div>
+  <div class="topic-summary">AIエージェントの構築、拡張、活用を支援するツール、プラットフォーム、学習リソースをまとめた。</div>
+<div class="item">
+  <span class="badge badge-changelog">CHANGELOG</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://code.claude.com/docs/en/changelog">v2.1.181</a></div>
+    <div class="item-desc">Added /config key=value syntax to set any setting from the prompt (e.g. /config thinking=false) — works in interactive, -p, and Remote Control, Added sandbox.allowAppleEvents opt-in setting that lets sandboxed commands send Apple Events on macOS, Added CLAUDE_CLIENT_PRESENCE_FILE environment variable: point it at a marker file to suppress mobile push notifications while you’re at the machine</div>
+    <div class="item-meta">June 17, 2026</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/nexu-io/html-anything">nexu-io/html-anything</a></div>
+    <div class="item-desc">✨ The agentic HTML editor — your local AI agent writes the HTML, you ship it. 🚀 75 Skills × 9 Surfaces (magazine · deck · poster · XHS / tweet · prototype · data report · Hyperframes) 🛡️ Sandboxed preview · 📤 1-click to WeChat / X / Zhihu / HTML / PNG 🔑 Zero API key — Claude Code / Cursor / Codex / Gemini / Copilot / OpenCode / Qwen / Aider.</div>
+    <div class="item-meta"><span class="stars">6933</span></div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/SamurAIGPT/Generative-Media-Skills">SamurAIGPT/Generative-Media-Skills</a></div>
+    <div class="item-desc">Multi-modal Generative Media Skills for AI Agents (Claude Code, Cursor, Gemini CLI). High-quality image, video, and audio generation powered by muapi.ai.</div>
+    <div class="item-meta"><span class="stars">3563</span></div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/davepoon/buildwithclaude">davepoon/buildwithclaude</a></div>
+    <div class="item-desc">A single hub to find Claude Skills, Agents, Commands, Hooks, Plugins, and Marketplace collections to extend Claude Code, Claude Desktop, Agent SDK and OpenClaw</div>
+    <div class="item-meta"><span class="stars">3082</span></div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/WenyuChiou/awesome-agentic-ai-zh">WenyuChiou/awesome-agentic-ai-zh</a></div>
+    <div class="item-desc">A trilingual (繁中 / English / 简中) learning roadmap for agentic AI: from LLM basics to multi-agent systems, with 240+ curated resources and hands-on examples. 中文 AI agent 學習地圖。</div>
+    <div class="item-meta"><span class="stars">2888</span></div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/geekjourneyx/md2wechat-skill">geekjourneyx/md2wechat-skill</a></div>
+    <div class="item-desc">Markdown to WeChat CLI | 一键排版发布到微信公众号：支持 40+ 排版样式和专业主题 、AI 配图 、批量发布</div>
+    <div class="item-meta"><span class="stars">2887</span></div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-plugin">PLUGIN</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://www.airwallex.com/docs">airwallex-agentos</a></div>
+    <div class="item-desc">Bring Airwallex&#x27;s global financial infrastructure to Claude. Orchestrate actions across your account in plain language, e.g., set up invoices from a PO, onboard suppliers from invoices, and check current cash position across currencies. AgentOS bundles pre-built finance Skills with MCP servers. A public CLI connects your agent to Airwallex&#x27;s capabilities.</div>
+    <div class="item-meta">productivity</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-plugin">PLUGIN</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://docs.oracle.com/en/cloud/paas/ai-data-platform/index.html">oracle-ai-data-platform-workbench-engineer-agent</a></div>
+    <div class="item-desc">Oracle AI Data Platform (AIDP) Workbench engineer agent for Claude Code — a 37-skill agent that operates the full Spark/Delta lakehouse in natural language. Discovers your catalog into a grounding cache, turns plain English into accurate Spark SQL, and runs the lifecycle (CREATE/INSERT/UPDATE/DELETE/MERGE, OPTIMIZE/VACUUM, time-travel). Ingests files, profiles data and sets quality rules, authors and repairs pipelines, provisions clusters, and debugs via the Spark UI. Governs the platform (roles, credential store, Delta Sharing, audit logs), plus native Git, bundles, and MLOps/MLflow. Runs via the official Oracle aidp CLI.</div>
+    <div class="item-meta">development</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-plugin">PLUGIN</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://docs.rilldata.com/developers/build/ai-configuration">rill</a></div>
+    <div class="item-desc">Skills for developing and querying projects in the Rill business intelligence platform</div>
+    <div class="item-meta">development</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">音声AIソリューション</div>
+  <div class="topic-summary">音声クローン、文字起こし、音声合成など、オープンソースでローカル実行可能な音声AI技術を集約。</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/debpalash/OmniVoice-Studio">debpalash/OmniVoice-Studio</a></div>
+    <div class="item-desc">The open-source ElevenLabs alternative for local voice cloning, design, create, dubbing and dictation Desktop App</div>
+    <div class="item-meta"><span class="stars">7134</span></div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/huggingface/speech-to-speech">huggingface/speech-to-speech</a></div>
+    <div class="item-desc">Build local voice agents with open-source models</div>
+    <div class="item-meta"><span class="stars">4891</span></div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/dograh-hq/dograh">dograh-hq/dograh</a></div>
+    <div class="item-desc">Open source voice AI platform. Self-hosted alternative to Vapi and Retell. On Prem, BYOK across  Speech to Speech or LLM/STT/TTS, with a visual workflow builder, MCP native and telephony support.</div>
+    <div class="item-meta"><span class="stars">4439</span></div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/OpenWhispr/openwhispr">OpenWhispr/openwhispr</a></div>
+    <div class="item-desc">Voice-to-text dictation app with local (Nvidia Parakeet/Whisper) and cloud models (BYOK). Privacy-first and available cross-platform.</div>
+    <div class="item-meta"><span class="stars">3832</span></div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">開発支援とAIリソース</div>
+  <div class="topic-summary">AI関連の便利なツール集と、クラウド環境へのコード移行・近代化を支援するソリューション。</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/ikaijua/Awesome-AITools">ikaijua/Awesome-AITools</a></div>
+    <div class="item-desc">Collection of AI-related utilities. Welcome to submit pull requests /收藏AI相关的实用工具，欢迎提交pull requests</div>
+    <div class="item-meta"><span class="stars">6027</span></div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-plugin">PLUGIN</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/awslabs/agent-plugins">aws-transform</a></div>
+    <div class="item-desc">Migrate, modernize, and upgrade codebases to AWS. Transforms .NET Framework to .NET 8/10, mainframe COBOL to Java, VMware VMs to EC2, SQL Server to Aurora, and upgrades Java/Python/Node.js versions and AWS SDKs. AWS Transform - continuous modernization analyzes codebases for tech debt, security issues, and upgrade opportunities, then remediates them.</div>
+    <div class="item-meta">migration</div>
+  </div>
+</div>
+</div>
+
+<footer class="footer">
+  Generated at 2026-06-18 07:56 JST<br>
+  Sources: Claude Code CHANGELOG, GitHub Releases, awesome-claude-code,
+  anthropics/skills, PulseMCP, Claude Plugins, GitHub Trending
+</footer>
+
+</div>
+</body>
+</html>
