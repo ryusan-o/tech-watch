@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Weekly Tech Watch — 2026-06-19</title>
+<style>
+:root {
+  --bg: #f8fafc;
+  --bg-card: #ffffff;
+  --bg-highlight: #eff6ff;
+  --text: #1e293b;
+  --text-muted: #64748b;
+  --text-light: #94a3b8;
+  --accent: #3b82f6;
+  --border: #e2e8f0;
+  --shadow: 0 1px 3px rgba(0,0,0,.08);
+  --badge-changelog: #3b82f6;
+  --badge-mcp: #8b5cf6;
+  --badge-trending: #f59e0b;
+  --badge-plugin: #10b981;
+  --badge-awesome: #f43f5e;
+  --badge-skills: #06b6d4;
+}
+@media(prefers-color-scheme:dark){
+:root {
+  --bg: #0f172a;
+  --bg-card: #1e293b;
+  --bg-highlight: #1e3a5f;
+  --text: #e2e8f0;
+  --text-muted: #94a3b8;
+  --text-light: #64748b;
+  --accent: #60a5fa;
+  --border: #334155;
+  --shadow: 0 1px 3px rgba(0,0,0,.3);
+}}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  background:var(--bg);color:var(--text);
+  line-height:1.6;padding:16px;
+}
+.container{max-width:760px;margin:0 auto}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* Header */
+.header{text-align:center;padding:32px 0 24px}
+.header h1{font-size:1.5rem;font-weight:700;letter-spacing:-.02em}
+.header .date-range{color:var(--text-muted);font-size:.875rem;margin-top:4px}
+
+/* Stats */
+.stat-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));
+  gap:8px;margin:0 0 32px;
+}
+.stat-card{
+  background:var(--bg-card);border:1px solid var(--border);border-radius:8px;
+  padding:12px;text-align:center;box-shadow:var(--shadow);
+}
+.stat-card .num{font-size:1.5rem;font-weight:700;color:var(--accent)}
+.stat-card .label{font-size:.75rem;color:var(--text-muted);margin-top:2px}
+
+/* Section heading */
+.section-heading{
+  font-size:1.125rem;font-weight:700;margin:32px 0 16px;
+  padding-bottom:8px;border-bottom:2px solid var(--accent);
+}
+
+/* Highlight cards */
+.highlight-card{
+  background:var(--bg-highlight);border:1px solid var(--border);
+  border-radius:12px;padding:20px;margin-bottom:16px;
+  border-left:4px solid var(--accent);
+}
+.highlight-card .hl-badge{
+  display:inline-block;font-size:.6875rem;font-weight:700;
+  color:var(--accent);background:var(--bg-card);
+  border:1px solid var(--border);border-radius:999px;
+  padding:2px 8px;margin-bottom:8px;
+}
+.highlight-card .hl-title{font-size:1rem;font-weight:700;margin-bottom:8px}
+.highlight-card .hl-title a{color:var(--text)}
+.highlight-card .hl-desc{font-size:.875rem;color:var(--text-muted);margin-bottom:8px}
+.highlight-card .hl-desc strong,
+.highlight-card .hl-scenario strong{
+  display:block;color:var(--text);font-size:.75rem;margin-bottom:2px;
+}
+.highlight-card .hl-link{font-size:.8125rem;margin-bottom:12px}
+.highlight-card .hl-scenario{
+  font-size:.875rem;line-height:1.7;
+  background:var(--bg-card);border-radius:8px;padding:12px;margin-bottom:8px;
+}
+.highlight-card .hl-action{
+  font-size:.8125rem;color:var(--accent);font-weight:600;
+}
+.highlight-card .hl-action::before{content:"→ "}
+
+/* Topic section */
+.topic{
+  background:var(--bg-card);border:1px solid var(--border);
+  border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:var(--shadow);
+}
+.topic-title{font-size:1rem;font-weight:700;margin-bottom:4px}
+.topic-summary{font-size:.8125rem;color:var(--text-muted);margin-bottom:16px}
+
+/* Item list */
+.item{
+  padding:10px 0;border-bottom:1px solid var(--border);
+  display:flex;gap:10px;align-items:flex-start;
+}
+.item:last-child{border-bottom:none;padding-bottom:0}
+.badge{
+  display:inline-block;font-size:.625rem;font-weight:700;
+  color:#fff;padding:2px 8px;border-radius:10px;white-space:nowrap;
+  flex-shrink:0;margin-top:3px;text-transform:uppercase;letter-spacing:.03em;
+}
+.badge-changelog{background:var(--badge-changelog)}
+.badge-mcp{background:var(--badge-mcp)}
+.badge-trending{background:var(--badge-trending)}
+.badge-plugin{background:var(--badge-plugin)}
+.badge-awesome{background:var(--badge-awesome)}
+.badge-skills{background:var(--badge-skills)}
+.item-body{flex:1;min-width:0}
+.item-title{font-size:.875rem;font-weight:600}
+.item-desc{font-size:.8125rem;color:var(--text-muted);margin-top:2px}
+.item-meta{font-size:.75rem;color:var(--text-light);margin-top:4px}
+.item-meta .stars::before{content:"\2B50 "}
+
+/* Footer */
+.footer{
+  text-align:center;color:var(--text-light);font-size:.75rem;
+  padding:32px 0 16px;border-top:1px solid var(--border);margin-top:32px;
+}
+
+/* No items */
+.empty{color:var(--text-light);font-style:italic;font-size:.875rem;padding:8px 0}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header class="header">
+  <h1>Weekly Tech Watch</h1>
+  <div class="date-range">2026-06-17 ~ 2026-06-19</div>
+</header>
+
+<div class="stat-grid">
+<div class="stat-card"><div class="num">10</div><div class="label">Trending</div></div>
+<div class="stat-card"><div class="num">3</div><div class="label">Plugins</div></div>
+</div>
+
+<h2 class="section-heading">Highlights</h2>
+<div class="highlight-card">
+  <div class="hl-badge">深掘り候補</div>
+  <div class="hl-title"><a href="https://github.com/bytedance/UI-TARS-desktop">GitHub: bytedance/UI-TARS-desktop</a></div>
+  <div class="hl-desc"><strong>概要</strong>ByteDanceがオープンソースのマルチモーダルAIエージェントスタック「UI-TARS-desktop」を公開しました。これは、様々なAIモデルとエージェントインフラを連携させ、多様なタスクを自動実行できるフレームワークを提供します。</div>
+  <div class="hl-link"><a href="https://github.com/bytedance/UI-TARS-desktop">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>りゅうさんのAIコンサルティング事業において、最新のAIエージェント技術動向として顧客に紹介する可能性があります。また、WONDAY-OSの構想でマルチモーダルな自動化を検討する際の技術選定の参考になるかもしれません。うま藻事業での画像認識による品質管理や、SNSコンテンツ生成の自動化にも応用できる可能性を秘めています。</div>
+  <div class="hl-action">深掘りするなら、GitHubリポジトリのREADMEを読み込み、どのようなAIモデルやインフラと連携できるのか、具体的なユースケース例を確認すると良いでしょう。GUIでの操作性やDify/n8nとの連携可能性も確認すると、りゅうさんのスキルセットに合うか判断しやすくなります。</div>
+</div>
+<div class="highlight-card">
+  <div class="hl-badge">深掘り候補</div>
+  <div class="hl-title"><a href="https://github.com/leon-ai/leon">GitHub: leon-ai/leon</a></div>
+  <div class="hl-desc"><strong>概要</strong>オープンソースのパーソナルAIアシスタント「Leon」がGitHubで注目を集めています。ユーザーの指示に基づき、情報収集やタスク自動実行など多様な機能を持ち、高いカスタマイズ性が特徴です。</div>
+  <div class="hl-link"><a href="https://github.com/leon-ai/leon">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>りゅうさんの「PersonalOS」や「WONDAY-OS」構想において、自身の業務を効率化する基盤として活用できる可能性があります。既存のClaude/Gemini APIやn8n等と連携し、メール処理や情報収集など「やらなきゃいけないこと」の自動化をさらに統合的に進められるかもしれません。</div>
+  <div class="hl-action">GitHubリポジトリのREADMEやドキュメントで、技術スタックや導入の容易さ、提供される機能モジュールを確認し、既存の自動化ツールとの連携可能性を深掘りする。</div>
+</div>
+<div class="highlight-card">
+  <div class="hl-badge">深掘り候補</div>
+  <div class="hl-title"><a href="https://github.com/modelscope/FunClip">GitHub: modelscope/FunClip</a></div>
+  <div class="hl-desc"><strong>概要</strong>GitHubで公開された「FunClip」は、LLMベースのAIを統合したオープンソースの動画音声認識・クリッピングツールです。高精度かつ使いやすさを特徴とし、動画内の発言を認識して自動で切り出す機能を提供します。</div>
+  <div class="hl-link"><a href="https://github.com/modelscope/FunClip">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>りゅうさんの「AIで経営を仕組み化」というSNS戦略において、動画コンテンツ作成の効率化に活用できる可能性があります。セミナーやコンサル内容の動画から重要な発言部分を自動で切り出し、SNS投稿用の短尺動画作成やテロップ作成の補助に役立つかもしれません。また、うま藻事業や「りゅうさんち」のプロモーション動画編集の手間削減にも繋がる可能性があります。</div>
+  <div class="hl-action">深掘りするなら、GitHubリポジトリのREADMEを確認し、ツールのインストール方法、利用例、LLM連携の具体的な仕組み（特に日本語対応の有無）を調査してみる。</div>
+</div>
+
+<h2 class="section-heading">Topics</h2>
+<div class="topic">
+  <div class="topic-title">AIエージェント</div>
+  <div class="topic-summary">自律的なタスク実行や個人支援を行うAIエージェントとアシスタントのフレームワークと活用事例。</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/bytedance/UI-TARS-desktop">bytedance/UI-TARS-desktop</a></div>
+    <div class="item-desc">The Open-Source Multimodal AI Agent Stack: Connecting Cutting-Edge AI Models and Agent Infra</div>
+    <div class="item-meta"><span class="stars">36845</span></div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/leon-ai/leon">leon-ai/leon</a></div>
+    <div class="item-desc">🧠 Leon is your open-source personal assistant.</div>
+    <div class="item-meta"><span class="stars">17326</span></div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/deanpeters/Product-Manager-Skills">deanpeters/Product-Manager-Skills</a></div>
+    <div class="item-desc">Product Management skills framework built on battle-tested methods for Claude Code, Cowork, Codex, and AI agents.</div>
+    <div class="item-meta"><span class="stars">5234</span></div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-plugin">PLUGIN</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/aws/agent-toolkit-for-aws">aws-agents-for-devsecops</a></div>
+    <div class="item-desc">Investigate incidents, review code and execute UAT for release readiness, scan code for vulnerabilities, and run penetration tests with AWS DevOps Agent and AWS Security Agent.</div>
+    <div class="item-meta">development</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">メディア・音声AI</div>
+  <div class="topic-summary">動画編集、音声認識、字幕生成、物語執筆など、メディアとコンテンツ制作を支援するAIツール。</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/modelscope/FunClip">modelscope/FunClip</a></div>
+    <div class="item-desc">Open-source, accurate and easy-to-use video speech recognition &amp; clipping tool. LLM-based AI clipping integrated.</div>
+    <div class="item-meta"><span class="stars">5831</span></div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/tmoroney/auto-subs">tmoroney/auto-subs</a></div>
+    <div class="item-desc">On-device subtitle generation that connects directly to DaVinci Resolve, Premiere, and After Effects.</div>
+    <div class="item-meta"><span class="stars">3638</span></div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/worldwonderer/oh-story-claudecode">worldwonderer/oh-story-claudecode</a></div>
+    <div class="item-desc">网文/小说写作 skill 包，覆盖长篇与短篇网络小说的扫榜、拆文、写作、去AI味、封面图全流程</div>
+    <div class="item-meta"><span class="stars">2717</span></div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/FluidInference/FluidAudio">FluidInference/FluidAudio</a></div>
+    <div class="item-desc">Frontier CoreML audio models in your apps — text-to-speech, speech-to-text, voice activity detection, and speaker diarization. In Swift, powered by SOTA open source. </div>
+    <div class="item-meta"><span class="stars">2288</span></div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">ローカルAI基盤</div>
+  <div class="topic-summary">PCをAIサーバーに変えたり、オンデバイスでAIモデルを実行したりするための基盤技術とツール。</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/microsoft/Foundry-Local">microsoft/Foundry-Local</a></div>
+    <div class="item-meta"><span class="stars">2376</span></div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/Light-Heart-Labs/DreamServer">Light-Heart-Labs/DreamServer</a></div>
+    <div class="item-desc">Turn your PC, Mac, or Linux box into an AI server.  LLM inference, chat UI, voice, agents, workflows, RAG, and image generation.</div>
+    <div class="item-meta"><span class="stars">2088</span></div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">ビジネス効率化AI</div>
+  <div class="topic-summary">音声入力、CRM、データ分析など、ビジネスプロセスや個人の生産性を向上させるAIアプリケーション。</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/Open-Less/openless">Open-Less/openless</a></div>
+    <div class="item-desc">Hold a key, speak, release — AI-polished text appears at your cursor in any app. Open-source voice input for macOS &amp; Windows. (按住快捷键说话，松开即得润色后的文字)</div>
+    <div class="item-meta"><span class="stars">2397</span></div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-plugin">PLUGIN</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://logrocket.com">logrocket</a></div>
+    <div class="item-desc">Connect Claude Code to LogRocket to query session replays, metrics, issues, and user behavior using natural language.</div>
+    <div class="item-meta">monitoring</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-plugin">PLUGIN</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://monday.com">monday-crm</a></div>
+    <div class="item-desc">Run your monday CRM in plain language. Build a pipeline from scratch, start the day with a ranked deal briefing, spin up a forecast dashboard, audit board health, clean up messy data in bulk, and turn meeting notes into deal updates. Every skill writes back into monday as a real update, doc, or dashboard. Built on the official monday MCP connector.</div>
+    <div class="item-meta">productivity</div>
+  </div>
+</div>
+</div>
+
+<footer class="footer">
+  Generated at 2026-06-19 07:55 JST<br>
+  Sources: Claude Code CHANGELOG, GitHub Releases, awesome-claude-code,
+  anthropics/skills, PulseMCP, Claude Plugins, GitHub Trending
+</footer>
+
+</div>
+</body>
+</html>
