@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Weekly Tech Watch — 2026-06-22</title>
+<style>
+:root {
+  --bg: #f8fafc;
+  --bg-card: #ffffff;
+  --bg-highlight: #eff6ff;
+  --text: #1e293b;
+  --text-muted: #64748b;
+  --text-light: #94a3b8;
+  --accent: #3b82f6;
+  --border: #e2e8f0;
+  --shadow: 0 1px 3px rgba(0,0,0,.08);
+  --badge-changelog: #3b82f6;
+  --badge-mcp: #8b5cf6;
+  --badge-trending: #f59e0b;
+  --badge-plugin: #10b981;
+  --badge-awesome: #f43f5e;
+  --badge-skills: #06b6d4;
+}
+@media(prefers-color-scheme:dark){
+:root {
+  --bg: #0f172a;
+  --bg-card: #1e293b;
+  --bg-highlight: #1e3a5f;
+  --text: #e2e8f0;
+  --text-muted: #94a3b8;
+  --text-light: #64748b;
+  --accent: #60a5fa;
+  --border: #334155;
+  --shadow: 0 1px 3px rgba(0,0,0,.3);
+}}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  background:var(--bg);color:var(--text);
+  line-height:1.6;padding:16px;
+}
+.container{max-width:760px;margin:0 auto}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* Header */
+.header{text-align:center;padding:32px 0 24px}
+.header h1{font-size:1.5rem;font-weight:700;letter-spacing:-.02em}
+.header .date-range{color:var(--text-muted);font-size:.875rem;margin-top:4px}
+
+/* Stats */
+.stat-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));
+  gap:8px;margin:0 0 32px;
+}
+.stat-card{
+  background:var(--bg-card);border:1px solid var(--border);border-radius:8px;
+  padding:12px;text-align:center;box-shadow:var(--shadow);
+}
+.stat-card .num{font-size:1.5rem;font-weight:700;color:var(--accent)}
+.stat-card .label{font-size:.75rem;color:var(--text-muted);margin-top:2px}
+
+/* Section heading */
+.section-heading{
+  font-size:1.125rem;font-weight:700;margin:32px 0 16px;
+  padding-bottom:8px;border-bottom:2px solid var(--accent);
+}
+
+/* Highlight cards */
+.highlight-card{
+  background:var(--bg-highlight);border:1px solid var(--border);
+  border-radius:12px;padding:20px;margin-bottom:16px;
+  border-left:4px solid var(--accent);
+}
+.highlight-card .hl-badge{
+  display:inline-block;font-size:.6875rem;font-weight:700;
+  color:var(--accent);background:var(--bg-card);
+  border:1px solid var(--border);border-radius:999px;
+  padding:2px 8px;margin-bottom:8px;
+}
+.highlight-card .hl-title{font-size:1rem;font-weight:700;margin-bottom:8px}
+.highlight-card .hl-title a{color:var(--text)}
+.highlight-card .hl-desc{font-size:.875rem;color:var(--text-muted);margin-bottom:8px}
+.highlight-card .hl-desc strong,
+.highlight-card .hl-scenario strong{
+  display:block;color:var(--text);font-size:.75rem;margin-bottom:2px;
+}
+.highlight-card .hl-link{font-size:.8125rem;margin-bottom:12px}
+.highlight-card .hl-scenario{
+  font-size:.875rem;line-height:1.7;
+  background:var(--bg-card);border-radius:8px;padding:12px;margin-bottom:8px;
+}
+.highlight-card .hl-action{
+  font-size:.8125rem;color:var(--accent);font-weight:600;
+}
+.highlight-card .hl-action::before{content:"→ "}
+
+/* Topic section */
+.topic{
+  background:var(--bg-card);border:1px solid var(--border);
+  border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:var(--shadow);
+}
+.topic-title{font-size:1rem;font-weight:700;margin-bottom:4px}
+.topic-summary{font-size:.8125rem;color:var(--text-muted);margin-bottom:16px}
+
+/* Item list */
+.item{
+  padding:10px 0;border-bottom:1px solid var(--border);
+  display:flex;gap:10px;align-items:flex-start;
+}
+.item:last-child{border-bottom:none;padding-bottom:0}
+.badge{
+  display:inline-block;font-size:.625rem;font-weight:700;
+  color:#fff;padding:2px 8px;border-radius:10px;white-space:nowrap;
+  flex-shrink:0;margin-top:3px;text-transform:uppercase;letter-spacing:.03em;
+}
+.badge-changelog{background:var(--badge-changelog)}
+.badge-mcp{background:var(--badge-mcp)}
+.badge-trending{background:var(--badge-trending)}
+.badge-plugin{background:var(--badge-plugin)}
+.badge-awesome{background:var(--badge-awesome)}
+.badge-skills{background:var(--badge-skills)}
+.item-body{flex:1;min-width:0}
+.item-title{font-size:.875rem;font-weight:600}
+.item-desc{font-size:.8125rem;color:var(--text-muted);margin-top:2px}
+.item-meta{font-size:.75rem;color:var(--text-light);margin-top:4px}
+.item-meta .stars::before{content:"\2B50 "}
+
+/* Footer */
+.footer{
+  text-align:center;color:var(--text-light);font-size:.75rem;
+  padding:32px 0 16px;border-top:1px solid var(--border);margin-top:32px;
+}
+
+/* No items */
+.empty{color:var(--text-light);font-style:italic;font-size:.875rem;padding:8px 0}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header class="header">
+  <h1>Weekly Tech Watch</h1>
+  <div class="date-range">2026-06-18 ~ 2026-06-22</div>
+</header>
+
+<div class="stat-grid">
+<div class="stat-card"><div class="num">2</div><div class="label">Claude Code</div></div>
+<div class="stat-card"><div class="num">10</div><div class="label">Trending</div></div>
+<div class="stat-card"><div class="num">2</div><div class="label">Plugins</div></div>
+</div>
+
+<h2 class="section-heading">Highlights</h2>
+<div class="highlight-card">
+  <div class="hl-badge">ニュース</div>
+  <div class="hl-title"><a href="https://code.claude.com/docs/en/changelog">Claude Code v2.1.183</a></div>
+  <div class="hl-desc"><strong>概要</strong>Claude Codeのv2.1.183アップデートにより、オートモードでの安全性が向上しました。破壊的なGitコマンド（例: git reset --hard）やインフラ削除コマンドが、意図しないデータ損失を防ぐため、特定の指示がない限りブロックされるようになります。</div>
+  <div class="hl-link"><a href="https://code.claude.com/docs/en/changelog">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>プログラミング経験が少なくClaude Codeをメインで利用するりゅうさんにとって、意図しない破壊的な操作を防ぐこの機能は、安心して開発を進める上で重要です。AIが安全に作業を進めることで、心理的な障壁を下げ、実行を加速させる可能性があります。</div>
+  <div class="hl-action">Claude CodeでGit操作を伴う作業を行う際に、この安全機能がどのように動作するかを実際に試してみると良いでしょう。</div>
+</div>
+<div class="highlight-card">
+  <div class="hl-badge">深掘り候補</div>
+  <div class="hl-title"><a href="https://github.com/nextlevelbuilder/ui-ux-pro-max-skill">GitHub: nextlevelbuilder/ui-ux-pro-max-skill</a></div>
+  <div class="hl-desc"><strong>概要</strong>GitHubで公開された「ui-ux-pro-max-skill」は、AIを活用して複数プラットフォーム向けのプロフェッショナルなUI/UXデザインを支援するAIスキルです。</div>
+  <div class="hl-link"><a href="https://github.com/nextlevelbuilder/ui-ux-pro-max-skill">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>WONDAYのAIコンサルティングにおいて、クライアントのウェブサイトやアプリケーションのUI/UX改善提案に活用できる可能性があります。また、りゅうさんちやうま藻事業のLP・ウェブサイトのプロトタイプ作成を加速し、SNSでの「AIで経営を仕組み化」テーマでデザイン自動化の事例として発信することも考えられます。</div>
+  <div class="hl-action">GitHubリポジトリのREADMEを確認し、このAIスキルが具体的にどのような機能を提供し、どのAIプラットフォームでどのように利用できるのかを調査する。</div>
+</div>
+<div class="highlight-card">
+  <div class="hl-badge">深掘り候補</div>
+  <div class="hl-title"><a href="https://github.com/DietrichGebert/ponytail">GitHub: DietrichGebert/ponytail</a></div>
+  <div class="hl-desc"><strong>概要</strong>GitHubの「ponytail」は、AIエージェントに「書かないコードが最良」という思想で、最も効率的かつ本質的な解決策を導かせるプロジェクトです。無駄を省き、最小限の努力で最大限の効果を出す「怠惰なシニア開発者」のような思考をAIに促すプロンプト戦略を提供します。</div>
+  <div class="hl-link"><a href="https://github.com/DietrichGebert/ponytail">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>りゅうさんの「やらなきゃいけないことの効率化」や「完璧主義による着手遅延」といった課題に対し、AIが本質的な解決策を提案することで、無駄な作業を削減し、MVPサイクルを加速できる可能性があります。WONDAY Growth Engineやクライアント導入標準パッケージなど、AIを活用した業務自動化ソリューション開発において、より洗練された提案に繋がるかもしれません。</div>
+  <div class="hl-action">GitHubリポジトリを詳細に確認し、どのようなプロンプト戦略や思考フレームワークが提供されているかを把握する。既存のAIプロジェクトへの適用可能性を検討する。</div>
+</div>
+
+<h2 class="section-heading">Topics</h2>
+<div class="topic">
+  <div class="topic-title">AI開発・基盤技術</div>
+  <div class="topic-summary">AIモデルの配布、音声認識・合成、RAGなど、AI開発を支える基盤技術とツール。</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/VectifyAI/PageIndex">VectifyAI/PageIndex</a></div>
+    <div class="item-desc">📑 PageIndex: Document Index for Vectorless, Reasoning-based RAG</div>
+    <div class="item-meta"><span class="stars">33272</span></div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/mozilla-ai/llamafile">mozilla-ai/llamafile</a></div>
+    <div class="item-desc">Distribute and run LLMs with a single file.</div>
+    <div class="item-meta"><span class="stars">25064</span></div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/FunAudioLLM/SenseVoice">FunAudioLLM/SenseVoice</a></div>
+    <div class="item-desc">Multilingual speech understanding: ASR + emotion recognition + audio event detection. 50+ languages, 15x faster than Whisper, non-autoregressive.</div>
+    <div class="item-meta"><span class="stars">8629</span></div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/Blaizzy/mlx-audio">Blaizzy/mlx-audio</a></div>
+    <div class="item-desc">A text-to-speech (TTS), speech-to-text (STT) and speech-to-speech (STS) library built on Apple&#x27;s MLX framework, providing efficient speech analysis on Apple Silicon.</div>
+    <div class="item-meta"><span class="stars">7403</span></div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">AI活用・業務効率化</div>
+  <div class="topic-summary">デザイン、プログラミング、会議、学習、プロジェクト管理など、多様な業務をAIで効率化するアプリケーション。</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/nextlevelbuilder/ui-ux-pro-max-skill">nextlevelbuilder/ui-ux-pro-max-skill</a></div>
+    <div class="item-desc">An AI SKILL that provide design intelligence for building professional UI/UX multiple platforms</div>
+    <div class="item-meta"><span class="stars">94726</span></div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/DietrichGebert/ponytail">DietrichGebert/ponytail</a></div>
+    <div class="item-desc">Makes your AI agent think like the laziest senior dev in the room. The best code is the code you never wrote.</div>
+    <div class="item-meta"><span class="stars">45856</span></div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/Agents365-ai/drawio-skill">Agents365-ai/drawio-skill</a></div>
+    <div class="item-desc">Generate draw.io diagrams from natural language — 6 presets, vision self-check + up to 5-round refinement, codebase-to-diagram, 10,000+ official shapes &amp; 321 AI/LLM brand logos. Exports PNG/SVG/PDF/JPG.</div>
+    <div class="item-meta"><span class="stars">4329</span></div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/anbeime/skill">anbeime/skill</a></div>
+    <div class="item-desc">收录最全、更新最快的技能Skills 商店，涵盖文档处理、内容创作、编程开发、机器学习、自动化工作流等多个领域的 72 个精选技能包。所有技能已打包完成，可直接安装使用！ 该商店中自动抓取了 Github 上的所有的 Skills 项目，并按照分类、更新时间、Star 数量等标签进行整理。</div>
+    <div class="item-meta"><span class="stars">1991</span></div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/Natively-AI-assistant/natively-cluely-ai-assistant">Natively-AI-assistant/natively-cluely-ai-assistant</a></div>
+    <div class="item-desc">Natively — Free open-source AI meeting assistant, interview copilot, and note taker. The best alternative to Cluely, Otter, Granola, Final Round AI, Fireflies, and Interview Coder. Real-time transcription, AI meeting notes, lecture recording, local RAG, BYOK, and stealth mode. Runs locally. No subscriptions. No data breaches.</div>
+    <div class="item-meta"><span class="stars">1522</span></div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-plugin">PLUGIN</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/coursera/skills">learn-with-coursera</a></div>
+    <div class="item-desc">Turn any learning intent into a personalized Coursera experience. Asks three quick questions (topic, familiarity, preferred format), searches Coursera&#x27;s catalog, and delivers the right next step — a course, hands-on project, short video, or live roleplay — then maps a path forward. Requires the Coursera connector for catalog tools.</div>
+    <div class="item-meta">learning</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-plugin">PLUGIN</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/anthropics/claude-plugins-public/tree/main/plugins/project-artifact">project-artifact</a></div>
+    <div class="item-desc">Generate and publish a living project status page — overview &amp; success criteria, the workstream sequence, and next steps — as a shareable claude.ai artifact backed by a per-project config, so refreshes re-gather live state, redeploy the same URL, and report only the delta.</div>
+    <div class="item-meta">productivity</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">ソフトウェア改善・開発者支援</div>
+  <div class="topic-summary">API応答の改善やGitコマンドの安全性向上など、ソフトウェアの品質と開発体験を高める更新。</div>
+<div class="item">
+  <span class="badge badge-changelog">CHANGELOG</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://code.claude.com/docs/en/changelog">v2.1.185</a></div>
+    <div class="item-desc">The stream-stall hint now reads “Waiting for API response · will retry in …” instead of “No response from API · Retrying in …”, and triggers after 20s of silence instead of 10s</div>
+    <div class="item-meta">June 20, 2026</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-changelog">CHANGELOG</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://code.claude.com/docs/en/changelog">v2.1.183</a></div>
+    <div class="item-desc">Improved auto mode safety: destructive git commands (git reset --hard, git checkout -- ., git clean -fd, git stash drop) are now blocked when you didn’t ask to discard local work, git commit --amend is blocked when the commit wasn’t made by the agent this session, and terraform destroy/pulumi destroy/cdk destroy are blocked unless you asked for the specific stack, Added a warning when the requested model is deprecated or automatically updated to a newer model, shown on stderr in print mode (-p) and now also covering models set in agent frontmatter, Added attribution.sessionUrl setting to omit the claude.ai session link from commits and PRs in web and Remote Control sessions</div>
+    <div class="item-meta">June 19, 2026</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">データ収集ツール</div>
+  <div class="topic-summary">Googleマップからビジネス情報などを効率的に抽出するためのデータスクレイピングツール。</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/gosom/google-maps-scraper">gosom/google-maps-scraper</a></div>
+    <div class="item-desc">scrape data  from Google Maps. Extracts data such as the name, address, phone number, website URL, rating,  reviews number, latitude and longitude, reviews,email and more for each place</div>
+    <div class="item-meta"><span class="stars">4473</span></div>
+  </div>
+</div>
+</div>
+
+<footer class="footer">
+  Generated at 2026-06-22 07:55 JST<br>
+  Sources: Claude Code CHANGELOG, GitHub Releases, awesome-claude-code,
+  anthropics/skills, PulseMCP, Claude Plugins, GitHub Trending
+</footer>
+
+</div>
+</body>
+</html>
