@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Weekly Tech Watch — 2026-06-23</title>
+<style>
+:root {
+  --bg: #f8fafc;
+  --bg-card: #ffffff;
+  --bg-highlight: #eff6ff;
+  --text: #1e293b;
+  --text-muted: #64748b;
+  --text-light: #94a3b8;
+  --accent: #3b82f6;
+  --border: #e2e8f0;
+  --shadow: 0 1px 3px rgba(0,0,0,.08);
+  --badge-changelog: #3b82f6;
+  --badge-mcp: #8b5cf6;
+  --badge-trending: #f59e0b;
+  --badge-plugin: #10b981;
+  --badge-awesome: #f43f5e;
+  --badge-skills: #06b6d4;
+}
+@media(prefers-color-scheme:dark){
+:root {
+  --bg: #0f172a;
+  --bg-card: #1e293b;
+  --bg-highlight: #1e3a5f;
+  --text: #e2e8f0;
+  --text-muted: #94a3b8;
+  --text-light: #64748b;
+  --accent: #60a5fa;
+  --border: #334155;
+  --shadow: 0 1px 3px rgba(0,0,0,.3);
+}}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  background:var(--bg);color:var(--text);
+  line-height:1.6;padding:16px;
+}
+.container{max-width:760px;margin:0 auto}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* Header */
+.header{text-align:center;padding:32px 0 24px}
+.header h1{font-size:1.5rem;font-weight:700;letter-spacing:-.02em}
+.header .date-range{color:var(--text-muted);font-size:.875rem;margin-top:4px}
+
+/* Stats */
+.stat-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));
+  gap:8px;margin:0 0 32px;
+}
+.stat-card{
+  background:var(--bg-card);border:1px solid var(--border);border-radius:8px;
+  padding:12px;text-align:center;box-shadow:var(--shadow);
+}
+.stat-card .num{font-size:1.5rem;font-weight:700;color:var(--accent)}
+.stat-card .label{font-size:.75rem;color:var(--text-muted);margin-top:2px}
+
+/* Section heading */
+.section-heading{
+  font-size:1.125rem;font-weight:700;margin:32px 0 16px;
+  padding-bottom:8px;border-bottom:2px solid var(--accent);
+}
+
+/* Highlight cards */
+.highlight-card{
+  background:var(--bg-highlight);border:1px solid var(--border);
+  border-radius:12px;padding:20px;margin-bottom:16px;
+  border-left:4px solid var(--accent);
+}
+.highlight-card .hl-badge{
+  display:inline-block;font-size:.6875rem;font-weight:700;
+  color:var(--accent);background:var(--bg-card);
+  border:1px solid var(--border);border-radius:999px;
+  padding:2px 8px;margin-bottom:8px;
+}
+.highlight-card .hl-title{font-size:1rem;font-weight:700;margin-bottom:8px}
+.highlight-card .hl-title a{color:var(--text)}
+.highlight-card .hl-desc{font-size:.875rem;color:var(--text-muted);margin-bottom:8px}
+.highlight-card .hl-desc strong,
+.highlight-card .hl-scenario strong{
+  display:block;color:var(--text);font-size:.75rem;margin-bottom:2px;
+}
+.highlight-card .hl-link{font-size:.8125rem;margin-bottom:12px}
+.highlight-card .hl-scenario{
+  font-size:.875rem;line-height:1.7;
+  background:var(--bg-card);border-radius:8px;padding:12px;margin-bottom:8px;
+}
+.highlight-card .hl-action{
+  font-size:.8125rem;color:var(--accent);font-weight:600;
+}
+.highlight-card .hl-action::before{content:"→ "}
+
+/* Topic section */
+.topic{
+  background:var(--bg-card);border:1px solid var(--border);
+  border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:var(--shadow);
+}
+.topic-title{font-size:1rem;font-weight:700;margin-bottom:4px}
+.topic-summary{font-size:.8125rem;color:var(--text-muted);margin-bottom:16px}
+
+/* Item list */
+.item{
+  padding:10px 0;border-bottom:1px solid var(--border);
+  display:flex;gap:10px;align-items:flex-start;
+}
+.item:last-child{border-bottom:none;padding-bottom:0}
+.badge{
+  display:inline-block;font-size:.625rem;font-weight:700;
+  color:#fff;padding:2px 8px;border-radius:10px;white-space:nowrap;
+  flex-shrink:0;margin-top:3px;text-transform:uppercase;letter-spacing:.03em;
+}
+.badge-changelog{background:var(--badge-changelog)}
+.badge-mcp{background:var(--badge-mcp)}
+.badge-trending{background:var(--badge-trending)}
+.badge-plugin{background:var(--badge-plugin)}
+.badge-awesome{background:var(--badge-awesome)}
+.badge-skills{background:var(--badge-skills)}
+.item-body{flex:1;min-width:0}
+.item-title{font-size:.875rem;font-weight:600}
+.item-desc{font-size:.8125rem;color:var(--text-muted);margin-top:2px}
+.item-meta{font-size:.75rem;color:var(--text-light);margin-top:4px}
+.item-meta .stars::before{content:"\2B50 "}
+
+/* Footer */
+.footer{
+  text-align:center;color:var(--text-light);font-size:.75rem;
+  padding:32px 0 16px;border-top:1px solid var(--border);margin-top:32px;
+}
+
+/* No items */
+.empty{color:var(--text-light);font-style:italic;font-size:.875rem;padding:8px 0}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header class="header">
+  <h1>Weekly Tech Watch</h1>
+  <div class="date-range">2026-06-21 ~ 2026-06-23</div>
+</header>
+
+<div class="stat-grid">
+<div class="stat-card"><div class="num">1</div><div class="label">Claude Code</div></div>
+<div class="stat-card"><div class="num">10</div><div class="label">Trending</div></div>
+<div class="stat-card"><div class="num">1</div><div class="label">Plugins</div></div>
+</div>
+
+<h2 class="section-heading">Highlights</h2>
+<div class="highlight-card">
+  <div class="hl-badge">ニュース</div>
+  <div class="hl-title"><a href="https://code.claude.com/docs/en/changelog">Claude Code v2.1.186</a></div>
+  <div class="hl-desc"><strong>概要</strong>Claude Codeの最新版v2.1.186で、CLIからMCP（Multi-Cloud Platform）サーバーへの認証・ログアウトが可能になりました。これにより、SSH経由でも対話型メニューを開かずに操作できるようになり、リモート環境での利用が容易になります。</div>
+  <div class="hl-link"><a href="https://code.claude.com/docs/en/changelog">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>りゅうさんは現在Claude Codeをメインに利用しており、この機能強化により、リモートサーバーやVPS環境でのClaude Codeの運用がよりスムーズになる可能性があります。例えば、常時稼働用のRYU-DESKTOPで自動化スクリプトを動かす際に、CLIからの認証で安定性が向上するかもしれません。将来的には、WONDAY-OSやMeetingMinutesのバックエンド処理での活用も考えられます。</div>
+  <div class="hl-action">もしリモート環境でのClaude Codeの利用を検討する際に、`claude mcp`の具体的な機能と、りゅうさんの現在のワークフローへの適合性を調査すると良いでしょう。</div>
+</div>
+<div class="highlight-card">
+  <div class="hl-badge">深掘り候補</div>
+  <div class="hl-title"><a href="https://github.com/headroomlabs-ai/headroom">GitHub: headroomlabs-ai/headroom</a></div>
+  <div class="hl-desc"><strong>概要</strong>LLMへの入力トークンを最大95%削減しつつ、回答品質を維持する「Headroom」がGitHubで公開されました。ツール出力、ログ、ファイル、RAGチャンクなどを効率的に圧縮し、APIコストと処理速度の改善に貢献します。</div>
+  <div class="hl-link"><a href="https://github.com/headroomlabs-ai/headroom">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>りゅうさんが利用中のClaudeやGeminiなどのAPIコスト削減に繋がる可能性があります。特にRAGを用いた情報検索やログ分析など、大量のテキストをLLMに渡す際の効率化と処理速度向上が期待できます。AIコンサルティングにおける提案の幅を広げることにも繋がるかもしれません。</div>
+  <div class="hl-action">深掘りするなら、HeadroomのGitHubリポジトリを読み込み、具体的な導入方法や既存のAI運用基盤（Dify, n8nなど）との連携可能性、Pythonでの利用例を調査するのが良いでしょう。</div>
+</div>
+<div class="highlight-card">
+  <div class="hl-badge">深掘り候補</div>
+  <div class="hl-title"><a href="https://github.com/calesthio/OpenMontage">GitHub: calesthio/OpenMontage</a></div>
+  <div class="hl-desc"><strong>概要</strong>世界初のオープンソースなエージェント型動画制作システム「OpenMontage」がGitHubで公開されました。12のパイプラインと500以上のエージェントスキルを備え、AIコーディングアシスタントを動画制作スタジオとして活用できます。</div>
+  <div class="hl-link"><a href="https://github.com/calesthio/OpenMontage">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>りゅうさんのSNS戦略におけるInstagramリールやLinkedIn動画など、動画コンテンツ制作の自動化・効率化に活用できる可能性があります。「AIで経営を仕組み化」というコンセプトで、クライアント向けの動画制作支援サービスへの応用も検討できるかもしれません。うま藻事業や「りゅうさんち」のプロモーション動画をAIで生成し、労働集約型からの脱却に貢献する可能性もあります。</div>
+  <div class="hl-action">GitHubリポジトリのREADMEやドキュメントを確認し、導入要件、利用方法、必要なプログラミング知識、既存AIアシスタントとの連携可能性を調査する。</div>
+</div>
+
+<h2 class="section-heading">Topics</h2>
+<div class="topic">
+  <div class="topic-title">MCPエコシステム</div>
+  <div class="topic-summary">MCPサーバーの認証、開発フレームワーク、LLM連携、コード解析、リバースエンジニアリングへの応用を網羅する技術群。</div>
+<div class="item">
+  <span class="badge badge-changelog">CHANGELOG</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://code.claude.com/docs/en/changelog">v2.1.186</a></div>
+    <div class="item-desc">Added claude mcp login &lt;name&gt; and claude mcp logout &lt;name&gt; to authenticate MCP servers from the CLI without opening the interactive /mcp menu, with --no-browser stdin redirect support for completing over SSH, Added status filtering (press f) to the /workflows agent detail view, Added a “Skills” section to the /plugin Installed tab</div>
+    <div class="item-meta">June 22, 2026</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/headroomlabs-ai/headroom">headroomlabs-ai/headroom</a></div>
+    <div class="item-desc">Compress tool outputs, logs, files, and RAG chunks before they reach the LLM. 60-95% fewer tokens, same answers. Library, proxy, MCP server.</div>
+    <div class="item-meta"><span class="stars">46972</span></div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/DeusData/codebase-memory-mcp">DeusData/codebase-memory-mcp</a></div>
+    <div class="item-desc">High-performance code intelligence MCP server. Indexes codebases into a persistent knowledge graph — average repo in milliseconds. 158 languages, sub-ms queries, 99% fewer tokens. Single static binary, zero dependencies.</div>
+    <div class="item-meta"><span class="stars">11459</span></div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/mcp-use/mcp-use">mcp-use/mcp-use</a></div>
+    <div class="item-desc">The fullstack MCP framework to develop MCP Apps for ChatGPT / Claude &amp; MCP Servers for AI Agents.</div>
+    <div class="item-meta"><span class="stars">10135</span></div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/mrexodia/ida-pro-mcp">mrexodia/ida-pro-mcp</a></div>
+    <div class="item-desc">AI-powered reverse engineering assistant that bridges IDA Pro with language models through MCP.</div>
+    <div class="item-meta"><span class="stars">9578</span></div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">オンデバイスAI</div>
+  <div class="topic-summary">モバイルやデスクトップデバイス上でAIモデルを効率的に実行し、プライバシーを保護する技術とアプリケーション。</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/software-mansion/react-native-executorch">software-mansion/react-native-executorch</a></div>
+    <div class="item-desc">Declarative way to run AI models in React Native on device, powered by ExecuTorch.</div>
+    <div class="item-meta"><span class="stars">1600</span></div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/TypeWhisper/typewhisper-mac">TypeWhisper/typewhisper-mac</a></div>
+    <div class="item-desc">Local speech-to-text for macOS  on-device AI, fully private, optional cloud</div>
+    <div class="item-meta"><span class="stars">1489</span></div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">AIエージェントと自動化</div>
+  <div class="topic-summary">複雑なタスクを自律的に処理し、動画制作やワークフロー管理を自動化するAIエージェント技術。</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/calesthio/OpenMontage">calesthio/OpenMontage</a></div>
+    <div class="item-desc">World&#x27;s first open-source, agentic video production system. 12 pipelines, 52 tools, 500+ agent skills. Turn your AI coding assistant into a full video production studio.</div>
+    <div class="item-meta"><span class="stars">11848</span></div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/a5c-ai/babysitter">a5c-ai/babysitter</a></div>
+    <div class="item-desc">Babysitter enforces obedience on agentic workforces and enables them to manage extremely complex tasks and workflows through deterministic, hallucination-free self-orchestration</div>
+    <div class="item-meta"><span class="stars">1393</span></div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">LLM開発・運用</div>
+  <div class="topic-summary">LLMアプリケーションのトレーシング、プロンプト管理、評価を支援するオープンソースプラットフォーム。</div>
+<div class="item">
+  <span class="badge badge-plugin">PLUGIN</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://langfuse.com">langfuse</a></div>
+    <div class="item-desc">Skills for working with Langfuse, the open-source LLM engineering platform for tracing, prompt management, and evaluation.</div>
+    <div class="item-meta">monitoring</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">特定用途向けソリューション</div>
+  <div class="topic-summary">ESP32デバイス制御サーバーや、音声コンテンツ編集・文字起こしに特化したAI活用アプリケーション。</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/xinnan-tech/xiaozhi-esp32-server">xinnan-tech/xiaozhi-esp32-server</a></div>
+    <div class="item-desc">本项目为xiaozhi-esp32提供后端服务，帮助您快速搭建ESP32设备控制服务器。Backend service for xiaozhi-esp32, helps you quickly build an ESP32 device control server.</div>
+    <div class="item-meta"><span class="stars">9868</span></div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/bugbakery/audapolis">bugbakery/audapolis</a></div>
+    <div class="item-desc">an editor for spoken-word audio with automatic transcription</div>
+    <div class="item-meta"><span class="stars">1865</span></div>
+  </div>
+</div>
+</div>
+
+<footer class="footer">
+  Generated at 2026-06-23 07:55 JST<br>
+  Sources: Claude Code CHANGELOG, GitHub Releases, awesome-claude-code,
+  anthropics/skills, PulseMCP, Claude Plugins, GitHub Trending
+</footer>
+
+</div>
+</body>
+</html>
