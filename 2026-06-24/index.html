@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Weekly Tech Watch — 2026-06-24</title>
+<style>
+:root {
+  --bg: #f8fafc;
+  --bg-card: #ffffff;
+  --bg-highlight: #eff6ff;
+  --text: #1e293b;
+  --text-muted: #64748b;
+  --text-light: #94a3b8;
+  --accent: #3b82f6;
+  --border: #e2e8f0;
+  --shadow: 0 1px 3px rgba(0,0,0,.08);
+  --badge-changelog: #3b82f6;
+  --badge-mcp: #8b5cf6;
+  --badge-trending: #f59e0b;
+  --badge-plugin: #10b981;
+  --badge-awesome: #f43f5e;
+  --badge-skills: #06b6d4;
+}
+@media(prefers-color-scheme:dark){
+:root {
+  --bg: #0f172a;
+  --bg-card: #1e293b;
+  --bg-highlight: #1e3a5f;
+  --text: #e2e8f0;
+  --text-muted: #94a3b8;
+  --text-light: #64748b;
+  --accent: #60a5fa;
+  --border: #334155;
+  --shadow: 0 1px 3px rgba(0,0,0,.3);
+}}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  background:var(--bg);color:var(--text);
+  line-height:1.6;padding:16px;
+}
+.container{max-width:760px;margin:0 auto}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* Header */
+.header{text-align:center;padding:32px 0 24px}
+.header h1{font-size:1.5rem;font-weight:700;letter-spacing:-.02em}
+.header .date-range{color:var(--text-muted);font-size:.875rem;margin-top:4px}
+
+/* Stats */
+.stat-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));
+  gap:8px;margin:0 0 32px;
+}
+.stat-card{
+  background:var(--bg-card);border:1px solid var(--border);border-radius:8px;
+  padding:12px;text-align:center;box-shadow:var(--shadow);
+}
+.stat-card .num{font-size:1.5rem;font-weight:700;color:var(--accent)}
+.stat-card .label{font-size:.75rem;color:var(--text-muted);margin-top:2px}
+
+/* Section heading */
+.section-heading{
+  font-size:1.125rem;font-weight:700;margin:32px 0 16px;
+  padding-bottom:8px;border-bottom:2px solid var(--accent);
+}
+
+/* Highlight cards */
+.highlight-card{
+  background:var(--bg-highlight);border:1px solid var(--border);
+  border-radius:12px;padding:20px;margin-bottom:16px;
+  border-left:4px solid var(--accent);
+}
+.highlight-card .hl-badge{
+  display:inline-block;font-size:.6875rem;font-weight:700;
+  color:var(--accent);background:var(--bg-card);
+  border:1px solid var(--border);border-radius:999px;
+  padding:2px 8px;margin-bottom:8px;
+}
+.highlight-card .hl-title{font-size:1rem;font-weight:700;margin-bottom:8px}
+.highlight-card .hl-title a{color:var(--text)}
+.highlight-card .hl-desc{font-size:.875rem;color:var(--text-muted);margin-bottom:8px}
+.highlight-card .hl-desc strong,
+.highlight-card .hl-scenario strong{
+  display:block;color:var(--text);font-size:.75rem;margin-bottom:2px;
+}
+.highlight-card .hl-link{font-size:.8125rem;margin-bottom:12px}
+.highlight-card .hl-scenario{
+  font-size:.875rem;line-height:1.7;
+  background:var(--bg-card);border-radius:8px;padding:12px;margin-bottom:8px;
+}
+.highlight-card .hl-action{
+  font-size:.8125rem;color:var(--accent);font-weight:600;
+}
+.highlight-card .hl-action::before{content:"→ "}
+
+/* Topic section */
+.topic{
+  background:var(--bg-card);border:1px solid var(--border);
+  border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:var(--shadow);
+}
+.topic-title{font-size:1rem;font-weight:700;margin-bottom:4px}
+.topic-summary{font-size:.8125rem;color:var(--text-muted);margin-bottom:16px}
+
+/* Item list */
+.item{
+  padding:10px 0;border-bottom:1px solid var(--border);
+  display:flex;gap:10px;align-items:flex-start;
+}
+.item:last-child{border-bottom:none;padding-bottom:0}
+.badge{
+  display:inline-block;font-size:.625rem;font-weight:700;
+  color:#fff;padding:2px 8px;border-radius:10px;white-space:nowrap;
+  flex-shrink:0;margin-top:3px;text-transform:uppercase;letter-spacing:.03em;
+}
+.badge-changelog{background:var(--badge-changelog)}
+.badge-mcp{background:var(--badge-mcp)}
+.badge-trending{background:var(--badge-trending)}
+.badge-plugin{background:var(--badge-plugin)}
+.badge-awesome{background:var(--badge-awesome)}
+.badge-skills{background:var(--badge-skills)}
+.item-body{flex:1;min-width:0}
+.item-title{font-size:.875rem;font-weight:600}
+.item-desc{font-size:.8125rem;color:var(--text-muted);margin-top:2px}
+.item-meta{font-size:.75rem;color:var(--text-light);margin-top:4px}
+.item-meta .stars::before{content:"\2B50 "}
+
+/* Footer */
+.footer{
+  text-align:center;color:var(--text-light);font-size:.75rem;
+  padding:32px 0 16px;border-top:1px solid var(--border);margin-top:32px;
+}
+
+/* No items */
+.empty{color:var(--text-light);font-style:italic;font-size:.875rem;padding:8px 0}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header class="header">
+  <h1>Weekly Tech Watch</h1>
+  <div class="date-range">2026-06-22 ~ 2026-06-24</div>
+</header>
+
+<div class="stat-grid">
+<div class="stat-card"><div class="num">6</div><div class="label">Trending</div></div>
+<div class="stat-card"><div class="num">1</div><div class="label">Plugins</div></div>
+</div>
+
+<h2 class="section-heading">Highlights</h2>
+<div class="highlight-card">
+  <div class="hl-badge">深掘り候補</div>
+  <div class="hl-title"><a href="https://www.anthropic.com/news/introducing-claude-tag">Introducing Claude Tag</a></div>
+  <div class="hl-desc"><strong>概要</strong>Claude Tagは、Anthropicが提供するチーム向けの新機能です。Claudeでの会話を共有・整理し、タグ付けや検索を通じてチーム内のコラボレーションと情報共有を効率化します。</div>
+  <div class="hl-link"><a href="https://www.anthropic.com/news/introducing-claude-tag">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>WONDAYのAIコンサルティング事業において、将来的にチームでClaudeを活用する際や、クライアントとのプロジェクトで情報共有を効率化する可能性があります。プロジェクトごとに会話を整理し、過去の検討履歴を素早く参照できることで、業務の標準化や引き継ぎにも役立つかもしれません。</div>
+  <div class="hl-action">Anthropicの公式ブログ記事や関連情報を確認し、具体的な機能や料金体系、WONDAYの事業規模での導入メリット・デメリットを深掘りする。</div>
+</div>
+<div class="highlight-card">
+  <div class="hl-badge">深掘り候補</div>
+  <div class="hl-title"><a href="https://github.com/assafelovic/gpt-researcher">GitHub: assafelovic/gpt-researcher</a></div>
+  <div class="hl-desc"><strong>概要</strong>GPT-Researcherは、任意のLLMプロバイダーを利用して、特定のトピックに関する深いリサーチを自律的に実行するAIエージェントです。ユーザーのクエリに基づき、ウェブ検索や情報収集、分析までを一貫して自動化します。</div>
+  <div class="hl-link"><a href="https://github.com/assafelovic/gpt-researcher">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>りゅうさんのAIコンサルティングにおいて、クライアントの業界や課題に関する事前リサーチを効率化できる可能性があります。また、「うま藻事業」の市場調査や競合分析、新しいメニュー開発のための情報収集など、「やらなきゃいけないこと」のリサーチ業務を仕組み化し、自身の「やりたいこと」に集中できる時間を創出する一助となるかもしれません。</div>
+  <div class="hl-action">GitHubリポジトリのREADMEで対応LLMや導入方法を確認し、n8nやDify、Make.comとの連携可能性を調査すると、りゅうさんの既存スキルセットでの活用可否を判断しやすくなります。</div>
+</div>
+<div class="highlight-card">
+  <div class="hl-badge">深掘り候補</div>
+  <div class="hl-title"><a href="https://github.com/glitternetwork/pinme">GitHub: glitternetwork/pinme</a></div>
+  <div class="hl-desc"><strong>概要</strong>GitHubのglitternetwork/pinmeは、フロントエンドアプリケーションを単一コマンドで迅速にデプロイできるツールです。Claude Code Skillsをサポートしており、開発から公開までのプロセスを効率化し、特にプロトタイプや小規模プロジェクトの迅速なリリースを支援します。</div>
+  <div class="hl-link"><a href="https://github.com/glitternetwork/pinme">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>りゅうさんの「完璧主義で着手が遅れる」課題に対し、MVPサイクルでの迅速なプロトタイプ公開を支援する可能性があります。Claude Codeとの連携により、AIを活用したフロントエンド開発からデプロイまでの「やらなきゃいけないこと」を効率化し、WONDAYの理念である「ストレスフリーな社会を作る」に貢献できるかもしれません。</div>
+  <div class="hl-action">深掘りするなら、GitHubリポジトリのREADMEを確認し、Claude Codeでの具体的な連携方法や、対応するフレームワーク、デプロイ先の種類を調査する。</div>
+</div>
+
+<h2 class="section-heading">Topics</h2>
+<div class="topic">
+  <div class="topic-title">AIエージェント開発</div>
+  <div class="topic-summary">LLMを活用した自律エージェントや開発者のための高度なAIワークフローツール。</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/assafelovic/gpt-researcher">assafelovic/gpt-researcher</a></div>
+    <div class="item-desc">An autonomous agent that conducts deep research on any data using any LLM providers</div>
+    <div class="item-meta"><span class="stars">27865</span></div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/rohitg00/pro-workflow">rohitg00/pro-workflow</a></div>
+    <div class="item-desc">Claude Code learns from your corrections: self-correcting memory that compounds over 50+ sessions. Context engineering, parallel worktrees, agent teams, and 17 battle-tested skills.</div>
+    <div class="item-meta"><span class="stars">2334</span></div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/maxritter/pilot-shell">maxritter/pilot-shell</a></div>
+    <div class="item-desc">How real engineers run Claude Code and Codex: spec-driven planning, enforced TDD, persistent memory, and quality enforcement on all levels. Make your agents production-ready.</div>
+    <div class="item-meta"><span class="stars">1758</span></div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">ローカルLLM開発</div>
+  <div class="topic-summary">Apple Silicon搭載MacでLLMをファインチューニングするためのツールと技術。</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/ARahim3/mlx-tune">ARahim3/mlx-tune</a></div>
+    <div class="item-desc">Fine-tune LLMs on your Mac with Apple Silicon. SFT, DPO, GRPO, Vision, TTS, STT, Embedding, and OCR fine-tuning — natively on MLX. Unsloth-compatible API.</div>
+    <div class="item-meta"><span class="stars">1323</span></div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">AI開発支援ツール</div>
+  <div class="topic-summary">AIの力を借りてフロントエンドデプロイや開発プロセスを効率化するツール。</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/glitternetwork/pinme">glitternetwork/pinme</a></div>
+    <div class="item-desc">Deploy Your Frontend in a Single Command. Claude Code Skills supported.</div>
+    <div class="item-meta"><span class="stars">3683</span></div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">エンタープライズAI基盤</div>
+  <div class="topic-summary">データレイク、モデルサービングなど、企業向けAI/データプラットフォームの機能。</div>
+<div class="item">
+  <span class="badge badge-plugin">PLUGIN</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://developers.databricks.com/">databricks</a></div>
+    <div class="item-desc">Databricks skills for the CLI, Apps, Lakebase, Model Serving, Lakeflow Jobs, Spark Declarative Pipelines, Declarative Automation Bundles (DABs), and classic-to-serverless migration.</div>
+    <div class="item-meta">database</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">AIアプリ・新機能</div>
+  <div class="topic-summary">音声認識アプリや、Claude関連の新しいタグ機能など、AIの応用とアップデート。</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/amicalhq/amical">amicalhq/amical</a></div>
+    <div class="item-desc">🎙️ AI Dictation App - Open Source and Local-first ⚡ Type 3x faster, no keyboard needed. 🆓 Powered by open source models, works offline, fast and accurate.</div>
+    <div class="item-meta"><span class="stars">1378</span></div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-anthropic_news">ANTHROPIC_NEWS</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://www.anthropic.com/news/introducing-claude-tag">Introducing Claude Tag</a></div>
+    <div class="item-desc">Claude Tag is a new way for teams to work with Claude.</div>
+    <div class="item-meta">Jun 23, 20</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">その他AI関連情報</div>
+  <div class="topic-summary">詳細不明なAI関連のニュースや更新。</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/addyosmani/critical">Addy Osmani: addyosmani/critical (PushEvent)</a></div>
+    <div class="item-desc">[revision] New push</div>
+    <div class="item-meta">2026-06-23</div>
+  </div>
+</div>
+</div>
+
+<footer class="footer">
+  Generated at 2026-06-24 07:55 JST<br>
+  Sources: Claude Code CHANGELOG, GitHub Releases, awesome-claude-code,
+  anthropics/skills, PulseMCP, Claude Plugins, GitHub Trending
+</footer>
+
+</div>
+</body>
+</html>
