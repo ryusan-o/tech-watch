@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Weekly Tech Watch — 2026-06-25</title>
+<style>
+:root {
+  --bg: #f8fafc;
+  --bg-card: #ffffff;
+  --bg-highlight: #eff6ff;
+  --text: #1e293b;
+  --text-muted: #64748b;
+  --text-light: #94a3b8;
+  --accent: #3b82f6;
+  --border: #e2e8f0;
+  --shadow: 0 1px 3px rgba(0,0,0,.08);
+  --badge-changelog: #3b82f6;
+  --badge-mcp: #8b5cf6;
+  --badge-trending: #f59e0b;
+  --badge-plugin: #10b981;
+  --badge-awesome: #f43f5e;
+  --badge-skills: #06b6d4;
+}
+@media(prefers-color-scheme:dark){
+:root {
+  --bg: #0f172a;
+  --bg-card: #1e293b;
+  --bg-highlight: #1e3a5f;
+  --text: #e2e8f0;
+  --text-muted: #94a3b8;
+  --text-light: #64748b;
+  --accent: #60a5fa;
+  --border: #334155;
+  --shadow: 0 1px 3px rgba(0,0,0,.3);
+}}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  background:var(--bg);color:var(--text);
+  line-height:1.6;padding:16px;
+}
+.container{max-width:760px;margin:0 auto}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* Header */
+.header{text-align:center;padding:32px 0 24px}
+.header h1{font-size:1.5rem;font-weight:700;letter-spacing:-.02em}
+.header .date-range{color:var(--text-muted);font-size:.875rem;margin-top:4px}
+
+/* Stats */
+.stat-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));
+  gap:8px;margin:0 0 32px;
+}
+.stat-card{
+  background:var(--bg-card);border:1px solid var(--border);border-radius:8px;
+  padding:12px;text-align:center;box-shadow:var(--shadow);
+}
+.stat-card .num{font-size:1.5rem;font-weight:700;color:var(--accent)}
+.stat-card .label{font-size:.75rem;color:var(--text-muted);margin-top:2px}
+
+/* Section heading */
+.section-heading{
+  font-size:1.125rem;font-weight:700;margin:32px 0 16px;
+  padding-bottom:8px;border-bottom:2px solid var(--accent);
+}
+
+/* Highlight cards */
+.highlight-card{
+  background:var(--bg-highlight);border:1px solid var(--border);
+  border-radius:12px;padding:20px;margin-bottom:16px;
+  border-left:4px solid var(--accent);
+}
+.highlight-card .hl-badge{
+  display:inline-block;font-size:.6875rem;font-weight:700;
+  color:var(--accent);background:var(--bg-card);
+  border:1px solid var(--border);border-radius:999px;
+  padding:2px 8px;margin-bottom:8px;
+}
+.highlight-card .hl-title{font-size:1rem;font-weight:700;margin-bottom:8px}
+.highlight-card .hl-title a{color:var(--text)}
+.highlight-card .hl-desc{font-size:.875rem;color:var(--text-muted);margin-bottom:8px}
+.highlight-card .hl-desc strong,
+.highlight-card .hl-scenario strong{
+  display:block;color:var(--text);font-size:.75rem;margin-bottom:2px;
+}
+.highlight-card .hl-link{font-size:.8125rem;margin-bottom:12px}
+.highlight-card .hl-scenario{
+  font-size:.875rem;line-height:1.7;
+  background:var(--bg-card);border-radius:8px;padding:12px;margin-bottom:8px;
+}
+.highlight-card .hl-action{
+  font-size:.8125rem;color:var(--accent);font-weight:600;
+}
+.highlight-card .hl-action::before{content:"→ "}
+
+/* Topic section */
+.topic{
+  background:var(--bg-card);border:1px solid var(--border);
+  border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:var(--shadow);
+}
+.topic-title{font-size:1rem;font-weight:700;margin-bottom:4px}
+.topic-summary{font-size:.8125rem;color:var(--text-muted);margin-bottom:16px}
+
+/* Item list */
+.item{
+  padding:10px 0;border-bottom:1px solid var(--border);
+  display:flex;gap:10px;align-items:flex-start;
+}
+.item:last-child{border-bottom:none;padding-bottom:0}
+.badge{
+  display:inline-block;font-size:.625rem;font-weight:700;
+  color:#fff;padding:2px 8px;border-radius:10px;white-space:nowrap;
+  flex-shrink:0;margin-top:3px;text-transform:uppercase;letter-spacing:.03em;
+}
+.badge-changelog{background:var(--badge-changelog)}
+.badge-mcp{background:var(--badge-mcp)}
+.badge-trending{background:var(--badge-trending)}
+.badge-plugin{background:var(--badge-plugin)}
+.badge-awesome{background:var(--badge-awesome)}
+.badge-skills{background:var(--badge-skills)}
+.item-body{flex:1;min-width:0}
+.item-title{font-size:.875rem;font-weight:600}
+.item-desc{font-size:.8125rem;color:var(--text-muted);margin-top:2px}
+.item-meta{font-size:.75rem;color:var(--text-light);margin-top:4px}
+.item-meta .stars::before{content:"\2B50 "}
+
+/* Footer */
+.footer{
+  text-align:center;color:var(--text-light);font-size:.75rem;
+  padding:32px 0 16px;border-top:1px solid var(--border);margin-top:32px;
+}
+
+/* No items */
+.empty{color:var(--text-light);font-style:italic;font-size:.875rem;padding:8px 0}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header class="header">
+  <h1>Weekly Tech Watch</h1>
+  <div class="date-range">2026-06-23 ~ 2026-06-25</div>
+</header>
+
+<div class="stat-grid">
+<div class="stat-card"><div class="num">1</div><div class="label">Claude Code</div></div>
+<div class="stat-card"><div class="num">2</div><div class="label">MCP</div></div>
+<div class="stat-card"><div class="num">3</div><div class="label">Trending</div></div>
+</div>
+
+<h2 class="section-heading">Highlights</h2>
+<div class="highlight-card">
+  <div class="hl-badge">ニュース</div>
+  <div class="hl-title"><a href="https://www.pulsemcp.com/servers/19hz-events">MCP: 19hz Events</a></div>
+  <div class="hl-desc"><strong>概要</strong>Bay Areaのアンダーグラウンド電子音楽イベント情報が、Pipeworx MCPゲートウェイを通じて提供されるサービスです。特定のジャンルのイベント情報を集約・配信するプラットフォームの事例として注目されます。</div>
+  <div class="hl-link"><a href="https://www.pulsemcp.com/servers/19hz-events">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>りゅうさんの事業とは直接的な関連は薄いですが、イベント情報の集約・配信の仕組みは、りゅうさんちのイベント告知やうま藻のプロモーション、AI経営スキル講座のイベント開催時の情報発信の参考になる可能性があります。特定のニッチな情報を効率的に届けるモデルとして着想を得るかもしれません。</div>
+  <div class="hl-action">もし興味があれば、イベント情報プラットフォームのビジネスモデルや、特定のコミュニティ向けの情報配信技術について軽く調べてみましょう。</div>
+</div>
+<div class="highlight-card">
+  <div class="hl-badge">ニュース</div>
+  <div class="hl-title"><a href="https://www.pulsemcp.com/servers/abhinav-quash">MCP: Quash</a></div>
+  <div class="hl-desc"><strong>概要</strong>モバイルアプリのバグ報告を自動化するツール「Quash」が登場。デバイスログ、ネットワークリクエスト、セッション記録、クラッシュトレースなどを自動収集し、デバッグ作業を効率化します。開発者の負担軽減と問題解決の迅速化に貢献します。</div>
+  <div class="hl-link"><a href="https://www.pulsemcp.com/servers/abhinav-quash">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>りゅうさん自身がモバイルアプリ開発を直接手掛けることは少ないですが、将来的にクライアントがモバイルアプリ開発を行う際の品質保証やデバッグ効率化の提案材料となる可能性があります。また、WONDAYがアプリ基盤を構築する際のトラブルシューティング効率化に役立つかもしれません。</div>
+  <div class="hl-action">もしモバイルアプリ開発のコンサル案件や自社でのアプリ開発が具体化した際に、類似ツールも含めて調査を検討する。</div>
+</div>
+<div class="highlight-card">
+  <div class="hl-badge">深掘り候補</div>
+  <div class="hl-title"><a href="https://github.com/nowork-studio/NotFair">GitHub: nowork-studio/NotFair</a></div>
+  <div class="hl-desc"><strong>概要</strong>GitHubで公開された「NotFair」は、Claude Codeを活用したオープンソースのスキル集です。SEO、地域ターゲティング（GEO）、Google広告、Meta広告の運用を効率化するための機能を提供し、AIによるマーケティング自動化を支援します。</div>
+  <div class="hl-link"><a href="https://github.com/nowork-studio/NotFair">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>りゅうさんご自身の「うま藻」事業や「りゅうさんち」の集客において、SEOやGoogle/Meta広告の運用効率化に活用できる可能性があります。また、AIコンサルティングのクライアントに対し、Claude Codeを活用したマーケティング自動化の具体的なソリューションとして提案の幅を広げる可能性も考えられます。</div>
+  <div class="hl-action">深掘りするなら、GitHubリポジトリのREADMEを確認し、提供されるスキルが具体的な業務にどう適用できるか、導入の容易性やカスタマイズの必要性を軽く調査することをお勧めします。</div>
+</div>
+
+<h2 class="section-heading">Topics</h2>
+<div class="topic">
+  <div class="topic-title">AI開発支援ツール</div>
+  <div class="topic-summary">AIエージェントやClaude Codeを活用し、開発、マーケティング、データ分析を効率化するツール群。</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/nowork-studio/NotFair">nowork-studio/NotFair</a></div>
+    <div class="item-desc">Open-source Claude Code skills for SEO, GEO, Google Ads, Meta Ads</div>
+    <div class="item-meta"><span class="stars">2983</span></div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/timescale/pg-aiguide">timescale/pg-aiguide</a></div>
+    <div class="item-desc">MCP server and Claude plugin for Postgres skills and documentation. Helps AI coding tools generate better PostgreSQL code.</div>
+    <div class="item-meta"><span class="stars">1771</span></div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/Kaelio/ktx">Kaelio/ktx</a></div>
+    <div class="item-desc">ktx is an executable context layer for data and analytics agents 🐙 Allow Claude Code, Codex, or other AI agents to query data accurately and with full context of your company</div>
+    <div class="item-meta"><span class="stars">1379</span></div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">開発・デバッグ</div>
+  <div class="topic-summary">ソフトウェアのバグ修正、信頼性向上、およびモバイルアプリのバグ報告を自動化するツールに関する情報。</div>
+<div class="item">
+  <span class="badge badge-changelog">CHANGELOG</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://code.claude.com/docs/en/changelog">v2.1.190</a></div>
+    <div class="item-desc">Bug fixes and reliability improvements</div>
+    <div class="item-meta">June 24, 2026</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-mcp">MCP</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://www.pulsemcp.com/servers/abhinav-quash">Quash</a></div>
+    <div class="item-desc">Automates mobile bug reporting by capturing device logs, network requests, session recordings, and crash traces for faster debugging.</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">その他</div>
+  <div class="topic-summary">電子音楽イベント情報や、詳細不明な項目を含むその他の情報。</div>
+<div class="item">
+  <span class="badge badge-mcp">MCP</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://www.pulsemcp.com/servers/19hz-events">19hz Events</a></div>
+    <div class="item-desc">Bay Area underground electronic music events from 19hz.info via the Pipeworx MCP gateway.</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/addyosmani/critical">Addy Osmani: addyosmani/critical (PushEvent)</a></div>
+    <div class="item-desc">[revision] New push</div>
+    <div class="item-meta">2026-06-24</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/addyosmani/agent-skills">Addy Osmani: addyosmani/agent-skills (PushEvent)</a></div>
+    <div class="item-desc">[main] New push</div>
+    <div class="item-meta">2026-06-24</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/addyosmani/agent-skills">Addy Osmani: addyosmani/agent-skills (PushEvent)</a></div>
+    <div class="item-desc">[main] New push</div>
+    <div class="item-meta">2026-06-24</div>
+  </div>
+</div>
+</div>
+
+<footer class="footer">
+  Generated at 2026-06-25 07:55 JST<br>
+  Sources: Claude Code CHANGELOG, GitHub Releases, awesome-claude-code,
+  anthropics/skills, PulseMCP, Claude Plugins, GitHub Trending
+</footer>
+
+</div>
+</body>
+</html>
