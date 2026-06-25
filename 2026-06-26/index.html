@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Weekly Tech Watch — 2026-06-26</title>
+<style>
+:root {
+  --bg: #f8fafc;
+  --bg-card: #ffffff;
+  --bg-highlight: #eff6ff;
+  --text: #1e293b;
+  --text-muted: #64748b;
+  --text-light: #94a3b8;
+  --accent: #3b82f6;
+  --border: #e2e8f0;
+  --shadow: 0 1px 3px rgba(0,0,0,.08);
+  --badge-changelog: #3b82f6;
+  --badge-mcp: #8b5cf6;
+  --badge-trending: #f59e0b;
+  --badge-plugin: #10b981;
+  --badge-awesome: #f43f5e;
+  --badge-skills: #06b6d4;
+}
+@media(prefers-color-scheme:dark){
+:root {
+  --bg: #0f172a;
+  --bg-card: #1e293b;
+  --bg-highlight: #1e3a5f;
+  --text: #e2e8f0;
+  --text-muted: #94a3b8;
+  --text-light: #64748b;
+  --accent: #60a5fa;
+  --border: #334155;
+  --shadow: 0 1px 3px rgba(0,0,0,.3);
+}}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  background:var(--bg);color:var(--text);
+  line-height:1.6;padding:16px;
+}
+.container{max-width:760px;margin:0 auto}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* Header */
+.header{text-align:center;padding:32px 0 24px}
+.header h1{font-size:1.5rem;font-weight:700;letter-spacing:-.02em}
+.header .date-range{color:var(--text-muted);font-size:.875rem;margin-top:4px}
+
+/* Stats */
+.stat-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));
+  gap:8px;margin:0 0 32px;
+}
+.stat-card{
+  background:var(--bg-card);border:1px solid var(--border);border-radius:8px;
+  padding:12px;text-align:center;box-shadow:var(--shadow);
+}
+.stat-card .num{font-size:1.5rem;font-weight:700;color:var(--accent)}
+.stat-card .label{font-size:.75rem;color:var(--text-muted);margin-top:2px}
+
+/* Section heading */
+.section-heading{
+  font-size:1.125rem;font-weight:700;margin:32px 0 16px;
+  padding-bottom:8px;border-bottom:2px solid var(--accent);
+}
+
+/* Highlight cards */
+.highlight-card{
+  background:var(--bg-highlight);border:1px solid var(--border);
+  border-radius:12px;padding:20px;margin-bottom:16px;
+  border-left:4px solid var(--accent);
+}
+.highlight-card .hl-badge{
+  display:inline-block;font-size:.6875rem;font-weight:700;
+  color:var(--accent);background:var(--bg-card);
+  border:1px solid var(--border);border-radius:999px;
+  padding:2px 8px;margin-bottom:8px;
+}
+.highlight-card .hl-title{font-size:1rem;font-weight:700;margin-bottom:8px}
+.highlight-card .hl-title a{color:var(--text)}
+.highlight-card .hl-desc{font-size:.875rem;color:var(--text-muted);margin-bottom:8px}
+.highlight-card .hl-desc strong,
+.highlight-card .hl-scenario strong{
+  display:block;color:var(--text);font-size:.75rem;margin-bottom:2px;
+}
+.highlight-card .hl-link{font-size:.8125rem;margin-bottom:12px}
+.highlight-card .hl-scenario{
+  font-size:.875rem;line-height:1.7;
+  background:var(--bg-card);border-radius:8px;padding:12px;margin-bottom:8px;
+}
+.highlight-card .hl-action{
+  font-size:.8125rem;color:var(--accent);font-weight:600;
+}
+.highlight-card .hl-action::before{content:"→ "}
+
+/* Topic section */
+.topic{
+  background:var(--bg-card);border:1px solid var(--border);
+  border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:var(--shadow);
+}
+.topic-title{font-size:1rem;font-weight:700;margin-bottom:4px}
+.topic-summary{font-size:.8125rem;color:var(--text-muted);margin-bottom:16px}
+
+/* Item list */
+.item{
+  padding:10px 0;border-bottom:1px solid var(--border);
+  display:flex;gap:10px;align-items:flex-start;
+}
+.item:last-child{border-bottom:none;padding-bottom:0}
+.badge{
+  display:inline-block;font-size:.625rem;font-weight:700;
+  color:#fff;padding:2px 8px;border-radius:10px;white-space:nowrap;
+  flex-shrink:0;margin-top:3px;text-transform:uppercase;letter-spacing:.03em;
+}
+.badge-changelog{background:var(--badge-changelog)}
+.badge-mcp{background:var(--badge-mcp)}
+.badge-trending{background:var(--badge-trending)}
+.badge-plugin{background:var(--badge-plugin)}
+.badge-awesome{background:var(--badge-awesome)}
+.badge-skills{background:var(--badge-skills)}
+.item-body{flex:1;min-width:0}
+.item-title{font-size:.875rem;font-weight:600}
+.item-desc{font-size:.8125rem;color:var(--text-muted);margin-top:2px}
+.item-meta{font-size:.75rem;color:var(--text-light);margin-top:4px}
+.item-meta .stars::before{content:"\2B50 "}
+
+/* Footer */
+.footer{
+  text-align:center;color:var(--text-light);font-size:.75rem;
+  padding:32px 0 16px;border-top:1px solid var(--border);margin-top:32px;
+}
+
+/* No items */
+.empty{color:var(--text-light);font-style:italic;font-size:.875rem;padding:8px 0}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header class="header">
+  <h1>Weekly Tech Watch</h1>
+  <div class="date-range">2026-06-24 ~ 2026-06-26</div>
+</header>
+
+<div class="stat-grid">
+<div class="stat-card"><div class="num">2</div><div class="label">Trending</div></div>
+<div class="stat-card"><div class="num">4</div><div class="label">Plugins</div></div>
+</div>
+
+<h2 class="section-heading">Highlights</h2>
+<div class="highlight-card">
+  <div class="hl-badge">深掘り候補</div>
+  <div class="hl-title"><a href="https://github.com/argmaxinc/argmax-oss-swift">GitHub: argmaxinc/argmax-oss-swift</a></div>
+  <div class="hl-desc"><strong>概要</strong>GitHubで公開された「argmaxinc/argmax-oss-swift」は、Apple Siliconデバイス上で動作するオンデバイス音声AIライブラリです。高速かつプライバシーに配慮した音声認識・合成をローカル環境で実現します。</div>
+  <div class="hl-link"><a href="https://github.com/argmaxinc/argmax-oss-swift">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>クライアントとの機密性の高い会話を扱うMeetingMinutesの議事録自動化において、プライバシー保護とAPIコスト削減の可能性があります。また、WONDAYコンサルティングで、オンデバイスAIのメリット（セキュリティ、オフライン対応）をクライアントへ提案する際の選択肢として活用できるかもしれません。</div>
+  <div class="hl-action">Swift以外の言語での利用可能性や、既存のAIツールとの連携可否を調査し、具体的な導入事例やメリットを深掘りする。</div>
+</div>
+<div class="highlight-card">
+  <div class="hl-badge">深掘り候補</div>
+  <div class="hl-title"><a href="https://github.com/wondelai/skills">GitHub: wondelai/skills</a></div>
+  <div class="hl-desc"><strong>概要</strong>GitHubで「wondelai/skills」リポジトリがトレンド入り。これはClaude Codeやagentskills.io互換のエージェント向けに、機能を拡張するスキル集を提供するものです。AIエージェントの能力向上に直結するリソースとして注目されています。</div>
+  <div class="hl-link"><a href="https://github.com/wondelai/skills">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>Claude Codeをメインで利用するりゅうさんにとって、AIエージェントの機能拡張はWONDAY-OSやクライアント導入標準パッケージの強化に繋がる可能性があります。既存のAI活用をさらに深め、「やらなきゃいけないこと」の自動化・効率化を加速させるヒントが得られるかもしれません。</div>
+  <div class="hl-action">GitHubリポジトリの内容と、関連するdevelopertoolkit.aiの情報を確認し、どのようなスキルが提供されているか、Claude Codeでの利用方法を調査します。</div>
+</div>
+<div class="highlight-card">
+  <div class="hl-badge">深掘り候補</div>
+  <div class="hl-title"><a href="https://www.dropbox.com">Plugin: dropbox</a></div>
+  <div class="hl-desc"><strong>概要</strong>ClaudeにDropboxプラグインが登場し、Dropbox内のファイルを直接検索・整理・保存・共有できるようになりました。ツールを切り替える手間なく、既存のファイル権限を尊重しつつClaude上で作業を完結できます。</div>
+  <div class="hl-link"><a href="https://www.dropbox.com">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>AI/ITコンサルティングにおいて、クライアント資料やプロジェクト関連文書をClaudeから直接参照・整理し、提案書作成の効率化に繋がる可能性があります。また、うま藻事業の商品開発資料やレシピ、不動産関連の重要事項説明書などの情報検索・管理の手間を削減し、ストレスフリーな業務環境構築に貢献できるでしょう。</div>
+  <div class="hl-action">Dropboxの利用状況を確認し、Claudeプラグインの具体的な機能やセキュリティ、既存のファイル管理ワークフローとの連携可能性を30分程度で調査すると良いでしょう。</div>
+</div>
+
+<h2 class="section-heading">Topics</h2>
+<div class="topic">
+  <div class="topic-title">AIアシスタント連携</div>
+  <div class="topic-summary">AIアシスタントの機能拡張や外部サービス連携を可能にするツール群。</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/wondelai/skills">wondelai/skills</a></div>
+    <div class="item-desc">Agent skills for Claude Code and other agentskills.io-compatible agents. See https://developertoolkit.ai for more information about skills in general.</div>
+    <div class="item-meta"><span class="stars">1457</span></div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-plugin">PLUGIN</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://www.dropbox.com">dropbox</a></div>
+    <div class="item-desc">The Dropbox plugin for Claude connects your Dropbox files directly to Claude, so you can search, organize, save generated content, and create sharing links without switching tools. It respects your existing Dropbox permissions, and Claude only works with files you already have access to.</div>
+    <div class="item-meta">productivity</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-plugin">PLUGIN</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/SAP-samples/hana-cli-claude-plugin">sap-hana-cli</a></div>
+    <div class="item-desc">150+ SAP HANA database tools for AI assistants. Query tables, import/export data, profile data quality, compare schemas, manage backups, monitor performance, and more. Connects to SAP HANA Cloud and on-premise databases.</div>
+    <div class="item-meta">database</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">AIデータ基盤・移行</div>
+  <div class="topic-summary">AIを活用したデータプラットフォーム構築と既存システムからの移行を支援。</div>
+<div class="item">
+  <span class="badge badge-plugin">PLUGIN</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://docs.oracle.com/en/cloud/paas/ai-data-platform/index.html">oracle-ai-data-platform-workbench-databricks-migrator</a></div>
+    <div class="item-desc">Drive the Oracle AI Data Platform (AIDP) Databricks Migration Toolkit in natural language. Plans and executes automated Databricks → AIDP migrations of notebooks, jobs, schedules, and catalog DDL — Pass-1 dependency rewrite + Pass-2 cell-by-cell execute/verify/fix on a live AIDP cluster with Claude.</div>
+    <div class="item-meta">development</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">デバイスAI技術</div>
+  <div class="topic-summary">Apple Silicon向けオンデバイス音声AIなど、特定の環境や用途に特化したAI技術。</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/argmaxinc/argmax-oss-swift">argmaxinc/argmax-oss-swift</a></div>
+    <div class="item-desc">On-device Speech AI for Apple Silicon</div>
+    <div class="item-meta"><span class="stars">6232</span></div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">SAPシステム刷新</div>
+  <div class="topic-summary">SAPUI5/OpenUI5アプリケーションの最新化を支援するツールキット。</div>
+<div class="item">
+  <span class="badge badge-plugin">PLUGIN</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/UI5/plugins-coding-agents">ui5-modernization</a></div>
+    <div class="item-desc">Complete UI5 modernization toolkit with workflow and specialized fix patterns for modernizing SAPUI5/OpenUI5 applications.</div>
+    <div class="item-meta">development</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">その他</div>
+  <div class="topic-summary">その他の情報や未分類の項目。</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/addyosmani/agent-skills">Addy Osmani: addyosmani/agent-skills (PushEvent)</a></div>
+    <div class="item-desc">[main] New push</div>
+    <div class="item-meta">2026-06-25</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/addyosmani/agent-skills">Addy Osmani: addyosmani/agent-skills (PushEvent)</a></div>
+    <div class="item-desc">[main] New push</div>
+    <div class="item-meta">2026-06-25</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/addyosmani/agent-skills">Addy Osmani: addyosmani/agent-skills (PushEvent)</a></div>
+    <div class="item-desc">[main] New push</div>
+    <div class="item-meta">2026-06-25</div>
+  </div>
+</div>
+</div>
+
+<footer class="footer">
+  Generated at 2026-06-26 07:55 JST<br>
+  Sources: Claude Code CHANGELOG, GitHub Releases, awesome-claude-code,
+  anthropics/skills, PulseMCP, Claude Plugins, GitHub Trending
+</footer>
+
+</div>
+</body>
+</html>
