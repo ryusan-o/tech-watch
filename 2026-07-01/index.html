@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Weekly Tech Watch — 2026-07-01</title>
+<style>
+:root {
+  --bg: #f8fafc;
+  --bg-card: #ffffff;
+  --bg-highlight: #eff6ff;
+  --text: #1e293b;
+  --text-muted: #64748b;
+  --text-light: #94a3b8;
+  --accent: #3b82f6;
+  --border: #e2e8f0;
+  --shadow: 0 1px 3px rgba(0,0,0,.08);
+  --badge-changelog: #3b82f6;
+  --badge-mcp: #8b5cf6;
+  --badge-trending: #f59e0b;
+  --badge-plugin: #10b981;
+  --badge-awesome: #f43f5e;
+  --badge-skills: #06b6d4;
+}
+@media(prefers-color-scheme:dark){
+:root {
+  --bg: #0f172a;
+  --bg-card: #1e293b;
+  --bg-highlight: #1e3a5f;
+  --text: #e2e8f0;
+  --text-muted: #94a3b8;
+  --text-light: #64748b;
+  --accent: #60a5fa;
+  --border: #334155;
+  --shadow: 0 1px 3px rgba(0,0,0,.3);
+}}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  background:var(--bg);color:var(--text);
+  line-height:1.6;padding:16px;
+}
+.container{max-width:760px;margin:0 auto}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* Header */
+.header{text-align:center;padding:32px 0 24px}
+.header h1{font-size:1.5rem;font-weight:700;letter-spacing:-.02em}
+.header .date-range{color:var(--text-muted);font-size:.875rem;margin-top:4px}
+
+/* Stats */
+.stat-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));
+  gap:8px;margin:0 0 32px;
+}
+.stat-card{
+  background:var(--bg-card);border:1px solid var(--border);border-radius:8px;
+  padding:12px;text-align:center;box-shadow:var(--shadow);
+}
+.stat-card .num{font-size:1.5rem;font-weight:700;color:var(--accent)}
+.stat-card .label{font-size:.75rem;color:var(--text-muted);margin-top:2px}
+
+/* Section heading */
+.section-heading{
+  font-size:1.125rem;font-weight:700;margin:32px 0 16px;
+  padding-bottom:8px;border-bottom:2px solid var(--accent);
+}
+
+/* Highlight cards */
+.highlight-card{
+  background:var(--bg-highlight);border:1px solid var(--border);
+  border-radius:12px;padding:20px;margin-bottom:16px;
+  border-left:4px solid var(--accent);
+}
+.highlight-card .hl-badge{
+  display:inline-block;font-size:.6875rem;font-weight:700;
+  color:var(--accent);background:var(--bg-card);
+  border:1px solid var(--border);border-radius:999px;
+  padding:2px 8px;margin-bottom:8px;
+}
+.highlight-card .hl-title{font-size:1rem;font-weight:700;margin-bottom:8px}
+.highlight-card .hl-title a{color:var(--text)}
+.highlight-card .hl-desc{font-size:.875rem;color:var(--text-muted);margin-bottom:8px}
+.highlight-card .hl-desc strong,
+.highlight-card .hl-scenario strong{
+  display:block;color:var(--text);font-size:.75rem;margin-bottom:2px;
+}
+.highlight-card .hl-link{font-size:.8125rem;margin-bottom:12px}
+.highlight-card .hl-scenario{
+  font-size:.875rem;line-height:1.7;
+  background:var(--bg-card);border-radius:8px;padding:12px;margin-bottom:8px;
+}
+.highlight-card .hl-action{
+  font-size:.8125rem;color:var(--accent);font-weight:600;
+}
+.highlight-card .hl-action::before{content:"→ "}
+
+/* Topic section */
+.topic{
+  background:var(--bg-card);border:1px solid var(--border);
+  border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:var(--shadow);
+}
+.topic-title{font-size:1rem;font-weight:700;margin-bottom:4px}
+.topic-summary{font-size:.8125rem;color:var(--text-muted);margin-bottom:16px}
+
+/* Item list */
+.item{
+  padding:10px 0;border-bottom:1px solid var(--border);
+  display:flex;gap:10px;align-items:flex-start;
+}
+.item:last-child{border-bottom:none;padding-bottom:0}
+.badge{
+  display:inline-block;font-size:.625rem;font-weight:700;
+  color:#fff;padding:2px 8px;border-radius:10px;white-space:nowrap;
+  flex-shrink:0;margin-top:3px;text-transform:uppercase;letter-spacing:.03em;
+}
+.badge-changelog{background:var(--badge-changelog)}
+.badge-mcp{background:var(--badge-mcp)}
+.badge-trending{background:var(--badge-trending)}
+.badge-plugin{background:var(--badge-plugin)}
+.badge-awesome{background:var(--badge-awesome)}
+.badge-skills{background:var(--badge-skills)}
+.item-body{flex:1;min-width:0}
+.item-title{font-size:.875rem;font-weight:600}
+.item-desc{font-size:.8125rem;color:var(--text-muted);margin-top:2px}
+.item-meta{font-size:.75rem;color:var(--text-light);margin-top:4px}
+.item-meta .stars::before{content:"\2B50 "}
+
+/* Footer */
+.footer{
+  text-align:center;color:var(--text-light);font-size:.75rem;
+  padding:32px 0 16px;border-top:1px solid var(--border);margin-top:32px;
+}
+
+/* No items */
+.empty{color:var(--text-light);font-style:italic;font-size:.875rem;padding:8px 0}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header class="header">
+  <h1>Weekly Tech Watch</h1>
+  <div class="date-range">2026-06-29 ~ 2026-07-01</div>
+</header>
+
+<div class="stat-grid">
+<div class="stat-card"><div class="num">1</div><div class="label">Claude Code</div></div>
+<div class="stat-card"><div class="num">1</div><div class="label">MCP</div></div>
+<div class="stat-card"><div class="num">11</div><div class="label">Plugins</div></div>
+</div>
+
+<h2 class="section-heading">Highlights</h2>
+<div class="highlight-card">
+  <div class="hl-badge">深掘り候補</div>
+  <div class="hl-title"><a href="https://www.anthropic.com/news/claude-sonnet-5">Introducing Claude Sonnet 5</a></div>
+  <div class="hl-desc"><strong>概要</strong>Anthropicが「Claude Sonnet 5」を発表しました。コーディング、エージェント機能、プロフェッショナルな業務において、規模に応じた最先端の性能を発揮し、既存のSonnetモデルから大幅な進化を遂げています。</div>
+  <div class="hl-link"><a href="https://www.anthropic.com/news/claude-sonnet-5">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>りゅうさんのAIコンサルティングやWONDAY-OS、MeetingMinutesなどの自動化プロジェクトにおいて、Sonnet 5の強化されたコーディング・エージェント機能は、より複雑なタスクの処理や効率化に貢献する可能性があります。既存のSonnet 4.6からの移行や、APIコストを考慮しつつ高度な自動化への適用を検討できるでしょう。</div>
+  <div class="hl-action">深掘りするなら、Sonnet 5の具体的な性能向上点と料金体系をAnthropicの公式ドキュメントで確認し、既存プロジェクトへの適用可能性を検討する。</div>
+</div>
+<div class="highlight-card">
+  <div class="hl-badge">深掘り候補</div>
+  <div class="hl-title"><a href="https://www.anthropic.com/news/claude-science-ai-workbench">Claude Science, an AI workbench for scientists, is now available</a></div>
+  <div class="hl-desc"><strong>概要</strong>Anthropicが科学者向けのAIワークベンチ「Claude Science」を発表しました。これは、研究者がよく使うツールやパッケージを統合し、カスタマイズ可能なアプリとして提供。監査可能な成果物生成と柔軟な計算リソースアクセスが特徴です。</div>
+  <div class="hl-link"><a href="https://www.anthropic.com/news/claude-science-ai-workbench">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>りゅうさんのうま藻事業において、八木澤氏のような藻類研究者の研究開発プロセスを効率化する可能性があります。研究データの分析や実験計画の立案支援に活用し、新メニュー開発や商業スキーム構築の精度向上に寄与できるかもしれません。AIコンサルとして、研究開発を行うクライアントへのAI導入支援の提案材料にもなり得ます。</div>
+  <div class="hl-action">Claude Scienceの具体的な機能や統合可能なツールについて、Anthropicの公式ページで詳細を確認してみましょう。うま藻事業の研究開発部門での活用可能性を検討するのも良いかもしれません。</div>
+</div>
+<div class="highlight-card">
+  <div class="hl-badge">ニュース</div>
+  <div class="hl-title"><a href="https://www.pulsemcp.com/servers/x-docs">MCP: X Docs</a></div>
+  <div class="hl-desc"><strong>概要</strong>X（旧Twitter）の開発者向けドキュメントに特化した検索・取得サービス「X Docs」が登場。APIリファレンスやコード例に効率的にアクセスできるようになります。</div>
+  <div class="hl-link"><a href="https://www.pulsemcp.com/servers/x-docs">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>WONDAYのSNS戦略やAI業務自動化診断において、XのAPIを活用した情報収集や自動投稿などの仕組みを構築する際、開発者ドキュメントの検索効率化に繋がる可能性があります。</div>
+  <div class="hl-action">XのAPI連携によるSNS自動化やデータ分析を検討する際に、このサービスが情報収集の効率化に役立つか確認すると良いでしょう。</div>
+</div>
+
+<h2 class="section-heading">Topics</h2>
+<div class="topic">
+  <div class="topic-title">AIモデルと新機能</div>
+  <div class="topic-summary">最新のAIモデル「Claude Sonnet 5」の導入や、科学者向けAIワークベンチの提供に関する情報。</div>
+<div class="item">
+  <span class="badge badge-changelog">CHANGELOG</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://code.claude.com/docs/en/changelog">v2.1.197</a></div>
+    <div class="item-desc">Introducing Claude Sonnet 5: now the default model in Claude Code, with a native 1M-token context window and promotional pricing of 2/2/2/10 per Mtok through August 31. Update to version 2.1.197 for access. https://www.anthropic.com/news/claude-sonnet-5</div>
+    <div class="item-meta">June 30, 2026</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-anthropic_news">ANTHROPIC_NEWS</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://www.anthropic.com/news/claude-sonnet-5">Introducing Claude Sonnet 5</a></div>
+    <div class="item-desc">Sonnet 5 delivers frontier performance across coding, agents, and professional work at scale.</div>
+    <div class="item-meta">Jun 30, 20</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-anthropic_news">ANTHROPIC_NEWS</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://www.anthropic.com/news/claude-science-ai-workbench">Claude Science, an AI workbench for scientists, is now available</a></div>
+    <div class="item-desc">Claude Science is a customizable app that integrates the tools and packages researchers most often use, produces auditable artifacts, and provides flexible access to computing resources.</div>
+    <div class="item-meta">Jun 30, 20</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">可観測性と監視</div>
+  <div class="topic-summary">GrafanaやHoneycombを活用した、AI支援を含むシステム監視、ダッシュボード、アラート管理のスキル。</div>
+<div class="item">
+  <span class="badge badge-plugin">PLUGIN</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://grafana.com">grafana-assistant</a></div>
+    <div class="item-desc">Skills and rules for developing and using the Grafana Assistant app and CLI.</div>
+    <div class="item-meta">monitoring</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-plugin">PLUGIN</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://grafana.com">grafana-cloud-mcp</a></div>
+    <div class="item-desc">Hosted MCP server for AI-assisted Grafana Cloud observability — no local installation required.</div>
+    <div class="item-meta">monitoring</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-plugin">PLUGIN</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://grafana.com">grafana-mcp</a></div>
+    <div class="item-desc">MCP server for AI-assisted Grafana dashboard, datasource, alerting, and incident management.</div>
+    <div class="item-meta">monitoring</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-plugin">PLUGIN</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://www.honeycomb.io">honeycomb</a></div>
+    <div class="item-desc">Skills, agents, and workflows for Honeycomb observability — query patterns, production investigations, SLOs, OpenTelemetry instrumentation, and Beeline migration. Designed to complement the Honeycomb MCP server.</div>
+    <div class="item-meta">monitoring</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">開発者ツール</div>
+  <div class="topic-summary">開発者向けドキュメント、マージ管理、CLIツールなど、開発ワークフローを効率化するスキル。</div>
+<div class="item">
+  <span class="badge badge-mcp">MCP</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://www.pulsemcp.com/servers/x-docs">X Docs</a></div>
+    <div class="item-desc">Provides search and retrieval access to X developer documentation, covering API references, code examples, and...</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-plugin">PLUGIN</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://mergify.com">mergify</a></div>
+    <div class="item-desc">Skills for the Mergify CLI: manage merge queues, stacked pull requests, Test Insights (flaky tests, quarantine), merge protections, and Mergify configuration directly from the terminal.</div>
+    <div class="item-meta">development</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-plugin">PLUGIN</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://www.preset.io">preset-cli-skills</a></div>
+    <div class="item-desc">Preset CLI skills for explicit shell, scripting, and CI/CD workflows driven by the `sup` CLI (PyPI package `superset-sup`). Use only for CLI workflows; do not use for MCP-only work or as a substitute for direct API calls when the user wants HTTP/SDK code.</div>
+    <div class="item-meta">development</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">クラウド運用</div>
+  <div class="topic-summary">HostingerやRenderなどのプラットフォームで、アプリケーションのデプロイ、管理、監視を行うスキル。</div>
+<div class="item">
+  <span class="badge badge-plugin">PLUGIN</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://www.hostinger.com">hostinger</a></div>
+    <div class="item-desc">Deploy, manage and monitor Hostinger services — Websites, Domains, Ecommerce, Email Marketing, Subscriptions &amp; Payments, and VPS. Authenticate via browser (OAuth) or API token.</div>
+    <div class="item-meta">deployment</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-plugin">PLUGIN</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://render.com">render</a></div>
+    <div class="item-desc">Deploy, debug, and monitor applications on Render. Includes skills, an agent, slash commands, and a render.yaml validation hook.</div>
+    <div class="item-meta">deployment</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">AIアプリ・データ</div>
+  <div class="topic-summary">マルチモーダルAIアプリ構築や、ウェブデータスクレイピングなど、AIとデータ活用に関するスキル。</div>
+<div class="item">
+  <span class="badge badge-plugin">PLUGIN</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://docs.pixeltable.com">pixeltable</a></div>
+    <div class="item-desc">Build multimodal AI applications with Pixeltable -- tables, computed columns, embedding search, UDFs, tool-calling agents, and 25+ AI provider integrations.</div>
+    <div class="item-meta">development</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-plugin">PLUGIN</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://www.zyte.com">zyte-web-data</a></div>
+    <div class="item-desc">Web scraping skills for Claude Code powered by the Zyte API — scrape sites, generate and run Scrapy spiders, define extraction schemas, and ship to Scrapy Cloud.</div>
+    <div class="item-meta">automation</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">データベース拡張</div>
+  <div class="topic-summary">MySQL向けVillageSQL拡張機能の構築や、PostgreSQL拡張の移植に特化したツール。</div>
+<div class="item">
+  <span class="badge badge-plugin">PLUGIN</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://villagesql.com">vsql-extension-builder</a></div>
+    <div class="item-desc">Builds a VillageSQL extension for MySQL end-to-end through a 7-phase persona-driven workflow. Commonly used to port PostgreSQL extensions to MySQL.</div>
+    <div class="item-meta">database</div>
+  </div>
+</div>
+</div>
+
+<footer class="footer">
+  Generated at 2026-07-01 07:55 JST<br>
+  Sources: Claude Code CHANGELOG, GitHub Releases, awesome-claude-code,
+  anthropics/skills, PulseMCP, Claude Plugins, GitHub Trending
+</footer>
+
+</div>
+</body>
+</html>
