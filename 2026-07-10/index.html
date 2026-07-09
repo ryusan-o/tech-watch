@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Weekly Tech Watch — 2026-07-10</title>
+<style>
+:root {
+  --bg: #f8fafc;
+  --bg-card: #ffffff;
+  --bg-highlight: #eff6ff;
+  --text: #1e293b;
+  --text-muted: #64748b;
+  --text-light: #94a3b8;
+  --accent: #3b82f6;
+  --border: #e2e8f0;
+  --shadow: 0 1px 3px rgba(0,0,0,.08);
+  --badge-changelog: #3b82f6;
+  --badge-mcp: #8b5cf6;
+  --badge-trending: #f59e0b;
+  --badge-plugin: #10b981;
+  --badge-awesome: #f43f5e;
+  --badge-skills: #06b6d4;
+}
+@media(prefers-color-scheme:dark){
+:root {
+  --bg: #0f172a;
+  --bg-card: #1e293b;
+  --bg-highlight: #1e3a5f;
+  --text: #e2e8f0;
+  --text-muted: #94a3b8;
+  --text-light: #64748b;
+  --accent: #60a5fa;
+  --border: #334155;
+  --shadow: 0 1px 3px rgba(0,0,0,.3);
+}}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  background:var(--bg);color:var(--text);
+  line-height:1.6;padding:16px;
+}
+.container{max-width:760px;margin:0 auto}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* Header */
+.header{text-align:center;padding:32px 0 24px}
+.header h1{font-size:1.5rem;font-weight:700;letter-spacing:-.02em}
+.header .date-range{color:var(--text-muted);font-size:.875rem;margin-top:4px}
+
+/* Stats */
+.stat-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));
+  gap:8px;margin:0 0 32px;
+}
+.stat-card{
+  background:var(--bg-card);border:1px solid var(--border);border-radius:8px;
+  padding:12px;text-align:center;box-shadow:var(--shadow);
+}
+.stat-card .num{font-size:1.5rem;font-weight:700;color:var(--accent)}
+.stat-card .label{font-size:.75rem;color:var(--text-muted);margin-top:2px}
+
+/* Section heading */
+.section-heading{
+  font-size:1.125rem;font-weight:700;margin:32px 0 16px;
+  padding-bottom:8px;border-bottom:2px solid var(--accent);
+}
+
+/* Highlight cards */
+.highlight-card{
+  background:var(--bg-highlight);border:1px solid var(--border);
+  border-radius:12px;padding:20px;margin-bottom:16px;
+  border-left:4px solid var(--accent);
+}
+.highlight-card .hl-badge{
+  display:inline-block;font-size:.6875rem;font-weight:700;
+  color:var(--accent);background:var(--bg-card);
+  border:1px solid var(--border);border-radius:999px;
+  padding:2px 8px;margin-bottom:8px;
+}
+.highlight-card .hl-title{font-size:1rem;font-weight:700;margin-bottom:8px}
+.highlight-card .hl-title a{color:var(--text)}
+.highlight-card .hl-desc{font-size:.875rem;color:var(--text-muted);margin-bottom:8px}
+.highlight-card .hl-desc strong,
+.highlight-card .hl-scenario strong{
+  display:block;color:var(--text);font-size:.75rem;margin-bottom:2px;
+}
+.highlight-card .hl-link{font-size:.8125rem;margin-bottom:12px}
+.highlight-card .hl-scenario{
+  font-size:.875rem;line-height:1.7;
+  background:var(--bg-card);border-radius:8px;padding:12px;margin-bottom:8px;
+}
+.highlight-card .hl-action{
+  font-size:.8125rem;color:var(--accent);font-weight:600;
+}
+.highlight-card .hl-action::before{content:"→ "}
+
+/* Topic section */
+.topic{
+  background:var(--bg-card);border:1px solid var(--border);
+  border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:var(--shadow);
+}
+.topic-title{font-size:1rem;font-weight:700;margin-bottom:4px}
+.topic-summary{font-size:.8125rem;color:var(--text-muted);margin-bottom:16px}
+
+/* Item list */
+.item{
+  padding:10px 0;border-bottom:1px solid var(--border);
+  display:flex;gap:10px;align-items:flex-start;
+}
+.item:last-child{border-bottom:none;padding-bottom:0}
+.badge{
+  display:inline-block;font-size:.625rem;font-weight:700;
+  color:#fff;padding:2px 8px;border-radius:10px;white-space:nowrap;
+  flex-shrink:0;margin-top:3px;text-transform:uppercase;letter-spacing:.03em;
+}
+.badge-changelog{background:var(--badge-changelog)}
+.badge-mcp{background:var(--badge-mcp)}
+.badge-trending{background:var(--badge-trending)}
+.badge-plugin{background:var(--badge-plugin)}
+.badge-awesome{background:var(--badge-awesome)}
+.badge-skills{background:var(--badge-skills)}
+.item-body{flex:1;min-width:0}
+.item-title{font-size:.875rem;font-weight:600}
+.item-desc{font-size:.8125rem;color:var(--text-muted);margin-top:2px}
+.item-meta{font-size:.75rem;color:var(--text-light);margin-top:4px}
+.item-meta .stars::before{content:"\2B50 "}
+
+/* Footer */
+.footer{
+  text-align:center;color:var(--text-light);font-size:.75rem;
+  padding:32px 0 16px;border-top:1px solid var(--border);margin-top:32px;
+}
+
+/* No items */
+.empty{color:var(--text-light);font-style:italic;font-size:.875rem;padding:8px 0}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header class="header">
+  <h1>Weekly Tech Watch</h1>
+  <div class="date-range">2026-07-08 ~ 2026-07-10</div>
+</header>
+
+<div class="stat-grid">
+<div class="stat-card"><div class="num">42</div><div class="label">MCP</div></div>
+<div class="stat-card"><div class="num">1</div><div class="label">Trending</div></div>
+<div class="stat-card"><div class="num">8</div><div class="label">awesome-cc</div></div>
+</div>
+
+<h2 class="section-heading">Highlights</h2>
+<div class="highlight-card">
+  <div class="hl-badge">ニュース</div>
+  <div class="hl-title"><a href="https://www.anthropic.com/news/hard-questions">Inviting hard questions</a></div>
+  <div class="hl-desc"><strong>概要</strong>AnthropicがAIに関する一般からの「難しい質問」を募集し、その回答プロセスや取り組みを公開すると発表しました。AIの安全性と透明性向上を目指す姿勢を示しています。</div>
+  <div class="hl-link"><a href="https://www.anthropic.com/news/hard-questions">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>りゅうさんのAIコンサル事業において、AIの倫理や安全性に関する顧客からの懸念に対応する際の参考情報として活用できる可能性があります。また、WONDAYの理念である「ストレスフリーな社会を作る」という観点から、AIの信頼性向上への取り組みを顧客に説明する際の材料にもなるかもしれません。</div>
+  <div class="hl-action">Anthropicが今後公開する質問への回答や取り組みの詳細に注目し、AIの倫理・安全性に関する動向を把握する。</div>
+</div>
+<div class="highlight-card">
+  <div class="hl-badge">ニュース</div>
+  <div class="hl-title"><a href="https://www.anthropic.com/news/ben-bernanke">Jul 9, 2026AnnouncementsBen Bernanke appointed to Anthropic’s Long-Term Benefit Trust</a></div>
+  <div class="hl-desc"><strong>概要</strong>Anthropicが元FRB議長のベン・バーナンキ氏を、AIの長期的な安全性と倫理的利用を監督する「Long-Term Benefit Trust」のメンバーに任命しました。これは、AIのガバナンスと社会への利益を重視する同社の姿勢を強化する動きです。</div>
+  <div class="hl-link"><a href="https://www.anthropic.com/news/ben-bernanke">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>りゅうさんのAIコンサルティング事業において、主要ツールであるClaudeを提供するAnthropicの倫理・安全性への取り組みをクライアントに説明する際の信頼性向上に繋がる可能性があります。AIの専門家として、AIガバナンスの動向を語る上での材料として活用できるでしょう。</div>
+  <div class="hl-action">興味があれば、AnthropicのLong-Term Benefit Trustの具体的な役割や他のメンバーについて、ニュース記事や公式サイトで詳細を確認してみる。</div>
+</div>
+<div class="highlight-card">
+  <div class="hl-badge">深掘り候補</div>
+  <div class="hl-title"><a href="https://www.anthropic.com/news/reflect-with-claude">Jul 9, 2026AnnouncementsIntroducing a way to reflect on how you use Claude</a></div>
+  <div class="hl-desc"><strong>概要</strong>Anthropicが、ユーザーがClaudeの利用状況を振り返り、より効果的な使い方を学ぶための新機能を発表しました。自身の対話履歴を分析し、AIとのインタラクションを最適化するツールが提供されます。</div>
+  <div class="hl-link"><a href="https://www.anthropic.com/news/reflect-with-claude">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>りゅうさんがメインで活用するClaudeの利用状況を可視化することで、自身のプロンプト設計やAIとの連携パターンの改善点を見つける可能性があります。「考えすぎて行動量・スピードが落ちる」課題に対し、AI活用を効率化するヒントを得られるかもしれません。また、AIコンサルティングにおいて、自身の活用改善プロセスをクライアントに示す事例としても活用できる可能性があります。</div>
+  <div class="hl-action">深掘りするなら、ClaudeのWeb UIで新機能の具体的な内容を確認し、自身の過去の対話履歴がどのように分析・可視化されるか試してみるのが良いでしょう。</div>
+</div>
+
+<h2 class="section-heading">Topics</h2>
+<div class="topic">
+  <div class="topic-title">AIエージェントのセキュリティ</div>
+  <div class="topic-summary">AIエージェントの実行、ツール利用、データアクセスにおけるポリシー適用、監査、承認を管理するツール群。</div>
+<div class="item">
+  <span class="badge badge-mcp">MCP</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://www.pulsemcp.com/servers/runeward">Runeward</a></div>
+    <div class="item-desc">Governed execution cells for AI agents: Docker/K8s sandboxes with policy, audit, and approvals.</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-mcp">MCP</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://www.pulsemcp.com/servers/runestone-gatekeeper">Runestone Gatekeeper</a></div>
+    <div class="item-desc">Enforces policy, human approval, and audit logging on every tool call your AI agents make.</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-mcp">MCP</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://www.pulsemcp.com/servers/vinsenzo83-baton">Baton</a></div>
+    <div class="item-desc">Hand off AI work with a signed Verification Receipt — an independent verifier proves it runs.</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-mcp">MCP</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://www.pulsemcp.com/servers/aisentinel">AISentinel</a></div>
+    <div class="item-desc">Enforce YAML security policies on AI agent tool calls and keep a tamper-evident audit log.</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-mcp">MCP</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://www.pulsemcp.com/servers/alexar76-argus3">Argus-3</a></div>
+    <div class="item-desc">MCP security firewall (WARDEN) that vets third-party MCP servers before their tools are allowed to run.</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-mcp">MCP</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://www.pulsemcp.com/servers/glyt">Glyt</a></div>
+    <div class="item-desc">Human-in-the-loop approval for agent actions, with verifiable action-bound receipts.</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-mcp">MCP</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://www.pulsemcp.com/servers/attestd">Attestd</a></div>
+    <div class="item-desc">CVE and supply chain risk checks for MCP clients, covering infrastructure, PyPI, and npm packages.</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">AIデータ処理・知識基盤</div>
+  <div class="topic-summary">AIエージェントが利用する多様なデータ形式の処理、知識グラフ化、コンテンツ準備、および検証を支援するツール。</div>
+<div class="item">
+  <span class="badge badge-mcp">MCP</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://www.pulsemcp.com/servers/graphify-nvidia-ai">Graphify NVIDIA AI Knowledge Graph</a></div>
+    <div class="item-desc">NVIDIA AI developer stack encoded as a typed, compressed knowledge graph for structured agent traversal.</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-mcp">MCP</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://www.pulsemcp.com/servers/zahirinatzuke-local-delegate">Local Delegate</a></div>
+    <div class="item-desc">Delegates mechanical text-processing tasks to a local OpenAI-compatible LLM to conserve token usage.</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-mcp">MCP</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://www.pulsemcp.com/servers/placepack">PlacePack</a></div>
+    <div class="item-desc">Generate deterministic placeholder image URLs and packs for docs, staging, testing, and AI agents.</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-mcp">MCP</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://www.pulsemcp.com/servers/sylphx-video-reader">Video Reader</a></div>
+    <div class="item-desc">Extracts structured, evidence-first data from video files for AI agents.</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-mcp">MCP</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://www.pulsemcp.com/servers/vouchdev-vouch">Vouch</a></div>
+    <div class="item-desc">Git-native, review-gated knowledge base for LLM agents. Cited retrieval, audited writes.</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-mcp">MCP</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://www.pulsemcp.com/servers/terobyte-librarian-cli">Librarian CLI</a></div>
+    <div class="item-desc">Converts ebooks to searchable Markdown and exposes them to AI agents via MCP.</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-mcp">MCP</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://www.pulsemcp.com/servers/kynth-core">Kynth Core</a></div>
+    <div class="item-desc">Documents to schema-valid JSON plus 38 more finished-job AI tools, on one credit wallet.</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-mcp">MCP</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://www.pulsemcp.com/servers/packforai">PackForAI</a></div>
+    <div class="item-desc">Convert PDF, DOCX, XLSX, CSV, JSON into clean, AI-ready Markdown via the PackForAI API.</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-mcp">MCP</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://www.pulsemcp.com/servers/asish-singh-agent-readiness-auditor">Agent Readiness Auditor</a></div>
+    <div class="item-desc">Audits websites for AI agent readiness and safety, scoring prompt injection risk and llms.txt signals.</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/dimastatz/whisper-flow">dimastatz/whisper-flow</a></div>
+    <div class="item-desc">Whisper-Flow is a framework designed to enable real-time transcription of audio content using OpenAI’s Whisper model. Rather than processing entire files after upload (“batch mode”), Whisper-Flow accepts a continuous stream of audio chunks and produces incremental transcripts immediately.</div>
+    <div class="item-meta"><span class="stars">802</span></div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">占い・スピリチュアルAI</div>
+  <div class="topic-summary">占星術、タロット、数秘術、ヒューマンデザインなど、スピリチュアルな情報を提供するAIエージェント向けAPI。</div>
+<div class="item">
+  <span class="badge badge-mcp">MCP</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://www.pulsemcp.com/servers/roxyapi-vedic-astrology">RoxyAPI Vedic Astrology</a></div>
+    <div class="item-desc">Provides Vedic (Jyotish) astrology calculations including kundli, dashas, nakshatras, and KP charts.</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-mcp">MCP</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://www.pulsemcp.com/servers/roxyapi-tarot">RoxyAPI Tarot</a></div>
+    <div class="item-desc">Provides tarot card readings and spreads using the complete 78-card Rider-Waite-Smith deck.</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-mcp">MCP</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://www.pulsemcp.com/servers/roxyapi-human-design">RoxyAPI Human Design</a></div>
+    <div class="item-desc">Generates Human Design bodygraphs, types, authorities, profiles, gates, and channels.</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-mcp">MCP</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://www.pulsemcp.com/servers/roxyapi-numerology">RoxyAPI Numerology</a></div>
+    <div class="item-desc">Calculates Life Path, Expression, karmic debt, and Chaldean numerology readings.</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-mcp">MCP</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://www.pulsemcp.com/servers/tarotoo">Tarotoo</a></div>
+    <div class="item-desc">Provides all 78 Rider-Waite-Smith tarot card meanings and readings for AI agents.</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">グローバル決済・金融</div>
+  <div class="topic-summary">世界各地の多様な決済手段に対応し、資金を保持せずに取引を処理する支払いゲートウェイおよびLLM利用費追跡ツール。</div>
+<div class="item">
+  <span class="badge badge-mcp">MCP</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://www.pulsemcp.com/servers/wishpool-colombia-payments">Wishpool Colombia Payments</a></div>
+    <div class="item-desc">Accepts payments in Colombia through Mercado Pago — PSE, Nequi, cards, and Efecty cash — without holding funds.</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-mcp">MCP</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://www.pulsemcp.com/servers/wishpool-france-payments">Wishpool France Payments</a></div>
+    <div class="item-desc">Accepts payments in France through Stripe — Cartes Bancaires, cards, and wallets — without holding funds.</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-mcp">MCP</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://www.pulsemcp.com/servers/wishpool-germany-payments">Wishpool Germany Payments</a></div>
+    <div class="item-desc">Accepts payments in Germany through Mollie — cards, PayPal, Klarna, and SEPA transfer — without holding funds.</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-mcp">MCP</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://www.pulsemcp.com/servers/wishpool-ghana-payments">Wishpool Ghana Payments</a></div>
+    <div class="item-desc">Accepts payments in Ghana through Paystack — MTN Mobile Money and cards — without holding funds.</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-mcp">MCP</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://www.pulsemcp.com/servers/wishpool-india-payments">Wishpool India Payments</a></div>
+    <div class="item-desc">Accepts payments in India through Razorpay — UPI, cards, and netbanking — without holding funds.</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-mcp">MCP</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://www.pulsemcp.com/servers/zhaoyue722-llm-usage">LLM Usage</a></div>
+    <div class="item-desc">Local-first, multi-provider tool that captures LLM API spend and exposes it to coding agents.</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">AI向け専門サービス</div>
+  <div class="topic-summary">AIエージェント向けのオラクルサービス、人間による判断、ブラウザテスト、業界特化型情報を提供するプラットフォーム。</div>
+<div class="item">
+  <span class="badge badge-mcp">MCP</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://www.pulsemcp.com/servers/alexar76-aimarket-oracle-gateway">AIMarket Oracle Gateway</a></div>
+    <div class="item-desc">Pay-per-call gateway exposing verifiable AIMarket oracle services to AI agents.</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-mcp">MCP</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://www.pulsemcp.com/servers/guitarmaniac24-getabrain">GetABrain</a></div>
+    <div class="item-desc">Get structured human judgment as an agent tool: ask a question, get a real person&#x27;s answer back.</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-mcp">MCP</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://www.pulsemcp.com/servers/alexar76-aimarket-packager">AIMarket Packager</a></div>
+    <div class="item-desc">Packages AIMarket Hub capabilities into self-hosted, ready-to-run MCP server products.</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-mcp">MCP</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://www.pulsemcp.com/servers/browserbash">BrowserBash</a></div>
+    <div class="item-desc">Plain-English browser tests for AI agents: real Chrome, deterministic verdicts. Free, no API keys.</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-mcp">MCP</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://www.pulsemcp.com/servers/dacix">DACIX</a></div>
+    <div class="item-desc">AI-agent marketplace: agent templates, web crawl, RO company registry &amp; financials, city info.</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-mcp">MCP</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://www.pulsemcp.com/servers/alpha-sophia">Alpha Sophia</a></div>
+    <div class="item-desc">Claims-grounded provider, market, and KOL intelligence for healthcare AI agents.</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">開発・業務効率化ツール</div>
+  <div class="topic-summary">コード品質管理、翻訳、データ連携、コンテンツ証明、履歴書作成など、開発者やビジネスの生産性を高めるツール。</div>
+<div class="item">
+  <span class="badge badge-mcp">MCP</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://www.pulsemcp.com/servers/doucs91-hivelore">Hivelore</a></div>
+    <div class="item-desc">Blocks commits that reintroduce a mistake a team has already documented and paid for.</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-mcp">MCP</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://www.pulsemcp.com/servers/tatastu-proof">Tatastu Proof</a></div>
+    <div class="item-desc">Stamp content with permanent, publicly verifiable provenance; verification is free forever.</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-mcp">MCP</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://www.pulsemcp.com/servers/sonenta">Sonenta</a></div>
+    <div class="item-desc">Sonenta translation management: keys, translations, accessibility, and source-health tools.</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-mcp">MCP</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://www.pulsemcp.com/servers/sidecar">Sidecar</a></div>
+    <div class="item-desc">Cross-tool context for your data stack — search, lineage, and impact across warehouse and BI tools.</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-mcp">MCP</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://www.pulsemcp.com/servers/hoshin-kanri">Hoshin Kanri X-Matrix</a></div>
+    <div class="item-desc">Hoshin Kanri X-Matrix for AI agents: strategy, meeting cadences, completeness score, OAuth 2.1.</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-mcp">MCP</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://www.pulsemcp.com/servers/reactive-resume">Reactive Resume</a></div>
+    <div class="item-desc">Free open-source resume builder with remote MCP tools for resumes and job applications.</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">その他・無関係な項目</div>
+  <div class="topic-summary">アニメリスト管理、FAX送信、地域ディレクトリ、および自動生成された無意味な項目。</div>
+<div class="item">
+  <span class="badge badge-mcp">MCP</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://www.pulsemcp.com/servers/grinv-mal">MyAnimeList Manager</a></div>
+    <div class="item-desc">Search MyAnimeList anime and manga data and manage your own MAL list entries.</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-mcp">MCP</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://www.pulsemcp.com/servers/sendthisfax">SendThisFax</a></div>
+    <div class="item-desc">Sends real faxes to EU institutions via a pay-per-fax checkout link or a prepaid API key.</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-mcp">MCP</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://www.pulsemcp.com/servers/namaste-america">Namaste America</a></div>
+    <div class="item-desc">Agent-first directory for Indians from India in the USA — restaurants, temples, events &amp; more.</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/075395c">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-07-09</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/4df3741">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-07-09</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/ec77b03">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-07-09</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/11f83ba">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-07-09</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/c075787">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-07-09</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/c79cc2c">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-07-09</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/0553944">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-07-09</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/7c3e353">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-07-09</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-anthropic_news">ANTHROPIC_NEWS</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://www.anthropic.com/news/hard-questions">Inviting hard questions</a></div>
+    <div class="item-desc">We’re asking the public for their hardest questions about AI, and committing to show our work as we address them.</div>
+    <div class="item-meta">Jul 9, 202</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-anthropic_news">ANTHROPIC_NEWS</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://www.anthropic.com/news/ben-bernanke">Jul 9, 2026AnnouncementsBen Bernanke appointed to Anthropic’s Long-Term Benefit Trust</a></div>
+    <div class="item-meta">Jul 9, 202</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-anthropic_news">ANTHROPIC_NEWS</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://www.anthropic.com/news/reflect-with-claude">Jul 9, 2026AnnouncementsIntroducing a way to reflect on how you use Claude</a></div>
+    <div class="item-meta">Jul 9, 202</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/addyosmani/agent-skills">Addy Osmani: addyosmani/agent-skills (PushEvent)</a></div>
+    <div class="item-desc">[main] New push</div>
+    <div class="item-meta">2026-07-09</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/addyosmani/agent-skills">Addy Osmani: addyosmani/agent-skills (PushEvent)</a></div>
+    <div class="item-desc">[main] New push</div>
+    <div class="item-meta">2026-07-09</div>
+  </div>
+</div>
+</div>
+
+<footer class="footer">
+  Generated at 2026-07-10 07:56 JST<br>
+  Sources: Claude Code CHANGELOG, GitHub Releases, awesome-claude-code,
+  anthropics/skills, PulseMCP, Claude Plugins, GitHub Trending
+</footer>
+
+</div>
+</body>
+</html>
