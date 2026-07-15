@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Weekly Tech Watch — 2026-07-16</title>
+<style>
+:root {
+  --bg: #f8fafc;
+  --bg-card: #ffffff;
+  --bg-highlight: #eff6ff;
+  --text: #1e293b;
+  --text-muted: #64748b;
+  --text-light: #94a3b8;
+  --accent: #3b82f6;
+  --border: #e2e8f0;
+  --shadow: 0 1px 3px rgba(0,0,0,.08);
+  --badge-changelog: #3b82f6;
+  --badge-mcp: #8b5cf6;
+  --badge-trending: #f59e0b;
+  --badge-plugin: #10b981;
+  --badge-awesome: #f43f5e;
+  --badge-skills: #06b6d4;
+}
+@media(prefers-color-scheme:dark){
+:root {
+  --bg: #0f172a;
+  --bg-card: #1e293b;
+  --bg-highlight: #1e3a5f;
+  --text: #e2e8f0;
+  --text-muted: #94a3b8;
+  --text-light: #64748b;
+  --accent: #60a5fa;
+  --border: #334155;
+  --shadow: 0 1px 3px rgba(0,0,0,.3);
+}}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  background:var(--bg);color:var(--text);
+  line-height:1.6;padding:16px;
+}
+.container{max-width:760px;margin:0 auto}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* Header */
+.header{text-align:center;padding:32px 0 24px}
+.header h1{font-size:1.5rem;font-weight:700;letter-spacing:-.02em}
+.header .date-range{color:var(--text-muted);font-size:.875rem;margin-top:4px}
+
+/* Stats */
+.stat-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));
+  gap:8px;margin:0 0 32px;
+}
+.stat-card{
+  background:var(--bg-card);border:1px solid var(--border);border-radius:8px;
+  padding:12px;text-align:center;box-shadow:var(--shadow);
+}
+.stat-card .num{font-size:1.5rem;font-weight:700;color:var(--accent)}
+.stat-card .label{font-size:.75rem;color:var(--text-muted);margin-top:2px}
+
+/* Section heading */
+.section-heading{
+  font-size:1.125rem;font-weight:700;margin:32px 0 16px;
+  padding-bottom:8px;border-bottom:2px solid var(--accent);
+}
+
+/* Highlight cards */
+.highlight-card{
+  background:var(--bg-highlight);border:1px solid var(--border);
+  border-radius:12px;padding:20px;margin-bottom:16px;
+  border-left:4px solid var(--accent);
+}
+.highlight-card .hl-badge{
+  display:inline-block;font-size:.6875rem;font-weight:700;
+  color:var(--accent);background:var(--bg-card);
+  border:1px solid var(--border);border-radius:999px;
+  padding:2px 8px;margin-bottom:8px;
+}
+.highlight-card .hl-title{font-size:1rem;font-weight:700;margin-bottom:8px}
+.highlight-card .hl-title a{color:var(--text)}
+.highlight-card .hl-desc{font-size:.875rem;color:var(--text-muted);margin-bottom:8px}
+.highlight-card .hl-desc strong,
+.highlight-card .hl-scenario strong{
+  display:block;color:var(--text);font-size:.75rem;margin-bottom:2px;
+}
+.highlight-card .hl-link{font-size:.8125rem;margin-bottom:12px}
+.highlight-card .hl-scenario{
+  font-size:.875rem;line-height:1.7;
+  background:var(--bg-card);border-radius:8px;padding:12px;margin-bottom:8px;
+}
+.highlight-card .hl-action{
+  font-size:.8125rem;color:var(--accent);font-weight:600;
+}
+.highlight-card .hl-action::before{content:"→ "}
+
+/* Topic section */
+.topic{
+  background:var(--bg-card);border:1px solid var(--border);
+  border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:var(--shadow);
+}
+.topic-title{font-size:1rem;font-weight:700;margin-bottom:4px}
+.topic-summary{font-size:.8125rem;color:var(--text-muted);margin-bottom:16px}
+
+/* Item list */
+.item{
+  padding:10px 0;border-bottom:1px solid var(--border);
+  display:flex;gap:10px;align-items:flex-start;
+}
+.item:last-child{border-bottom:none;padding-bottom:0}
+.badge{
+  display:inline-block;font-size:.625rem;font-weight:700;
+  color:#fff;padding:2px 8px;border-radius:10px;white-space:nowrap;
+  flex-shrink:0;margin-top:3px;text-transform:uppercase;letter-spacing:.03em;
+}
+.badge-changelog{background:var(--badge-changelog)}
+.badge-mcp{background:var(--badge-mcp)}
+.badge-trending{background:var(--badge-trending)}
+.badge-plugin{background:var(--badge-plugin)}
+.badge-awesome{background:var(--badge-awesome)}
+.badge-skills{background:var(--badge-skills)}
+.item-body{flex:1;min-width:0}
+.item-title{font-size:.875rem;font-weight:600}
+.item-desc{font-size:.8125rem;color:var(--text-muted);margin-top:2px}
+.item-meta{font-size:.75rem;color:var(--text-light);margin-top:4px}
+.item-meta .stars::before{content:"\2B50 "}
+
+/* Footer */
+.footer{
+  text-align:center;color:var(--text-light);font-size:.75rem;
+  padding:32px 0 16px;border-top:1px solid var(--border);margin-top:32px;
+}
+
+/* No items */
+.empty{color:var(--text-light);font-style:italic;font-size:.875rem;padding:8px 0}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header class="header">
+  <h1>Weekly Tech Watch</h1>
+  <div class="date-range">2026-07-14 ~ 2026-07-16</div>
+</header>
+
+<div class="stat-grid">
+<div class="stat-card"><div class="num">2</div><div class="label">MCP</div></div>
+<div class="stat-card"><div class="num">2</div><div class="label">Trending</div></div>
+<div class="stat-card"><div class="num">1</div><div class="label">Plugins</div></div>
+<div class="stat-card"><div class="num">9</div><div class="label">awesome-cc</div></div>
+</div>
+
+<h2 class="section-heading">Highlights</h2>
+<div class="highlight-card">
+  <div class="hl-badge">深掘り候補</div>
+  <div class="hl-title"><a href="https://www.pulsemcp.com/servers/htmldrop">MCP: htmldrop</a></div>
+  <div class="hl-desc"><strong>概要</strong>HTML、Markdown、PDF、画像などのファイルを、有効期限付きの共有可能なリンクに変換するサービス「htmldrop」が登場しました。AIエージェントが一時的な情報参照に活用できるよう設計されており、情報共有の効率化に貢献します。</div>
+  <div class="hl-link"><a href="https://www.pulsemcp.com/servers/htmldrop">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>AIコンサルティングにおいて、クライアントへの一時的な資料共有や、AIが生成した中間成果物の確認に活用できる可能性があります。うま藻事業でのレポートや画像共有、WONDAY-OSやMeetingMinutesでのAI連携時の情報受け渡しを効率化し、「やらなきゃいけないこと」の自動化に寄与するでしょう。</div>
+  <div class="hl-action">深掘りするなら、既存のファイル共有サービスとの違いや、AIエージェント連携の具体的なメリット、セキュリティポリシーを確認すると良いでしょう。</div>
+</div>
+<div class="highlight-card">
+  <div class="hl-badge">ニュース</div>
+  <div class="hl-title"><a href="https://www.pulsemcp.com/servers/geppetto-robot-directory">MCP: Geppetto Robot Directory</a></div>
+  <div class="hl-desc"><strong>概要</strong>AIアシスタントが500種類以上のロボットを仕様、価格、ブランド、自動化効果で検索・比較・調査できる専門ディレクトリ「Geppetto Robot Directory」が登場しました。ロボット導入検討時の情報収集を効率化します。</div>
+  <div class="hl-link"><a href="https://www.pulsemcp.com/servers/geppetto-robot-directory">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>AIコンサルティングにおいて、クライアントの「やらなきゃいけないこと」を自動化するソリューションとしてロボットを検討する際、情報収集の効率化に活用できる可能性があります。うま藻事業の製造プロセスや研究開発における自動化の可能性を探る際の引き出しの一つとしても役立つかもしれません。</div>
+  <div class="hl-action">将来的にロボット導入を検討するクライアントが現れた際や、WONDAYの自動化ソリューションの幅を広げる際に参照する。</div>
+</div>
+<div class="highlight-card">
+  <div class="hl-badge">深掘り候補</div>
+  <div class="hl-title"><a href="https://github.com/siyuan-note/siyuan">GitHub: siyuan-note/siyuan</a></div>
+  <div class="hl-desc"><strong>概要</strong>Siyuan Noteは、プライバシーを重視し、自己ホストで運用可能なオープンソースの個人知識管理ソフトウェアです。TypeScriptとGolangで開発されており、Notionのような機能を持ちつつ、データの完全な所有権をユーザーが保持できる点が特徴です。</div>
+  <div class="hl-link"><a href="https://github.com/siyuan-note/siyuan">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>りゅうさんの「PersonalOS」や「WONDAY-OS」といったAI運用基盤において、Notionの代替または補完として検討する可能性があります。自己ホスト型であるため、データ主権とプライバシーを重視するWONDAYの理念に合致し、クライアントへのAIコンサルティングでセキュアな情報管理基盤として提案できるかもしれません。</div>
+  <div class="hl-action">Siyuan Noteの公式ドキュメントやデモを確認し、Notionとの機能比較、自己ホストの導入容易性、既存AIツールとの連携可能性について調査する。</div>
+</div>
+
+<h2 class="section-heading">Topics</h2>
+<div class="topic">
+  <div class="topic-title">AIアシスタント開発</div>
+  <div class="topic-summary">AIエージェント、アシスタント、評価ツールなど、AI関連のアプリケーションと開発技術の紹介。</div>
+<div class="item">
+  <span class="badge badge-mcp">MCP</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://www.pulsemcp.com/servers/htmldrop">htmldrop</a></div>
+    <div class="item-desc">Turns HTML, Markdown, PDF, or image artifacts into shareable links with expiry, purpose-built for AI agents.</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-mcp">MCP</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://www.pulsemcp.com/servers/geppetto-robot-directory">Geppetto Robot Directory</a></div>
+    <div class="item-desc">Lets AI assistants search, compare, and research 500+ robots by specs, price, brand, and automation impact.</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/iamsrikanthnani/pluely">iamsrikanthnani/pluely</a></div>
+    <div class="item-desc">The Open Source Alternative to Cluely - A lightning-fast, privacy-first AI assistant that works seamlessly during meetings, interviews, and conversations without anyone knowing. Built with Tauri for native performance, just 10MB. Completely undetectable in video calls, screen shares, and recordings.</div>
+    <div class="item-meta"><span class="stars">2288</span></div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-plugin">PLUGIN</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/confident-ai/deepeval">deepeval</a></div>
+    <div class="item-desc">Skills for adding DeepEval evaluations, tracing, datasets, Confident AI reports, and iterative improvement loops to AI applications.</div>
+    <div class="item-meta">development</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">個人知識管理</div>
+  <div class="topic-summary">プライバシーとオープンソースを重視した自己ホスト型知識管理ソフトウェア。</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/siyuan-note/siyuan">siyuan-note/siyuan</a></div>
+    <div class="item-desc">A privacy-first, self-hosted, fully open source personal knowledge management software, written in typescript and golang.</div>
+    <div class="item-meta"><span class="stars">45136</span></div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">リソース・機能追加</div>
+  <div class="topic-summary">プロジェクトへの新しいリソースや機能の追加に関する更新情報。</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/2575d53">Add resource: Vox director skill (#2263)</a></div>
+    <div class="item-meta">2026-07-15</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">リポジトリ保守作業</div>
+  <div class="topic-summary">リポジトリのデータやSVGファイル更新など、定期的な保守・メンテナンス作業。</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/29c8943">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-07-15</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/ff2b85a">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-07-15</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/9ee81c7">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-07-15</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/ef7cd26">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-07-15</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/5241353">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-07-15</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/c695468">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-07-15</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/e0ecd33">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-07-15</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/dbf79fc">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-07-15</div>
+  </div>
+</div>
+</div>
+
+<footer class="footer">
+  Generated at 2026-07-16 07:55 JST<br>
+  Sources: Claude Code CHANGELOG, GitHub Releases, awesome-claude-code,
+  anthropics/skills, PulseMCP, Claude Plugins, GitHub Trending
+</footer>
+
+</div>
+</body>
+</html>
