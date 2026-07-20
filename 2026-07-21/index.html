@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Weekly Tech Watch — 2026-07-21</title>
+<style>
+:root {
+  --bg: #f8fafc;
+  --bg-card: #ffffff;
+  --bg-highlight: #eff6ff;
+  --text: #1e293b;
+  --text-muted: #64748b;
+  --text-light: #94a3b8;
+  --accent: #3b82f6;
+  --border: #e2e8f0;
+  --shadow: 0 1px 3px rgba(0,0,0,.08);
+  --badge-changelog: #3b82f6;
+  --badge-mcp: #8b5cf6;
+  --badge-trending: #f59e0b;
+  --badge-plugin: #10b981;
+  --badge-awesome: #f43f5e;
+  --badge-skills: #06b6d4;
+}
+@media(prefers-color-scheme:dark){
+:root {
+  --bg: #0f172a;
+  --bg-card: #1e293b;
+  --bg-highlight: #1e3a5f;
+  --text: #e2e8f0;
+  --text-muted: #94a3b8;
+  --text-light: #64748b;
+  --accent: #60a5fa;
+  --border: #334155;
+  --shadow: 0 1px 3px rgba(0,0,0,.3);
+}}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  background:var(--bg);color:var(--text);
+  line-height:1.6;padding:16px;
+}
+.container{max-width:760px;margin:0 auto}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* Header */
+.header{text-align:center;padding:32px 0 24px}
+.header h1{font-size:1.5rem;font-weight:700;letter-spacing:-.02em}
+.header .date-range{color:var(--text-muted);font-size:.875rem;margin-top:4px}
+
+/* Stats */
+.stat-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));
+  gap:8px;margin:0 0 32px;
+}
+.stat-card{
+  background:var(--bg-card);border:1px solid var(--border);border-radius:8px;
+  padding:12px;text-align:center;box-shadow:var(--shadow);
+}
+.stat-card .num{font-size:1.5rem;font-weight:700;color:var(--accent)}
+.stat-card .label{font-size:.75rem;color:var(--text-muted);margin-top:2px}
+
+/* Section heading */
+.section-heading{
+  font-size:1.125rem;font-weight:700;margin:32px 0 16px;
+  padding-bottom:8px;border-bottom:2px solid var(--accent);
+}
+
+/* Highlight cards */
+.highlight-card{
+  background:var(--bg-highlight);border:1px solid var(--border);
+  border-radius:12px;padding:20px;margin-bottom:16px;
+  border-left:4px solid var(--accent);
+}
+.highlight-card .hl-badge{
+  display:inline-block;font-size:.6875rem;font-weight:700;
+  color:var(--accent);background:var(--bg-card);
+  border:1px solid var(--border);border-radius:999px;
+  padding:2px 8px;margin-bottom:8px;
+}
+.highlight-card .hl-title{font-size:1rem;font-weight:700;margin-bottom:8px}
+.highlight-card .hl-title a{color:var(--text)}
+.highlight-card .hl-desc{font-size:.875rem;color:var(--text-muted);margin-bottom:8px}
+.highlight-card .hl-desc strong,
+.highlight-card .hl-scenario strong{
+  display:block;color:var(--text);font-size:.75rem;margin-bottom:2px;
+}
+.highlight-card .hl-link{font-size:.8125rem;margin-bottom:12px}
+.highlight-card .hl-scenario{
+  font-size:.875rem;line-height:1.7;
+  background:var(--bg-card);border-radius:8px;padding:12px;margin-bottom:8px;
+}
+.highlight-card .hl-action{
+  font-size:.8125rem;color:var(--accent);font-weight:600;
+}
+.highlight-card .hl-action::before{content:"→ "}
+
+/* Topic section */
+.topic{
+  background:var(--bg-card);border:1px solid var(--border);
+  border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:var(--shadow);
+}
+.topic-title{font-size:1rem;font-weight:700;margin-bottom:4px}
+.topic-summary{font-size:.8125rem;color:var(--text-muted);margin-bottom:16px}
+
+/* Item list */
+.item{
+  padding:10px 0;border-bottom:1px solid var(--border);
+  display:flex;gap:10px;align-items:flex-start;
+}
+.item:last-child{border-bottom:none;padding-bottom:0}
+.badge{
+  display:inline-block;font-size:.625rem;font-weight:700;
+  color:#fff;padding:2px 8px;border-radius:10px;white-space:nowrap;
+  flex-shrink:0;margin-top:3px;text-transform:uppercase;letter-spacing:.03em;
+}
+.badge-changelog{background:var(--badge-changelog)}
+.badge-mcp{background:var(--badge-mcp)}
+.badge-trending{background:var(--badge-trending)}
+.badge-plugin{background:var(--badge-plugin)}
+.badge-awesome{background:var(--badge-awesome)}
+.badge-skills{background:var(--badge-skills)}
+.item-body{flex:1;min-width:0}
+.item-title{font-size:.875rem;font-weight:600}
+.item-desc{font-size:.8125rem;color:var(--text-muted);margin-top:2px}
+.item-meta{font-size:.75rem;color:var(--text-light);margin-top:4px}
+.item-meta .stars::before{content:"\2B50 "}
+
+/* Footer */
+.footer{
+  text-align:center;color:var(--text-light);font-size:.75rem;
+  padding:32px 0 16px;border-top:1px solid var(--border);margin-top:32px;
+}
+
+/* No items */
+.empty{color:var(--text-light);font-style:italic;font-size:.875rem;padding:8px 0}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header class="header">
+  <h1>Weekly Tech Watch</h1>
+  <div class="date-range">2026-07-19 ~ 2026-07-21</div>
+</header>
+
+<div class="stat-grid">
+<div class="stat-card"><div class="num">1</div><div class="label">Claude Code</div></div>
+<div class="stat-card"><div class="num">1</div><div class="label">Trending</div></div>
+<div class="stat-card"><div class="num">1</div><div class="label">Plugins</div></div>
+<div class="stat-card"><div class="num">8</div><div class="label">awesome-cc</div></div>
+</div>
+
+<h2 class="section-heading">Highlights</h2>
+<div class="highlight-card">
+  <div class="hl-badge">深掘り候補</div>
+  <div class="hl-title"><a href="https://code.claude.com/docs/en/changelog">Claude Code v2.1.216</a></div>
+  <div class="hl-desc"><strong>概要</strong>Claude Codeのv2.1.216アップデートで、サンドボックス環境のファイルシステム分離を無効にする新設定が追加されました。これにより、ネットワーク出力制御は維持しつつ、より柔軟なファイル操作が可能になります。</div>
+  <div class="hl-link"><a href="https://code.claude.com/docs/en/changelog">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>りゅうさんはClaude Codeをメインに利用しており、AIによる自動化を推進しています。この設定により、Claude Code内でファイル操作を伴う複雑なタスク（例: データ処理、レポート生成、コード生成後のファイル保存など）を、セキュリティを保ちつつ効率的に実行できる可能性があります。特に「やらなきゃいけないこと」の自動化において、より高度な連携が期待できます。</div>
+  <div class="hl-action">Claude Codeの公式ドキュメントや関連フォーラムで、この新設定が想定する具体的なユースケースや、AIエージェントによるファイル操作の可能性について軽く調査すると理解が深まります。</div>
+</div>
+<div class="highlight-card">
+  <div class="hl-badge">ニュース</div>
+  <div class="hl-title"><a href="https://www.anthropic.com/news/rare-disease-research-grants">Jul 20, 2026AnnouncementsApply for Anthropic’s AI for Science rare disease research grants</a></div>
+  <div class="hl-desc"><strong>概要</strong>Anthropicが「AI for Science」プログラムを開始し、希少疾患研究にAIを活用するプロジェクトへの助成金提供を発表しました。これはAIの社会貢献的利用を推進し、医療分野での応用を加速させる狙いがあります。</div>
+  <div class="hl-link"><a href="https://www.anthropic.com/news/rare-disease-research-grants">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>Anthropicの助成金プログラムは、AIが医療分野の社会課題解決に貢献する事例として、AIコンサルティングの知見を広げる可能性があります。特に「AI経営スキル講座」において、AIの倫理的・社会貢献的活用を語る際の具体例として参考になるかもしれません。</div>
+  <div class="hl-action">深掘りするなら、Anthropicの「AI for Science」プログラムの具体的な内容や、過去の助成事例について軽く調べてみましょう。</div>
+</div>
+<div class="highlight-card">
+  <div class="hl-badge">深掘り候補</div>
+  <div class="hl-title"><a href="https://github.com/feiskyer/claude-code-settings">GitHub: feiskyer/claude-code-settings</a></div>
+  <div class="hl-desc"><strong>概要</strong>Claude Codeを強化するスキル、サブエージェント、設定テンプレートをまとめたGitHubリポジトリが公開されました。リサーチ、画像生成、GitHub自動化など、Claude Codeの多様な活用を可能にします。</div>
+  <div class="hl-link"><a href="https://github.com/feiskyer/claude-code-settings">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>りゅうさんのClaude Code環境を強化し、AIコンサルティングやWONDAY-OS基盤の効率化に役立つ可能性があります。特に、リサーチやGitHub自動化のテンプレートは、設計思考から実行への橋渡しを加速させ、「やらなきゃいけないこと」の自動化を促進する一助となるかもしれません。既存の自動化フローへの応用も検討できます。</div>
+  <div class="hl-action">深掘りするなら、GitHubリポジトリを閲覧し、Claude Codeで活用可能なスキルや設定テンプレートを具体的に調査する。自身のプロジェクトへの応用可能性を検討する。</div>
+</div>
+
+<h2 class="section-heading">Topics</h2>
+<div class="topic">
+  <div class="topic-title">リポジトリ更新</div>
+  <div class="topic-summary">リポジトリのティッカーデータとSVGを更新する定型作業に関する項目。</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/e424aee">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-07-20</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/09f8001">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-07-20</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/c467902">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-07-20</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/a8b883d">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-07-20</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/c4f0faf">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-07-20</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/f71a7a5">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-07-20</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/6b821b6">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-07-20</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/bd2cc14">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-07-20</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">ソフトウェア更新</div>
+  <div class="topic-summary">サンドボックス設定の追加やセッションの遅延修正を含むソフトウェアのバージョンアップ情報。</div>
+<div class="item">
+  <span class="badge badge-changelog">CHANGELOG</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://code.claude.com/docs/en/changelog">v2.1.216</a></div>
+    <div class="item-desc">Added sandbox.filesystem.disabled setting to skip filesystem isolation while keeping network egress control, Fixed a slowdown in long sessions where message normalization cost grew quadratically with the number of turns, causing multi-second stalls and slow resumes, Fixed auto mode denying commands with “HTTP 401” classifier errors after the OAuth token expired or rotated mid-session</div>
+    <div class="item-meta">July 20, 2026</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">Claude Code拡張</div>
+  <div class="topic-summary">Claude Codeの機能強化、設定テンプレート、およびNew Relicとの連携に関する情報。</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/feiskyer/claude-code-settings">feiskyer/claude-code-settings</a></div>
+    <div class="item-desc">Curated skills, sub-agents, and config templates that supercharge Claude Code — research, image gen, GitHub automation &amp; more.</div>
+    <div class="item-meta"><span class="stars">1601</span></div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-plugin">PLUGIN</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://newrelic.com">newrelic</a></div>
+    <div class="item-desc">New Relic observability intelligence for Claude Code. Investigate APM performance, analyze cloud costs, debug Kubernetes, write NRQL queries, and respond to alerts — all from your terminal using New Relic telemetry data.</div>
+    <div class="item-meta">monitoring</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">AI研究発表</div>
+  <div class="topic-summary">AnthropicによるAI科学研究、特に希少疾患研究への応募に関する告知。</div>
+<div class="item">
+  <span class="badge badge-anthropic_news">ANTHROPIC_NEWS</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://www.anthropic.com/news/rare-disease-research-grants">Jul 20, 2026AnnouncementsApply for Anthropic’s AI for Science rare disease research grants</a></div>
+    <div class="item-meta">Jul 20, 20</div>
+  </div>
+</div>
+</div>
+
+<footer class="footer">
+  Generated at 2026-07-21 07:55 JST<br>
+  Sources: Claude Code CHANGELOG, GitHub Releases, awesome-claude-code,
+  anthropics/skills, PulseMCP, Claude Plugins, GitHub Trending
+</footer>
+
+</div>
+</body>
+</html>
