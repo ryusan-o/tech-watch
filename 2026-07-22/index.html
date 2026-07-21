@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Weekly Tech Watch — 2026-07-22</title>
+<style>
+:root {
+  --bg: #f8fafc;
+  --bg-card: #ffffff;
+  --bg-highlight: #eff6ff;
+  --text: #1e293b;
+  --text-muted: #64748b;
+  --text-light: #94a3b8;
+  --accent: #3b82f6;
+  --border: #e2e8f0;
+  --shadow: 0 1px 3px rgba(0,0,0,.08);
+  --badge-changelog: #3b82f6;
+  --badge-mcp: #8b5cf6;
+  --badge-trending: #f59e0b;
+  --badge-plugin: #10b981;
+  --badge-awesome: #f43f5e;
+  --badge-skills: #06b6d4;
+}
+@media(prefers-color-scheme:dark){
+:root {
+  --bg: #0f172a;
+  --bg-card: #1e293b;
+  --bg-highlight: #1e3a5f;
+  --text: #e2e8f0;
+  --text-muted: #94a3b8;
+  --text-light: #64748b;
+  --accent: #60a5fa;
+  --border: #334155;
+  --shadow: 0 1px 3px rgba(0,0,0,.3);
+}}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  background:var(--bg);color:var(--text);
+  line-height:1.6;padding:16px;
+}
+.container{max-width:760px;margin:0 auto}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* Header */
+.header{text-align:center;padding:32px 0 24px}
+.header h1{font-size:1.5rem;font-weight:700;letter-spacing:-.02em}
+.header .date-range{color:var(--text-muted);font-size:.875rem;margin-top:4px}
+
+/* Stats */
+.stat-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));
+  gap:8px;margin:0 0 32px;
+}
+.stat-card{
+  background:var(--bg-card);border:1px solid var(--border);border-radius:8px;
+  padding:12px;text-align:center;box-shadow:var(--shadow);
+}
+.stat-card .num{font-size:1.5rem;font-weight:700;color:var(--accent)}
+.stat-card .label{font-size:.75rem;color:var(--text-muted);margin-top:2px}
+
+/* Section heading */
+.section-heading{
+  font-size:1.125rem;font-weight:700;margin:32px 0 16px;
+  padding-bottom:8px;border-bottom:2px solid var(--accent);
+}
+
+/* Highlight cards */
+.highlight-card{
+  background:var(--bg-highlight);border:1px solid var(--border);
+  border-radius:12px;padding:20px;margin-bottom:16px;
+  border-left:4px solid var(--accent);
+}
+.highlight-card .hl-badge{
+  display:inline-block;font-size:.6875rem;font-weight:700;
+  color:var(--accent);background:var(--bg-card);
+  border:1px solid var(--border);border-radius:999px;
+  padding:2px 8px;margin-bottom:8px;
+}
+.highlight-card .hl-title{font-size:1rem;font-weight:700;margin-bottom:8px}
+.highlight-card .hl-title a{color:var(--text)}
+.highlight-card .hl-desc{font-size:.875rem;color:var(--text-muted);margin-bottom:8px}
+.highlight-card .hl-desc strong,
+.highlight-card .hl-scenario strong{
+  display:block;color:var(--text);font-size:.75rem;margin-bottom:2px;
+}
+.highlight-card .hl-link{font-size:.8125rem;margin-bottom:12px}
+.highlight-card .hl-scenario{
+  font-size:.875rem;line-height:1.7;
+  background:var(--bg-card);border-radius:8px;padding:12px;margin-bottom:8px;
+}
+.highlight-card .hl-action{
+  font-size:.8125rem;color:var(--accent);font-weight:600;
+}
+.highlight-card .hl-action::before{content:"→ "}
+
+/* Topic section */
+.topic{
+  background:var(--bg-card);border:1px solid var(--border);
+  border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:var(--shadow);
+}
+.topic-title{font-size:1rem;font-weight:700;margin-bottom:4px}
+.topic-summary{font-size:.8125rem;color:var(--text-muted);margin-bottom:16px}
+
+/* Item list */
+.item{
+  padding:10px 0;border-bottom:1px solid var(--border);
+  display:flex;gap:10px;align-items:flex-start;
+}
+.item:last-child{border-bottom:none;padding-bottom:0}
+.badge{
+  display:inline-block;font-size:.625rem;font-weight:700;
+  color:#fff;padding:2px 8px;border-radius:10px;white-space:nowrap;
+  flex-shrink:0;margin-top:3px;text-transform:uppercase;letter-spacing:.03em;
+}
+.badge-changelog{background:var(--badge-changelog)}
+.badge-mcp{background:var(--badge-mcp)}
+.badge-trending{background:var(--badge-trending)}
+.badge-plugin{background:var(--badge-plugin)}
+.badge-awesome{background:var(--badge-awesome)}
+.badge-skills{background:var(--badge-skills)}
+.item-body{flex:1;min-width:0}
+.item-title{font-size:.875rem;font-weight:600}
+.item-desc{font-size:.8125rem;color:var(--text-muted);margin-top:2px}
+.item-meta{font-size:.75rem;color:var(--text-light);margin-top:4px}
+.item-meta .stars::before{content:"\2B50 "}
+
+/* Footer */
+.footer{
+  text-align:center;color:var(--text-light);font-size:.75rem;
+  padding:32px 0 16px;border-top:1px solid var(--border);margin-top:32px;
+}
+
+/* No items */
+.empty{color:var(--text-light);font-style:italic;font-size:.875rem;padding:8px 0}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header class="header">
+  <h1>Weekly Tech Watch</h1>
+  <div class="date-range">2026-07-20 ~ 2026-07-22</div>
+</header>
+
+<div class="stat-grid">
+<div class="stat-card"><div class="num">1</div><div class="label">Claude Code</div></div>
+<div class="stat-card"><div class="num">1</div><div class="label">Trending</div></div>
+<div class="stat-card"><div class="num">14</div><div class="label">Plugins</div></div>
+<div class="stat-card"><div class="num">12</div><div class="label">awesome-cc</div></div>
+</div>
+
+<h2 class="section-heading">Highlights</h2>
+<div class="highlight-card">
+  <div class="hl-badge">ニュース</div>
+  <div class="hl-title"><a href="https://code.claude.com/docs/en/changelog">Claude Code v2.1.217</a></div>
+  <div class="hl-desc"><strong>概要</strong>Claude Codeの最新バージョンv2.1.217にて、プロンプト入力時に絵文字ショートコード（例: `:heart:`)による絵文字補完機能が追加されました。設定で無効化も可能です。</div>
+  <div class="hl-link"><a href="https://code.claude.com/docs/en/changelog">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>AIへの指示や生成テキストに視覚的な表現や感情を素早く追加できるようになります。これにより、プロンプトの意図をより明確に伝えたり、SNS投稿のドラフト作成時に表現の幅を広げたりする際に活用できる可能性があります。</div>
+  <div class="hl-action">Claude Codeのプロンプト入力で、実際に絵文字ショートコードを試して使用感を軽く確認してみる。</div>
+</div>
+<div class="highlight-card">
+  <div class="hl-badge">深掘り候補</div>
+  <div class="hl-title"><a href="https://github.com/handy-computer/transcribe.cpp">GitHub: handy-computer/transcribe.cpp</a></div>
+  <div class="hl-desc"><strong>概要</strong>GitHubの「transcribe.cpp」は、ggml形式の音声認識モデルをローカル環境で高速実行できるC++ベースのツールです。Whisperを含む16以上のモデルファミリーに対応し、CPUでも効率的な音声テキスト変換を可能にすることで、ローカルでの音声認識の選択肢を広げます。</div>
+  <div class="hl-link"><a href="https://github.com/handy-computer/transcribe.cpp">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>りゅうさんの「MeetingMinutes（議事録自動化）」プロジェクトにおいて、Whisper APIへの依存度を下げ、ローカル環境で音声認識を行う代替手段として検討する可能性があります。機密性の高い会議や、インターネット接続が不安定な場所での利用時に、より安定した運用基盤を構築し、APIコスト削減にも繋がるかもしれません。</div>
+  <div class="hl-action">深掘りするなら、`transcribe.cpp`の導入難易度や、既存のWhisper APIと比べての精度・速度、対応モデルの種類を調査し、MeetingMinutesへの適用可能性を検討する。</div>
+</div>
+<div class="highlight-card">
+  <div class="hl-badge">ニュース</div>
+  <div class="hl-title"><a href="https://www.altimate.ai">Plugin: altimate-code</a></div>
+  <div class="hl-desc"><strong>概要</strong>altimate-codeは、dbtやデータウェアハウスの作業を自動化するCLIエージェントプラグインです。SQL分析、データリネージ、dbtのビルド/テスト/実行、ウェアハウスプロファイリング、FinOpsなど100以上のデータツールを提供し、主要なデータウェアハウスに接続可能です。</div>
+  <div class="hl-link"><a href="https://www.altimate.ai">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>りゅうさんのAIコンサルティング事業において、大規模なデータウェアハウスを運用するクライアントのデータ分析基盤構築やFinOpsによるコスト最適化を支援する際の選択肢として、この専門ツールを知識として持つ可能性があります。また、将来的にうま藻事業で膨大なデータを扱う際の基盤検討の一助となるかもしれません。</div>
+  <div class="hl-action">もし興味があれば、FinOps機能がデータウェアハウスのコスト削減にどう貢献するか、AIコンサルとしてクライアントに提案する際の切り口を軽く調べてみるのが良いでしょう。</div>
+</div>
+
+<h2 class="section-heading">Topics</h2>
+<div class="topic">
+  <div class="topic-title">AIエージェント開発</div>
+  <div class="topic-summary">AIエージェントの機能拡張、開発、運用を支援する多様なツールとスキル群。</div>
+<div class="item">
+  <span class="badge badge-plugin">PLUGIN</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://www.altimate.ai">altimate-code</a></div>
+    <div class="item-desc">Delegates dbt and warehouse work to altimate-code, a specialized CLI agent with 100+ purpose-built data tools (SQL analysis, column-level lineage, dbt build/test/run, warehouse profiling, FinOps, connectivity to Snowflake, BigQuery, Redshift, Databricks, Postgres, MySQL, DuckDB).</div>
+    <div class="item-meta">database</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-plugin">PLUGIN</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/microsoft/azure-sql-database-container">azure-sql-developer</a></div>
+    <div class="item-desc">Agent skills for Azure SQL Developer, the Azure SQL Database engine running locally in a container. Teaches your agent to run the engine, connect, migrate, scaffold, build RAG, wire CI, and go local-to-cloud, using the real Private Preview image instead of the SQL Server image.</div>
+    <div class="item-meta">database</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-plugin">PLUGIN</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://browser-use.com">browser-use</a></div>
+    <div class="item-desc">Give Claude a real browser — your Chrome or a Browser Use Cloud browser. Use it whenever a task involves a website or web app: browsing, scraping and data extraction, filling forms, testing sites, taking screenshots, automating web workflows.</div>
+    <div class="item-meta">automation</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-plugin">PLUGIN</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://carbone.io">carbone-skill</a></div>
+    <div class="item-desc">Official Carbone skill — complete templating language reference covering tags, loops, conditions, formatters, aggregators, and all output formats (DOCX, XLSX, PPTX, ODT, HTML, Markdown, PDF)</div>
+    <div class="item-meta">productivity</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-plugin">PLUGIN</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://www.gitkraken.com">gitkraken</a></div>
+    <div class="item-desc">Gives Claude access to your real Git and project context: commits, branches, pull requests, and issues across every repo you work in. Works with GitHub, GitLab, Azure DevOps, Bitbucket, and Jira.</div>
+    <div class="item-meta">development</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-plugin">PLUGIN</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://growthbook.io">growthbook</a></div>
+    <div class="item-desc">A suite of agent skills for the full GrowthBook feature flag and experimentation lifecycle.</div>
+    <div class="item-meta">testing</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-plugin">PLUGIN</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://goo.gle/modern-web-guidance">modern-web-guidance</a></div>
+    <div class="item-desc">Keep your coding agent up to date with the latest web best practices</div>
+    <div class="item-meta">development</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-plugin">PLUGIN</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://mlflow.org/">mlflow</a></div>
+    <div class="item-desc">Skills for tracing, evaluating, and improving AI agents with MLflow. Supports the full agent improvement loop: instrument → trace → evaluate → iterate → validate.</div>
+    <div class="item-meta">monitoring</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-plugin">PLUGIN</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/qodo-ai/qodo-skills.git">qodo</a></div>
+    <div class="item-desc">Qodo Skills provides a curated library of reusable AI agent capabilities that extend Claude&#x27;s functionality for software development workflows. Each skill is designed to integrate seamlessly into your development process, enabling tasks like code quality checks, automated testing, security scanning, and compliance validation. Skills operate across your entire SDLC—from IDE to CI/CD—ensuring consistent standards and catching issues early.</div>
+    <div class="item-meta">development</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-plugin">PLUGIN</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/SAP/ui-theme-designer-plugins-for-coding-agents">ui-theme-designer</a></div>
+    <div class="item-desc">Plugin for coding agents working with UI theme designer. Bundles two skills: how-to and conceptual answers about UI theme designer on BTP, and questions about the SAP Design System and SAP Fiori design tokens — theme parameters and component-level parameter usage in UI5, UI5 Web Components, and Fundamental Styles.</div>
+    <div class="item-meta">design</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/569b290">Add resource: claude-replay (#2312)</a></div>
+    <div class="item-meta">2026-07-21</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">セキュリティ・運用</div>
+  <div class="topic-summary">AIエージェントを活用したセキュリティ対策、脆弱性診断、運用管理に関するスキル。</div>
+<div class="item">
+  <span class="badge badge-plugin">PLUGIN</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://www.crowdsec.net">crowdsec</a></div>
+    <div class="item-desc">Operational skill for installing, configuring, operating, and debugging CrowdSec (cscli, LAPI/CAPI, hub, bouncers, WAF/AppSec) across bare-metal, Docker, and Kubernetes.</div>
+    <div class="item-meta">security</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-plugin">PLUGIN</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://docs.stackhawk.com/ai-security/">stackhawk-hawkscan</a></div>
+    <div class="item-desc">Configure, run, and interpret HawkScan DAST results inside Claude Code. Generates stackhawk.yml configs, runs scans via CLI or Docker, and transforms security findings into prioritized fix tasks for your coding agent.</div>
+    <div class="item-meta">security</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-plugin">PLUGIN</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://docs.stackhawk.com/ai-security/">stackhawk-api</a></div>
+    <div class="item-desc">Query the StackHawk platform API for security posture reporting, findings analysis, and app management. Guides agents through authentication, data retrieval, and result presentation.</div>
+    <div class="item-meta">security</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">コアAI/ML技術</div>
+  <div class="topic-summary">音声認識など、基盤となるAI/機械学習モデルの推論機能と関連技術。</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/handy-computer/transcribe.cpp">handy-computer/transcribe.cpp</a></div>
+    <div class="item-desc"> ggml speech-to-text inference for 16+ model families</div>
+    <div class="item-meta"><span class="stars">1473</span></div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">UI/Web開発</div>
+  <div class="topic-summary">ユーザーインターフェースの改善やWebコンテンツ作成を支援する機能とツール。</div>
+<div class="item">
+  <span class="badge badge-changelog">CHANGELOG</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://code.claude.com/docs/en/changelog">v2.1.217</a></div>
+    <div class="item-desc">Added emoji shortcode autocomplete in the prompt input: type :heart: to insert ❤️, or :hea for suggestions — disable with the emojiCompletionEnabled setting, Added warnings when transcript writes are failing (e.g. disk full) or when session saving is off due to an inherited environment variable, instead of losing transcripts silently, Fixed a memory leak where truncated MCP tool outputs kept the full untruncated result in memory for the rest of the session</div>
+    <div class="item-meta">July 21, 2026</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-plugin">PLUGIN</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://ckeditor.com">ckeditor</a></div>
+    <div class="item-desc">Install, configure, and integrate CKEditor 5 (free and premium) in any JavaScript project.</div>
+    <div class="item-meta">development</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">内部更新・その他</div>
+  <div class="topic-summary">リポジトリのデータ更新、作業中項目など、内部的なメンテナンスと軽微な変更。</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/2bc8d60">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-07-21</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/520ee52">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-07-21</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/fdbda6e">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-07-21</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/6a0af3a">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-07-21</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/47bd585">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-07-21</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/d3c889a">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-07-21</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/505bde9">wip</a></div>
+    <div class="item-meta">2026-07-21</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/92146d9">wip</a></div>
+    <div class="item-meta">2026-07-21</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/38ad512">wip</a></div>
+    <div class="item-meta">2026-07-21</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/9aaaadd">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-07-21</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/84548e8">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-07-21</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/jaredpalmer/jaredpalmer">Jared Palmer: jaredpalmer/jaredpalmer (PushEvent)</a></div>
+    <div class="item-desc">[main] New push</div>
+    <div class="item-meta">2026-07-21</div>
+  </div>
+</div>
+</div>
+
+<footer class="footer">
+  Generated at 2026-07-22 07:56 JST<br>
+  Sources: Claude Code CHANGELOG, GitHub Releases, awesome-claude-code,
+  anthropics/skills, PulseMCP, Claude Plugins, GitHub Trending
+</footer>
+
+</div>
+</body>
+</html>
