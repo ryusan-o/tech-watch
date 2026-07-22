@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Weekly Tech Watch — 2026-07-23</title>
+<style>
+:root {
+  --bg: #f8fafc;
+  --bg-card: #ffffff;
+  --bg-highlight: #eff6ff;
+  --text: #1e293b;
+  --text-muted: #64748b;
+  --text-light: #94a3b8;
+  --accent: #3b82f6;
+  --border: #e2e8f0;
+  --shadow: 0 1px 3px rgba(0,0,0,.08);
+  --badge-changelog: #3b82f6;
+  --badge-mcp: #8b5cf6;
+  --badge-trending: #f59e0b;
+  --badge-plugin: #10b981;
+  --badge-awesome: #f43f5e;
+  --badge-skills: #06b6d4;
+}
+@media(prefers-color-scheme:dark){
+:root {
+  --bg: #0f172a;
+  --bg-card: #1e293b;
+  --bg-highlight: #1e3a5f;
+  --text: #e2e8f0;
+  --text-muted: #94a3b8;
+  --text-light: #64748b;
+  --accent: #60a5fa;
+  --border: #334155;
+  --shadow: 0 1px 3px rgba(0,0,0,.3);
+}}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  background:var(--bg);color:var(--text);
+  line-height:1.6;padding:16px;
+}
+.container{max-width:760px;margin:0 auto}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* Header */
+.header{text-align:center;padding:32px 0 24px}
+.header h1{font-size:1.5rem;font-weight:700;letter-spacing:-.02em}
+.header .date-range{color:var(--text-muted);font-size:.875rem;margin-top:4px}
+
+/* Stats */
+.stat-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));
+  gap:8px;margin:0 0 32px;
+}
+.stat-card{
+  background:var(--bg-card);border:1px solid var(--border);border-radius:8px;
+  padding:12px;text-align:center;box-shadow:var(--shadow);
+}
+.stat-card .num{font-size:1.5rem;font-weight:700;color:var(--accent)}
+.stat-card .label{font-size:.75rem;color:var(--text-muted);margin-top:2px}
+
+/* Section heading */
+.section-heading{
+  font-size:1.125rem;font-weight:700;margin:32px 0 16px;
+  padding-bottom:8px;border-bottom:2px solid var(--accent);
+}
+
+/* Highlight cards */
+.highlight-card{
+  background:var(--bg-highlight);border:1px solid var(--border);
+  border-radius:12px;padding:20px;margin-bottom:16px;
+  border-left:4px solid var(--accent);
+}
+.highlight-card .hl-badge{
+  display:inline-block;font-size:.6875rem;font-weight:700;
+  color:var(--accent);background:var(--bg-card);
+  border:1px solid var(--border);border-radius:999px;
+  padding:2px 8px;margin-bottom:8px;
+}
+.highlight-card .hl-title{font-size:1rem;font-weight:700;margin-bottom:8px}
+.highlight-card .hl-title a{color:var(--text)}
+.highlight-card .hl-desc{font-size:.875rem;color:var(--text-muted);margin-bottom:8px}
+.highlight-card .hl-desc strong,
+.highlight-card .hl-scenario strong{
+  display:block;color:var(--text);font-size:.75rem;margin-bottom:2px;
+}
+.highlight-card .hl-link{font-size:.8125rem;margin-bottom:12px}
+.highlight-card .hl-scenario{
+  font-size:.875rem;line-height:1.7;
+  background:var(--bg-card);border-radius:8px;padding:12px;margin-bottom:8px;
+}
+.highlight-card .hl-action{
+  font-size:.8125rem;color:var(--accent);font-weight:600;
+}
+.highlight-card .hl-action::before{content:"→ "}
+
+/* Topic section */
+.topic{
+  background:var(--bg-card);border:1px solid var(--border);
+  border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:var(--shadow);
+}
+.topic-title{font-size:1rem;font-weight:700;margin-bottom:4px}
+.topic-summary{font-size:.8125rem;color:var(--text-muted);margin-bottom:16px}
+
+/* Item list */
+.item{
+  padding:10px 0;border-bottom:1px solid var(--border);
+  display:flex;gap:10px;align-items:flex-start;
+}
+.item:last-child{border-bottom:none;padding-bottom:0}
+.badge{
+  display:inline-block;font-size:.625rem;font-weight:700;
+  color:#fff;padding:2px 8px;border-radius:10px;white-space:nowrap;
+  flex-shrink:0;margin-top:3px;text-transform:uppercase;letter-spacing:.03em;
+}
+.badge-changelog{background:var(--badge-changelog)}
+.badge-mcp{background:var(--badge-mcp)}
+.badge-trending{background:var(--badge-trending)}
+.badge-plugin{background:var(--badge-plugin)}
+.badge-awesome{background:var(--badge-awesome)}
+.badge-skills{background:var(--badge-skills)}
+.item-body{flex:1;min-width:0}
+.item-title{font-size:.875rem;font-weight:600}
+.item-desc{font-size:.8125rem;color:var(--text-muted);margin-top:2px}
+.item-meta{font-size:.75rem;color:var(--text-light);margin-top:4px}
+.item-meta .stars::before{content:"\2B50 "}
+
+/* Footer */
+.footer{
+  text-align:center;color:var(--text-light);font-size:.75rem;
+  padding:32px 0 16px;border-top:1px solid var(--border);margin-top:32px;
+}
+
+/* No items */
+.empty{color:var(--text-light);font-style:italic;font-size:.875rem;padding:8px 0}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header class="header">
+  <h1>Weekly Tech Watch</h1>
+  <div class="date-range">2026-07-21 ~ 2026-07-23</div>
+</header>
+
+<div class="stat-grid">
+<div class="stat-card"><div class="num">1</div><div class="label">Claude Code</div></div>
+<div class="stat-card"><div class="num">1</div><div class="label">Trending</div></div>
+<div class="stat-card"><div class="num">1</div><div class="label">Plugins</div></div>
+<div class="stat-card"><div class="num">8</div><div class="label">awesome-cc</div></div>
+<div class="stat-card"><div class="num">1</div><div class="label">Skills</div></div>
+</div>
+
+<h2 class="section-heading">Highlights</h2>
+<div class="highlight-card">
+  <div class="hl-badge">ニュース</div>
+  <div class="hl-title"><a href="https://code.claude.com/docs/en/changelog">Claude Code v2.1.218</a></div>
+  <div class="hl-desc"><strong>概要</strong>Claude Code v2.1.218で、スクリーンリーダー利用時のテキスト削除（単語・行削除）における読み上げ機能が追加されました。アクセシビリティ向上が目的です。</div>
+  <div class="hl-link"><a href="https://code.claude.com/docs/en/changelog">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>このアップデートは、Claude Codeのアクセシビリティ機能強化に関するものです。りゅうさん自身の直接的な作業効率向上には直結しませんが、将来的に多様なユーザー層へのAIコンサルティングやサービス提供を検討する際に、アクセシビリティへの配慮が重要となる可能性があります。WONDAYの「ストレスフリーな社会を作る」理念にも通じる視点です。</div>
+  <div class="hl-action">Claude Codeの今後のアクセシビリティ機能の進化を、ユーザー層拡大の視点から時折確認する。</div>
+</div>
+<div class="highlight-card">
+  <div class="hl-badge">ニュース</div>
+  <div class="hl-title"><a href="https://www.anthropic.com/news/economic-futures-research-fund-agenda">Jul 22, 2026Economic ResearchA research agenda for the Economic Futures Research Fund</a></div>
+  <div class="hl-desc"><strong>概要</strong>Anthropicが「経済の未来研究基金」の研究アジェンダを発表しました。AIが経済に与える影響を多角的に分析し、公平で持続可能な未来を築くための研究テーマを提示しています。</div>
+  <div class="hl-link"><a href="https://www.anthropic.com/news/economic-futures-research-fund-agenda">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>りゅうさんの「ストレスフリーな社会を作る」というWONDAYの理念や、AI経営スキル講座の提供において、AIが経済・社会に与える影響に関するAnthropicの最新の視点を取り入れることで、コンサルティングや講座内容の深掘りに活用できる可能性があります。特に、AIが労働市場や生産性に与える影響について、りゅうさんの「労働集約型からの脱却」という目標の背景知識を強化できるかもしれません。</div>
+  <div class="hl-action">深掘りするなら、Anthropicのニュースリリースを読み、具体的な研究テーマや重点分野を確認することで、WONDAYの理念との関連性を検討できます。</div>
+</div>
+<div class="highlight-card">
+  <div class="hl-badge">ニュース</div>
+  <div class="hl-title"><a href="https://www.anthropic.com/news/anthropic-economic-index-connector">Jul 22, 2026ProductAsk Claude about the Anthropic Economic Index</a></div>
+  <div class="hl-desc"><strong>概要</strong>Anthropicが「Anthropic Economic Index Connector」を発表しました。これはClaudeが経済指標データを直接参照し、分析に活用できる機能を提供すると考えられます。AIによるリアルタイムな市場動向把握を強化するものです。</div>
+  <div class="hl-link"><a href="https://www.anthropic.com/news/anthropic-economic-index-connector">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>りゅうさんのAIコンサルティング事業において、クライアントの業界や不動産市場、飲食業界の消費動向など、経済指標に基づいたより深い分析提案が可能になる可能性があります。うま藻事業の市場規模予測や海外展開の検討材料としても活用できるかもしれません。</div>
+  <div class="hl-action">深掘りするなら、Anthropicの公式ブログでコネクタの詳細機能や対応データ源を確認し、具体的な活用シナリオを検討する。</div>
+</div>
+
+<h2 class="section-heading">Topics</h2>
+<div class="topic">
+  <div class="topic-title">AIエージェント機能強化</div>
+  <div class="topic-summary">Claudeのコードレビュー、セキュリティスキャン、APIスキルに関する新機能と改善。</div>
+<div class="item">
+  <span class="badge badge-changelog">CHANGELOG</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://code.claude.com/docs/en/changelog">v2.1.218</a></div>
+    <div class="item-desc">Changed /code-review to run as a background subagent, so review work no longer fills your conversation and keeps stacked slash commands as its review target, Added screen-reader announcements of deleted text for word and line deletions (Option+Delete, Ctrl+W, Cmd+Backspace, Ctrl+U, Ctrl+K) in --ax-screen-reader mode, Fixed Windows paths with \u-prefixed segments (like C:\Users\unicorn) being corrupted into CJK characters in tool inputs, which made those files inaccessible</div>
+    <div class="item-meta">July 22, 2026</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-plugin">PLUGIN</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/anthropics/claude-plugins-official/tree/main/plugins/claude-security">claude-security</a></div>
+    <div class="item-desc">Deep vulnerability scanning of your own code, run entirely inside your Claude Code session at a chosen effort tier, with every finding challenged before it is reported and the verification tally computed in code. Turns surviving findings into targeted patches, each verified by a panel of agents, that you apply when you choose.</div>
+    <div class="item-meta">security</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-skills">SKILLS</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/anthropics/skills/commit/1f630fd">Update claude-api skill: Managed Agents July launch wave, partner pricing, tool-</a></div>
+    <div class="item-meta">2026-07-22</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">リアルタイム翻訳</div>
+  <div class="topic-summary">Windows LiveCaptionsを活用した、音声・スピーチのリアルタイム翻訳ツール。</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/SakiRinn/LiveCaptions-Translator">SakiRinn/LiveCaptions-Translator</a></div>
+    <div class="item-desc">Lightweight and powerful real-time audio/speech translation tool based on Windows LiveCaptions.</div>
+    <div class="item-meta"><span class="stars">3388</span></div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">リポジトリ保守作業</div>
+  <div class="topic-summary">リポジトリのティッカーデータやSVGの更新など、定期的な保守作業の記録。</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/df98307">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-07-22</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/97fcb87">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-07-22</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/020a950">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-07-22</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/b7c8d44">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-07-22</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/5a9e68d">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-07-22</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/884e80a">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-07-22</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/76bbb8b">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-07-22</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/2555041">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-07-22</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">経済研究と指標</div>
+  <div class="topic-summary">経済の未来研究アジェンダやAnthropic経済指標に関する情報。</div>
+<div class="item">
+  <span class="badge badge-anthropic_news">ANTHROPIC_NEWS</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://www.anthropic.com/news/economic-futures-research-fund-agenda">Jul 22, 2026Economic ResearchA research agenda for the Economic Futures Research Fund</a></div>
+    <div class="item-meta">Jul 22, 20</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-anthropic_news">ANTHROPIC_NEWS</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://www.anthropic.com/news/anthropic-economic-index-connector">Jul 22, 2026ProductAsk Claude about the Anthropic Economic Index</a></div>
+    <div class="item-meta">Jul 22, 20</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">その他未分類</div>
+  <div class="topic-summary">内容が不明確または空欄の項目をまとめたカテゴリ。</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/addyosmani/agent-skills">Addy Osmani: addyosmani/agent-skills (PushEvent)</a></div>
+    <div class="item-desc">[main] New push</div>
+    <div class="item-meta">2026-07-22</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/addyosmani/agent-skills">Addy Osmani: addyosmani/agent-skills (PushEvent)</a></div>
+    <div class="item-desc">[main] New push</div>
+    <div class="item-meta">2026-07-22</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/addyosmani/agent-skills">Addy Osmani: addyosmani/agent-skills (PushEvent)</a></div>
+    <div class="item-desc">[main] New push</div>
+    <div class="item-meta">2026-07-22</div>
+  </div>
+</div>
+</div>
+
+<footer class="footer">
+  Generated at 2026-07-23 07:56 JST<br>
+  Sources: Claude Code CHANGELOG, GitHub Releases, awesome-claude-code,
+  anthropics/skills, PulseMCP, Claude Plugins, GitHub Trending
+</footer>
+
+</div>
+</body>
+</html>
