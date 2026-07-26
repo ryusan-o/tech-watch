@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Weekly Tech Watch — 2026-07-27</title>
+<style>
+:root {
+  --bg: #f8fafc;
+  --bg-card: #ffffff;
+  --bg-highlight: #eff6ff;
+  --text: #1e293b;
+  --text-muted: #64748b;
+  --text-light: #94a3b8;
+  --accent: #3b82f6;
+  --border: #e2e8f0;
+  --shadow: 0 1px 3px rgba(0,0,0,.08);
+  --badge-changelog: #3b82f6;
+  --badge-mcp: #8b5cf6;
+  --badge-trending: #f59e0b;
+  --badge-plugin: #10b981;
+  --badge-awesome: #f43f5e;
+  --badge-skills: #06b6d4;
+}
+@media(prefers-color-scheme:dark){
+:root {
+  --bg: #0f172a;
+  --bg-card: #1e293b;
+  --bg-highlight: #1e3a5f;
+  --text: #e2e8f0;
+  --text-muted: #94a3b8;
+  --text-light: #64748b;
+  --accent: #60a5fa;
+  --border: #334155;
+  --shadow: 0 1px 3px rgba(0,0,0,.3);
+}}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  background:var(--bg);color:var(--text);
+  line-height:1.6;padding:16px;
+}
+.container{max-width:760px;margin:0 auto}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* Header */
+.header{text-align:center;padding:32px 0 24px}
+.header h1{font-size:1.5rem;font-weight:700;letter-spacing:-.02em}
+.header .date-range{color:var(--text-muted);font-size:.875rem;margin-top:4px}
+
+/* Stats */
+.stat-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));
+  gap:8px;margin:0 0 32px;
+}
+.stat-card{
+  background:var(--bg-card);border:1px solid var(--border);border-radius:8px;
+  padding:12px;text-align:center;box-shadow:var(--shadow);
+}
+.stat-card .num{font-size:1.5rem;font-weight:700;color:var(--accent)}
+.stat-card .label{font-size:.75rem;color:var(--text-muted);margin-top:2px}
+
+/* Section heading */
+.section-heading{
+  font-size:1.125rem;font-weight:700;margin:32px 0 16px;
+  padding-bottom:8px;border-bottom:2px solid var(--accent);
+}
+
+/* Highlight cards */
+.highlight-card{
+  background:var(--bg-highlight);border:1px solid var(--border);
+  border-radius:12px;padding:20px;margin-bottom:16px;
+  border-left:4px solid var(--accent);
+}
+.highlight-card .hl-badge{
+  display:inline-block;font-size:.6875rem;font-weight:700;
+  color:var(--accent);background:var(--bg-card);
+  border:1px solid var(--border);border-radius:999px;
+  padding:2px 8px;margin-bottom:8px;
+}
+.highlight-card .hl-title{font-size:1rem;font-weight:700;margin-bottom:8px}
+.highlight-card .hl-title a{color:var(--text)}
+.highlight-card .hl-desc{font-size:.875rem;color:var(--text-muted);margin-bottom:8px}
+.highlight-card .hl-desc strong,
+.highlight-card .hl-scenario strong{
+  display:block;color:var(--text);font-size:.75rem;margin-bottom:2px;
+}
+.highlight-card .hl-link{font-size:.8125rem;margin-bottom:12px}
+.highlight-card .hl-scenario{
+  font-size:.875rem;line-height:1.7;
+  background:var(--bg-card);border-radius:8px;padding:12px;margin-bottom:8px;
+}
+.highlight-card .hl-action{
+  font-size:.8125rem;color:var(--accent);font-weight:600;
+}
+.highlight-card .hl-action::before{content:"→ "}
+
+/* Topic section */
+.topic{
+  background:var(--bg-card);border:1px solid var(--border);
+  border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:var(--shadow);
+}
+.topic-title{font-size:1rem;font-weight:700;margin-bottom:4px}
+.topic-summary{font-size:.8125rem;color:var(--text-muted);margin-bottom:16px}
+
+/* Item list */
+.item{
+  padding:10px 0;border-bottom:1px solid var(--border);
+  display:flex;gap:10px;align-items:flex-start;
+}
+.item:last-child{border-bottom:none;padding-bottom:0}
+.badge{
+  display:inline-block;font-size:.625rem;font-weight:700;
+  color:#fff;padding:2px 8px;border-radius:10px;white-space:nowrap;
+  flex-shrink:0;margin-top:3px;text-transform:uppercase;letter-spacing:.03em;
+}
+.badge-changelog{background:var(--badge-changelog)}
+.badge-mcp{background:var(--badge-mcp)}
+.badge-trending{background:var(--badge-trending)}
+.badge-plugin{background:var(--badge-plugin)}
+.badge-awesome{background:var(--badge-awesome)}
+.badge-skills{background:var(--badge-skills)}
+.item-body{flex:1;min-width:0}
+.item-title{font-size:.875rem;font-weight:600}
+.item-desc{font-size:.8125rem;color:var(--text-muted);margin-top:2px}
+.item-meta{font-size:.75rem;color:var(--text-light);margin-top:4px}
+.item-meta .stars::before{content:"\2B50 "}
+
+/* Footer */
+.footer{
+  text-align:center;color:var(--text-light);font-size:.75rem;
+  padding:32px 0 16px;border-top:1px solid var(--border);margin-top:32px;
+}
+
+/* No items */
+.empty{color:var(--text-light);font-style:italic;font-size:.875rem;padding:8px 0}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header class="header">
+  <h1>Weekly Tech Watch</h1>
+  <div class="date-range">2026-07-23 ~ 2026-07-27</div>
+</header>
+
+<div class="stat-grid">
+<div class="stat-card"><div class="num">2</div><div class="label">Claude Code</div></div>
+<div class="stat-card"><div class="num">1</div><div class="label">MCP</div></div>
+<div class="stat-card"><div class="num">2</div><div class="label">Trending</div></div>
+<div class="stat-card"><div class="num">16</div><div class="label">awesome-cc</div></div>
+</div>
+
+<h2 class="section-heading">Highlights</h2>
+<div class="highlight-card">
+  <div class="hl-badge">深掘り候補</div>
+  <div class="hl-title"><a href="https://code.claude.com/docs/en/changelog">Claude Code v2.1.219</a></div>
+  <div class="hl-desc"><strong>概要</strong>Claude Codeに新モデル「Claude Opus 5」が追加され、既存のOpusモデルのデフォルトとなりました。1Mトークンの大規模なコンテキストウィンドウを持ち、高速モードでは入出力トークンごとに異なる料金が設定されています。</div>
+  <div class="hl-link"><a href="https://code.claude.com/docs/en/changelog">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>りゅうさんのAIコンサルティングやWONDAY-OS基盤として、Opus 5の1Mコンテキストは、複雑な全体設計や長文ドキュメントの分析・要約に活用できる可能性があります。「分解と再構築」の思考基盤をAIで補強し、大規模情報を一度に処理して精度の高いアウトプット生成に役立つかもしれません。AI経営スキル講座の教材作成やクライアント提案資料の効率化にも繋がる可能性があります。</div>
+  <div class="hl-action">深掘りするなら、Claude CodeのUIでOpus 5の挙動を試したり、Anthropic APIの料金体系を詳細に確認し、既存のOpus 4.6との性能・コスト比較を検討してみましょう。</div>
+</div>
+<div class="highlight-card">
+  <div class="hl-badge">深掘り候補</div>
+  <div class="hl-title"><a href="https://www.anthropic.com/news/claude-opus-5">Introducing Claude Opus 5</a></div>
+  <div class="hl-desc"><strong>概要</strong>Anthropicから最新モデル「Claude Opus 5」が発表されました。長時間稼働するAIエージェント機能が大幅に向上し、コーディングや専門業務の精度も改善されたとのことです。</div>
+  <div class="hl-link"><a href="https://www.anthropic.com/news/claude-opus-5">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>WONDAY-OSやAIチーム基盤における複雑な自動化ワークフローの安定性と効率を向上させる可能性があります。AIコンサルティングでの設計支援やコード生成の精度向上にも寄与するでしょう。</div>
+  <div class="hl-action">Anthropicの公式リリースノートで具体的な性能向上点やAPIの変更点を確認し、既存のClaude Code環境での影響を検証してみてください。</div>
+</div>
+<div class="highlight-card">
+  <div class="hl-badge">ニュース</div>
+  <div class="hl-title"><a href="https://www.pulsemcp.com/servers/backtest360">MCP: Backtest360</a></div>
+  <div class="hl-desc"><strong>概要</strong>Backtest360エンジンAPIが公開され、AIエージェントがトレーディング戦略の構築、実行、比較を自動で行えるようになりました。これにより、金融市場での戦略開発を効率化し、AIによる高度な投資判断支援が可能になります。</div>
+  <div class="hl-link"><a href="https://www.pulsemcp.com/servers/backtest360">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>りゅうさんのAIコンサルティング事業において、AIが金融戦略を自動構築・検証できる技術トレンドとして把握する可能性があります。将来的にクライアントが資産運用や事業投資の意思決定支援をAIに求める際、技術的な引き出しの一つとして役立つかもしれません。</div>
+  <div class="hl-action">もし興味があれば、Backtest360のウェブサイトで提供されるAPIドキュメントを軽く確認してみるのが良いでしょう。</div>
+</div>
+
+<h2 class="section-heading">Topics</h2>
+<div class="topic">
+  <div class="topic-title">主要AIモデルの更新</div>
+  <div class="topic-summary">最新のClaude Opus 5モデルのリリースと、その機能強化に関する情報です。</div>
+<div class="item">
+  <span class="badge badge-changelog">CHANGELOG</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://code.claude.com/docs/en/changelog">v2.1.219</a></div>
+    <div class="item-desc">Added Claude Opus 5 (claude-opus-5), now the default Opus model — 1M context, fast mode at 10/10/10/50 per Mtok, Added sandbox.network.strictAllowlist setting to deny non-allowlisted hosts for sandboxed commands without prompting, Added DirectoryAdded hook that fires after /add-dir or the SDK register_repo_root control request registers a new working directory mid-session</div>
+    <div class="item-meta">July 24, 2026</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-anthropic_news">ANTHROPIC_NEWS</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://www.anthropic.com/news/claude-opus-5">Introducing Claude Opus 5</a></div>
+    <div class="item-desc">Opus 5 is a step change improvement for the Opus tier powering long-running agents while delivering improvements in coding and professional work.</div>
+    <div class="item-meta">Jul 24, 20</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">AI応用技術とツール</div>
+  <div class="topic-summary">金融取引戦略AI、多言語音声認識、AI動画生成など、特定の分野に特化したAI技術とツールの紹介です。</div>
+<div class="item">
+  <span class="badge badge-mcp">MCP</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://www.pulsemcp.com/servers/backtest360">Backtest360</a></div>
+    <div class="item-desc">Exposes the Backtest360 engine API as tools for AI agents to build, run, and compare trading strategies.</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/QwenAudio/SenseVoice">QwenAudio/SenseVoice</a></div>
+    <div class="item-desc">Open-source SenseVoiceSmall model for Mandarin, Cantonese, English, Japanese, and Korean ASR, language ID, emotion recognition, and audio event detection.</div>
+    <div class="item-meta"><span class="stars">8940</span></div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/Vincentwei1021/video-shotcraft">Vincentwei1021/video-shotcraft</a></div>
+    <div class="item-desc">AI video skill for Claude Code &amp; Codex — cinematic product videos with Remotion: 106 shot recipe cards, 161 motion previews, a production-ready template</div>
+    <div class="item-meta"><span class="stars">1894</span></div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">システムメンテナンス</div>
+  <div class="topic-summary">バグ修正、信頼性向上、内部データ更新など、システム全般の保守と軽微な変更に関する情報です。</div>
+<div class="item">
+  <span class="badge badge-changelog">CHANGELOG</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://code.claude.com/docs/en/changelog">v2.1.220</a></div>
+    <div class="item-desc">Bug fixes and reliability improvements</div>
+    <div class="item-meta">July 25, 2026</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/2e675f9">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-07-26</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/dd58d93">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-07-26</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/3979882">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-07-26</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/3dfddf3">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-07-26</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/1595228">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-07-26</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/02432d9">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-07-26</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/5fccb1f">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-07-26</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/436c0bf">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-07-26</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/bbfe419">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-07-25</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/8050b68">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-07-25</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/141d756">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-07-25</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/8f647e0">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-07-25</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/924aa0a">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-07-25</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/79762b3">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-07-25</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/bdddd76">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-07-25</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/bf7b6fb">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-07-25</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/addyosmani/agent-skills">Addy Osmani: addyosmani/agent-skills (PushEvent)</a></div>
+    <div class="item-desc">[main] New push</div>
+    <div class="item-meta">2026-07-26</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/addyosmani/agent-skills/releases/tag/0.6.5">Addy Osmani: addyosmani/agent-skills (ReleaseEvent)</a></div>
+    <div class="item-desc">Release published: 0.6.5</div>
+    <div class="item-meta">2026-07-26</div>
+  </div>
+</div>
+</div>
+
+<footer class="footer">
+  Generated at 2026-07-27 07:55 JST<br>
+  Sources: Claude Code CHANGELOG, GitHub Releases, awesome-claude-code,
+  anthropics/skills, PulseMCP, Claude Plugins, GitHub Trending
+</footer>
+
+</div>
+</body>
+</html>
