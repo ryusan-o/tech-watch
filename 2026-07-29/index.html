@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Weekly Tech Watch — 2026-07-29</title>
+<style>
+:root {
+  --bg: #f8fafc;
+  --bg-card: #ffffff;
+  --bg-highlight: #eff6ff;
+  --text: #1e293b;
+  --text-muted: #64748b;
+  --text-light: #94a3b8;
+  --accent: #3b82f6;
+  --border: #e2e8f0;
+  --shadow: 0 1px 3px rgba(0,0,0,.08);
+  --badge-changelog: #3b82f6;
+  --badge-mcp: #8b5cf6;
+  --badge-trending: #f59e0b;
+  --badge-plugin: #10b981;
+  --badge-awesome: #f43f5e;
+  --badge-skills: #06b6d4;
+}
+@media(prefers-color-scheme:dark){
+:root {
+  --bg: #0f172a;
+  --bg-card: #1e293b;
+  --bg-highlight: #1e3a5f;
+  --text: #e2e8f0;
+  --text-muted: #94a3b8;
+  --text-light: #64748b;
+  --accent: #60a5fa;
+  --border: #334155;
+  --shadow: 0 1px 3px rgba(0,0,0,.3);
+}}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  background:var(--bg);color:var(--text);
+  line-height:1.6;padding:16px;
+}
+.container{max-width:760px;margin:0 auto}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* Header */
+.header{text-align:center;padding:32px 0 24px}
+.header h1{font-size:1.5rem;font-weight:700;letter-spacing:-.02em}
+.header .date-range{color:var(--text-muted);font-size:.875rem;margin-top:4px}
+
+/* Stats */
+.stat-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));
+  gap:8px;margin:0 0 32px;
+}
+.stat-card{
+  background:var(--bg-card);border:1px solid var(--border);border-radius:8px;
+  padding:12px;text-align:center;box-shadow:var(--shadow);
+}
+.stat-card .num{font-size:1.5rem;font-weight:700;color:var(--accent)}
+.stat-card .label{font-size:.75rem;color:var(--text-muted);margin-top:2px}
+
+/* Section heading */
+.section-heading{
+  font-size:1.125rem;font-weight:700;margin:32px 0 16px;
+  padding-bottom:8px;border-bottom:2px solid var(--accent);
+}
+
+/* Highlight cards */
+.highlight-card{
+  background:var(--bg-highlight);border:1px solid var(--border);
+  border-radius:12px;padding:20px;margin-bottom:16px;
+  border-left:4px solid var(--accent);
+}
+.highlight-card .hl-badge{
+  display:inline-block;font-size:.6875rem;font-weight:700;
+  color:var(--accent);background:var(--bg-card);
+  border:1px solid var(--border);border-radius:999px;
+  padding:2px 8px;margin-bottom:8px;
+}
+.highlight-card .hl-title{font-size:1rem;font-weight:700;margin-bottom:8px}
+.highlight-card .hl-title a{color:var(--text)}
+.highlight-card .hl-desc{font-size:.875rem;color:var(--text-muted);margin-bottom:8px}
+.highlight-card .hl-desc strong,
+.highlight-card .hl-scenario strong{
+  display:block;color:var(--text);font-size:.75rem;margin-bottom:2px;
+}
+.highlight-card .hl-link{font-size:.8125rem;margin-bottom:12px}
+.highlight-card .hl-scenario{
+  font-size:.875rem;line-height:1.7;
+  background:var(--bg-card);border-radius:8px;padding:12px;margin-bottom:8px;
+}
+.highlight-card .hl-action{
+  font-size:.8125rem;color:var(--accent);font-weight:600;
+}
+.highlight-card .hl-action::before{content:"→ "}
+
+/* Topic section */
+.topic{
+  background:var(--bg-card);border:1px solid var(--border);
+  border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:var(--shadow);
+}
+.topic-title{font-size:1rem;font-weight:700;margin-bottom:4px}
+.topic-summary{font-size:.8125rem;color:var(--text-muted);margin-bottom:16px}
+
+/* Item list */
+.item{
+  padding:10px 0;border-bottom:1px solid var(--border);
+  display:flex;gap:10px;align-items:flex-start;
+}
+.item:last-child{border-bottom:none;padding-bottom:0}
+.badge{
+  display:inline-block;font-size:.625rem;font-weight:700;
+  color:#fff;padding:2px 8px;border-radius:10px;white-space:nowrap;
+  flex-shrink:0;margin-top:3px;text-transform:uppercase;letter-spacing:.03em;
+}
+.badge-changelog{background:var(--badge-changelog)}
+.badge-mcp{background:var(--badge-mcp)}
+.badge-trending{background:var(--badge-trending)}
+.badge-plugin{background:var(--badge-plugin)}
+.badge-awesome{background:var(--badge-awesome)}
+.badge-skills{background:var(--badge-skills)}
+.item-body{flex:1;min-width:0}
+.item-title{font-size:.875rem;font-weight:600}
+.item-desc{font-size:.8125rem;color:var(--text-muted);margin-top:2px}
+.item-meta{font-size:.75rem;color:var(--text-light);margin-top:4px}
+.item-meta .stars::before{content:"\2B50 "}
+
+/* Footer */
+.footer{
+  text-align:center;color:var(--text-light);font-size:.75rem;
+  padding:32px 0 16px;border-top:1px solid var(--border);margin-top:32px;
+}
+
+/* No items */
+.empty{color:var(--text-light);font-style:italic;font-size:.875rem;padding:8px 0}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header class="header">
+  <h1>Weekly Tech Watch</h1>
+  <div class="date-range">2026-07-27 ~ 2026-07-29</div>
+</header>
+
+<div class="stat-grid">
+<div class="stat-card"><div class="num">2</div><div class="label">MCP</div></div>
+<div class="stat-card"><div class="num">1</div><div class="label">Plugins</div></div>
+<div class="stat-card"><div class="num">10</div><div class="label">awesome-cc</div></div>
+</div>
+
+<h2 class="section-heading">Highlights</h2>
+<div class="highlight-card">
+  <div class="hl-badge">深掘り候補</div>
+  <div class="hl-title"><a href="https://www.pulsemcp.com/servers/octoparse">MCP: Octoparse</a></div>
+  <div class="hl-desc"><strong>概要</strong>Octoparseの公式サーバーが、Webスクレイピングのテンプレート発見、クラウドタスク管理、構造化データのエクスポート機能を提供。これにより、効率的なデータ収集と管理が可能になります。</div>
+  <div class="hl-link"><a href="https://www.pulsemcp.com/servers/octoparse">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>AI/ITコンサルティングにおいて、クライアントの市場調査や競合分析のためのデータ収集を自動化できる可能性があります。また、うま藻事業や飲食業での競合商品・価格調査、不動産市場のトレンド把握など、多岐にわたる情報収集の効率化に貢献できるかもしれません。</div>
+  <div class="hl-action">深掘りするなら、Octoparseの機能詳細や料金体系、既存のn8nやPythonスクリプトとの連携可能性について調査し、具体的なデータ収集ニーズに合致するか検討します。</div>
+</div>
+<div class="highlight-card">
+  <div class="hl-badge">ニュース</div>
+  <div class="hl-title"><a href="https://www.pulsemcp.com/servers/options-analysis-suite">MCP: Options Analysis Suite</a></div>
+  <div class="hl-desc"><strong>概要</strong>オプション取引の高度な分析機能を提供するMCPサーバーが登場しました。17種類の価格モデルやGreeks、GEX、IVサーフェス、23のスクリーナー、ダークプール分析など、多角的な市場分析を可能にします。</div>
+  <div class="hl-link"><a href="https://www.pulsemcp.com/servers/options-analysis-suite">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>りゅうさんの現在の事業とは直接的な関連は薄いですが、将来的な資産運用や事業多角化の視点から、高度な金融分析ツールの動向を把握する機会となる可能性があります。AIを活用した自動化の知見を金融分野に応用する可能性を探るきっかけになるかもしれません。</div>
+  <div class="hl-action">もし金融市場の分析に興味があれば、ツールの具体的な機能や適用可能な市場について、詳細ページで確認してみるのが良いでしょう。</div>
+</div>
+<div class="highlight-card">
+  <div class="hl-badge">ニュース</div>
+  <div class="hl-title"><a href="https://developer.paypal.com/">Plugin: paypal</a></div>
+  <div class="hl-desc"><strong>概要</strong>Claude向けのPayPal開発プラグインが登場しました。PayPalのAPIとMCPサーバーを活用し、決済、サブスクリプション、請求書発行、紛争解決などの機能をClaudeに統合できます。これにより、AIを通じて多様な金融取引を自動化する可能性が広がります。</div>
+  <div class="hl-link"><a href="https://developer.paypal.com/">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>りゅうさんの事業において、ClaudeとPayPalプラグインを連携させることで、うま藻事業のECサイトでの決済処理自動化や、AIコンサルティングの請求書発行プロセスを効率化できる可能性があります。また、りゅうさんちの予約システムにおける事前決済導入や、サブスクリプション型サービス提供時の決済管理にも活用できるかもしれません。</div>
+  <div class="hl-action">もし決済自動化の新たな選択肢として興味があれば、ClaudeのPayPalプラグインの具体的な機能やセキュリティ、導入コストについて情報収集を進めるのが良いでしょう。</div>
+</div>
+
+<h2 class="section-heading">Topics</h2>
+<div class="topic">
+  <div class="topic-title">データ・クラウドサービス</div>
+  <div class="topic-summary">データ抽出、クラウドタスク管理、構造化データのエクスポートを提供するサービス。</div>
+<div class="item">
+  <span class="badge badge-mcp">MCP</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://www.pulsemcp.com/servers/octoparse">Octoparse</a></div>
+    <div class="item-desc">Octoparse&#x27;s official server for template discovery, cloud task management, and structured data export.</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">金融分析ツール</div>
+  <div class="topic-summary">オプション分析、価格モデル、ギリシャ指標、市場スクリーナーなどを含む金融分析スイート。</div>
+<div class="item">
+  <span class="badge badge-mcp">MCP</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://www.pulsemcp.com/servers/options-analysis-suite">Options Analysis Suite</a></div>
+    <div class="item-desc">MCP server for options analytics including 17 pricing models, Greeks, GEX, IV surface, 23 screeners, dark pool, and...</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">決済連携ソリューション</div>
+  <div class="topic-summary">PayPalのAPIを利用して支払い、購読、請求書、紛争などを統合する開発プラグイン。</div>
+<div class="item">
+  <span class="badge badge-plugin">PLUGIN</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://developer.paypal.com/">paypal</a></div>
+    <div class="item-desc">PayPal development plugin for Claude — integrate payments, subscriptions, invoices, disputes, and more using PayPal&#x27;s APIs and MCP server</div>
+    <div class="item-meta">development</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">リポジトリ保守作業</div>
+  <div class="topic-summary">リポジトリのティッカーデータやSVGの更新、READMEの再生成など、定期的な保守作業。</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/8bb4851">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-07-28</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/ca54e5e">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-07-28</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/1520c63">chore: regenerate README + carousel from CSV [skip ci]</a></div>
+    <div class="item-meta">2026-07-28</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/f4dfdb8">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-07-28</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/7035f73">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-07-28</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/8f1dadc">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-07-28</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/a8f412b">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-07-28</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/849b663">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-07-28</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/03d3cf9">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-07-28</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">開発リソース追加</div>
+  <div class="topic-summary">Claudeのコード設定に関する新しいリソースやガイドの追加。</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/a2a34a8">Add resource: My Claude Code Setup (#2344)</a></div>
+    <div class="item-meta">2026-07-28</div>
+  </div>
+</div>
+</div>
+
+<footer class="footer">
+  Generated at 2026-07-29 07:55 JST<br>
+  Sources: Claude Code CHANGELOG, GitHub Releases, awesome-claude-code,
+  anthropics/skills, PulseMCP, Claude Plugins, GitHub Trending
+</footer>
+
+</div>
+</body>
+</html>
