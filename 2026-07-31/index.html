@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Weekly Tech Watch — 2026-07-31</title>
+<style>
+:root {
+  --bg: #f8fafc;
+  --bg-card: #ffffff;
+  --bg-highlight: #eff6ff;
+  --text: #1e293b;
+  --text-muted: #64748b;
+  --text-light: #94a3b8;
+  --accent: #3b82f6;
+  --border: #e2e8f0;
+  --shadow: 0 1px 3px rgba(0,0,0,.08);
+  --badge-changelog: #3b82f6;
+  --badge-mcp: #8b5cf6;
+  --badge-trending: #f59e0b;
+  --badge-plugin: #10b981;
+  --badge-awesome: #f43f5e;
+  --badge-skills: #06b6d4;
+}
+@media(prefers-color-scheme:dark){
+:root {
+  --bg: #0f172a;
+  --bg-card: #1e293b;
+  --bg-highlight: #1e3a5f;
+  --text: #e2e8f0;
+  --text-muted: #94a3b8;
+  --text-light: #64748b;
+  --accent: #60a5fa;
+  --border: #334155;
+  --shadow: 0 1px 3px rgba(0,0,0,.3);
+}}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  background:var(--bg);color:var(--text);
+  line-height:1.6;padding:16px;
+}
+.container{max-width:760px;margin:0 auto}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* Header */
+.header{text-align:center;padding:32px 0 24px}
+.header h1{font-size:1.5rem;font-weight:700;letter-spacing:-.02em}
+.header .date-range{color:var(--text-muted);font-size:.875rem;margin-top:4px}
+
+/* Stats */
+.stat-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));
+  gap:8px;margin:0 0 32px;
+}
+.stat-card{
+  background:var(--bg-card);border:1px solid var(--border);border-radius:8px;
+  padding:12px;text-align:center;box-shadow:var(--shadow);
+}
+.stat-card .num{font-size:1.5rem;font-weight:700;color:var(--accent)}
+.stat-card .label{font-size:.75rem;color:var(--text-muted);margin-top:2px}
+
+/* Section heading */
+.section-heading{
+  font-size:1.125rem;font-weight:700;margin:32px 0 16px;
+  padding-bottom:8px;border-bottom:2px solid var(--accent);
+}
+
+/* Highlight cards */
+.highlight-card{
+  background:var(--bg-highlight);border:1px solid var(--border);
+  border-radius:12px;padding:20px;margin-bottom:16px;
+  border-left:4px solid var(--accent);
+}
+.highlight-card .hl-badge{
+  display:inline-block;font-size:.6875rem;font-weight:700;
+  color:var(--accent);background:var(--bg-card);
+  border:1px solid var(--border);border-radius:999px;
+  padding:2px 8px;margin-bottom:8px;
+}
+.highlight-card .hl-title{font-size:1rem;font-weight:700;margin-bottom:8px}
+.highlight-card .hl-title a{color:var(--text)}
+.highlight-card .hl-desc{font-size:.875rem;color:var(--text-muted);margin-bottom:8px}
+.highlight-card .hl-desc strong,
+.highlight-card .hl-scenario strong{
+  display:block;color:var(--text);font-size:.75rem;margin-bottom:2px;
+}
+.highlight-card .hl-link{font-size:.8125rem;margin-bottom:12px}
+.highlight-card .hl-scenario{
+  font-size:.875rem;line-height:1.7;
+  background:var(--bg-card);border-radius:8px;padding:12px;margin-bottom:8px;
+}
+.highlight-card .hl-action{
+  font-size:.8125rem;color:var(--accent);font-weight:600;
+}
+.highlight-card .hl-action::before{content:"→ "}
+
+/* Topic section */
+.topic{
+  background:var(--bg-card);border:1px solid var(--border);
+  border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:var(--shadow);
+}
+.topic-title{font-size:1rem;font-weight:700;margin-bottom:4px}
+.topic-summary{font-size:.8125rem;color:var(--text-muted);margin-bottom:16px}
+
+/* Item list */
+.item{
+  padding:10px 0;border-bottom:1px solid var(--border);
+  display:flex;gap:10px;align-items:flex-start;
+}
+.item:last-child{border-bottom:none;padding-bottom:0}
+.badge{
+  display:inline-block;font-size:.625rem;font-weight:700;
+  color:#fff;padding:2px 8px;border-radius:10px;white-space:nowrap;
+  flex-shrink:0;margin-top:3px;text-transform:uppercase;letter-spacing:.03em;
+}
+.badge-changelog{background:var(--badge-changelog)}
+.badge-mcp{background:var(--badge-mcp)}
+.badge-trending{background:var(--badge-trending)}
+.badge-plugin{background:var(--badge-plugin)}
+.badge-awesome{background:var(--badge-awesome)}
+.badge-skills{background:var(--badge-skills)}
+.item-body{flex:1;min-width:0}
+.item-title{font-size:.875rem;font-weight:600}
+.item-desc{font-size:.8125rem;color:var(--text-muted);margin-top:2px}
+.item-meta{font-size:.75rem;color:var(--text-light);margin-top:4px}
+.item-meta .stars::before{content:"\2B50 "}
+
+/* Footer */
+.footer{
+  text-align:center;color:var(--text-light);font-size:.75rem;
+  padding:32px 0 16px;border-top:1px solid var(--border);margin-top:32px;
+}
+
+/* No items */
+.empty{color:var(--text-light);font-style:italic;font-size:.875rem;padding:8px 0}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header class="header">
+  <h1>Weekly Tech Watch</h1>
+  <div class="date-range">2026-07-29 ~ 2026-07-31</div>
+</header>
+
+<div class="stat-grid">
+<div class="stat-card"><div class="num">1</div><div class="label">MCP</div></div>
+<div class="stat-card"><div class="num">5</div><div class="label">Trending</div></div>
+<div class="stat-card"><div class="num">8</div><div class="label">awesome-cc</div></div>
+</div>
+
+<h2 class="section-heading">Highlights</h2>
+<div class="highlight-card">
+  <div class="hl-badge">深掘り候補</div>
+  <div class="hl-title"><a href="https://www.pulsemcp.com/servers/khiip">MCP: Khiip</a></div>
+  <div class="hl-desc"><strong>概要</strong>Khiipは、ウェブページをローカルディスクにMarkdown形式で保存するオープンソースツールです。個人のウェブコンテンツを長期的に保存し、再利用可能な形で管理する基盤を提供します。</div>
+  <div class="hl-link"><a href="https://www.pulsemcp.com/servers/khiip">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>AIコンサルティングやうま藻事業における情報収集において、ウェブ上の記事や資料をMarkdown形式で効率的に保存し、自身のナレッジベースを強化できる可能性があります。既存の「PersonalOS」や「WONDAY-OS」の基盤として、情報の「分解と再構築」を支援するツールとなるかもしれません。</div>
+  <div class="hl-action">KhiipのGitHubリポジトリやドキュメントを確認し、セットアップの容易さや既存ツール（Notion、Obsidianなど）との連携可能性を調査すると、導入の判断材料が増えるでしょう。</div>
+</div>
+<div class="highlight-card">
+  <div class="hl-badge">深掘り候補</div>
+  <div class="hl-title"><a href="https://github.com/AlekPet/ComfyUI_Custom_Nodes_AlekPet">GitHub: AlekPet/ComfyUI_Custom_Nodes_AlekPet</a></div>
+  <div class="hl-desc"><strong>概要</strong>ComfyUIの機能を拡張するカスタムノード集がGitHubで公開されました。これにより、画像生成AIの複雑なワークフローをより柔軟に構築し、高度な表現や効率化が可能になります。</div>
+  <div class="hl-link"><a href="https://github.com/AlekPet/ComfyUI_Custom_Nodes_AlekPet">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>りゅうさんのAIコンサルティング事業において、クライアントへの画像生成AI活用提案の幅を広げる可能性があります。うま藻事業での商品イメージ作成や、りゅうさんちのSNSコンテンツ制作で、より高品質で多様なビジュアルコンテンツを効率的に生成するのに役立つかもしれません。</div>
+  <div class="hl-action">深掘りするなら、GitHubリポジトリのREADMEや主要なカスタムノードのデモ動画を確認し、具体的な機能と導入の難易度をざっと把握することをお勧めします。</div>
+</div>
+<div class="highlight-card">
+  <div class="hl-badge">深掘り候補</div>
+  <div class="hl-title"><a href="https://github.com/hoangsonww/Claude-Code-Agent-Monitor">GitHub: hoangsonww/Claude-Code-Agent-Monitor</a></div>
+  <div class="hl-desc"><strong>概要</strong>Claude Codeの活動をリアルタイムで監視するダッシュボードがGitHubで公開されました。セッション、エージェントの動き、ツール利用状況などを可視化し、ライブ分析、カンバンボード、通知機能をWeb UIやネイティブアプリで提供します。</div>
+  <div class="hl-link"><a href="https://github.com/hoangsonww/Claude-Code-Agent-Monitor">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>Claude Codeをメインで使うりゅうさんにとって、AIエージェントの活動を可視化し、進捗管理を助ける可能性があります。特に「考えすぎて行動量・スピードが落ちる」「並行PJが増えがち」といった課題に対し、AI運用基盤「WONDAY-OS」や「Claude Code環境」プロジェクトでの活用が考えられます。</div>
+  <div class="hl-action">GitHubリポジトリを確認し、セットアップの容易さ、提供されるダッシュボード機能の詳細、既存のClaude Code利用フローへの組み込み可能性を調査します。</div>
+</div>
+
+<h2 class="section-heading">Topics</h2>
+<div class="topic">
+  <div class="topic-title">AIエージェント開発</div>
+  <div class="topic-summary">Claude CodeなどのAIコーディングエージェントの監視、設計、設定、スキル作成を支援するツール群。</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hoangsonww/Claude-Code-Agent-Monitor">hoangsonww/Claude-Code-Agent-Monitor</a></div>
+    <div class="item-desc">🚀 A real-time monitoring dashboard for Claude Code, built with SQLite3, Node.js, Express, React, Vite, TailwindCSS, and WebSockets. It tracks sessions, agent activity, tool usage, and subagent orchestration, providing live analytics, a Kanban status board, status notifications, a cute buddy, and an interactive web UI/MacOS/Windows native app.</div>
+    <div class="item-meta"><span class="stars">857</span></div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/bitjaru/styleseed">bitjaru/styleseed</a></div>
+    <div class="item-desc">Open-source design-method engine for Claude Code, Codex &amp; Cursor. Gives coding agents fixed design judgment—not one fixed aesthetic—then selects or derives the right grammar from references, locks project decisions, and verifies UI, carousels, decks &amp; docs. 20 skills · MIT.</div>
+    <div class="item-meta"><span class="stars">857</span></div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/fcakyon/claude-codex-settings">fcakyon/claude-codex-settings</a></div>
+    <div class="item-desc">Battle-tested Claude Code, OpenAI Codex, Cursor configs, plugins, hooks and agents with Kimi, MiniMax and GLM API support.</div>
+    <div class="item-meta"><span class="stars">854</span></div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/tripleyak/SkillForge">tripleyak/SkillForge</a></div>
+    <div class="item-desc">A skill creator that proves its skills work. Evidence-driven skill creation for Claude Code and Codex: baseline-tested generation, per-skill regression evals, ecosystem doctor, cross-runtime compile, and an opt-in proactive advisor.</div>
+    <div class="item-meta"><span class="stars">809</span></div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">AIワークフロー拡張</div>
+  <div class="topic-summary">ComfyUIなどの既存AIツールの機能をカスタムノードで拡張し、ワークフローを強化する。</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/AlekPet/ComfyUI_Custom_Nodes_AlekPet">AlekPet/ComfyUI_Custom_Nodes_AlekPet</a></div>
+    <div class="item-desc">Custom nodes that extend the capabilities of Comfyui</div>
+    <div class="item-meta"><span class="stars">1518</span></div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">個人ウェブアーカイブ</div>
+  <div class="topic-summary">個人のウェブコンテンツをMarkdownで保存し、自己管理するためのオープンソースのウェブ保存基盤。</div>
+<div class="item">
+  <span class="badge badge-mcp">MCP</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://www.pulsemcp.com/servers/khiip">Khiip</a></div>
+    <div class="item-desc">Open-source substrate for personal-web preservation, capturing pages as plain Markdown on your own disk.</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">定期リポジトリ更新</div>
+  <div class="topic-summary">リポジトリのティッカーデータやSVGファイルを更新する、CIスキップ対象の定期メンテナンス作業。</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/22941e1">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-07-30</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/113e6d9">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-07-30</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/aaf5f0b">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-07-30</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/90c05af">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-07-30</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/a6baa0c">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-07-30</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/16582d5">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-07-30</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/07db1b8">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-07-30</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/788e109">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-07-30</div>
+  </div>
+</div>
+</div>
+
+<footer class="footer">
+  Generated at 2026-07-31 07:55 JST<br>
+  Sources: Claude Code CHANGELOG, GitHub Releases, awesome-claude-code,
+  anthropics/skills, PulseMCP, Claude Plugins, GitHub Trending
+</footer>
+
+</div>
+</body>
+</html>
