@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Weekly Tech Watch — 2026-08-03</title>
+<style>
+:root {
+  --bg: #f8fafc;
+  --bg-card: #ffffff;
+  --bg-highlight: #eff6ff;
+  --text: #1e293b;
+  --text-muted: #64748b;
+  --text-light: #94a3b8;
+  --accent: #3b82f6;
+  --border: #e2e8f0;
+  --shadow: 0 1px 3px rgba(0,0,0,.08);
+  --badge-changelog: #3b82f6;
+  --badge-mcp: #8b5cf6;
+  --badge-trending: #f59e0b;
+  --badge-plugin: #10b981;
+  --badge-awesome: #f43f5e;
+  --badge-skills: #06b6d4;
+}
+@media(prefers-color-scheme:dark){
+:root {
+  --bg: #0f172a;
+  --bg-card: #1e293b;
+  --bg-highlight: #1e3a5f;
+  --text: #e2e8f0;
+  --text-muted: #94a3b8;
+  --text-light: #64748b;
+  --accent: #60a5fa;
+  --border: #334155;
+  --shadow: 0 1px 3px rgba(0,0,0,.3);
+}}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  background:var(--bg);color:var(--text);
+  line-height:1.6;padding:16px;
+}
+.container{max-width:760px;margin:0 auto}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* Header */
+.header{text-align:center;padding:32px 0 24px}
+.header h1{font-size:1.5rem;font-weight:700;letter-spacing:-.02em}
+.header .date-range{color:var(--text-muted);font-size:.875rem;margin-top:4px}
+
+/* Stats */
+.stat-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));
+  gap:8px;margin:0 0 32px;
+}
+.stat-card{
+  background:var(--bg-card);border:1px solid var(--border);border-radius:8px;
+  padding:12px;text-align:center;box-shadow:var(--shadow);
+}
+.stat-card .num{font-size:1.5rem;font-weight:700;color:var(--accent)}
+.stat-card .label{font-size:.75rem;color:var(--text-muted);margin-top:2px}
+
+/* Section heading */
+.section-heading{
+  font-size:1.125rem;font-weight:700;margin:32px 0 16px;
+  padding-bottom:8px;border-bottom:2px solid var(--accent);
+}
+
+/* Highlight cards */
+.highlight-card{
+  background:var(--bg-highlight);border:1px solid var(--border);
+  border-radius:12px;padding:20px;margin-bottom:16px;
+  border-left:4px solid var(--accent);
+}
+.highlight-card .hl-badge{
+  display:inline-block;font-size:.6875rem;font-weight:700;
+  color:var(--accent);background:var(--bg-card);
+  border:1px solid var(--border);border-radius:999px;
+  padding:2px 8px;margin-bottom:8px;
+}
+.highlight-card .hl-title{font-size:1rem;font-weight:700;margin-bottom:8px}
+.highlight-card .hl-title a{color:var(--text)}
+.highlight-card .hl-desc{font-size:.875rem;color:var(--text-muted);margin-bottom:8px}
+.highlight-card .hl-desc strong,
+.highlight-card .hl-scenario strong{
+  display:block;color:var(--text);font-size:.75rem;margin-bottom:2px;
+}
+.highlight-card .hl-link{font-size:.8125rem;margin-bottom:12px}
+.highlight-card .hl-scenario{
+  font-size:.875rem;line-height:1.7;
+  background:var(--bg-card);border-radius:8px;padding:12px;margin-bottom:8px;
+}
+.highlight-card .hl-action{
+  font-size:.8125rem;color:var(--accent);font-weight:600;
+}
+.highlight-card .hl-action::before{content:"→ "}
+
+/* Topic section */
+.topic{
+  background:var(--bg-card);border:1px solid var(--border);
+  border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:var(--shadow);
+}
+.topic-title{font-size:1rem;font-weight:700;margin-bottom:4px}
+.topic-summary{font-size:.8125rem;color:var(--text-muted);margin-bottom:16px}
+
+/* Item list */
+.item{
+  padding:10px 0;border-bottom:1px solid var(--border);
+  display:flex;gap:10px;align-items:flex-start;
+}
+.item:last-child{border-bottom:none;padding-bottom:0}
+.badge{
+  display:inline-block;font-size:.625rem;font-weight:700;
+  color:#fff;padding:2px 8px;border-radius:10px;white-space:nowrap;
+  flex-shrink:0;margin-top:3px;text-transform:uppercase;letter-spacing:.03em;
+}
+.badge-changelog{background:var(--badge-changelog)}
+.badge-mcp{background:var(--badge-mcp)}
+.badge-trending{background:var(--badge-trending)}
+.badge-plugin{background:var(--badge-plugin)}
+.badge-awesome{background:var(--badge-awesome)}
+.badge-skills{background:var(--badge-skills)}
+.item-body{flex:1;min-width:0}
+.item-title{font-size:.875rem;font-weight:600}
+.item-desc{font-size:.8125rem;color:var(--text-muted);margin-top:2px}
+.item-meta{font-size:.75rem;color:var(--text-light);margin-top:4px}
+.item-meta .stars::before{content:"\2B50 "}
+
+/* Footer */
+.footer{
+  text-align:center;color:var(--text-light);font-size:.75rem;
+  padding:32px 0 16px;border-top:1px solid var(--border);margin-top:32px;
+}
+
+/* No items */
+.empty{color:var(--text-light);font-style:italic;font-size:.875rem;padding:8px 0}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header class="header">
+  <h1>Weekly Tech Watch</h1>
+  <div class="date-range">2026-07-30 ~ 2026-08-03</div>
+</header>
+
+<div class="stat-grid">
+<div class="stat-card"><div class="num">1</div><div class="label">MCP</div></div>
+<div class="stat-card"><div class="num">2</div><div class="label">Trending</div></div>
+<div class="stat-card"><div class="num">16</div><div class="label">awesome-cc</div></div>
+</div>
+
+<h2 class="section-heading">Highlights</h2>
+<div class="highlight-card">
+  <div class="hl-badge">ニュース</div>
+  <div class="hl-title"><a href="https://www.pulsemcp.com/servers/iarfhlaith-gaff-check">MCP: Gaff Check</a></div>
+  <div class="hl-desc"><strong>概要</strong>アイルランドの公共不動産データを照会する「Gaff Check」がPulsemcp.comで提供開始されました。計画申請、販売価格、洪水リスク、エネルギー評価（BER ratings）など、多岐にわたる不動産情報へアクセス可能です。</div>
+  <div class="hl-link"><a href="https://www.pulsemcp.com/servers/iarfhlaith-gaff-check">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>りゅうさんは宅建士として不動産業務に携わっていますが、このツールはアイルランドのデータに特化しており、直接的な活用は難しい可能性があります。しかし、不動産情報の自動収集・分析の仕組みは、将来的に日本の不動産市場でのAIコンサルティングや、ご自身の不動産管理業務におけるデータ活用を検討する際の参考になるかもしれません。</div>
+  <div class="hl-action">日本で同様の不動産データ統合サービスやAPIがないか、情報収集のヒントとして活用を検討する。</div>
+</div>
+<div class="highlight-card">
+  <div class="hl-badge">深掘り候補</div>
+  <div class="hl-title"><a href="https://github.com/deepset-ai/haystack">GitHub: deepset-ai/haystack</a></div>
+  <div class="hl-desc"><strong>概要</strong>deepset-ai/haystackは、LLMアプリ開発のためのオープンソースAIオーケストレーションフレームワークです。RAGやエージェント、マルチモーダル、会話システム構築に特化し、検索・ルーティング・メモリ・生成をモジュール式パイプラインで制御できます。スケーラブルなプロダクション対応アプリ開発を支援します。</div>
+  <div class="hl-link"><a href="https://github.com/deepset-ai/haystack">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>クライアントへのAI導入支援で、RAGやエージェント機能を用いた高度なLLMアプリ構築の選択肢として提案できる可能性があります。自身のAI運用基盤「WONDAY-OS」や「MeetingMinutes」の機能強化、うま藻事業の顧客向けFAQシステム、りゅうさんちの予約・問い合わせ自動化など、モジュール性を活かした効率的な開発に活用できるかもしれません。</div>
+  <div class="hl-action">深掘りするなら、HaystackのRAGやエージェントのサンプルコードを確認し、Difyやn8nで実現している機能との比較を行うのが良いでしょう。</div>
+</div>
+<div class="highlight-card">
+  <div class="hl-badge">深掘り候補</div>
+  <div class="hl-title"><a href="https://github.com/snakers4/silero-models">GitHub: snakers4/silero-models</a></div>
+  <div class="hl-desc"><strong>概要</strong>Silero Modelsは、事前に訓練されたテキスト読み上げ（TTS）モデルを驚くほど簡単に利用できるGitHubリポジトリです。高品質な音声合成を手軽に実装できる点が特徴で、多様な言語に対応しています。</div>
+  <div class="hl-link"><a href="https://github.com/snakers4/silero-models">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>AI経営スキル講座のコンテンツ作成やWONDAY Growth Engineのデモ動画におけるナレーション生成に活用し、コンテンツ制作の効率化と質向上に貢献する可能性があります。また、PersonalOSでテキスト情報を音声で確認する機能を追加し、情報摂取の多様性を高める可能性も考えられます。</div>
+  <div class="hl-action">深掘りするなら、Silero Modelsの概要を理解し、既存のAIプラットフォームのTTS機能と比較して、WONDAYの理念に沿う活用シナリオを検討すると良いでしょう。</div>
+</div>
+
+<h2 class="section-heading">Topics</h2>
+<div class="topic">
+  <div class="topic-title">AI・機械学習</div>
+  <div class="topic-summary">LLMアプリ開発フレームワークと音声合成モデルに関する最新情報。</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/deepset-ai/haystack">deepset-ai/haystack</a></div>
+    <div class="item-desc">Open-source AI orchestration framework for building context-engineered, production-ready LLM applications. Design modular pipelines and agent workflows with explicit control over retrieval, routing, memory, and generation. Built for scalable agents, RAG, multimodal applications, semantic search, and conversational systems.</div>
+    <div class="item-meta"><span class="stars">26091</span></div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/snakers4/silero-models">snakers4/silero-models</a></div>
+    <div class="item-desc">Silero Models: pre-trained text-to-speech models made embarrassingly simple</div>
+    <div class="item-meta"><span class="stars">6035</span></div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">公共データ活用</div>
+  <div class="topic-summary">アイルランドの不動産データを照会するツールについて。</div>
+<div class="item">
+  <span class="badge badge-mcp">MCP</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://www.pulsemcp.com/servers/iarfhlaith-gaff-check">Gaff Check</a></div>
+    <div class="item-desc">Queries Irish public property datasets including planning applications, sale prices, flood risk, and BER ratings.</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">リポジトリ更新</div>
+  <div class="topic-summary">リポジトリのデータやSVGファイルに関する定期的な更新情報。</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/f3d39dd">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-08-02</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/6173ba2">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-08-02</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/5c1191a">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-08-02</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/c290542">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-08-02</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/19a6014">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-08-02</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/1d743cb">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-08-02</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/5b034d3">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-08-02</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/63caef0">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-08-02</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/36efb2a">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-08-01</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/c76f277">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-08-01</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/050529e">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-08-01</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/67fd03c">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-08-01</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/e674c2b">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-08-01</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/f808efe">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-08-01</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/a9c1743">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-08-01</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/8c02b65">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-08-01</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">その他</div>
+  <div class="topic-summary">内容が不明な項目。</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/bcherny/json-schema-to-typescript">Boris Cherny: bcherny/json-schema-to-typescript (PushEvent)</a></div>
+    <div class="item-desc">[fix-issue-671] New push</div>
+    <div class="item-meta">2026-08-02</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/bcherny/json-schema-to-typescript">Boris Cherny: bcherny/json-schema-to-typescript (PushEvent)</a></div>
+    <div class="item-desc">[fix-issue-671] New push</div>
+    <div class="item-meta">2026-08-02</div>
+  </div>
+</div>
+</div>
+
+<footer class="footer">
+  Generated at 2026-08-03 07:55 JST<br>
+  Sources: Claude Code CHANGELOG, GitHub Releases, awesome-claude-code,
+  anthropics/skills, PulseMCP, Claude Plugins, GitHub Trending
+</footer>
+
+</div>
+</body>
+</html>
