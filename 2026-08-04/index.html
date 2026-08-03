@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Weekly Tech Watch — 2026-08-04</title>
+<style>
+:root {
+  --bg: #f8fafc;
+  --bg-card: #ffffff;
+  --bg-highlight: #eff6ff;
+  --text: #1e293b;
+  --text-muted: #64748b;
+  --text-light: #94a3b8;
+  --accent: #3b82f6;
+  --border: #e2e8f0;
+  --shadow: 0 1px 3px rgba(0,0,0,.08);
+  --badge-changelog: #3b82f6;
+  --badge-mcp: #8b5cf6;
+  --badge-trending: #f59e0b;
+  --badge-plugin: #10b981;
+  --badge-awesome: #f43f5e;
+  --badge-skills: #06b6d4;
+}
+@media(prefers-color-scheme:dark){
+:root {
+  --bg: #0f172a;
+  --bg-card: #1e293b;
+  --bg-highlight: #1e3a5f;
+  --text: #e2e8f0;
+  --text-muted: #94a3b8;
+  --text-light: #64748b;
+  --accent: #60a5fa;
+  --border: #334155;
+  --shadow: 0 1px 3px rgba(0,0,0,.3);
+}}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  background:var(--bg);color:var(--text);
+  line-height:1.6;padding:16px;
+}
+.container{max-width:760px;margin:0 auto}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* Header */
+.header{text-align:center;padding:32px 0 24px}
+.header h1{font-size:1.5rem;font-weight:700;letter-spacing:-.02em}
+.header .date-range{color:var(--text-muted);font-size:.875rem;margin-top:4px}
+
+/* Stats */
+.stat-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));
+  gap:8px;margin:0 0 32px;
+}
+.stat-card{
+  background:var(--bg-card);border:1px solid var(--border);border-radius:8px;
+  padding:12px;text-align:center;box-shadow:var(--shadow);
+}
+.stat-card .num{font-size:1.5rem;font-weight:700;color:var(--accent)}
+.stat-card .label{font-size:.75rem;color:var(--text-muted);margin-top:2px}
+
+/* Section heading */
+.section-heading{
+  font-size:1.125rem;font-weight:700;margin:32px 0 16px;
+  padding-bottom:8px;border-bottom:2px solid var(--accent);
+}
+
+/* Highlight cards */
+.highlight-card{
+  background:var(--bg-highlight);border:1px solid var(--border);
+  border-radius:12px;padding:20px;margin-bottom:16px;
+  border-left:4px solid var(--accent);
+}
+.highlight-card .hl-badge{
+  display:inline-block;font-size:.6875rem;font-weight:700;
+  color:var(--accent);background:var(--bg-card);
+  border:1px solid var(--border);border-radius:999px;
+  padding:2px 8px;margin-bottom:8px;
+}
+.highlight-card .hl-title{font-size:1rem;font-weight:700;margin-bottom:8px}
+.highlight-card .hl-title a{color:var(--text)}
+.highlight-card .hl-desc{font-size:.875rem;color:var(--text-muted);margin-bottom:8px}
+.highlight-card .hl-desc strong,
+.highlight-card .hl-scenario strong{
+  display:block;color:var(--text);font-size:.75rem;margin-bottom:2px;
+}
+.highlight-card .hl-link{font-size:.8125rem;margin-bottom:12px}
+.highlight-card .hl-scenario{
+  font-size:.875rem;line-height:1.7;
+  background:var(--bg-card);border-radius:8px;padding:12px;margin-bottom:8px;
+}
+.highlight-card .hl-action{
+  font-size:.8125rem;color:var(--accent);font-weight:600;
+}
+.highlight-card .hl-action::before{content:"→ "}
+
+/* Topic section */
+.topic{
+  background:var(--bg-card);border:1px solid var(--border);
+  border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:var(--shadow);
+}
+.topic-title{font-size:1rem;font-weight:700;margin-bottom:4px}
+.topic-summary{font-size:.8125rem;color:var(--text-muted);margin-bottom:16px}
+
+/* Item list */
+.item{
+  padding:10px 0;border-bottom:1px solid var(--border);
+  display:flex;gap:10px;align-items:flex-start;
+}
+.item:last-child{border-bottom:none;padding-bottom:0}
+.badge{
+  display:inline-block;font-size:.625rem;font-weight:700;
+  color:#fff;padding:2px 8px;border-radius:10px;white-space:nowrap;
+  flex-shrink:0;margin-top:3px;text-transform:uppercase;letter-spacing:.03em;
+}
+.badge-changelog{background:var(--badge-changelog)}
+.badge-mcp{background:var(--badge-mcp)}
+.badge-trending{background:var(--badge-trending)}
+.badge-plugin{background:var(--badge-plugin)}
+.badge-awesome{background:var(--badge-awesome)}
+.badge-skills{background:var(--badge-skills)}
+.item-body{flex:1;min-width:0}
+.item-title{font-size:.875rem;font-weight:600}
+.item-desc{font-size:.8125rem;color:var(--text-muted);margin-top:2px}
+.item-meta{font-size:.75rem;color:var(--text-light);margin-top:4px}
+.item-meta .stars::before{content:"\2B50 "}
+
+/* Footer */
+.footer{
+  text-align:center;color:var(--text-light);font-size:.75rem;
+  padding:32px 0 16px;border-top:1px solid var(--border);margin-top:32px;
+}
+
+/* No items */
+.empty{color:var(--text-light);font-style:italic;font-size:.875rem;padding:8px 0}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header class="header">
+  <h1>Weekly Tech Watch</h1>
+  <div class="date-range">2026-08-02 ~ 2026-08-04</div>
+</header>
+
+<div class="stat-grid">
+<div class="stat-card"><div class="num">2</div><div class="label">Trending</div></div>
+<div class="stat-card"><div class="num">2</div><div class="label">Plugins</div></div>
+<div class="stat-card"><div class="num">10</div><div class="label">awesome-cc</div></div>
+</div>
+
+<h2 class="section-heading">Highlights</h2>
+<div class="highlight-card">
+  <div class="hl-badge">ニュース</div>
+  <div class="hl-title"><a href="https://github.com/modelcontextprotocol/python-sdk">GitHub: modelcontextprotocol/python-sdk</a></div>
+  <div class="hl-desc"><strong>概要</strong>AIモデルとの対話やデータ連携におけるコンテキスト管理を標準化する「Model Context Protocol」の公式Python SDKがGitHubで公開されました。これにより、複雑なAIアプリケーション開発でのコンテキストの一貫性維持と効率的なデータフローを支援します。</div>
+  <div class="hl-link"><a href="https://github.com/modelcontextprotocol/python-sdk">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>AIコンサルティングにおいて、クライアントの複雑なAIシステムでコンテキスト管理の課題が生じた際、このプロトコルを基盤としたソリューションを提案する可能性があります。また、WONDAY-OSやAIチーム基盤の設計で、複数のAIモデルやツールを連携させる際のコンテキスト一貫性維持の概念として参考になるでしょう。</div>
+  <div class="hl-action">深掘りするなら、Model Context Protocolの概念や、それが解決しようとしているAI開発における具体的な課題について、技術ブログや解説記事で概要を把握すると良いでしょう。</div>
+</div>
+<div class="highlight-card">
+  <div class="hl-badge">深掘り候補</div>
+  <div class="hl-title"><a href="https://github.com/waybarrios/vllm-mlx">GitHub: waybarrios/vllm-mlx</a></div>
+  <div class="hl-desc"><strong>概要</strong>Apple Silicon向けにOpenAI/Anthropic互換APIを提供するローカルLLM/VLMサーバー「vllm-mlx」が登場しました。LlamaやQwen-VLなどのモデルを連続バッチング、ツールコーリング、マルチモーダル対応で高速実行でき、Claude Codeとも連携可能です。</div>
+  <div class="hl-link"><a href="https://github.com/waybarrios/vllm-mlx">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>AIプラットフォーム依存からの脱却を目指すWONDAYの理念に合致し、ローカル環境でのLLM実行によりAPIコスト削減やデータプライバシー強化の可能性があります。AIコンサルティングにおいて、クライアントへのローカルLLM導入支援や、WONDAY-OSの基盤として活用できるかもしれません。</div>
+  <div class="hl-action">Apple Silicon搭載機での動作検証や、既存のClaude Code連携ワークフローへの組み込み可能性について、30分程度で調査を検討します。</div>
+</div>
+<div class="highlight-card">
+  <div class="hl-badge">深掘り候補</div>
+  <div class="hl-title"><a href="https://github.com/bcherny/json-schema-to-typescript">Boris Cherny: bcherny/json-schema-to-typescript</a></div>
+  <div class="hl-desc"><strong>概要</strong>bcherny/json-schema-to-typescriptは、JSON SchemaからTypeScriptの型定義を自動生成するツールです。今回の更新は、特定のスキーマ参照に関するバグ修正のブランチが作成されたことを示しており、より安定した型生成が期待されます。</div>
+  <div class="hl-link"><a href="https://github.com/bcherny/json-schema-to-typescript">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>りゅうさんのAI/ITコンサルティングにおいて、API連携やデータ構造を扱う際、JSON SchemaからTypeScriptの型定義を自動生成することで、開発効率と型安全性を高める可能性があります。Difyやn8nで複雑なデータフローを設計する際のデータ整合性チェックや、AIエージェントの入出力定義の厳密化に役立つかもしれません。</div>
+  <div class="hl-action">深掘りするなら、GitHubリポジトリでツールのREADMEやサンプルコードを確認し、JSON SchemaがTypeScript型にどう変換されるか具体的な使用例を見てみましょう。</div>
+</div>
+
+<h2 class="section-heading">Topics</h2>
+<div class="topic">
+  <div class="topic-title">AIモデル開発・実行</div>
+  <div class="topic-summary">AIモデルのプロトコルSDKと、Apple Silicon向けLLM/VLMサーバーに関する動向。</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/modelcontextprotocol/python-sdk">modelcontextprotocol/python-sdk</a></div>
+    <div class="item-desc">The official Python SDK for Model Context Protocol servers and clients</div>
+    <div class="item-meta"><span class="stars">23867</span></div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/waybarrios/vllm-mlx">waybarrios/vllm-mlx</a></div>
+    <div class="item-desc">OpenAI and Anthropic compatible server for Apple Silicon. Run LLMs and vision-language models (Llama, Qwen-VL, LLaVA) with continuous batching, MCP tool calling, and multimodal support. Native MLX backend, 400+ tok/s. Works with Claude Code.</div>
+    <div class="item-meta"><span class="stars">1484</span></div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">開発者向けツール</div>
+  <div class="topic-summary">Atlassian製品群の作業コンテキストを統合するCLIツール。</div>
+<div class="item">
+  <span class="badge badge-plugin">PLUGIN</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://developer.atlassian.com/cloud/twg-cli/">atlassian-twg-cli</a></div>
+    <div class="item-desc">Teamwork Graph CLI is Atlassian&#x27;s agent-first interface to your entire work context: Jira issues, Confluence pages, Bitbucket PRs, along with your connected third-party data sources. Purpose-built for coding agents like Claude Code (terminal or desktop), and powered by Atlassian&#x27;s context graph. Try: &quot;draft a Jira issue from this PR and link it to the epic.&quot; Using Claude Code in the browser? Install the Atlassian Rovo MCP plugin instead. Run /twg-setup after install to connect Atlassian Teamwork Graph CLI to Claude Code.</div>
+    <div class="item-meta">productivity</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">EコマースAI活用</div>
+  <div class="topic-summary">Eコマースの顧客体験と収益向上をAIで支援するプラグイン。</div>
+<div class="item">
+  <span class="badge badge-plugin">PLUGIN</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://help.noibu.com/articles/3918362002-overview-of-the-noibu-plugin-for-claude">noibu</a></div>
+    <div class="item-desc">Built for ecommerce, the Noibu plugin bridges the gap between customer experience and revenue by connecting Claude directly to your store&#x27;s session, error, and conversion data through Noibu — and to the marketing, support, and commerce platforms that put insight into motion. Go beyond analysis: surface what&#x27;s costing you revenue, take action across your stack, build workflows to automate work end-to-end.</div>
+    <div class="item-meta">monitoring</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">CI/CDシステム改善</div>
+  <div class="topic-summary">GitHub URL解析の強化やリソース提出条件のゲート化など、CIシステムの改善。</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/a4c9e44">fix(ci): tighten GitHub URL parsing in the submission gate</a></div>
+    <div class="item-meta">2026-08-03</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/41289b0">feat(ci): gate resource submissions on maturity conditions</a></div>
+    <div class="item-meta">2026-08-03</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">定期リポジトリ更新</div>
+  <div class="topic-summary">リポジトリのティッカーデータやSVGファイルを更新する定期的なメンテナンス作業。</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/bbea732">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-08-03</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/0b28480">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-08-03</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/b1db660">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-08-03</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/914337a">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-08-03</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/e152acd">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-08-03</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/b9a767a">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-08-03</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/3bb087d">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-08-03</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/a531b99">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-08-03</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">未分類項目</div>
+  <div class="topic-summary">情報が不足している、または分類が困難な項目群。</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/bcherny/json-schema-to-typescript">Boris Cherny: bcherny/json-schema-to-typescript (CreateEvent)</a></div>
+    <div class="item-desc">Created branch: claude/fuzz-fix-ref-boolean-schema</div>
+    <div class="item-meta">2026-08-03</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/bcherny/json-schema-to-typescript">Boris Cherny: bcherny/json-schema-to-typescript (CreateEvent)</a></div>
+    <div class="item-desc">Created branch: claude/fix-issue-143</div>
+    <div class="item-meta">2026-08-03</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/bcherny/json-schema-to-typescript">Boris Cherny: bcherny/json-schema-to-typescript (CreateEvent)</a></div>
+    <div class="item-desc">Created branch: claude/fix-issue-76</div>
+    <div class="item-meta">2026-08-03</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/bcherny/json-schema-to-typescript">Boris Cherny: bcherny/json-schema-to-typescript (CreateEvent)</a></div>
+    <div class="item-desc">Created branch: claude/fix-issue-132</div>
+    <div class="item-meta">2026-08-03</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/bcherny/json-schema-to-typescript">Boris Cherny: bcherny/json-schema-to-typescript (CreateEvent)</a></div>
+    <div class="item-desc">Created branch: claude/fix-issue-359</div>
+    <div class="item-meta">2026-08-03</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/bcherny/json-schema-to-typescript">Boris Cherny: bcherny/json-schema-to-typescript (CreateEvent)</a></div>
+    <div class="item-desc">Created branch: claude/fix-issue-365</div>
+    <div class="item-meta">2026-08-03</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/addyosmani/agent-skills">Addy Osmani: addyosmani/agent-skills (PushEvent)</a></div>
+    <div class="item-desc">[main] New push</div>
+    <div class="item-meta">2026-08-03</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/addyosmani/agent-skills">Addy Osmani: addyosmani/agent-skills (PushEvent)</a></div>
+    <div class="item-desc">[main] New push</div>
+    <div class="item-meta">2026-08-03</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/addyosmani/agent-skills">Addy Osmani: addyosmani/agent-skills (PushEvent)</a></div>
+    <div class="item-desc">[main] New push</div>
+    <div class="item-meta">2026-08-03</div>
+  </div>
+</div>
+</div>
+
+<footer class="footer">
+  Generated at 2026-08-04 07:55 JST<br>
+  Sources: Claude Code CHANGELOG, GitHub Releases, awesome-claude-code,
+  anthropics/skills, PulseMCP, Claude Plugins, GitHub Trending
+</footer>
+
+</div>
+</body>
+</html>
