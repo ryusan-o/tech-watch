@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Weekly Tech Watch — 2026-08-05</title>
+<style>
+:root {
+  --bg: #f8fafc;
+  --bg-card: #ffffff;
+  --bg-highlight: #eff6ff;
+  --text: #1e293b;
+  --text-muted: #64748b;
+  --text-light: #94a3b8;
+  --accent: #3b82f6;
+  --border: #e2e8f0;
+  --shadow: 0 1px 3px rgba(0,0,0,.08);
+  --badge-changelog: #3b82f6;
+  --badge-mcp: #8b5cf6;
+  --badge-trending: #f59e0b;
+  --badge-plugin: #10b981;
+  --badge-awesome: #f43f5e;
+  --badge-skills: #06b6d4;
+}
+@media(prefers-color-scheme:dark){
+:root {
+  --bg: #0f172a;
+  --bg-card: #1e293b;
+  --bg-highlight: #1e3a5f;
+  --text: #e2e8f0;
+  --text-muted: #94a3b8;
+  --text-light: #64748b;
+  --accent: #60a5fa;
+  --border: #334155;
+  --shadow: 0 1px 3px rgba(0,0,0,.3);
+}}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  background:var(--bg);color:var(--text);
+  line-height:1.6;padding:16px;
+}
+.container{max-width:760px;margin:0 auto}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* Header */
+.header{text-align:center;padding:32px 0 24px}
+.header h1{font-size:1.5rem;font-weight:700;letter-spacing:-.02em}
+.header .date-range{color:var(--text-muted);font-size:.875rem;margin-top:4px}
+
+/* Stats */
+.stat-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));
+  gap:8px;margin:0 0 32px;
+}
+.stat-card{
+  background:var(--bg-card);border:1px solid var(--border);border-radius:8px;
+  padding:12px;text-align:center;box-shadow:var(--shadow);
+}
+.stat-card .num{font-size:1.5rem;font-weight:700;color:var(--accent)}
+.stat-card .label{font-size:.75rem;color:var(--text-muted);margin-top:2px}
+
+/* Section heading */
+.section-heading{
+  font-size:1.125rem;font-weight:700;margin:32px 0 16px;
+  padding-bottom:8px;border-bottom:2px solid var(--accent);
+}
+
+/* Highlight cards */
+.highlight-card{
+  background:var(--bg-highlight);border:1px solid var(--border);
+  border-radius:12px;padding:20px;margin-bottom:16px;
+  border-left:4px solid var(--accent);
+}
+.highlight-card .hl-badge{
+  display:inline-block;font-size:.6875rem;font-weight:700;
+  color:var(--accent);background:var(--bg-card);
+  border:1px solid var(--border);border-radius:999px;
+  padding:2px 8px;margin-bottom:8px;
+}
+.highlight-card .hl-title{font-size:1rem;font-weight:700;margin-bottom:8px}
+.highlight-card .hl-title a{color:var(--text)}
+.highlight-card .hl-desc{font-size:.875rem;color:var(--text-muted);margin-bottom:8px}
+.highlight-card .hl-desc strong,
+.highlight-card .hl-scenario strong{
+  display:block;color:var(--text);font-size:.75rem;margin-bottom:2px;
+}
+.highlight-card .hl-link{font-size:.8125rem;margin-bottom:12px}
+.highlight-card .hl-scenario{
+  font-size:.875rem;line-height:1.7;
+  background:var(--bg-card);border-radius:8px;padding:12px;margin-bottom:8px;
+}
+.highlight-card .hl-action{
+  font-size:.8125rem;color:var(--accent);font-weight:600;
+}
+.highlight-card .hl-action::before{content:"→ "}
+
+/* Topic section */
+.topic{
+  background:var(--bg-card);border:1px solid var(--border);
+  border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:var(--shadow);
+}
+.topic-title{font-size:1rem;font-weight:700;margin-bottom:4px}
+.topic-summary{font-size:.8125rem;color:var(--text-muted);margin-bottom:16px}
+
+/* Item list */
+.item{
+  padding:10px 0;border-bottom:1px solid var(--border);
+  display:flex;gap:10px;align-items:flex-start;
+}
+.item:last-child{border-bottom:none;padding-bottom:0}
+.badge{
+  display:inline-block;font-size:.625rem;font-weight:700;
+  color:#fff;padding:2px 8px;border-radius:10px;white-space:nowrap;
+  flex-shrink:0;margin-top:3px;text-transform:uppercase;letter-spacing:.03em;
+}
+.badge-changelog{background:var(--badge-changelog)}
+.badge-mcp{background:var(--badge-mcp)}
+.badge-trending{background:var(--badge-trending)}
+.badge-plugin{background:var(--badge-plugin)}
+.badge-awesome{background:var(--badge-awesome)}
+.badge-skills{background:var(--badge-skills)}
+.item-body{flex:1;min-width:0}
+.item-title{font-size:.875rem;font-weight:600}
+.item-desc{font-size:.8125rem;color:var(--text-muted);margin-top:2px}
+.item-meta{font-size:.75rem;color:var(--text-light);margin-top:4px}
+.item-meta .stars::before{content:"\2B50 "}
+
+/* Footer */
+.footer{
+  text-align:center;color:var(--text-light);font-size:.75rem;
+  padding:32px 0 16px;border-top:1px solid var(--border);margin-top:32px;
+}
+
+/* No items */
+.empty{color:var(--text-light);font-style:italic;font-size:.875rem;padding:8px 0}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header class="header">
+  <h1>Weekly Tech Watch</h1>
+  <div class="date-range">2026-08-03 ~ 2026-08-05</div>
+</header>
+
+<div class="stat-grid">
+<div class="stat-card"><div class="num">2</div><div class="label">Claude Code</div></div>
+<div class="stat-card"><div class="num">12</div><div class="label">awesome-cc</div></div>
+</div>
+
+<h2 class="section-heading">Highlights</h2>
+<div class="highlight-card">
+  <div class="hl-badge">ニュース</div>
+  <div class="hl-title"><a href="https://code.claude.com/docs/en/changelog">Claude Code v2.1.221</a></div>
+  <div class="hl-desc"><strong>概要</strong>Claude Codeがv2.1.221にアップデートされ、LinuxおよびWSL環境でのサンドボックス機能が強化されました。認証情報ファイル（credential files）を「マスク」モードで扱えるようになり、サンドボックス内で機密情報が直接読み取られるのを防ぎ、セキュリティが向上します。</div>
+  <div class="hl-link"><a href="https://code.claude.com/docs/en/changelog">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>りゅうさんのAIチーム基盤やWONDAY-OS構築において、Claude Codeで外部APIを利用する際の認証情報管理のセキュリティ強化に繋がる可能性があります。Linux/WSL環境でサンドボックス化されたAIエージェントが機密ファイルにアクセスする際、情報漏洩リスクを低減し、より安全な自動化・仕組み化を推進できるかもしれません。</div>
+  <div class="hl-action">Claude Codeで外部APIを利用する際の認証情報管理のセキュリティ向上に興味があれば、公式ドキュメントでサンドボックスの「mask」モードについて詳細を確認する。</div>
+</div>
+<div class="highlight-card">
+  <div class="hl-badge">深掘り候補</div>
+  <div class="hl-title"><a href="https://code.claude.com/docs/en/changelog">Claude Code v2.1.222</a></div>
+  <div class="hl-desc"><strong>概要</strong>Claude Codeの自動モードにおいて、エージェントセッション間でメッセージを送信する際の安全性が向上しました。SendMessage経由のメッセージが、ディスパッチ前にパーミッション分類器で評価されます。</div>
+  <div class="hl-link"><a href="https://code.claude.com/docs/en/changelog">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>りゅうさんのAIチーム基盤やWONDAY-OSにおけるエージェント連携において、意図しない情報漏洩や誤動作のリスクを低減し、より堅牢な自動化システム構築に繋がる可能性があります。特にクライアント向けコンサルティングで機密情報を扱う際の信頼性向上に寄与するでしょう。</div>
+  <div class="hl-action">深掘りするなら、パーミッション分類器が具体的にどのような基準でメッセージを評価するのか、Claude Codeの公式ドキュメントで詳細を確認するのが良いでしょう。</div>
+</div>
+<div class="highlight-card">
+  <div class="hl-badge">ニュース</div>
+  <div class="hl-title"><a href="https://www.anthropic.com/news/tino-cuellar">Aug 4, 2026AnnouncementsMariano-Florentino (Tino) Cuéllar to join Anthropic as Chief Global Affairs Officer</a></div>
+  <div class="hl-desc"><strong>概要</strong>Anthropicが元カリフォルニア州最高裁判事のTino Cuéllar氏を最高国際関係責任者に任命しました。AIの倫理的開発と国際的な政策連携を強化し、安全なAIの普及を目指す姿勢を示しています。</div>
+  <div class="hl-link"><a href="https://www.anthropic.com/news/tino-cuellar">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>りゅうさんの主要AIツールであるAnthropicが、AIの倫理やガバナンスに注力する姿勢を強化していると捉えられます。AI経営スキル講座やAIコンサルティングにおいて、AIの安全性や社会実装に関する深い洞察をクライアントに提供する際の参考情報となる可能性があります。</div>
+  <div class="hl-action">Anthropicの公式ブログや関連ニュースで、Cuéllar氏の今後の具体的な活動方針や発言をウォッチすると、同社のAIガバナンス戦略の理解が深まるでしょう。</div>
+</div>
+
+<h2 class="section-heading">Topics</h2>
+<div class="topic">
+  <div class="topic-title">ソフトウェア更新</div>
+  <div class="topic-summary">開発ツールにおけるセキュリティ修正や新機能の追加に関する更新情報。</div>
+<div class="item">
+  <span class="badge badge-changelog">CHANGELOG</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://code.claude.com/docs/en/changelog">v2.1.222</a></div>
+    <div class="item-desc">Fixed worktree-isolated sessions and their subagents being able to run destructive git commands against the main checkout; isolation now applies to file edits and Bash in every session type, Fixed PreToolUse auto-allow hooks bypassing tool restrictions in background agent tasks (summaries, compaction, renames), Fixed /usage-credits on Team and Enterprise showing “you’ve already sent a usage credit request” for members whose earlier request was dismissed, blocking them from sending a new one</div>
+    <div class="item-meta">August 4, 2026</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-changelog">CHANGELOG</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://code.claude.com/docs/en/changelog">v2.1.221</a></div>
+    <div class="item-desc">[VSCode] Added Focus view: a chat-menu toggle that hides tool activity behind an expandable per-turn summary with a live running-tool indicator, toggled with Ctrl+Alt+F or the “Claude Code: Toggle Focus view” command, Added mode: &quot;mask&quot; for sandbox credential files on Linux and WSL — sandboxed commands read a sentinel copy (the whole file, or just the spans captured by an extract regex) while the sandbox proxy substitutes the real value on egress; on macOS file masking falls back to deny, Added warnings to claude plugin validate when a marketplace or plugin name would be rejected by Claude Desktop’s managed marketplace sync</div>
+    <div class="item-meta">August 4, 2026</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">リポジトリ保守</div>
+  <div class="topic-summary">リポジトリのデータ更新やコンテンツ再生成など、定期的な保守作業の記録。</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/99a449f">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-08-04</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/dcb93b3">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-08-04</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/a404fcd">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-08-04</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/fecbf60">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-08-04</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/6254af1">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-08-04</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/5ffcff0">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-08-04</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/3572184">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-08-04</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/0be35e6">chore: regenerate README + carousel from CSV [skip ci]</a></div>
+    <div class="item-meta">2026-08-04</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/278ba60">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-08-04</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/c152cd5">chore: regenerate README + carousel from CSV [skip ci]</a></div>
+    <div class="item-meta">2026-08-03</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">新規リソース追加</div>
+  <div class="topic-summary">特定のツールやデータセット、特にAI関連の「ハーネス」リソースの追加。</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/49d51b6">Add resource: CC Harness (#2425)</a></div>
+    <div class="item-meta">2026-08-04</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/8fc2634">Add resource: Claude Code Harness (#2424)</a></div>
+    <div class="item-meta">2026-08-03</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">企業人事発表</div>
+  <div class="topic-summary">Anthropic社への新メンバー参加に関する公式発表。</div>
+<div class="item">
+  <span class="badge badge-anthropic_news">ANTHROPIC_NEWS</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://www.anthropic.com/news/tino-cuellar">Aug 4, 2026AnnouncementsMariano-Florentino (Tino) Cuéllar to join Anthropic as Chief Global Affairs Officer</a></div>
+    <div class="item-meta">Aug 4, 202</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">不明・空欄項目</div>
+  <div class="topic-summary">内容が不明または空欄の項目をまとめたもの。</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/bcherny/json-schema-to-typescript">Boris Cherny: bcherny/json-schema-to-typescript (CreateEvent)</a></div>
+    <div class="item-desc">Created branch: claude/fuzz-fix-ref-to-boolean-schema</div>
+    <div class="item-meta">2026-08-04</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/bcherny/json-schema-to-typescript">Boris Cherny: bcherny/json-schema-to-typescript (CreateEvent)</a></div>
+    <div class="item-desc">Created branch: claude/fix-issue-559</div>
+    <div class="item-meta">2026-08-04</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/GoogleChromeLabs/quicklink/releases/tag/3.0.2">Addy Osmani: GoogleChromeLabs/quicklink (ReleaseEvent)</a></div>
+    <div class="item-desc">Release published: 3.0.2</div>
+    <div class="item-meta">2026-08-04</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/GoogleChromeLabs/quicklink">Addy Osmani: GoogleChromeLabs/quicklink (PushEvent)</a></div>
+    <div class="item-desc">[main] New push</div>
+    <div class="item-meta">2026-08-04</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/GoogleChromeLabs/quicklink">Addy Osmani: GoogleChromeLabs/quicklink (PushEvent)</a></div>
+    <div class="item-desc">[main] New push</div>
+    <div class="item-meta">2026-08-04</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/sankalpsthakur/quicklink">Addy Osmani: sankalpsthakur/quicklink (PushEvent)</a></div>
+    <div class="item-desc">[385-document-modern-bundle] New push</div>
+    <div class="item-meta">2026-08-04</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/sankalpsthakur/quicklink">Addy Osmani: sankalpsthakur/quicklink (PushEvent)</a></div>
+    <div class="item-desc">[385-document-modern-bundle] New push</div>
+    <div class="item-meta">2026-08-04</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/GoogleChromeLabs/quicklink">Addy Osmani: GoogleChromeLabs/quicklink (PushEvent)</a></div>
+    <div class="item-desc">[main] New push</div>
+    <div class="item-meta">2026-08-04</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/addyosmani/agent-skills/releases/tag/0.6.6">Addy Osmani: addyosmani/agent-skills (ReleaseEvent)</a></div>
+    <div class="item-desc">Release published: 0.6.6</div>
+    <div class="item-meta">2026-08-04</div>
+  </div>
+</div>
+</div>
+
+<footer class="footer">
+  Generated at 2026-08-05 07:55 JST<br>
+  Sources: Claude Code CHANGELOG, GitHub Releases, awesome-claude-code,
+  anthropics/skills, PulseMCP, Claude Plugins, GitHub Trending
+</footer>
+
+</div>
+</body>
+</html>
