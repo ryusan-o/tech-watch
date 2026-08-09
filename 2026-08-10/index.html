@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Weekly Tech Watch — 2026-08-10</title>
+<style>
+:root {
+  --bg: #f8fafc;
+  --bg-card: #ffffff;
+  --bg-highlight: #eff6ff;
+  --text: #1e293b;
+  --text-muted: #64748b;
+  --text-light: #94a3b8;
+  --accent: #3b82f6;
+  --border: #e2e8f0;
+  --shadow: 0 1px 3px rgba(0,0,0,.08);
+  --badge-changelog: #3b82f6;
+  --badge-mcp: #8b5cf6;
+  --badge-trending: #f59e0b;
+  --badge-plugin: #10b981;
+  --badge-awesome: #f43f5e;
+  --badge-skills: #06b6d4;
+}
+@media(prefers-color-scheme:dark){
+:root {
+  --bg: #0f172a;
+  --bg-card: #1e293b;
+  --bg-highlight: #1e3a5f;
+  --text: #e2e8f0;
+  --text-muted: #94a3b8;
+  --text-light: #64748b;
+  --accent: #60a5fa;
+  --border: #334155;
+  --shadow: 0 1px 3px rgba(0,0,0,.3);
+}}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  background:var(--bg);color:var(--text);
+  line-height:1.6;padding:16px;
+}
+.container{max-width:760px;margin:0 auto}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* Header */
+.header{text-align:center;padding:32px 0 24px}
+.header h1{font-size:1.5rem;font-weight:700;letter-spacing:-.02em}
+.header .date-range{color:var(--text-muted);font-size:.875rem;margin-top:4px}
+
+/* Stats */
+.stat-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));
+  gap:8px;margin:0 0 32px;
+}
+.stat-card{
+  background:var(--bg-card);border:1px solid var(--border);border-radius:8px;
+  padding:12px;text-align:center;box-shadow:var(--shadow);
+}
+.stat-card .num{font-size:1.5rem;font-weight:700;color:var(--accent)}
+.stat-card .label{font-size:.75rem;color:var(--text-muted);margin-top:2px}
+
+/* Section heading */
+.section-heading{
+  font-size:1.125rem;font-weight:700;margin:32px 0 16px;
+  padding-bottom:8px;border-bottom:2px solid var(--accent);
+}
+
+/* Highlight cards */
+.highlight-card{
+  background:var(--bg-highlight);border:1px solid var(--border);
+  border-radius:12px;padding:20px;margin-bottom:16px;
+  border-left:4px solid var(--accent);
+}
+.highlight-card .hl-badge{
+  display:inline-block;font-size:.6875rem;font-weight:700;
+  color:var(--accent);background:var(--bg-card);
+  border:1px solid var(--border);border-radius:999px;
+  padding:2px 8px;margin-bottom:8px;
+}
+.highlight-card .hl-title{font-size:1rem;font-weight:700;margin-bottom:8px}
+.highlight-card .hl-title a{color:var(--text)}
+.highlight-card .hl-desc{font-size:.875rem;color:var(--text-muted);margin-bottom:8px}
+.highlight-card .hl-desc strong,
+.highlight-card .hl-scenario strong{
+  display:block;color:var(--text);font-size:.75rem;margin-bottom:2px;
+}
+.highlight-card .hl-link{font-size:.8125rem;margin-bottom:12px}
+.highlight-card .hl-scenario{
+  font-size:.875rem;line-height:1.7;
+  background:var(--bg-card);border-radius:8px;padding:12px;margin-bottom:8px;
+}
+.highlight-card .hl-action{
+  font-size:.8125rem;color:var(--accent);font-weight:600;
+}
+.highlight-card .hl-action::before{content:"→ "}
+
+/* Topic section */
+.topic{
+  background:var(--bg-card);border:1px solid var(--border);
+  border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:var(--shadow);
+}
+.topic-title{font-size:1rem;font-weight:700;margin-bottom:4px}
+.topic-summary{font-size:.8125rem;color:var(--text-muted);margin-bottom:16px}
+
+/* Item list */
+.item{
+  padding:10px 0;border-bottom:1px solid var(--border);
+  display:flex;gap:10px;align-items:flex-start;
+}
+.item:last-child{border-bottom:none;padding-bottom:0}
+.badge{
+  display:inline-block;font-size:.625rem;font-weight:700;
+  color:#fff;padding:2px 8px;border-radius:10px;white-space:nowrap;
+  flex-shrink:0;margin-top:3px;text-transform:uppercase;letter-spacing:.03em;
+}
+.badge-changelog{background:var(--badge-changelog)}
+.badge-mcp{background:var(--badge-mcp)}
+.badge-trending{background:var(--badge-trending)}
+.badge-plugin{background:var(--badge-plugin)}
+.badge-awesome{background:var(--badge-awesome)}
+.badge-skills{background:var(--badge-skills)}
+.item-body{flex:1;min-width:0}
+.item-title{font-size:.875rem;font-weight:600}
+.item-desc{font-size:.8125rem;color:var(--text-muted);margin-top:2px}
+.item-meta{font-size:.75rem;color:var(--text-light);margin-top:4px}
+.item-meta .stars::before{content:"\2B50 "}
+
+/* Footer */
+.footer{
+  text-align:center;color:var(--text-light);font-size:.75rem;
+  padding:32px 0 16px;border-top:1px solid var(--border);margin-top:32px;
+}
+
+/* No items */
+.empty{color:var(--text-light);font-style:italic;font-size:.875rem;padding:8px 0}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header class="header">
+  <h1>Weekly Tech Watch</h1>
+  <div class="date-range">2026-08-06 ~ 2026-08-10</div>
+</header>
+
+<div class="stat-grid">
+<div class="stat-card"><div class="num">3</div><div class="label">Claude Code</div></div>
+<div class="stat-card"><div class="num">3</div><div class="label">Trending</div></div>
+<div class="stat-card"><div class="num">5</div><div class="label">Plugins</div></div>
+<div class="stat-card"><div class="num">20</div><div class="label">awesome-cc</div></div>
+</div>
+
+<h2 class="section-heading">Highlights</h2>
+<div class="highlight-card">
+  <div class="hl-badge">ニュース</div>
+  <div class="hl-title"><a href="https://code.claude.com/docs/en/changelog">Claude Code v2.1.224</a></div>
+  <div class="hl-desc"><strong>概要</strong>Claude Codeがv2.1.224にアップデートされ、TeamおよびEnterpriseプラン向けに自己ホスト型環境「self-hosted-runner」が追加されました。これにより、ユーザー自身のマシンやコンテナ上でClaude Codeのセッションを実行できるようになります。</div>
+  <div class="hl-link"><a href="https://code.claude.com/docs/en/changelog">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>「AIチーム基盤」や「WONDAY-OS（AI運用基盤）」プロジェクトにおいて、将来的にセキュリティやデータ主権の要件が高まった際に、自己ホスト型環境の検討が必要になる可能性があります。特にクライアントの機密情報を扱うコンサルティング業務では、データ管理の柔軟性が向上するかもしれません。</div>
+  <div class="hl-action">深掘りするなら、Team/Enterpriseプランの機能詳細や料金体系を確認し、WONDAYの将来的な事業展開との適合性を検討する。</div>
+</div>
+<div class="highlight-card">
+  <div class="hl-badge">深掘り候補</div>
+  <div class="hl-title"><a href="https://code.claude.com/docs/en/changelog">Claude Code v2.1.225</a></div>
+  <div class="hl-desc"><strong>概要</strong>Claude Code v2.1.225がリリースされ、API利用におけるゲートウェイの利用上限額サポートが追加されました。上限に達した際の警告メッセージが詳細化され、上限額、リセット時間、オペレーターメッセージが表示されることで、コスト管理の透明性が向上します。</div>
+  <div class="hl-link"><a href="https://code.claude.com/docs/en/changelog">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>りゅうさんはAnthropic APIを従量課金で利用しており、この機能はAI活用における費用管理の効率化に役立つ可能性があります。予期せぬ課金を防ぎ、複数のプロジェクトでAIを利用する際のコスト超過リスクを低減することで、「やらなきゃいけないこと」の自動化・効率化に貢献できるかもしれません。</div>
+  <div class="hl-action">深掘りするなら、Anthropic APIの利用状況と、この「gateway spend-limit」が自身の従量課金にどのように適用され得るかを確認すると良いでしょう。</div>
+</div>
+<div class="highlight-card">
+  <div class="hl-badge">ニュース</div>
+  <div class="hl-title"><a href="https://www.anthropic.com/news/improving-fable-5-s-biology-safeguards">Aug 7, 2026ProductImproving Fable 5&#x27;s biology safeguards</a></div>
+  <div class="hl-desc"><strong>概要</strong>Anthropicは、開発中の次世代AIモデル「Fable 5」における生物学的な安全対策を強化したと発表しました。これは、AIの潜在的な悪用リスクを低減し、責任あるAI開発を推進するための重要な取り組みです。</div>
+  <div class="hl-link"><a href="https://www.anthropic.com/news/improving-fable-5-s-biology-safeguards">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>AIコンサルとして、次世代モデルの安全対策動向を把握することで、クライアントへのAI導入提案時に信頼性やリスク管理に関する深い知見を提供できる可能性があります。WONDAYの理念である「ストレスフリーな社会」を実現する上で、AIの倫理的・安全な利用を啓蒙する際の根拠としても活用できるでしょう。</div>
+  <div class="hl-action">深掘りするなら、Anthropicの公式ブログで具体的な安全対策の内容や技術的アプローチについて詳細を確認すると良いでしょう。</div>
+</div>
+
+<h2 class="section-heading">Topics</h2>
+<div class="topic">
+  <div class="topic-title">Claude Code更新</div>
+  <div class="topic-summary">Claude Codeの最新バージョン情報、自己ホスティング機能、使用制限、開発者向けスキルに関する更新。</div>
+<div class="item">
+  <span class="badge badge-changelog">CHANGELOG</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://code.claude.com/docs/en/changelog">v2.1.226</a></div>
+    <div class="item-desc">Bug fixes and reliability improvements</div>
+    <div class="item-meta">August 8, 2026</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-changelog">CHANGELOG</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://code.claude.com/docs/en/changelog">v2.1.225</a></div>
+    <div class="item-desc">Added gateway spend-limit support to Claude Code’s usage warning; the limit-reached message now names the cap, its reset time, and the operator’s message (requires the gateway on 2.1.225), Added a workspace trust prompt to claude agents for untrusted directories, matching the behavior of claude, Fixed a transient 401 replacing a long-lived CLAUDE_CODE_OAUTH_TOKEN with a stored login’s short-lived token, breaking headless sessions until restart</div>
+    <div class="item-meta">August 8, 2026</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-changelog">CHANGELOG</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://code.claude.com/docs/en/changelog">v2.1.224</a></div>
+    <div class="item-desc">Added self-hosted environments: claude self-hosted-runner turns your own machines or containers into a place Claude Code web, mobile, and desktop sessions can run, on Team and Enterprise plans, Added archive plugin source: install plugins from a zip over HTTPS without git or npm, with optional SHA-256 pinning, Added a cancel-and-confirm step when removing an unavailable paste changes a command’s text</div>
+    <div class="item-meta">August 7, 2026</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/Jeffallan/claude-skills">Jeffallan/claude-skills</a></div>
+    <div class="item-desc">66 Specialized Skills for Full-Stack Developers. Transform Claude Code into your expert pair programmer.</div>
+    <div class="item-meta"><span class="stars">10941</span></div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-plugin">PLUGIN</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://synthflow.ai">synthflow</a></div>
+    <div class="item-desc">Connects Claude Code to the Synthflow AI voice-agent platform through its hosted MCP server, with skills for reviewing calls and auditing agent prompts, plus a docs-search connector.</div>
+    <div class="item-meta">automation</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/5df9e12">Add resource: Beyond the Prompt: Claude Code (#2480)</a></div>
+    <div class="item-meta">2026-08-09</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">AI音声・文字起こし</div>
+  <div class="topic-summary">OpenAI Whisper ASRや会議文字起こしAPIなど、音声認識と文字起こしに関連するAIツールとサービス。</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/ahmetoner/whisper-asr-webservice">ahmetoner/whisper-asr-webservice</a></div>
+    <div class="item-desc">OpenAI Whisper ASR Webservice API</div>
+    <div class="item-meta"><span class="stars">3316</span></div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/Vexa-ai/vexa">Vexa-ai/vexa</a></div>
+    <div class="item-desc">Open-source meeting transcription API for Google Meet, Microsoft Teams &amp; Zoom. Auto-join bots, real-time WebSocket transcripts, MCP server for AI agents. Self-host or use hosted SaaS.</div>
+    <div class="item-meta"><span class="stars">2665</span></div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">開発者ツール</div>
+  <div class="topic-summary">決済統合、マネージドデータベース、ストリーミング、Salesforce開発など、多様なプラットフォーム向け開発ツール。</div>
+<div class="item">
+  <span class="badge badge-plugin">PLUGIN</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://www.airwallex.com/docs">airwallex-dev</a></div>
+    <div class="item-desc">Build Airwallex payment integrations in your own codebase. Generates the checkout, card-element, onboarding, and subscription-billing code for an Airwallex integration and wires it into your project: Hosted Payment Page, Drop-in and Split Card elements, connected-account KYC onboarding, and Billing Hosted Checkout for subscriptions and card-saving. Also plans card-on-file merchant-initiated flows for AI providers such as top-ups and auto-recharge.</div>
+    <div class="item-meta">development</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-plugin">PLUGIN</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://aiven.io">aiven</a></div>
+    <div class="item-desc">Easily deploy managed PostgreSQL (pg), Kafka, OpenSearch, Clickhouse and other databases, streaming and apps. Free tier available, up and running in minutes.</div>
+    <div class="item-meta">database</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-plugin">PLUGIN</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/forcedotcom/sf-skills/tree/main/plugins/builder/salesforce-development">salesforce-development</a></div>
+    <div class="item-desc">Build Salesforce apps and agents using these core building blocks: metadata, Apex, deploy/retrieve, security, reporting, and generated installed-versus-available capability discovery.</div>
+    <div class="item-meta">development</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-plugin">PLUGIN</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://www.confluent.io">streaming-skills-plugin</a></div>
+    <div class="item-desc">Skills for streaming application developers, covering Kafka and Flink client libraries and Schema Registry</div>
+    <div class="item-meta">development</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">Fable 5情報</div>
+  <div class="topic-summary">Claude Fable 5に関するリソースや、生物学的安全対策の改善に関する製品アップデート。</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/12a3a15">Add resource: A Field Guide to Claude Fable 5 (#2478)</a></div>
+    <div class="item-meta">2026-08-09</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-anthropic_news">ANTHROPIC_NEWS</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://www.anthropic.com/news/improving-fable-5-s-biology-safeguards">Aug 7, 2026ProductImproving Fable 5&#x27;s biology safeguards</a></div>
+    <div class="item-meta">Aug 7, 202</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">リポジトリ保守</div>
+  <div class="topic-summary">リポジトリのデータ更新、READMEやカルーセルの再生成など、定期的な保守作業の記録。</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/0d5f216">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-08-09</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/e04bb8b">chore: regenerate README + carousel from CSV [skip ci]</a></div>
+    <div class="item-meta">2026-08-09</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/344cbc5">chore: regenerate README + carousel from CSV [skip ci]</a></div>
+    <div class="item-meta">2026-08-09</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/16e726a">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-08-09</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/8b12550">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-08-09</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/ac38c28">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-08-09</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/131b649">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-08-09</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/ff60d0f">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-08-09</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/687752a">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-08-09</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/eea9106">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-08-09</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/45114ea">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-08-08</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/be13803">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-08-08</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/2b3be99">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-08-08</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/f9bfa77">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-08-08</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/d8d2a3b">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-08-08</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/71a24e6">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-08-08</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/c0452a6">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-08-08</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/0f18502">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-08-08</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">その他</div>
+  <div class="topic-summary">内容が空白または分類が難しい項目。</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/addyosmani/agent-skills">Addy Osmani: addyosmani/agent-skills (PushEvent)</a></div>
+    <div class="item-desc">[main] New push</div>
+    <div class="item-meta">2026-08-08</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/addyosmani/agent-skills">Addy Osmani: addyosmani/agent-skills (PushEvent)</a></div>
+    <div class="item-desc">[constraint-driven-development] New push</div>
+    <div class="item-meta">2026-08-08</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/addyosmani/agent-skills">Addy Osmani: addyosmani/agent-skills (CreateEvent)</a></div>
+    <div class="item-desc">Created branch: feat/constraint-driven-development</div>
+    <div class="item-meta">2026-08-08</div>
+  </div>
+</div>
+</div>
+
+<footer class="footer">
+  Generated at 2026-08-10 07:55 JST<br>
+  Sources: Claude Code CHANGELOG, GitHub Releases, awesome-claude-code,
+  anthropics/skills, PulseMCP, Claude Plugins, GitHub Trending
+</footer>
+
+</div>
+</body>
+</html>
