@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Weekly Tech Watch — 2026-08-13</title>
+<style>
+:root {
+  --bg: #f8fafc;
+  --bg-card: #ffffff;
+  --bg-highlight: #eff6ff;
+  --text: #1e293b;
+  --text-muted: #64748b;
+  --text-light: #94a3b8;
+  --accent: #3b82f6;
+  --border: #e2e8f0;
+  --shadow: 0 1px 3px rgba(0,0,0,.08);
+  --badge-changelog: #3b82f6;
+  --badge-mcp: #8b5cf6;
+  --badge-trending: #f59e0b;
+  --badge-plugin: #10b981;
+  --badge-awesome: #f43f5e;
+  --badge-skills: #06b6d4;
+}
+@media(prefers-color-scheme:dark){
+:root {
+  --bg: #0f172a;
+  --bg-card: #1e293b;
+  --bg-highlight: #1e3a5f;
+  --text: #e2e8f0;
+  --text-muted: #94a3b8;
+  --text-light: #64748b;
+  --accent: #60a5fa;
+  --border: #334155;
+  --shadow: 0 1px 3px rgba(0,0,0,.3);
+}}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  background:var(--bg);color:var(--text);
+  line-height:1.6;padding:16px;
+}
+.container{max-width:760px;margin:0 auto}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* Header */
+.header{text-align:center;padding:32px 0 24px}
+.header h1{font-size:1.5rem;font-weight:700;letter-spacing:-.02em}
+.header .date-range{color:var(--text-muted);font-size:.875rem;margin-top:4px}
+
+/* Stats */
+.stat-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));
+  gap:8px;margin:0 0 32px;
+}
+.stat-card{
+  background:var(--bg-card);border:1px solid var(--border);border-radius:8px;
+  padding:12px;text-align:center;box-shadow:var(--shadow);
+}
+.stat-card .num{font-size:1.5rem;font-weight:700;color:var(--accent)}
+.stat-card .label{font-size:.75rem;color:var(--text-muted);margin-top:2px}
+
+/* Section heading */
+.section-heading{
+  font-size:1.125rem;font-weight:700;margin:32px 0 16px;
+  padding-bottom:8px;border-bottom:2px solid var(--accent);
+}
+
+/* Highlight cards */
+.highlight-card{
+  background:var(--bg-highlight);border:1px solid var(--border);
+  border-radius:12px;padding:20px;margin-bottom:16px;
+  border-left:4px solid var(--accent);
+}
+.highlight-card .hl-badge{
+  display:inline-block;font-size:.6875rem;font-weight:700;
+  color:var(--accent);background:var(--bg-card);
+  border:1px solid var(--border);border-radius:999px;
+  padding:2px 8px;margin-bottom:8px;
+}
+.highlight-card .hl-title{font-size:1rem;font-weight:700;margin-bottom:8px}
+.highlight-card .hl-title a{color:var(--text)}
+.highlight-card .hl-desc{font-size:.875rem;color:var(--text-muted);margin-bottom:8px}
+.highlight-card .hl-desc strong,
+.highlight-card .hl-scenario strong{
+  display:block;color:var(--text);font-size:.75rem;margin-bottom:2px;
+}
+.highlight-card .hl-link{font-size:.8125rem;margin-bottom:12px}
+.highlight-card .hl-scenario{
+  font-size:.875rem;line-height:1.7;
+  background:var(--bg-card);border-radius:8px;padding:12px;margin-bottom:8px;
+}
+.highlight-card .hl-action{
+  font-size:.8125rem;color:var(--accent);font-weight:600;
+}
+.highlight-card .hl-action::before{content:"→ "}
+
+/* Topic section */
+.topic{
+  background:var(--bg-card);border:1px solid var(--border);
+  border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:var(--shadow);
+}
+.topic-title{font-size:1rem;font-weight:700;margin-bottom:4px}
+.topic-summary{font-size:.8125rem;color:var(--text-muted);margin-bottom:16px}
+
+/* Item list */
+.item{
+  padding:10px 0;border-bottom:1px solid var(--border);
+  display:flex;gap:10px;align-items:flex-start;
+}
+.item:last-child{border-bottom:none;padding-bottom:0}
+.badge{
+  display:inline-block;font-size:.625rem;font-weight:700;
+  color:#fff;padding:2px 8px;border-radius:10px;white-space:nowrap;
+  flex-shrink:0;margin-top:3px;text-transform:uppercase;letter-spacing:.03em;
+}
+.badge-changelog{background:var(--badge-changelog)}
+.badge-mcp{background:var(--badge-mcp)}
+.badge-trending{background:var(--badge-trending)}
+.badge-plugin{background:var(--badge-plugin)}
+.badge-awesome{background:var(--badge-awesome)}
+.badge-skills{background:var(--badge-skills)}
+.item-body{flex:1;min-width:0}
+.item-title{font-size:.875rem;font-weight:600}
+.item-desc{font-size:.8125rem;color:var(--text-muted);margin-top:2px}
+.item-meta{font-size:.75rem;color:var(--text-light);margin-top:4px}
+.item-meta .stars::before{content:"\2B50 "}
+
+/* Footer */
+.footer{
+  text-align:center;color:var(--text-light);font-size:.75rem;
+  padding:32px 0 16px;border-top:1px solid var(--border);margin-top:32px;
+}
+
+/* No items */
+.empty{color:var(--text-light);font-style:italic;font-size:.875rem;padding:8px 0}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header class="header">
+  <h1>Weekly Tech Watch</h1>
+  <div class="date-range">2026-08-11 ~ 2026-08-13</div>
+</header>
+
+<div class="stat-grid">
+<div class="stat-card"><div class="num">3</div><div class="label">Trending</div></div>
+<div class="stat-card"><div class="num">8</div><div class="label">awesome-cc</div></div>
+</div>
+
+<h2 class="section-heading">Highlights</h2>
+<div class="highlight-card">
+  <div class="hl-badge">深掘り候補</div>
+  <div class="hl-title"><a href="https://github.com/modelcontextprotocol/typescript-sdk">GitHub: modelcontextprotocol/typescript-sdk</a></div>
+  <div class="hl-desc"><strong>概要</strong>GitHubでModel Context Protocol (MCP) の公式TypeScript SDKが公開されました。これは、AIモデルとアプリケーション間でコンテキスト（文脈）を標準的に共有するためのプロトコルで、TypeScript環境でのサーバー・クライアント構築を容易にします。</div>
+  <div class="hl-link"><a href="https://github.com/modelcontextprotocol/typescript-sdk">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>AIコンサルティングにおいて、複数のAIモデルや外部システム連携時のコンテキスト管理を標準化するソリューションとして、その概念をクライアントに提案できる可能性があります。また、WONDAY-OSやAIチーム基盤で異なるAIツール間の一貫したコンテキスト維持・共有の仕組みを検討する際の設計思想として参考になるかもしれません。</div>
+  <div class="hl-action">Model Context Protocolの基本的な概念と、それがAIアプリケーションの複雑な連携においてどのような課題を解決するかについて解説記事をいくつか読み、理解を深める。</div>
+</div>
+<div class="highlight-card">
+  <div class="hl-badge">深掘り候補</div>
+  <div class="hl-title"><a href="https://github.com/MahmoudAshraf97/whisper-diarization">GitHub: MahmoudAshraf97/whisper-diarization</a></div>
+  <div class="hl-desc"><strong>概要</strong>GitHubで公開された「whisper-diarization」は、OpenAI Whisperに話者分離機能を統合した自動音声認識ツールです。音声データから発言者を識別し、議事録作成などの精度を向上させる可能性があります。</div>
+  <div class="hl-link"><a href="https://github.com/MahmoudAshraf97/whisper-diarization">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>「MeetingMinutes」プロジェクトにおいて、議事録の文字起こし精度と話者識別の課題解決に繋がる可能性があります。会議やヒアリング音声から、誰がいつ発言したかを自動で識別し、固有名詞の誤認識や名寄せの手間を削減できるかもしれません。これにより、議事録作成の効率化と品質向上が期待できます。</div>
+  <div class="hl-action">GitHubリポジトリのREADMEやドキュメントを確認し、導入方法や技術的な要件、既存のMeetingMinutesシステムとの連携可能性を調査するのが良いでしょう。</div>
+</div>
+<div class="highlight-card">
+  <div class="hl-badge">深掘り候補</div>
+  <div class="hl-title"><a href="https://github.com/nowork-studio/notfair-plugin">GitHub: nowork-studio/notfair-plugin</a></div>
+  <div class="hl-desc"><strong>概要</strong>AIエージェントにSEO、GEO（地域ターゲティング）、マーケティングスキルを付与するオープンソースプラグインが公開されました。これにより、AIがウェブコンテンツの最適化や地域特化型プロモーション戦略を自動で実行できるようになります。</div>
+  <div class="hl-link"><a href="https://github.com/nowork-studio/notfair-plugin">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>ヘルシービストロりゅうさんちの地域集客（GEO）や、うま藻事業のECサイトのSEO強化に活用できる可能性があります。AIコンサルティングでは、クライアントのマーケティング支援におけるAIエージェントの機能拡張として提案の幅を広げ、労働集約型からの脱却に貢献するかもしれません。</div>
+  <div class="hl-action">深掘りするなら、GitHubリポジトリのREADMEやドキュメントを確認し、具体的な機能や導入要件、既存のAIエージェントとの連携方法を調査してみましょう。</div>
+</div>
+
+<h2 class="section-heading">Topics</h2>
+<div class="topic">
+  <div class="topic-title">AI基盤技術</div>
+  <div class="topic-summary">モデル間通信プロトコルSDKと音声認識・話者分離技術に関する最新動向。</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/modelcontextprotocol/typescript-sdk">modelcontextprotocol/typescript-sdk</a></div>
+    <div class="item-desc">The official TypeScript SDK for Model Context Protocol servers and clients</div>
+    <div class="item-meta"><span class="stars">13152</span></div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/MahmoudAshraf97/whisper-diarization">MahmoudAshraf97/whisper-diarization</a></div>
+    <div class="item-desc">Automatic Speech Recognition with Speaker Diarization based on OpenAI Whisper</div>
+    <div class="item-meta"><span class="stars">5616</span></div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">AI応用ツール</div>
+  <div class="topic-summary">AIエージェント向けにSEO、GEO、マーケティングスキルを提供するオープンソースプラグイン。</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/nowork-studio/notfair-plugin">nowork-studio/notfair-plugin</a></div>
+    <div class="item-desc">Open-source SEO, GEO, and marketing skills for AI agents.</div>
+    <div class="item-meta"><span class="stars">3346</span></div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">リポジトリ更新</div>
+  <div class="topic-summary">リポジトリの定期的なデータ更新や軽微な修正、および内容不明な項目に関する情報。</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/2e0347e">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-08-12</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/b8f66f8">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-08-12</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/572c94a">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-08-12</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/bc20c1f">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-08-12</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/2c335be">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-08-12</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/835ac90">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-08-12</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/947b70c">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-08-12</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/a6e6c52">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-08-12</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/jaredpalmer/vwaffle">Jared Palmer: jaredpalmer/vwaffle (CreateEvent)</a></div>
+    <div class="item-desc">Created branch: main</div>
+    <div class="item-meta">2026-08-12</div>
+  </div>
+</div>
+</div>
+
+<footer class="footer">
+  Generated at 2026-08-13 07:55 JST<br>
+  Sources: Claude Code CHANGELOG, GitHub Releases, awesome-claude-code,
+  anthropics/skills, PulseMCP, Claude Plugins, GitHub Trending
+</footer>
+
+</div>
+</body>
+</html>
