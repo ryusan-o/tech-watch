@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Weekly Tech Watch — 2026-08-19</title>
+<style>
+:root {
+  --bg: #f8fafc;
+  --bg-card: #ffffff;
+  --bg-highlight: #eff6ff;
+  --text: #1e293b;
+  --text-muted: #64748b;
+  --text-light: #94a3b8;
+  --accent: #3b82f6;
+  --border: #e2e8f0;
+  --shadow: 0 1px 3px rgba(0,0,0,.08);
+  --badge-changelog: #3b82f6;
+  --badge-mcp: #8b5cf6;
+  --badge-trending: #f59e0b;
+  --badge-plugin: #10b981;
+  --badge-awesome: #f43f5e;
+  --badge-skills: #06b6d4;
+}
+@media(prefers-color-scheme:dark){
+:root {
+  --bg: #0f172a;
+  --bg-card: #1e293b;
+  --bg-highlight: #1e3a5f;
+  --text: #e2e8f0;
+  --text-muted: #94a3b8;
+  --text-light: #64748b;
+  --accent: #60a5fa;
+  --border: #334155;
+  --shadow: 0 1px 3px rgba(0,0,0,.3);
+}}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  background:var(--bg);color:var(--text);
+  line-height:1.6;padding:16px;
+}
+.container{max-width:760px;margin:0 auto}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* Header */
+.header{text-align:center;padding:32px 0 24px}
+.header h1{font-size:1.5rem;font-weight:700;letter-spacing:-.02em}
+.header .date-range{color:var(--text-muted);font-size:.875rem;margin-top:4px}
+
+/* Stats */
+.stat-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));
+  gap:8px;margin:0 0 32px;
+}
+.stat-card{
+  background:var(--bg-card);border:1px solid var(--border);border-radius:8px;
+  padding:12px;text-align:center;box-shadow:var(--shadow);
+}
+.stat-card .num{font-size:1.5rem;font-weight:700;color:var(--accent)}
+.stat-card .label{font-size:.75rem;color:var(--text-muted);margin-top:2px}
+
+/* Section heading */
+.section-heading{
+  font-size:1.125rem;font-weight:700;margin:32px 0 16px;
+  padding-bottom:8px;border-bottom:2px solid var(--accent);
+}
+
+/* Highlight cards */
+.highlight-card{
+  background:var(--bg-highlight);border:1px solid var(--border);
+  border-radius:12px;padding:20px;margin-bottom:16px;
+  border-left:4px solid var(--accent);
+}
+.highlight-card .hl-badge{
+  display:inline-block;font-size:.6875rem;font-weight:700;
+  color:var(--accent);background:var(--bg-card);
+  border:1px solid var(--border);border-radius:999px;
+  padding:2px 8px;margin-bottom:8px;
+}
+.highlight-card .hl-title{font-size:1rem;font-weight:700;margin-bottom:8px}
+.highlight-card .hl-title a{color:var(--text)}
+.highlight-card .hl-desc{font-size:.875rem;color:var(--text-muted);margin-bottom:8px}
+.highlight-card .hl-desc strong,
+.highlight-card .hl-scenario strong{
+  display:block;color:var(--text);font-size:.75rem;margin-bottom:2px;
+}
+.highlight-card .hl-link{font-size:.8125rem;margin-bottom:12px}
+.highlight-card .hl-scenario{
+  font-size:.875rem;line-height:1.7;
+  background:var(--bg-card);border-radius:8px;padding:12px;margin-bottom:8px;
+}
+.highlight-card .hl-action{
+  font-size:.8125rem;color:var(--accent);font-weight:600;
+}
+.highlight-card .hl-action::before{content:"→ "}
+
+/* Topic section */
+.topic{
+  background:var(--bg-card);border:1px solid var(--border);
+  border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:var(--shadow);
+}
+.topic-title{font-size:1rem;font-weight:700;margin-bottom:4px}
+.topic-summary{font-size:.8125rem;color:var(--text-muted);margin-bottom:16px}
+
+/* Item list */
+.item{
+  padding:10px 0;border-bottom:1px solid var(--border);
+  display:flex;gap:10px;align-items:flex-start;
+}
+.item:last-child{border-bottom:none;padding-bottom:0}
+.badge{
+  display:inline-block;font-size:.625rem;font-weight:700;
+  color:#fff;padding:2px 8px;border-radius:10px;white-space:nowrap;
+  flex-shrink:0;margin-top:3px;text-transform:uppercase;letter-spacing:.03em;
+}
+.badge-changelog{background:var(--badge-changelog)}
+.badge-mcp{background:var(--badge-mcp)}
+.badge-trending{background:var(--badge-trending)}
+.badge-plugin{background:var(--badge-plugin)}
+.badge-awesome{background:var(--badge-awesome)}
+.badge-skills{background:var(--badge-skills)}
+.item-body{flex:1;min-width:0}
+.item-title{font-size:.875rem;font-weight:600}
+.item-desc{font-size:.8125rem;color:var(--text-muted);margin-top:2px}
+.item-meta{font-size:.75rem;color:var(--text-light);margin-top:4px}
+.item-meta .stars::before{content:"\2B50 "}
+
+/* Footer */
+.footer{
+  text-align:center;color:var(--text-light);font-size:.75rem;
+  padding:32px 0 16px;border-top:1px solid var(--border);margin-top:32px;
+}
+
+/* No items */
+.empty{color:var(--text-light);font-style:italic;font-size:.875rem;padding:8px 0}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header class="header">
+  <h1>Weekly Tech Watch</h1>
+  <div class="date-range">2026-08-17 ~ 2026-08-19</div>
+</header>
+
+<div class="stat-grid">
+<div class="stat-card"><div class="num">1</div><div class="label">Claude Code</div></div>
+<div class="stat-card"><div class="num">2</div><div class="label">Trending</div></div>
+<div class="stat-card"><div class="num">8</div><div class="label">awesome-cc</div></div>
+<div class="stat-card"><div class="num">1</div><div class="label">Skills</div></div>
+</div>
+
+<h2 class="section-heading">Highlights</h2>
+<div class="highlight-card">
+  <div class="hl-badge">ニュース</div>
+  <div class="hl-title"><a href="https://code.claude.com/docs/en/changelog">Claude Code v2.1.235</a></div>
+  <div class="hl-desc"><strong>概要</strong>Claude Code v2.1.235で、プロンプト入力時のスペルチェック機能がオプションとして追加されました。これにより、入力中に誤字が下線表示され、aspellなどの既存ツールと連携して利用可能です。</div>
+  <div class="hl-link"><a href="https://code.claude.com/docs/en/changelog">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>りゅうさんのAI活用において、プロンプト作成時の誤字脱字を自動で検知し、修正の手間を削減できる可能性があります。これにより、プロンプトの品質向上と作成効率化に繋がり、AIチーム基盤のストレスフリーな運用に貢献できるでしょう。</div>
+  <div class="hl-action">もし興味があれば、Claude Codeの設定画面でスペルチェック機能の有効化方法を確認してみるのが良いでしょう。</div>
+</div>
+<div class="highlight-card">
+  <div class="hl-badge">ニュース</div>
+  <div class="hl-title"><a href="https://github.com/amruthpillai/reactive-resume">GitHub: amruthpillai/reactive-resume</a></div>
+  <div class="hl-desc"><strong>概要</strong>プライバシーを重視したオープンソースの履歴書ビルダー「Reactive Resume」がGitHubで注目されています。完全にセキュアでカスタマイズ可能、ポータブルかつ無料で利用できる点が特徴です。</div>
+  <div class="hl-link"><a href="https://github.com/amruthpillai/reactive-resume">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>AI/ITコンサルティングにおいて、クライアントの採用活動における応募者への履歴書作成支援ツールとして提案できる可能性があります。また、WONDAYが採用を行う際の効率化や、自身の経歴を整理するPersonalOSの一部として活用を検討できるかもしれません。</div>
+  <div class="hl-action">もしクライアントから採用や人事関連の業務効率化相談があった際に、本ツールの詳細機能や導入事例を深掘りする。</div>
+</div>
+<div class="highlight-card">
+  <div class="hl-badge">深掘り候補</div>
+  <div class="hl-title"><a href="https://github.com/titanwings/colleague-skill">GitHub: titanwings/colleague-skill</a></div>
+  <div class="hl-desc"><strong>概要</strong>GitHubの「colleague-skill」プロジェクトは、退職者の持つスキルや知識を「デジタル生命」としてデジタル化し、組織内で継続的に活用する新しいコンセプトを提示しています。これは、人材流動に伴うノウハウの散逸を防ぎ、組織の知識資産を永続的に保持する可能性を示唆しています。</div>
+  <div class="hl-link"><a href="https://github.com/titanwings/colleague-skill">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>WONDAYのAIコンサルティングにおいて、過去のクライアント課題解決ノウハウや、AlgaleX事業の専門知識（藻類研究、営業戦略など）をデジタル資産として蓄積・活用する可能性があります。これにより、メンバーの入れ替わりがあっても知識が失われず、新規プロジェクトやメンバーの自走支援に役立て、「やらなきゃ」を仕組み化する一助となるでしょう。</div>
+  <div class="hl-action">深掘りするなら、GitHubリポジトリのREADMEやコードを確認し、どのような技術で「デジタル生命」を実装しているか調査してみましょう。</div>
+</div>
+
+<h2 class="section-heading">Topics</h2>
+<div class="topic">
+  <div class="topic-title">ソフトウェア更新</div>
+  <div class="topic-summary">新機能の追加や既存機能の改善に関する最新情報です。</div>
+<div class="item">
+  <span class="badge badge-changelog">CHANGELOG</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://code.claude.com/docs/en/changelog">v2.1.235</a></div>
+    <div class="item-desc">Added an optional spellcheck setting that underlines misspelled words in the prompt input as you type, using your installed aspell, hunspell, or ispell, Fixed whole-prompt-cache invalidation when a language server disconnected or reconnected mid-session, Fixed nested markdown list items misaligning at depth 3+ and added a hanging indent to wrapped list items in the terminal UI</div>
+    <div class="item-meta">August 18, 2026</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-skills">SKILLS</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/anthropics/skills/commit/0a64e39">Rename claude-academy-guide skill to academy-guide and shorten its description (</a></div>
+    <div class="item-meta">2026-08-18</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">注目のアプリ</div>
+  <div class="topic-summary">プライバシーを重視したオープンソースの履歴書作成ツールを紹介します。</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/amruthpillai/reactive-resume">amruthpillai/reactive-resume</a></div>
+    <div class="item-desc">A one-of-a-kind resume builder that keeps your privacy in mind. Completely secure, customizable, portable, open-source and free forever. Try it out today!</div>
+    <div class="item-meta"><span class="stars">41004</span></div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">未来技術・AI</div>
+  <div class="topic-summary">デジタル生命やAI関連の革新的なコンセプトを探ります。</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/titanwings/colleague-skill">titanwings/colleague-skill</a></div>
+    <div class="item-desc">将冰冷的离别化为温暖的 Skill，欢迎加入数字生命1.0！Transforming cold farewells into warm skills? It&#x27;s giving rebirth era. Welcome to Digital Life 1.0. 🫶</div>
+    <div class="item-meta"><span class="stars">23387</span></div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">開発・保守作業</div>
+  <div class="topic-summary">リポジトリのデータ更新など、内部的な開発および保守に関する変更点です。</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/52afb0a">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-08-18</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/58cdbfd">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-08-18</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/d62748f">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-08-18</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/1b4aa87">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-08-18</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/eae1677">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-08-18</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/c51b6fe">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-08-18</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/86f605e">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-08-18</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/a570b64">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-08-18</div>
+  </div>
+</div>
+</div>
+
+<footer class="footer">
+  Generated at 2026-08-19 07:55 JST<br>
+  Sources: Claude Code CHANGELOG, GitHub Releases, awesome-claude-code,
+  anthropics/skills, PulseMCP, Claude Plugins, GitHub Trending
+</footer>
+
+</div>
+</body>
+</html>
