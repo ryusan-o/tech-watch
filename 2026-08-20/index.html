@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Weekly Tech Watch — 2026-08-20</title>
+<style>
+:root {
+  --bg: #f8fafc;
+  --bg-card: #ffffff;
+  --bg-highlight: #eff6ff;
+  --text: #1e293b;
+  --text-muted: #64748b;
+  --text-light: #94a3b8;
+  --accent: #3b82f6;
+  --border: #e2e8f0;
+  --shadow: 0 1px 3px rgba(0,0,0,.08);
+  --badge-changelog: #3b82f6;
+  --badge-mcp: #8b5cf6;
+  --badge-trending: #f59e0b;
+  --badge-plugin: #10b981;
+  --badge-awesome: #f43f5e;
+  --badge-skills: #06b6d4;
+}
+@media(prefers-color-scheme:dark){
+:root {
+  --bg: #0f172a;
+  --bg-card: #1e293b;
+  --bg-highlight: #1e3a5f;
+  --text: #e2e8f0;
+  --text-muted: #94a3b8;
+  --text-light: #64748b;
+  --accent: #60a5fa;
+  --border: #334155;
+  --shadow: 0 1px 3px rgba(0,0,0,.3);
+}}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  background:var(--bg);color:var(--text);
+  line-height:1.6;padding:16px;
+}
+.container{max-width:760px;margin:0 auto}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* Header */
+.header{text-align:center;padding:32px 0 24px}
+.header h1{font-size:1.5rem;font-weight:700;letter-spacing:-.02em}
+.header .date-range{color:var(--text-muted);font-size:.875rem;margin-top:4px}
+
+/* Stats */
+.stat-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));
+  gap:8px;margin:0 0 32px;
+}
+.stat-card{
+  background:var(--bg-card);border:1px solid var(--border);border-radius:8px;
+  padding:12px;text-align:center;box-shadow:var(--shadow);
+}
+.stat-card .num{font-size:1.5rem;font-weight:700;color:var(--accent)}
+.stat-card .label{font-size:.75rem;color:var(--text-muted);margin-top:2px}
+
+/* Section heading */
+.section-heading{
+  font-size:1.125rem;font-weight:700;margin:32px 0 16px;
+  padding-bottom:8px;border-bottom:2px solid var(--accent);
+}
+
+/* Highlight cards */
+.highlight-card{
+  background:var(--bg-highlight);border:1px solid var(--border);
+  border-radius:12px;padding:20px;margin-bottom:16px;
+  border-left:4px solid var(--accent);
+}
+.highlight-card .hl-badge{
+  display:inline-block;font-size:.6875rem;font-weight:700;
+  color:var(--accent);background:var(--bg-card);
+  border:1px solid var(--border);border-radius:999px;
+  padding:2px 8px;margin-bottom:8px;
+}
+.highlight-card .hl-title{font-size:1rem;font-weight:700;margin-bottom:8px}
+.highlight-card .hl-title a{color:var(--text)}
+.highlight-card .hl-desc{font-size:.875rem;color:var(--text-muted);margin-bottom:8px}
+.highlight-card .hl-desc strong,
+.highlight-card .hl-scenario strong{
+  display:block;color:var(--text);font-size:.75rem;margin-bottom:2px;
+}
+.highlight-card .hl-link{font-size:.8125rem;margin-bottom:12px}
+.highlight-card .hl-scenario{
+  font-size:.875rem;line-height:1.7;
+  background:var(--bg-card);border-radius:8px;padding:12px;margin-bottom:8px;
+}
+.highlight-card .hl-action{
+  font-size:.8125rem;color:var(--accent);font-weight:600;
+}
+.highlight-card .hl-action::before{content:"→ "}
+
+/* Topic section */
+.topic{
+  background:var(--bg-card);border:1px solid var(--border);
+  border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:var(--shadow);
+}
+.topic-title{font-size:1rem;font-weight:700;margin-bottom:4px}
+.topic-summary{font-size:.8125rem;color:var(--text-muted);margin-bottom:16px}
+
+/* Item list */
+.item{
+  padding:10px 0;border-bottom:1px solid var(--border);
+  display:flex;gap:10px;align-items:flex-start;
+}
+.item:last-child{border-bottom:none;padding-bottom:0}
+.badge{
+  display:inline-block;font-size:.625rem;font-weight:700;
+  color:#fff;padding:2px 8px;border-radius:10px;white-space:nowrap;
+  flex-shrink:0;margin-top:3px;text-transform:uppercase;letter-spacing:.03em;
+}
+.badge-changelog{background:var(--badge-changelog)}
+.badge-mcp{background:var(--badge-mcp)}
+.badge-trending{background:var(--badge-trending)}
+.badge-plugin{background:var(--badge-plugin)}
+.badge-awesome{background:var(--badge-awesome)}
+.badge-skills{background:var(--badge-skills)}
+.item-body{flex:1;min-width:0}
+.item-title{font-size:.875rem;font-weight:600}
+.item-desc{font-size:.8125rem;color:var(--text-muted);margin-top:2px}
+.item-meta{font-size:.75rem;color:var(--text-light);margin-top:4px}
+.item-meta .stars::before{content:"\2B50 "}
+
+/* Footer */
+.footer{
+  text-align:center;color:var(--text-light);font-size:.75rem;
+  padding:32px 0 16px;border-top:1px solid var(--border);margin-top:32px;
+}
+
+/* No items */
+.empty{color:var(--text-light);font-style:italic;font-size:.875rem;padding:8px 0}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header class="header">
+  <h1>Weekly Tech Watch</h1>
+  <div class="date-range">2026-08-18 ~ 2026-08-20</div>
+</header>
+
+<div class="stat-grid">
+<div class="stat-card"><div class="num">1</div><div class="label">Claude Code</div></div>
+<div class="stat-card"><div class="num">1</div><div class="label">Trending</div></div>
+<div class="stat-card"><div class="num">8</div><div class="label">awesome-cc</div></div>
+</div>
+
+<h2 class="section-heading">Highlights</h2>
+<div class="highlight-card">
+  <div class="hl-badge">深掘り候補</div>
+  <div class="hl-title"><a href="https://code.claude.com/docs/en/changelog">Claude Code v2.1.236</a></div>
+  <div class="hl-desc"><strong>概要</strong>Claude Code v2.1.236で、新しいセッションのデフォルトモデルを設定できる環境変数`ANTHROPIC_DEFAULT_MODEL`が追加されました。これにより、`/model`コマンドで上書き可能で、再起動後も設定が維持されます。</div>
+  <div class="hl-link"><a href="https://code.claude.com/docs/en/changelog">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>りゅうさんのAI協働スタイルにおいて、プロジェクトやタスクに応じてClaudeモデルを使い分ける際、環境変数でデフォルトモデルを設定できるようになります。これにより、特定のAI運用基盤（WONDAY-OS）や議事録自動化（MeetingMinutes）などで、セッション開始時のモデル選択の手間を削減し、効率化を図れる可能性があります。</div>
+  <div class="hl-action">深掘りするなら、現在のClaude Code利用環境で、どのプロジェクトにどのモデルをデフォルト設定すると効率的か検討する。</div>
+</div>
+<div class="highlight-card">
+  <div class="hl-badge">深掘り候補</div>
+  <div class="hl-title"><a href="https://github.com/RunanywhereAI/RCLI">GitHub: RunanywhereAI/RCLI</a></div>
+  <div class="hl-desc"><strong>概要</strong>Mac上で動作し、クラウド接続不要で音声AIとRAGを組み合わせたツール「RCLI」がGitHubで公開されました。ローカルのドキュメントを音声で検索・対話できるため、プライバシーとオフライン利用に優れています。</div>
+  <div class="hl-link"><a href="https://github.com/RunanywhereAI/RCLI">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>WONDAYのAI経営コンサルティングにおいて、クライアントの機密情報をクラウドに上げずにローカルで分析・対話する環境構築の可能性を探れます。また、PersonalOSやWONDAY-OSの基盤として、自身のドキュメントや議事録を音声で検索・活用し、業務効率化を図るアプローチも考えられます。</div>
+  <div class="hl-action">深掘りするなら、GitHubリポジトリで対応OSやドキュメント形式、導入手順を確認し、自身のMac環境で試用可能か検討すると良いでしょう。</div>
+</div>
+<div class="highlight-card">
+  <div class="hl-badge">深掘り候補</div>
+  <div class="hl-title"><a href="https://github.com/addyosmani/factory">Addy Osmani: addyosmani/factory</a></div>
+  <div class="hl-desc"><strong>概要</strong>Google ChromeチームのAddy Osmani氏が、自身のGitHubリポジトリに「実践的なアドバイス」に関するドキュメント追加を示唆するブランチを作成しました。Web開発のベストプラクティスや効率化に関する情報が共有される可能性があります。</div>
+  <div class="hl-link"><a href="https://github.com/addyosmani/factory">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>りゅうさんのAI/ITコンサルティング事業やWONDAY-OSなどの開発において、効率的なプロジェクト推進やベストプラクティス導入のヒントになる可能性があります。AIを用いた業務設計や自動化を進める上で、実践的な開発ノウハウはクライアントの自走支援や「やらなきゃ」の仕組み化に貢献するかもしれません。</div>
+  <div class="hl-action">深掘りするなら、ブランチがマージされ、ドキュメントが公開された際に内容を確認し、具体的なアドバイスがWONDAYのプロジェクトに適用可能か検討してください。</div>
+</div>
+
+<h2 class="section-heading">Topics</h2>
+<div class="topic">
+  <div class="topic-title">AIモデル設定</div>
+  <div class="topic-summary">Anthropicモデルのデフォルト設定に関するソフトウェアアップデート。</div>
+<div class="item">
+  <span class="badge badge-changelog">CHANGELOG</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://code.claude.com/docs/en/changelog">v2.1.236</a></div>
+    <div class="item-desc">Added ANTHROPIC_DEFAULT_MODEL environment variable: sets the model new sessions start on, while a /model pick still overrides it and persists across restarts (unlike ANTHROPIC_MODEL), Added notify_when_idle to cross-session SendMessage: ask another Claude Code session on this machine to send one notice when it next goes idle — opt-in, one-shot, no polling (macOS and Linux), Sandbox: on macOS, wildcard read-deny rules (e.g. **/.env) now take precedence inside allowed read regions, cover matched directories’ contents, and can’t be bypassed by renaming the denied file</div>
+    <div class="item-meta">August 19, 2026</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">ローカルAIソリューション</div>
+  <div class="topic-summary">クラウド不要でMac上で動作するオンデバイス音声AIとRAGソリューション。</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/RunanywhereAI/RCLI">RunanywhereAI/RCLI</a></div>
+    <div class="item-desc">Talk to your Mac, query your docs, no cloud required. On-device voice AI + RAG</div>
+    <div class="item-meta"><span class="stars">1542</span></div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">リポジトリ保守</div>
+  <div class="topic-summary">リポジトリのティッカーデータとSVGを更新する定型的な保守作業。</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/bcb5b30">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-08-19</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/2de2980">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-08-19</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/3660afd">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-08-19</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/542fcd1">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-08-19</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/d3badd3">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-08-19</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/5002df9">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-08-19</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/6c3a2f6">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-08-19</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/e65f120">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-08-19</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">その他</div>
+  <div class="topic-summary">内容が記載されていない項目。</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/addyosmani/factory">Addy Osmani: addyosmani/factory (PushEvent)</a></div>
+    <div class="item-desc">[main] New push</div>
+    <div class="item-meta">2026-08-19</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/addyosmani/factory">Addy Osmani: addyosmani/factory (CreateEvent)</a></div>
+    <div class="item-desc">Created branch: docs/add-pragmatic-advice</div>
+    <div class="item-meta">2026-08-19</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/addyosmani/factory">Addy Osmani: addyosmani/factory (CreateEvent)</a></div>
+    <div class="item-desc">Created branch: docs/link-factory-demo</div>
+    <div class="item-meta">2026-08-19</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/addyosmani/factory">Addy Osmani: addyosmani/factory (PushEvent)</a></div>
+    <div class="item-desc">[main] New push</div>
+    <div class="item-meta">2026-08-19</div>
+  </div>
+</div>
+</div>
+
+<footer class="footer">
+  Generated at 2026-08-20 07:56 JST<br>
+  Sources: Claude Code CHANGELOG, GitHub Releases, awesome-claude-code,
+  anthropics/skills, PulseMCP, Claude Plugins, GitHub Trending
+</footer>
+
+</div>
+</body>
+</html>
