@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Weekly Tech Watch — 2026-08-21</title>
+<style>
+:root {
+  --bg: #f8fafc;
+  --bg-card: #ffffff;
+  --bg-highlight: #eff6ff;
+  --text: #1e293b;
+  --text-muted: #64748b;
+  --text-light: #94a3b8;
+  --accent: #3b82f6;
+  --border: #e2e8f0;
+  --shadow: 0 1px 3px rgba(0,0,0,.08);
+  --badge-changelog: #3b82f6;
+  --badge-mcp: #8b5cf6;
+  --badge-trending: #f59e0b;
+  --badge-plugin: #10b981;
+  --badge-awesome: #f43f5e;
+  --badge-skills: #06b6d4;
+}
+@media(prefers-color-scheme:dark){
+:root {
+  --bg: #0f172a;
+  --bg-card: #1e293b;
+  --bg-highlight: #1e3a5f;
+  --text: #e2e8f0;
+  --text-muted: #94a3b8;
+  --text-light: #64748b;
+  --accent: #60a5fa;
+  --border: #334155;
+  --shadow: 0 1px 3px rgba(0,0,0,.3);
+}}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  background:var(--bg);color:var(--text);
+  line-height:1.6;padding:16px;
+}
+.container{max-width:760px;margin:0 auto}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* Header */
+.header{text-align:center;padding:32px 0 24px}
+.header h1{font-size:1.5rem;font-weight:700;letter-spacing:-.02em}
+.header .date-range{color:var(--text-muted);font-size:.875rem;margin-top:4px}
+
+/* Stats */
+.stat-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));
+  gap:8px;margin:0 0 32px;
+}
+.stat-card{
+  background:var(--bg-card);border:1px solid var(--border);border-radius:8px;
+  padding:12px;text-align:center;box-shadow:var(--shadow);
+}
+.stat-card .num{font-size:1.5rem;font-weight:700;color:var(--accent)}
+.stat-card .label{font-size:.75rem;color:var(--text-muted);margin-top:2px}
+
+/* Section heading */
+.section-heading{
+  font-size:1.125rem;font-weight:700;margin:32px 0 16px;
+  padding-bottom:8px;border-bottom:2px solid var(--accent);
+}
+
+/* Highlight cards */
+.highlight-card{
+  background:var(--bg-highlight);border:1px solid var(--border);
+  border-radius:12px;padding:20px;margin-bottom:16px;
+  border-left:4px solid var(--accent);
+}
+.highlight-card .hl-badge{
+  display:inline-block;font-size:.6875rem;font-weight:700;
+  color:var(--accent);background:var(--bg-card);
+  border:1px solid var(--border);border-radius:999px;
+  padding:2px 8px;margin-bottom:8px;
+}
+.highlight-card .hl-title{font-size:1rem;font-weight:700;margin-bottom:8px}
+.highlight-card .hl-title a{color:var(--text)}
+.highlight-card .hl-desc{font-size:.875rem;color:var(--text-muted);margin-bottom:8px}
+.highlight-card .hl-desc strong,
+.highlight-card .hl-scenario strong{
+  display:block;color:var(--text);font-size:.75rem;margin-bottom:2px;
+}
+.highlight-card .hl-link{font-size:.8125rem;margin-bottom:12px}
+.highlight-card .hl-scenario{
+  font-size:.875rem;line-height:1.7;
+  background:var(--bg-card);border-radius:8px;padding:12px;margin-bottom:8px;
+}
+.highlight-card .hl-action{
+  font-size:.8125rem;color:var(--accent);font-weight:600;
+}
+.highlight-card .hl-action::before{content:"→ "}
+
+/* Topic section */
+.topic{
+  background:var(--bg-card);border:1px solid var(--border);
+  border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:var(--shadow);
+}
+.topic-title{font-size:1rem;font-weight:700;margin-bottom:4px}
+.topic-summary{font-size:.8125rem;color:var(--text-muted);margin-bottom:16px}
+
+/* Item list */
+.item{
+  padding:10px 0;border-bottom:1px solid var(--border);
+  display:flex;gap:10px;align-items:flex-start;
+}
+.item:last-child{border-bottom:none;padding-bottom:0}
+.badge{
+  display:inline-block;font-size:.625rem;font-weight:700;
+  color:#fff;padding:2px 8px;border-radius:10px;white-space:nowrap;
+  flex-shrink:0;margin-top:3px;text-transform:uppercase;letter-spacing:.03em;
+}
+.badge-changelog{background:var(--badge-changelog)}
+.badge-mcp{background:var(--badge-mcp)}
+.badge-trending{background:var(--badge-trending)}
+.badge-plugin{background:var(--badge-plugin)}
+.badge-awesome{background:var(--badge-awesome)}
+.badge-skills{background:var(--badge-skills)}
+.item-body{flex:1;min-width:0}
+.item-title{font-size:.875rem;font-weight:600}
+.item-desc{font-size:.8125rem;color:var(--text-muted);margin-top:2px}
+.item-meta{font-size:.75rem;color:var(--text-light);margin-top:4px}
+.item-meta .stars::before{content:"\2B50 "}
+
+/* Footer */
+.footer{
+  text-align:center;color:var(--text-light);font-size:.75rem;
+  padding:32px 0 16px;border-top:1px solid var(--border);margin-top:32px;
+}
+
+/* No items */
+.empty{color:var(--text-light);font-style:italic;font-size:.875rem;padding:8px 0}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header class="header">
+  <h1>Weekly Tech Watch</h1>
+  <div class="date-range">2026-08-19 ~ 2026-08-21</div>
+</header>
+
+<div class="stat-grid">
+<div class="stat-card"><div class="num">2</div><div class="label">Claude Code</div></div>
+<div class="stat-card"><div class="num">1</div><div class="label">Trending</div></div>
+<div class="stat-card"><div class="num">8</div><div class="label">awesome-cc</div></div>
+</div>
+
+<h2 class="section-heading">Highlights</h2>
+<div class="highlight-card">
+  <div class="hl-badge">ニュース</div>
+  <div class="hl-title"><a href="https://code.claude.com/docs/en/changelog">Claude Code v2.1.238</a></div>
+  <div class="hl-desc"><strong>概要</strong>Claude Codeの最新アップデートで、プロンプトでのCtrl+Wキーバインド動作をBashのreadlineスタイルに変更できる設定が追加されました。デフォルトの動作は変わりません。</div>
+  <div class="hl-link"><a href="https://code.claude.com/docs/en/changelog">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>Claude Codeのプロンプト操作で、BashライクなCtrl+Wの挙動を選択できるようになりました。普段からBashを使う方にとっては、より直感的な操作で思考の中断を減らし、AIとの協働効率をわずかながら高める可能性があります。</div>
+  <div class="hl-action">興味があれば、Claude Codeの設定画面で`keybindingFlavor`オプションを確認し、&quot;readline&quot;に設定して試してみてください。</div>
+</div>
+<div class="highlight-card">
+  <div class="hl-badge">タスク候補</div>
+  <div class="hl-title"><a href="https://code.claude.com/docs/en/changelog">Claude Code v2.1.237</a></div>
+  <div class="hl-desc"><strong>概要</strong>Claude Codeに新しい「Concise」出力スタイルが追加されました。これにより、AIが前置きや説明を省き、結果から直接提示する簡潔な応答が可能になります。</div>
+  <div class="hl-link"><a href="https://code.claude.com/docs/en/changelog">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>りゅうさんのAI経営支援やWONDAY-OSにおけるAI運用基盤で、AIからの出力が冗長になるケースを削減できる可能性があります。特に議事録要約や報告書作成など、迅速な情報把握が求められる場面で効率化に繋がるでしょう。</div>
+  <div class="hl-action">試すなら、Claude Codeの`/config`で「Concise」スタイルを有効にし、既存のプロンプトで出力の変化を確認してみるのが良いでしょう。</div>
+</div>
+<div class="highlight-card">
+  <div class="hl-badge">深掘り候補</div>
+  <div class="hl-title"><a href="https://github.com/zenbu-labs/terminal-browser">GitHub: zenbu-labs/terminal-browser</a></div>
+  <div class="hl-desc"><strong>概要</strong>ターミナル内で直接ウェブブラウジングを可能にするツール「terminal-browser」がGitHubで公開されました。GUI環境に依存せず、コマンドラインから手軽にウェブコンテンツを閲覧できます。</div>
+  <div class="hl-link"><a href="https://github.com/zenbu-labs/terminal-browser">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>AIを活用した業務自動化や、リモートサーバー上での作業効率化に繋がる可能性があります。例えば、SSH接続中にAPIドキュメントやGitHubリポジトリをCUIで確認したり、AIエージェントがウェブ情報を参照する際の手段として、特定のCUIフローに組み込むことが考えられます。</div>
+  <div class="hl-action">深掘りするなら、GitHubリポジトリのREADMEを確認し、どのようなウェブサイトがどの程度表示できるのか、またスクリプトからの制御可能性について調査する。</div>
+</div>
+
+<h2 class="section-heading">Topics</h2>
+<div class="topic">
+  <div class="topic-title">ソフトウェア更新</div>
+  <div class="topic-summary">最新バージョンでの新機能追加とバグ修正に関する情報です。</div>
+<div class="item">
+  <span class="badge badge-changelog">CHANGELOG</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://code.claude.com/docs/en/changelog">v2.1.238</a></div>
+    <div class="item-desc">Added a keybindingFlavor setting: set it to &quot;readline&quot; to make Ctrl+W in the prompt delete back to the previous whitespace, as in Bash; the default (&quot;classic&quot;) is unchanged, Plugin marketplaces: headersHelper on a url marketplace or a catalog entry runs a command that mints HTTP headers (e.g. a short-lived token) for catalog and same-origin archive fetches, A catalog entry’s headersHelper runs only when you install or update that plugin, after its command is shown; claude plugin install/update ask [y/N] (or pass -y)</div>
+    <div class="item-meta">August 20, 2026</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-changelog">CHANGELOG</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://code.claude.com/docs/en/changelog">v2.1.237</a></div>
+    <div class="item-desc">Fixed prompt caching for sessions using an LLM gateway or custom base URL, Added a built-in “Concise” output style: Claude leads with results and skips preamble and narration, while doing the work just as thoroughly. Select it under Output style in /config.</div>
+    <div class="item-meta">August 20, 2026</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">新規ツール発表</div>
+  <div class="topic-summary">ターミナル内で動作する新しいブラウザプロジェクトが公開されました。</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/zenbu-labs/terminal-browser">zenbu-labs/terminal-browser</a></div>
+    <div class="item-desc">A browser that runs directly inside your existing terminal</div>
+    <div class="item-meta"><span class="stars">1684</span></div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">リポジトリ保守</div>
+  <div class="topic-summary">リポジトリのデータとSVGファイルの更新といった軽微な保守作業です。</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/9192d25">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-08-20</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/ce3ca73">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-08-20</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/e609972">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-08-20</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/c966ed1">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-08-20</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/81cadea">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-08-20</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/3898087">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-08-20</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/2e7552b">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-08-20</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/69438d6">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-08-20</div>
+  </div>
+</div>
+</div>
+
+<footer class="footer">
+  Generated at 2026-08-21 07:55 JST<br>
+  Sources: Claude Code CHANGELOG, GitHub Releases, awesome-claude-code,
+  anthropics/skills, PulseMCP, Claude Plugins, GitHub Trending
+</footer>
+
+</div>
+</body>
+</html>
