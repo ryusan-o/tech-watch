@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Weekly Tech Watch — 2026-08-25</title>
+<style>
+:root {
+  --bg: #f8fafc;
+  --bg-card: #ffffff;
+  --bg-highlight: #eff6ff;
+  --text: #1e293b;
+  --text-muted: #64748b;
+  --text-light: #94a3b8;
+  --accent: #3b82f6;
+  --border: #e2e8f0;
+  --shadow: 0 1px 3px rgba(0,0,0,.08);
+  --badge-changelog: #3b82f6;
+  --badge-mcp: #8b5cf6;
+  --badge-trending: #f59e0b;
+  --badge-plugin: #10b981;
+  --badge-awesome: #f43f5e;
+  --badge-skills: #06b6d4;
+}
+@media(prefers-color-scheme:dark){
+:root {
+  --bg: #0f172a;
+  --bg-card: #1e293b;
+  --bg-highlight: #1e3a5f;
+  --text: #e2e8f0;
+  --text-muted: #94a3b8;
+  --text-light: #64748b;
+  --accent: #60a5fa;
+  --border: #334155;
+  --shadow: 0 1px 3px rgba(0,0,0,.3);
+}}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  background:var(--bg);color:var(--text);
+  line-height:1.6;padding:16px;
+}
+.container{max-width:760px;margin:0 auto}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* Header */
+.header{text-align:center;padding:32px 0 24px}
+.header h1{font-size:1.5rem;font-weight:700;letter-spacing:-.02em}
+.header .date-range{color:var(--text-muted);font-size:.875rem;margin-top:4px}
+
+/* Stats */
+.stat-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));
+  gap:8px;margin:0 0 32px;
+}
+.stat-card{
+  background:var(--bg-card);border:1px solid var(--border);border-radius:8px;
+  padding:12px;text-align:center;box-shadow:var(--shadow);
+}
+.stat-card .num{font-size:1.5rem;font-weight:700;color:var(--accent)}
+.stat-card .label{font-size:.75rem;color:var(--text-muted);margin-top:2px}
+
+/* Section heading */
+.section-heading{
+  font-size:1.125rem;font-weight:700;margin:32px 0 16px;
+  padding-bottom:8px;border-bottom:2px solid var(--accent);
+}
+
+/* Highlight cards */
+.highlight-card{
+  background:var(--bg-highlight);border:1px solid var(--border);
+  border-radius:12px;padding:20px;margin-bottom:16px;
+  border-left:4px solid var(--accent);
+}
+.highlight-card .hl-badge{
+  display:inline-block;font-size:.6875rem;font-weight:700;
+  color:var(--accent);background:var(--bg-card);
+  border:1px solid var(--border);border-radius:999px;
+  padding:2px 8px;margin-bottom:8px;
+}
+.highlight-card .hl-title{font-size:1rem;font-weight:700;margin-bottom:8px}
+.highlight-card .hl-title a{color:var(--text)}
+.highlight-card .hl-desc{font-size:.875rem;color:var(--text-muted);margin-bottom:8px}
+.highlight-card .hl-desc strong,
+.highlight-card .hl-scenario strong{
+  display:block;color:var(--text);font-size:.75rem;margin-bottom:2px;
+}
+.highlight-card .hl-link{font-size:.8125rem;margin-bottom:12px}
+.highlight-card .hl-scenario{
+  font-size:.875rem;line-height:1.7;
+  background:var(--bg-card);border-radius:8px;padding:12px;margin-bottom:8px;
+}
+.highlight-card .hl-action{
+  font-size:.8125rem;color:var(--accent);font-weight:600;
+}
+.highlight-card .hl-action::before{content:"→ "}
+
+/* Topic section */
+.topic{
+  background:var(--bg-card);border:1px solid var(--border);
+  border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:var(--shadow);
+}
+.topic-title{font-size:1rem;font-weight:700;margin-bottom:4px}
+.topic-summary{font-size:.8125rem;color:var(--text-muted);margin-bottom:16px}
+
+/* Item list */
+.item{
+  padding:10px 0;border-bottom:1px solid var(--border);
+  display:flex;gap:10px;align-items:flex-start;
+}
+.item:last-child{border-bottom:none;padding-bottom:0}
+.badge{
+  display:inline-block;font-size:.625rem;font-weight:700;
+  color:#fff;padding:2px 8px;border-radius:10px;white-space:nowrap;
+  flex-shrink:0;margin-top:3px;text-transform:uppercase;letter-spacing:.03em;
+}
+.badge-changelog{background:var(--badge-changelog)}
+.badge-mcp{background:var(--badge-mcp)}
+.badge-trending{background:var(--badge-trending)}
+.badge-plugin{background:var(--badge-plugin)}
+.badge-awesome{background:var(--badge-awesome)}
+.badge-skills{background:var(--badge-skills)}
+.item-body{flex:1;min-width:0}
+.item-title{font-size:.875rem;font-weight:600}
+.item-desc{font-size:.8125rem;color:var(--text-muted);margin-top:2px}
+.item-meta{font-size:.75rem;color:var(--text-light);margin-top:4px}
+.item-meta .stars::before{content:"\2B50 "}
+
+/* Footer */
+.footer{
+  text-align:center;color:var(--text-light);font-size:.75rem;
+  padding:32px 0 16px;border-top:1px solid var(--border);margin-top:32px;
+}
+
+/* No items */
+.empty{color:var(--text-light);font-style:italic;font-size:.875rem;padding:8px 0}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header class="header">
+  <h1>Weekly Tech Watch</h1>
+  <div class="date-range">2026-08-23 ~ 2026-08-25</div>
+</header>
+
+<div class="stat-grid">
+<div class="stat-card"><div class="num">2</div><div class="label">Trending</div></div>
+<div class="stat-card"><div class="num">1</div><div class="label">Plugins</div></div>
+<div class="stat-card"><div class="num">8</div><div class="label">awesome-cc</div></div>
+</div>
+
+<h2 class="section-heading">Highlights</h2>
+<div class="highlight-card">
+  <div class="hl-badge">深掘り候補</div>
+  <div class="hl-title"><a href="https://github.com/nidhinjs/prompt-master">GitHub: nidhinjs/prompt-master</a></div>
+  <div class="hl-desc"><strong>概要</strong>GitHubで公開された「prompt-master」は、Claudeを基盤としたプロンプト生成スキルです。あらゆるAIツール向けに、正確なプロンプトを生成し、トークンやクレジットの無駄をなくし、完全なコンテキストと記憶保持を実現すると謳っています。</div>
+  <div class="hl-link"><a href="https://github.com/nidhinjs/prompt-master">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>りゅうさんのAI経営コンサルティングやWONDAYのAI業務自動化において、クライアント向け提案や社内業務効率化で質の高いプロンプトを効率的に作成できる可能性があります。MeetingMinutesのWhisperプロンプト改善やRecipismのレシピ生成精度向上、AIチーム基盤強化にも寄与するかもしれません。</div>
+  <div class="hl-action">深掘りするなら、GitHubリポジトリのREADMEやコードを確認し、Claude Code環境への組み込み可能性や、他のAIツールへの応用範囲を調査する。</div>
+</div>
+<div class="highlight-card">
+  <div class="hl-badge">ニュース</div>
+  <div class="hl-title"><a href="https://github.com/zenstory-ai/oh-story-claudecode">GitHub: zenstory-ai/oh-story-claudecode</a></div>
+  <div class="hl-desc"><strong>概要</strong>GitHubで公開された「oh-story-claudecode」は、AIモデルClaude Codeを活用した小説・物語執筆支援のスキルパックです。企画から構成、執筆、AIらしさの除去、さらには表紙画像生成まで、一連の創作プロセスを自動化・効率化する機能を提供します。</div>
+  <div class="hl-link"><a href="https://github.com/zenstory-ai/oh-story-claudecode">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>AIによるコンテンツ生成の応用事例として、りゅうさんの「AI経営スキル講座」や「WONDAY Growth Engine」でのデモンストレーションに活用できる可能性があります。また、将来的に「Recipism」のようなコンテンツ生成プロジェクトで、より複雑な物語性や表現の「AI味除去」を検討する際の参考になるかもしれません。直接的な事業への導入よりは、AI活用の可能性を広げる視点でのウォッチが考えられます。</div>
+  <div class="hl-action">AIによる物語生成の仕組みや、AI味除去の具体的な手法に興味があれば、GitHubリポジトリのREADMEやコードを軽く確認してみるのが良いでしょう。</div>
+</div>
+<div class="highlight-card">
+  <div class="hl-badge">深掘り候補</div>
+  <div class="hl-title"><a href="https://github.com/addyosmani/web-quality-skills">Addy Osmani: addyosmani/web-quality-skills</a></div>
+  <div class="hl-desc"><strong>概要</strong>Google ChromeチームのAddy Osmani氏が、Webサイトの品質向上に関するスキルセットやガイドラインをまとめたGitHubリポジトリで、新しいバージョン（v2）の開発ブランチを作成しました。Webパフォーマンス、UX、アクセシビリティなどの最新知見が期待されます。</div>
+  <div class="hl-link"><a href="https://github.com/addyosmani/web-quality-skills">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>りゅうさんの「りゅうさんち」や「うま藻」のWebサイト、WONDAYのコンサルティング紹介ページなど、自社Webプレゼンスの品質向上に活用できる可能性があります。クライアントへのAI/ITコンサルティングにおいて、Webサイトのパフォーマンス改善やUX最適化の提案材料として、最新の知見を取り入れることで信頼性を高められるでしょう。</div>
+  <div class="hl-action">深掘りするなら、GitHubリポジトリのREADMEやブランチの内容を確認し、Web品質に関する具体的なスキルセットやガイドラインの方向性を把握すると良いでしょう。</div>
+</div>
+
+<h2 class="section-heading">Topics</h2>
+<div class="topic">
+  <div class="topic-title">AI開発・応用</div>
+  <div class="topic-summary">Claudeのスキルを活用したプロンプト作成、ゲーム開発、小説執筆など、AIの多様な応用事例を紹介します。</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/nidhinjs/prompt-master">nidhinjs/prompt-master</a></div>
+    <div class="item-desc">A Claude skill that writes the accurate prompts for any AI tool. Zero tokens or credits wasted. Full context and memory retention</div>
+    <div class="item-meta"><span class="stars">11722</span></div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/zenstory-ai/oh-story-claudecode">zenstory-ai/oh-story-claudecode</a></div>
+    <div class="item-desc">网文/小说写作 skill 包，覆盖长篇与短篇网络小说的扫榜、拆文、写作、去AI味、封面图全流程 | An all-in-one skill pack for long- and short-form web fiction.</div>
+    <div class="item-meta"><span class="stars">6025</span></div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-plugin">PLUGIN</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://unity.com">unity</a></div>
+    <div class="item-desc">Unity&#x27;s official plugin for Claude Code, with curated skills for game development, monetization, and performance optimization.</div>
+    <div class="item-meta">development</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">リポジトリ更新</div>
+  <div class="topic-summary">リポジトリのティッカーデータやSVGファイルの定期的な更新に関する項目をまとめました。</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/f787740">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-08-24</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/205084e">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-08-24</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/8855cfc">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-08-24</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/6ed2c37">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-08-24</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/eebbe6b">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-08-24</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/c12e395">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-08-24</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/c1ff98b">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-08-24</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/3da5555">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-08-24</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">未分類項目</div>
+  <div class="topic-summary">情報が不足している、または分類が困難な項目をまとめています。</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/addyosmani/web-quality-skills">Addy Osmani: addyosmani/web-quality-skills (CreateEvent)</a></div>
+    <div class="item-desc">Created branch: codex/web-quality-skills-v2</div>
+    <div class="item-meta">2026-08-24</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/addyosmani/web-quality-skills">Addy Osmani: addyosmani/web-quality-skills (PushEvent)</a></div>
+    <div class="item-desc">[web-quality-skills-v2] New push</div>
+    <div class="item-meta">2026-08-24</div>
+  </div>
+</div>
+</div>
+
+<footer class="footer">
+  Generated at 2026-08-25 07:55 JST<br>
+  Sources: Claude Code CHANGELOG, GitHub Releases, awesome-claude-code,
+  anthropics/skills, PulseMCP, Claude Plugins, GitHub Trending
+</footer>
+
+</div>
+</body>
+</html>
