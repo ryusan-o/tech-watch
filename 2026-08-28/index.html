@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Weekly Tech Watch — 2026-08-28</title>
+<style>
+:root {
+  --bg: #f8fafc;
+  --bg-card: #ffffff;
+  --bg-highlight: #eff6ff;
+  --text: #1e293b;
+  --text-muted: #64748b;
+  --text-light: #94a3b8;
+  --accent: #3b82f6;
+  --border: #e2e8f0;
+  --shadow: 0 1px 3px rgba(0,0,0,.08);
+  --badge-changelog: #3b82f6;
+  --badge-mcp: #8b5cf6;
+  --badge-trending: #f59e0b;
+  --badge-plugin: #10b981;
+  --badge-awesome: #f43f5e;
+  --badge-skills: #06b6d4;
+}
+@media(prefers-color-scheme:dark){
+:root {
+  --bg: #0f172a;
+  --bg-card: #1e293b;
+  --bg-highlight: #1e3a5f;
+  --text: #e2e8f0;
+  --text-muted: #94a3b8;
+  --text-light: #64748b;
+  --accent: #60a5fa;
+  --border: #334155;
+  --shadow: 0 1px 3px rgba(0,0,0,.3);
+}}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  background:var(--bg);color:var(--text);
+  line-height:1.6;padding:16px;
+}
+.container{max-width:760px;margin:0 auto}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* Header */
+.header{text-align:center;padding:32px 0 24px}
+.header h1{font-size:1.5rem;font-weight:700;letter-spacing:-.02em}
+.header .date-range{color:var(--text-muted);font-size:.875rem;margin-top:4px}
+
+/* Stats */
+.stat-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));
+  gap:8px;margin:0 0 32px;
+}
+.stat-card{
+  background:var(--bg-card);border:1px solid var(--border);border-radius:8px;
+  padding:12px;text-align:center;box-shadow:var(--shadow);
+}
+.stat-card .num{font-size:1.5rem;font-weight:700;color:var(--accent)}
+.stat-card .label{font-size:.75rem;color:var(--text-muted);margin-top:2px}
+
+/* Section heading */
+.section-heading{
+  font-size:1.125rem;font-weight:700;margin:32px 0 16px;
+  padding-bottom:8px;border-bottom:2px solid var(--accent);
+}
+
+/* Highlight cards */
+.highlight-card{
+  background:var(--bg-highlight);border:1px solid var(--border);
+  border-radius:12px;padding:20px;margin-bottom:16px;
+  border-left:4px solid var(--accent);
+}
+.highlight-card .hl-badge{
+  display:inline-block;font-size:.6875rem;font-weight:700;
+  color:var(--accent);background:var(--bg-card);
+  border:1px solid var(--border);border-radius:999px;
+  padding:2px 8px;margin-bottom:8px;
+}
+.highlight-card .hl-title{font-size:1rem;font-weight:700;margin-bottom:8px}
+.highlight-card .hl-title a{color:var(--text)}
+.highlight-card .hl-desc{font-size:.875rem;color:var(--text-muted);margin-bottom:8px}
+.highlight-card .hl-desc strong,
+.highlight-card .hl-scenario strong{
+  display:block;color:var(--text);font-size:.75rem;margin-bottom:2px;
+}
+.highlight-card .hl-link{font-size:.8125rem;margin-bottom:12px}
+.highlight-card .hl-scenario{
+  font-size:.875rem;line-height:1.7;
+  background:var(--bg-card);border-radius:8px;padding:12px;margin-bottom:8px;
+}
+.highlight-card .hl-action{
+  font-size:.8125rem;color:var(--accent);font-weight:600;
+}
+.highlight-card .hl-action::before{content:"→ "}
+
+/* Topic section */
+.topic{
+  background:var(--bg-card);border:1px solid var(--border);
+  border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:var(--shadow);
+}
+.topic-title{font-size:1rem;font-weight:700;margin-bottom:4px}
+.topic-summary{font-size:.8125rem;color:var(--text-muted);margin-bottom:16px}
+
+/* Item list */
+.item{
+  padding:10px 0;border-bottom:1px solid var(--border);
+  display:flex;gap:10px;align-items:flex-start;
+}
+.item:last-child{border-bottom:none;padding-bottom:0}
+.badge{
+  display:inline-block;font-size:.625rem;font-weight:700;
+  color:#fff;padding:2px 8px;border-radius:10px;white-space:nowrap;
+  flex-shrink:0;margin-top:3px;text-transform:uppercase;letter-spacing:.03em;
+}
+.badge-changelog{background:var(--badge-changelog)}
+.badge-mcp{background:var(--badge-mcp)}
+.badge-trending{background:var(--badge-trending)}
+.badge-plugin{background:var(--badge-plugin)}
+.badge-awesome{background:var(--badge-awesome)}
+.badge-skills{background:var(--badge-skills)}
+.item-body{flex:1;min-width:0}
+.item-title{font-size:.875rem;font-weight:600}
+.item-desc{font-size:.8125rem;color:var(--text-muted);margin-top:2px}
+.item-meta{font-size:.75rem;color:var(--text-light);margin-top:4px}
+.item-meta .stars::before{content:"\2B50 "}
+
+/* Footer */
+.footer{
+  text-align:center;color:var(--text-light);font-size:.75rem;
+  padding:32px 0 16px;border-top:1px solid var(--border);margin-top:32px;
+}
+
+/* No items */
+.empty{color:var(--text-light);font-style:italic;font-size:.875rem;padding:8px 0}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header class="header">
+  <h1>Weekly Tech Watch</h1>
+  <div class="date-range">2026-08-26 ~ 2026-08-28</div>
+</header>
+
+<div class="stat-grid">
+<div class="stat-card"><div class="num">1</div><div class="label">Claude Code</div></div>
+<div class="stat-card"><div class="num">7</div><div class="label">awesome-cc</div></div>
+</div>
+
+<h2 class="section-heading">Highlights</h2>
+<div class="highlight-card">
+  <div class="hl-badge">深掘り候補</div>
+  <div class="hl-title"><a href="https://code.claude.com/docs/en/changelog">Claude Code v2.1.248</a></div>
+  <div class="hl-desc"><strong>概要</strong>Claude Code v2.1.248で、セキュリティを強化する`--restricted`オプションが追加されました。これにより、コマンド実行やWebFetchなどの組み込みツールが制限され、ファイルアクセスはワーキングディレクトリ内に限定されるため、より安全な環境でAIによるコード実行が可能になります。</div>
+  <div class="hl-link"><a href="https://code.claude.com/docs/en/changelog">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>りゅうさんがAIコンサルティングでクライアントにClaude Codeの利用を提案する際、このオプションを活用することで、機密情報を扱う業務や外部連携を厳しく制限したいケースにおいて、より安全性の高い実行環境を提供できる可能性があります。社内でのAI活用におけるリスク管理にも役立つかもしれません。</div>
+  <div class="hl-action">深掘りするなら、`--restricted`オプションが具体的にどのようなシナリオで有効か、既存のAI活用プロジェクト（例: MeetingMinutes、WONDAY Growth Engine）にどのように適用できるかを調査する。</div>
+</div>
+<div class="highlight-card">
+  <div class="hl-badge">ニュース</div>
+  <div class="hl-title"><a href="https://www.anthropic.com/news/model-hardware-standard-research-preview">Previewing the Model Hardware Standard</a></div>
+  <div class="hl-desc"><strong>概要</strong>Anthropicは、AIエージェントが物理デバイスを安全に操作するための共有仕様「Model Hardware Standard (MHS)」の研究プレビューを開始しました。ロボットやIoT機器との連携を標準化し、AIが物理世界で多様なタスクを安全に実行できる基盤構築を目指します。</div>
+  <div class="hl-link"><a href="https://www.anthropic.com/news/model-hardware-standard-research-preview">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>りゅうさんちやうま藻事業において、スマートキッチン機器や藻類培養設備のAIによる自動制御、最適化の将来的な基盤となる可能性があります。また、クライアントへのAI業務自動化提案で、物理的な作業を含むソリューションの可能性を広げるかもしれません。AIが物理世界で「実行」する未来を見据える上で、標準化の動向を把握しておくことは重要です。</div>
+  <div class="hl-action">MHSの進捗や、具体的なユースケースが発表された際に再度確認すると良いでしょう。</div>
+</div>
+<div class="highlight-card">
+  <div class="hl-badge">ニュース</div>
+  <div class="hl-title"><a href="https://www.anthropic.com/news/expanding-support-for-scientists">Aug 27, 2026Announcements Expanding our support for scientists</a></div>
+  <div class="hl-desc"><strong>概要</strong>Anthropicが科学研究者向けにAIモデルへのアクセスやリソース提供を拡大し、AIを活用した研究を支援する方針を発表しました。安全性や倫理的利用を重視しつつ、科学分野でのAI活用を促進する狙いです。</div>
+  <div class="hl-link"><a href="https://www.anthropic.com/news/expanding-support-for-scientists">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>うま藻事業における藻類研究の将来的なAI活用可能性や、AIコンサルティングでの先端技術動向把握に役立つ可能性があります。AIの倫理的・安全な利用に関する知見は、クライアントへの提案やWONDAYのAI活用方針を検討する際の参考になるかもしれません。</div>
+  <div class="hl-action">Anthropicのブログ記事を読み込み、具体的な支援内容や対象分野を確認することで、今後のAI活用戦略のヒントが得られるかもしれません。</div>
+</div>
+
+<h2 class="section-heading">Topics</h2>
+<div class="topic">
+  <div class="topic-title">ソフトウェア更新</div>
+  <div class="topic-summary">新機能の追加や既存機能の改善に関する更新情報。</div>
+<div class="item">
+  <span class="badge badge-changelog">CHANGELOG</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://code.claude.com/docs/en/changelog">v2.1.248</a></div>
+    <div class="item-desc">Added --restricted (or CLAUDE_CODE_RESTRICTED=1): removes the built-in tools that run commands or code and WebFetch (unless named in --tools), keeps file tools inside the working directory, refuses bypassPermissions, and ignores user, project and local settings files, Added experimental.cacheTtl (&quot;5m&quot; or &quot;1h&quot;) to agent frontmatter: a per-agent prompt cache TTL used when no subagent TTL setting is configured, Added claude self-hosted-runner --client-label &lt;label&gt; (or SELF_HOSTED_RUNNER_CLIENT_LABEL) to override the label the runner registers with (default: hostname)</div>
+    <div class="item-meta">August 27, 2026</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/c921568">Add resource: seedeep (#2644)</a></div>
+    <div class="item-meta">2026-08-27</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">リポジトリ保守</div>
+  <div class="topic-summary">データ更新やドキュメント生成など、リポジトリの日常的な保守作業。</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/5cc4638">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-08-27</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/2fe3643">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-08-27</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/4c5585d">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-08-27</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/c233a47">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-08-27</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/c046acd">chore: regenerate README + carousel from CSV [skip ci]</a></div>
+    <div class="item-meta">2026-08-27</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/80b3e0b">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-08-27</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">重要なお知らせ</div>
+  <div class="topic-summary">新しい標準の発表や科学者支援の拡大など、企業戦略に関わる発表。</div>
+<div class="item">
+  <span class="badge badge-anthropic_news">ANTHROPIC_NEWS</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://www.anthropic.com/news/model-hardware-standard-research-preview">Previewing the Model Hardware Standard</a></div>
+    <div class="item-desc">We’re opening a research preview of the Model Hardware Standard (MHS), a shared specification for AI agents to safely operate physical devices, to a first group of scientific research labs and advance</div>
+    <div class="item-meta">Aug 27, 20</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-anthropic_news">ANTHROPIC_NEWS</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://www.anthropic.com/news/expanding-support-for-scientists">Aug 27, 2026Announcements Expanding our support for scientists</a></div>
+    <div class="item-meta">Aug 27, 20</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">その他</div>
+  <div class="topic-summary">分類が難しい、または情報が不足している項目。</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/addyosmani/skills.addy.ie">Addy Osmani: addyosmani/skills.addy.ie (PushEvent)</a></div>
+    <div class="item-desc">[agent-readiness] New push</div>
+    <div class="item-meta">2026-08-27</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/addyosmani/skills.addy.ie">Addy Osmani: addyosmani/skills.addy.ie (PushEvent)</a></div>
+    <div class="item-desc">[main] New push</div>
+    <div class="item-meta">2026-08-27</div>
+  </div>
+</div>
+</div>
+
+<footer class="footer">
+  Generated at 2026-08-28 07:55 JST<br>
+  Sources: Claude Code CHANGELOG, GitHub Releases, awesome-claude-code,
+  anthropics/skills, PulseMCP, Claude Plugins, GitHub Trending
+</footer>
+
+</div>
+</body>
+</html>
