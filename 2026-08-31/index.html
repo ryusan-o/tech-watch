@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Weekly Tech Watch — 2026-08-31</title>
+<style>
+:root {
+  --bg: #f8fafc;
+  --bg-card: #ffffff;
+  --bg-highlight: #eff6ff;
+  --text: #1e293b;
+  --text-muted: #64748b;
+  --text-light: #94a3b8;
+  --accent: #3b82f6;
+  --border: #e2e8f0;
+  --shadow: 0 1px 3px rgba(0,0,0,.08);
+  --badge-changelog: #3b82f6;
+  --badge-mcp: #8b5cf6;
+  --badge-trending: #f59e0b;
+  --badge-plugin: #10b981;
+  --badge-awesome: #f43f5e;
+  --badge-skills: #06b6d4;
+}
+@media(prefers-color-scheme:dark){
+:root {
+  --bg: #0f172a;
+  --bg-card: #1e293b;
+  --bg-highlight: #1e3a5f;
+  --text: #e2e8f0;
+  --text-muted: #94a3b8;
+  --text-light: #64748b;
+  --accent: #60a5fa;
+  --border: #334155;
+  --shadow: 0 1px 3px rgba(0,0,0,.3);
+}}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  background:var(--bg);color:var(--text);
+  line-height:1.6;padding:16px;
+}
+.container{max-width:760px;margin:0 auto}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* Header */
+.header{text-align:center;padding:32px 0 24px}
+.header h1{font-size:1.5rem;font-weight:700;letter-spacing:-.02em}
+.header .date-range{color:var(--text-muted);font-size:.875rem;margin-top:4px}
+
+/* Stats */
+.stat-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));
+  gap:8px;margin:0 0 32px;
+}
+.stat-card{
+  background:var(--bg-card);border:1px solid var(--border);border-radius:8px;
+  padding:12px;text-align:center;box-shadow:var(--shadow);
+}
+.stat-card .num{font-size:1.5rem;font-weight:700;color:var(--accent)}
+.stat-card .label{font-size:.75rem;color:var(--text-muted);margin-top:2px}
+
+/* Section heading */
+.section-heading{
+  font-size:1.125rem;font-weight:700;margin:32px 0 16px;
+  padding-bottom:8px;border-bottom:2px solid var(--accent);
+}
+
+/* Highlight cards */
+.highlight-card{
+  background:var(--bg-highlight);border:1px solid var(--border);
+  border-radius:12px;padding:20px;margin-bottom:16px;
+  border-left:4px solid var(--accent);
+}
+.highlight-card .hl-badge{
+  display:inline-block;font-size:.6875rem;font-weight:700;
+  color:var(--accent);background:var(--bg-card);
+  border:1px solid var(--border);border-radius:999px;
+  padding:2px 8px;margin-bottom:8px;
+}
+.highlight-card .hl-title{font-size:1rem;font-weight:700;margin-bottom:8px}
+.highlight-card .hl-title a{color:var(--text)}
+.highlight-card .hl-desc{font-size:.875rem;color:var(--text-muted);margin-bottom:8px}
+.highlight-card .hl-desc strong,
+.highlight-card .hl-scenario strong{
+  display:block;color:var(--text);font-size:.75rem;margin-bottom:2px;
+}
+.highlight-card .hl-link{font-size:.8125rem;margin-bottom:12px}
+.highlight-card .hl-scenario{
+  font-size:.875rem;line-height:1.7;
+  background:var(--bg-card);border-radius:8px;padding:12px;margin-bottom:8px;
+}
+.highlight-card .hl-action{
+  font-size:.8125rem;color:var(--accent);font-weight:600;
+}
+.highlight-card .hl-action::before{content:"→ "}
+
+/* Topic section */
+.topic{
+  background:var(--bg-card);border:1px solid var(--border);
+  border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:var(--shadow);
+}
+.topic-title{font-size:1rem;font-weight:700;margin-bottom:4px}
+.topic-summary{font-size:.8125rem;color:var(--text-muted);margin-bottom:16px}
+
+/* Item list */
+.item{
+  padding:10px 0;border-bottom:1px solid var(--border);
+  display:flex;gap:10px;align-items:flex-start;
+}
+.item:last-child{border-bottom:none;padding-bottom:0}
+.badge{
+  display:inline-block;font-size:.625rem;font-weight:700;
+  color:#fff;padding:2px 8px;border-radius:10px;white-space:nowrap;
+  flex-shrink:0;margin-top:3px;text-transform:uppercase;letter-spacing:.03em;
+}
+.badge-changelog{background:var(--badge-changelog)}
+.badge-mcp{background:var(--badge-mcp)}
+.badge-trending{background:var(--badge-trending)}
+.badge-plugin{background:var(--badge-plugin)}
+.badge-awesome{background:var(--badge-awesome)}
+.badge-skills{background:var(--badge-skills)}
+.item-body{flex:1;min-width:0}
+.item-title{font-size:.875rem;font-weight:600}
+.item-desc{font-size:.8125rem;color:var(--text-muted);margin-top:2px}
+.item-meta{font-size:.75rem;color:var(--text-light);margin-top:4px}
+.item-meta .stars::before{content:"\2B50 "}
+
+/* Footer */
+.footer{
+  text-align:center;color:var(--text-light);font-size:.75rem;
+  padding:32px 0 16px;border-top:1px solid var(--border);margin-top:32px;
+}
+
+/* No items */
+.empty{color:var(--text-light);font-style:italic;font-size:.875rem;padding:8px 0}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header class="header">
+  <h1>Weekly Tech Watch</h1>
+  <div class="date-range">2026-08-27 ~ 2026-08-31</div>
+</header>
+
+<div class="stat-grid">
+<div class="stat-card"><div class="num">2</div><div class="label">Claude Code</div></div>
+<div class="stat-card"><div class="num">2</div><div class="label">Plugins</div></div>
+<div class="stat-card"><div class="num">16</div><div class="label">awesome-cc</div></div>
+</div>
+
+<h2 class="section-heading">Highlights</h2>
+<div class="highlight-card">
+  <div class="hl-badge">深掘り候補</div>
+  <div class="hl-title"><a href="https://code.claude.com/docs/en/changelog">Claude Code v2.1.251</a></div>
+  <div class="hl-desc"><strong>概要</strong>Claude Codeの最新版v2.1.251では、AIモデル切り替え時に処理を挟めるPreModelSwitch/PostModelSwitchフックイベントが追加されました。また、セッション再開時にセッションの古さや再キャッシュコストの見積もりが取得できるようになり、AI運用の効率化を支援します。</div>
+  <div class="hl-link"><a href="https://code.claude.com/docs/en/changelog">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>りゅうさんは複数のAIモデルを使い分けているため、Pre/PostModelSwitchフックを活用することで、タスクやコストに応じて最適なモデルへ自動的に切り替えたり、切り替え時の確認プロセスを組み込んだりする可能性があります。これにより、AI活用の効率化やコスト管理の最適化に役立つかもしれません。セッションの古さや再キャッシュコストの把握は、AI運用基盤におけるリソース管理やパフォーマンスチューニングの精度向上に繋がる可能性があり...</div>
+  <div class="hl-action">深掘りするなら、現在のClaude Code利用状況でモデル切り替えがどの程度発生しているか、またその際の課題を洗い出し、フックイベントで解決できる可能性を探る。</div>
+</div>
+<div class="highlight-card">
+  <div class="hl-badge">ニュース</div>
+  <div class="hl-title"><a href="https://github.com/addyosmani/clarity/releases/tag/v0.2.0">Addy Osmani: addyosmani/clarity</a></div>
+  <div class="hl-desc"><strong>概要</strong>Webパフォーマンス測定ツールclarityがバージョン0.2.0をリリースしました。Core Web VitalsのINP（Interaction to Next Paint）指標のサポートを強化し、Webサイトのユーザー体験に影響するインタラクションのパフォーマンス分析がより詳細に行えるようになりました。</div>
+  <div class="hl-link"><a href="https://github.com/addyosmani/clarity/releases/tag/v0.2.0">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>りゅうさんご自身の事業サイトや、AI/ITコンサルティングのクライアントサイトのWebパフォーマンス改善に活用できる可能性があります。特に、Core Web VitalsのINP強化により、ユーザー操作に対する応答速度を詳細に分析し、サイトのユーザー体験向上に繋がる具体的な改善点を見つける手助けとなるかもしれません。</div>
+  <div class="hl-action">深掘りするなら、clarityのGitHubリポジトリや公式ドキュメントで、具体的な導入方法やレポートのサンプルを確認してみましょう。</div>
+</div>
+<div class="highlight-card">
+  <div class="hl-badge">深掘り候補</div>
+  <div class="hl-title"><a href="https://github.com/addyosmani/agent-skills/releases/tag/0.6.8">Addy Osmani: addyosmani/agent-skills</a></div>
+  <div class="hl-desc"><strong>概要</strong>Addy Osmani氏のAIエージェント向けスキルライブラリに、Gitの差分表示やブランチ操作など多数のコマンドが追加されました。AIがコードリポジトリを直接操作し、開発ワークフローを自動化する可能性が広がります。</div>
+  <div class="hl-link"><a href="https://github.com/addyosmani/agent-skills/releases/tag/0.6.8">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>りゅうさんのAIチーム基盤やWONDAY Growth Engineにおいて、AIがコード生成からバージョン管理（コミット、プッシュなど）まで一貫して実行する開発プロセスの自動化に繋がる可能性があります。AIに実務を任せる範囲を広げ、開発効率を高める基盤となり得ます。</div>
+  <div class="hl-action">このagent-skillsライブラリがどのようなAIエージェントフレームワークで利用されているか、具体的な開発自動化の事例を調査する。</div>
+</div>
+
+<h2 class="section-heading">Topics</h2>
+<div class="topic">
+  <div class="topic-title">ソフトウェア更新</div>
+  <div class="topic-summary">最新バージョンにおける新機能追加やバグ修正、信頼性向上の詳細。</div>
+<div class="item">
+  <span class="badge badge-changelog">CHANGELOG</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://code.claude.com/docs/en/changelog">v2.1.251</a></div>
+    <div class="item-desc">Added PreModelSwitch and PostModelSwitch hook events (block, confirm, or annotate a model switch); SessionStart resume hooks now receive session staleness and the estimated re-cache cost, Added live streaming of a foreground subagent’s tool calls and results to Remote Control clients (background subagents, the default, still show status only), Added a Spend limit bar to /usage and a rate_limits.spend_limit status line field for developers behind a Claude apps gateway with spend limits</div>
+    <div class="item-meta">August 28, 2026</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-changelog">CHANGELOG</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://code.claude.com/docs/en/changelog">v2.1.250</a></div>
+    <div class="item-desc">Bug fixes and reliability improvements</div>
+    <div class="item-meta">August 28, 2026</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">AI活用ソリューション</div>
+  <div class="topic-summary">AIエージェントスキルやAI駆動型マーケティングなど、特定の製品やSDKにおけるAI機能の統合。</div>
+<div class="item">
+  <span class="badge badge-plugin">PLUGIN</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://www.scandit.com">scandit-sdk</a></div>
+    <div class="item-desc">AI agent skills for integrating the Scandit Data Capture SDK — product selection, documentation, and implementation guides for barcode scanning, ID capture, and smart label capture.</div>
+    <div class="item-meta">development</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-plugin">PLUGIN</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://www.activecampaign.com">activecampaign</a></div>
+    <div class="item-desc">Marketing automation, CRM, and email marketing powered by ActiveCampaign. Manage contacts, campaigns, automations, deals, and get AI-powered marketing insights — all from Claude.</div>
+    <div class="item-meta">productivity</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">定期メンテナンス</div>
+  <div class="topic-summary">リポジトリのデータ更新やSVGファイル更新など、システム内部の定期的な保守作業。</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/b408242">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-08-30</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/8e220ed">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-08-30</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/58394c5">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-08-30</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/14ada49">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-08-30</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/f8b356e">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-08-30</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/f3a3bf8">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-08-30</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/8ced5e9">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-08-30</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/0cabb42">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-08-30</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/230ede4">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-08-29</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/92c7013">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-08-29</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/efa8b1a">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-08-29</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/9a6adf7">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-08-29</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/b52f649">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-08-29</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/08bdc89">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-08-29</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/942c3c6">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-08-29</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/c4aebbf">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-08-29</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">未分類項目</div>
+  <div class="topic-summary">タイトルと説明が空欄の項目。</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/bcherny/json-schema-to-typescript">Boris Cherny: bcherny/json-schema-to-typescript (PushEvent)</a></div>
+    <div class="item-desc">[master] New push</div>
+    <div class="item-meta">2026-08-28</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/bcherny/json-schema-to-typescript">Boris Cherny: bcherny/json-schema-to-typescript (PushEvent)</a></div>
+    <div class="item-desc">[master] New push</div>
+    <div class="item-meta">2026-08-28</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/bcherny/json-schema-to-typescript">Boris Cherny: bcherny/json-schema-to-typescript (PushEvent)</a></div>
+    <div class="item-desc">[master] New push</div>
+    <div class="item-meta">2026-08-28</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/bcherny/json-schema-to-typescript">Boris Cherny: bcherny/json-schema-to-typescript (PushEvent)</a></div>
+    <div class="item-desc">[master] New push</div>
+    <div class="item-meta">2026-08-28</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/bcherny/json-schema-to-typescript">Boris Cherny: bcherny/json-schema-to-typescript (PushEvent)</a></div>
+    <div class="item-desc">[master] New push</div>
+    <div class="item-meta">2026-08-28</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/bcherny/json-schema-to-typescript">Boris Cherny: bcherny/json-schema-to-typescript (PushEvent)</a></div>
+    <div class="item-desc">[master] New push</div>
+    <div class="item-meta">2026-08-28</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/bcherny/json-schema-to-typescript">Boris Cherny: bcherny/json-schema-to-typescript (PushEvent)</a></div>
+    <div class="item-desc">[master] New push</div>
+    <div class="item-meta">2026-08-28</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/bcherny/json-schema-to-typescript">Boris Cherny: bcherny/json-schema-to-typescript (PushEvent)</a></div>
+    <div class="item-desc">[master] New push</div>
+    <div class="item-meta">2026-08-28</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/bcherny/json-schema-to-typescript">Boris Cherny: bcherny/json-schema-to-typescript (PushEvent)</a></div>
+    <div class="item-desc">[master] New push</div>
+    <div class="item-meta">2026-08-28</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/bcherny/json-schema-to-typescript">Boris Cherny: bcherny/json-schema-to-typescript (PushEvent)</a></div>
+    <div class="item-desc">[master] New push</div>
+    <div class="item-meta">2026-08-27</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/bcherny/json-schema-to-typescript">Boris Cherny: bcherny/json-schema-to-typescript (PushEvent)</a></div>
+    <div class="item-desc">[master] New push</div>
+    <div class="item-meta">2026-08-27</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/bcherny/json-schema-to-typescript">Boris Cherny: bcherny/json-schema-to-typescript (PushEvent)</a></div>
+    <div class="item-desc">[master] New push</div>
+    <div class="item-meta">2026-08-28</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/bcherny/json-schema-to-typescript">Boris Cherny: bcherny/json-schema-to-typescript (PushEvent)</a></div>
+    <div class="item-desc">[master] New push</div>
+    <div class="item-meta">2026-08-28</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/bcherny/json-schema-to-typescript">Boris Cherny: bcherny/json-schema-to-typescript (PushEvent)</a></div>
+    <div class="item-desc">[master] New push</div>
+    <div class="item-meta">2026-08-28</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/bcherny/json-schema-to-typescript">Boris Cherny: bcherny/json-schema-to-typescript (PushEvent)</a></div>
+    <div class="item-desc">[master] New push</div>
+    <div class="item-meta">2026-08-28</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/addyosmani/clarity/releases/tag/v0.2.0">Addy Osmani: addyosmani/clarity (ReleaseEvent)</a></div>
+    <div class="item-desc">Release published: clarity 0.2.0</div>
+    <div class="item-meta">2026-08-30</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/addyosmani/clarity">Addy Osmani: addyosmani/clarity (PushEvent)</a></div>
+    <div class="item-desc">[main] New push</div>
+    <div class="item-meta">2026-08-29</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/addyosmani/clarity">Addy Osmani: addyosmani/clarity (PushEvent)</a></div>
+    <div class="item-desc">[clarity-best-in-class] New push</div>
+    <div class="item-meta">2026-08-29</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/addyosmani/clarity">Addy Osmani: addyosmani/clarity (PushEvent)</a></div>
+    <div class="item-desc">[main] New push</div>
+    <div class="item-meta">2026-08-29</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/addyosmani/clarity">Addy Osmani: addyosmani/clarity (PushEvent)</a></div>
+    <div class="item-desc">[main] New push</div>
+    <div class="item-meta">2026-08-29</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/addyosmani/clarity">Addy Osmani: addyosmani/clarity (PushEvent)</a></div>
+    <div class="item-desc">[main] New push</div>
+    <div class="item-meta">2026-08-29</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/addyosmani/agent-skills">Addy Osmani: addyosmani/agent-skills (PushEvent)</a></div>
+    <div class="item-desc">[main] New push</div>
+    <div class="item-meta">2026-08-28</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/addyosmani/agent-skills">Addy Osmani: addyosmani/agent-skills (PushEvent)</a></div>
+    <div class="item-desc">[main] New push</div>
+    <div class="item-meta">2026-08-28</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/addyosmani/agent-skills">Addy Osmani: addyosmani/agent-skills (PushEvent)</a></div>
+    <div class="item-desc">[main] New push</div>
+    <div class="item-meta">2026-08-28</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/addyosmani/clarity">Addy Osmani: addyosmani/clarity (PushEvent)</a></div>
+    <div class="item-desc">[main] New push</div>
+    <div class="item-meta">2026-08-29</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/addyosmani/agent-skills/releases/tag/0.6.8">Addy Osmani: addyosmani/agent-skills (ReleaseEvent)</a></div>
+    <div class="item-desc">Release published: 0.6.8</div>
+    <div class="item-meta">2026-08-28</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/addyosmani/clarity">Addy Osmani: addyosmani/clarity (PushEvent)</a></div>
+    <div class="item-desc">[main] New push</div>
+    <div class="item-meta">2026-08-28</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/addyosmani/clarity">Addy Osmani: addyosmani/clarity (PushEvent)</a></div>
+    <div class="item-desc">[clarity-best-in-class] New push</div>
+    <div class="item-meta">2026-08-28</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/addyosmani/clarity">Addy Osmani: addyosmani/clarity (CreateEvent)</a></div>
+    <div class="item-desc">Created branch: codex/clarity-best-in-class</div>
+    <div class="item-meta">2026-08-28</div>
+  </div>
+</div>
+</div>
+
+<footer class="footer">
+  Generated at 2026-08-31 07:56 JST<br>
+  Sources: Claude Code CHANGELOG, GitHub Releases, awesome-claude-code,
+  anthropics/skills, PulseMCP, Claude Plugins, GitHub Trending
+</footer>
+
+</div>
+</body>
+</html>
