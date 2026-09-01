@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Weekly Tech Watch — 2026-09-02</title>
+<style>
+:root {
+  --bg: #f8fafc;
+  --bg-card: #ffffff;
+  --bg-highlight: #eff6ff;
+  --text: #1e293b;
+  --text-muted: #64748b;
+  --text-light: #94a3b8;
+  --accent: #3b82f6;
+  --border: #e2e8f0;
+  --shadow: 0 1px 3px rgba(0,0,0,.08);
+  --badge-changelog: #3b82f6;
+  --badge-mcp: #8b5cf6;
+  --badge-trending: #f59e0b;
+  --badge-plugin: #10b981;
+  --badge-awesome: #f43f5e;
+  --badge-skills: #06b6d4;
+}
+@media(prefers-color-scheme:dark){
+:root {
+  --bg: #0f172a;
+  --bg-card: #1e293b;
+  --bg-highlight: #1e3a5f;
+  --text: #e2e8f0;
+  --text-muted: #94a3b8;
+  --text-light: #64748b;
+  --accent: #60a5fa;
+  --border: #334155;
+  --shadow: 0 1px 3px rgba(0,0,0,.3);
+}}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  background:var(--bg);color:var(--text);
+  line-height:1.6;padding:16px;
+}
+.container{max-width:760px;margin:0 auto}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* Header */
+.header{text-align:center;padding:32px 0 24px}
+.header h1{font-size:1.5rem;font-weight:700;letter-spacing:-.02em}
+.header .date-range{color:var(--text-muted);font-size:.875rem;margin-top:4px}
+
+/* Stats */
+.stat-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));
+  gap:8px;margin:0 0 32px;
+}
+.stat-card{
+  background:var(--bg-card);border:1px solid var(--border);border-radius:8px;
+  padding:12px;text-align:center;box-shadow:var(--shadow);
+}
+.stat-card .num{font-size:1.5rem;font-weight:700;color:var(--accent)}
+.stat-card .label{font-size:.75rem;color:var(--text-muted);margin-top:2px}
+
+/* Section heading */
+.section-heading{
+  font-size:1.125rem;font-weight:700;margin:32px 0 16px;
+  padding-bottom:8px;border-bottom:2px solid var(--accent);
+}
+
+/* Highlight cards */
+.highlight-card{
+  background:var(--bg-highlight);border:1px solid var(--border);
+  border-radius:12px;padding:20px;margin-bottom:16px;
+  border-left:4px solid var(--accent);
+}
+.highlight-card .hl-badge{
+  display:inline-block;font-size:.6875rem;font-weight:700;
+  color:var(--accent);background:var(--bg-card);
+  border:1px solid var(--border);border-radius:999px;
+  padding:2px 8px;margin-bottom:8px;
+}
+.highlight-card .hl-title{font-size:1rem;font-weight:700;margin-bottom:8px}
+.highlight-card .hl-title a{color:var(--text)}
+.highlight-card .hl-desc{font-size:.875rem;color:var(--text-muted);margin-bottom:8px}
+.highlight-card .hl-desc strong,
+.highlight-card .hl-scenario strong{
+  display:block;color:var(--text);font-size:.75rem;margin-bottom:2px;
+}
+.highlight-card .hl-link{font-size:.8125rem;margin-bottom:12px}
+.highlight-card .hl-scenario{
+  font-size:.875rem;line-height:1.7;
+  background:var(--bg-card);border-radius:8px;padding:12px;margin-bottom:8px;
+}
+.highlight-card .hl-action{
+  font-size:.8125rem;color:var(--accent);font-weight:600;
+}
+.highlight-card .hl-action::before{content:"→ "}
+
+/* Topic section */
+.topic{
+  background:var(--bg-card);border:1px solid var(--border);
+  border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:var(--shadow);
+}
+.topic-title{font-size:1rem;font-weight:700;margin-bottom:4px}
+.topic-summary{font-size:.8125rem;color:var(--text-muted);margin-bottom:16px}
+
+/* Item list */
+.item{
+  padding:10px 0;border-bottom:1px solid var(--border);
+  display:flex;gap:10px;align-items:flex-start;
+}
+.item:last-child{border-bottom:none;padding-bottom:0}
+.badge{
+  display:inline-block;font-size:.625rem;font-weight:700;
+  color:#fff;padding:2px 8px;border-radius:10px;white-space:nowrap;
+  flex-shrink:0;margin-top:3px;text-transform:uppercase;letter-spacing:.03em;
+}
+.badge-changelog{background:var(--badge-changelog)}
+.badge-mcp{background:var(--badge-mcp)}
+.badge-trending{background:var(--badge-trending)}
+.badge-plugin{background:var(--badge-plugin)}
+.badge-awesome{background:var(--badge-awesome)}
+.badge-skills{background:var(--badge-skills)}
+.item-body{flex:1;min-width:0}
+.item-title{font-size:.875rem;font-weight:600}
+.item-desc{font-size:.8125rem;color:var(--text-muted);margin-top:2px}
+.item-meta{font-size:.75rem;color:var(--text-light);margin-top:4px}
+.item-meta .stars::before{content:"\2B50 "}
+
+/* Footer */
+.footer{
+  text-align:center;color:var(--text-light);font-size:.75rem;
+  padding:32px 0 16px;border-top:1px solid var(--border);margin-top:32px;
+}
+
+/* No items */
+.empty{color:var(--text-light);font-style:italic;font-size:.875rem;padding:8px 0}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header class="header">
+  <h1>Weekly Tech Watch</h1>
+  <div class="date-range">2026-08-31 ~ 2026-09-02</div>
+</header>
+
+<div class="stat-grid">
+<div class="stat-card"><div class="num">2</div><div class="label">Claude Code</div></div>
+<div class="stat-card"><div class="num">2</div><div class="label">Trending</div></div>
+<div class="stat-card"><div class="num">8</div><div class="label">awesome-cc</div></div>
+<div class="stat-card"><div class="num">1</div><div class="label">Skills</div></div>
+</div>
+
+<h2 class="section-heading">Highlights</h2>
+<div class="highlight-card">
+  <div class="hl-badge">深掘り候補</div>
+  <div class="hl-title"><a href="https://code.claude.com/docs/en/changelog">Claude Code v2.1.257</a></div>
+  <div class="hl-desc"><strong>概要</strong>Claude Code v2.1.257がリリースされ、新モデル「Claude Fable 5.1」がデフォルトのFableモデルとなりました。このモデルは1Mのコンテキストウィンドウを持ち、キャッシュ読み取りが$0.25/Mtokと低コストで利用可能です。</div>
+  <div class="hl-link"><a href="https://code.claude.com/docs/en/changelog">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>Claude Fable 5.1の1Mコンテキストは、長文の議事録要約や過去のプロジェクト資料からの情報抽出に活用できる可能性があります。安価なキャッシュ読み取りは、AIチーム基盤での定型的な情報参照コストを削減し、WONDAY Growth Engineでのクライアントデータ分析効率化にも貢献するかもしれません。</div>
+  <div class="hl-action">深掘りするなら、Fable 5.1の具体的な性能向上点やキャッシュ利用の適用範囲をClaude Codeのドキュメントで確認し、既存のAIチーム基盤での活用シナリオを検討しましょう。</div>
+</div>
+<div class="highlight-card">
+  <div class="hl-badge">ニュース</div>
+  <div class="hl-title"><a href="https://www.anthropic.com/news/enterprise-frontier-safeguards">Sep 1, 2026AnnouncementsDeveloping Enterprise Frontier Safeguards with our customers</a></div>
+  <div class="hl-desc"><strong>概要</strong>Anthropicは、企業顧客と協力し、フロンティアAIの安全対策を共同開発していると発表しました。これは、大規模AIモデルを企業が安心して導入できるよう、リスク軽減策や責任ある利用のための枠組みを構築する取り組みです。</div>
+  <div class="hl-link"><a href="https://www.anthropic.com/news/enterprise-frontier-safeguards">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>りゅうさんがAIコンサルタントとしてクライアントへAI導入を提案する際、セキュリティや倫理面での懸念を解消する上で、Anthropicの安全対策に関する知見を活用できる可能性があります。WONDAY Growth EngineやCRM支援において、信頼性の高いAIシステムを提案する際の裏付けとなるでしょう。</div>
+  <div class="hl-action">深掘りするなら、Anthropicの今後の発表や、具体的な安全対策フレームワークの詳細について定期的に情報を追うと良いでしょう。</div>
+</div>
+<div class="highlight-card">
+  <div class="hl-badge">深掘り候補</div>
+  <div class="hl-title"><a href="https://github.com/career-ops-hq/career-ops">GitHub: career-ops-hq/career-ops</a></div>
+  <div class="hl-desc"><strong>概要</strong>オープンソースのAI求職ツール「career-ops」が注目されています。求人サイトをスキャンし、AIが求人情報を構造化されたレポートで評価。履歴書の最適化や応募追跡も可能で、Claude CodeなどローカルのAIコーディングCLIで実行できます。</div>
+  <div class="hl-link"><a href="https://github.com/career-ops-hq/career-ops">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>このオープンソースAIツールは、求人情報の自動分析と評価レポート生成の仕組みを、りゅうさんのAI経営コンサルティングや業務自動化診断に応用できる可能性があります。クライアントの採用活動における求人票分析の効率化や、WONDAY社内の採用業務におけるAI活用事例として検討できるかもしれません。</div>
+  <div class="hl-action">深掘りするなら、GitHubリポジトリのREADMEを確認し、AIによる求人評価ロジックやローカル実行の具体的な手順を30分程度で調査してみるのが良いでしょう。</div>
+</div>
+
+<h2 class="section-heading">Topics</h2>
+<div class="topic">
+  <div class="topic-title">Claude AI更新</div>
+  <div class="topic-summary">Claude AIモデルの新機能追加とバグ修正に関する最新情報。</div>
+<div class="item">
+  <span class="badge badge-changelog">CHANGELOG</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://code.claude.com/docs/en/changelog">v2.1.258</a></div>
+    <div class="item-desc">Fixed Claude Code failing to launch on macOS 12 (Monterey), a regression introduced in 2.1.255, Fixed remote and scheduled sessions failing with “user messages must have non-empty content” after a re-sent permission approval could not be applied</div>
+    <div class="item-meta">September 1, 2026</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-changelog">CHANGELOG</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://code.claude.com/docs/en/changelog">v2.1.257</a></div>
+    <div class="item-desc">Added Claude Fable 5.1 (claude-fable-5-1), now the default Fable model — 1M context, 10/10/10/50 per Mtok with $0.25/Mtok cache reads, Added “Time format” (timeFormat) and timeZone settings: 12-hour, 24-hour, 24-hour UTC, or a strftime pattern for the turn-end clock and transcript-view timestamps, Added a Containment Escape rule to auto mode so cloud metadata-credential fetches, egress evasion, and cross-tenant reach are no longer auto-approved unless your environment marks them expected</div>
+    <div class="item-meta">September 1, 2026</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-skills">SKILLS</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/anthropics/skills/commit/5304866">Update claude-api skill: Claude Fable 5.1 / Mythos 5.1, Managed Agents updates, </a></div>
+    <div class="item-meta">2026-09-01</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">開発者ツール</div>
+  <div class="topic-summary">AndroidをDockerで実行するソリューションなど、開発者向けのツールと技術。</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/budtmo/docker-android">budtmo/docker-android</a></div>
+    <div class="item-desc">Android in docker solution with noVNC supported, video recording and mcp server</div>
+    <div class="item-meta"><span class="stars">15800</span></div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">AIキャリア支援</div>
+  <div class="topic-summary">AIを活用したオープンソースの求職・キャリア管理ツール。</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/career-ops-hq/career-ops">career-ops-hq/career-ops</a></div>
+    <div class="item-desc">Open-source AI job search: scan job portals, evaluate listings into a structured A-H report with a global 1-5 score, tailor your CV, track applications — runs locally in your AI coding CLI (Claude Code, Codex, OpenCode, Antigravity…)</div>
+    <div class="item-meta"><span class="stars">69751</span></div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">リポジトリ保守</div>
+  <div class="topic-summary">リポジトリのデータ更新など、定期的なメンテナンス作業に関する項目。</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/5efac76">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-09-01</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/9a814c3">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-09-01</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/2de46ff">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-09-01</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/88f17ea">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-09-01</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/25408b5">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-09-01</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/68c4172">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-09-01</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/781cb3a">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-09-01</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/9bb7d9c">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-09-01</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">企業向け発表</div>
+  <div class="topic-summary">企業向けのフロンティアセーフガード開発に関する将来の発表。</div>
+<div class="item">
+  <span class="badge badge-anthropic_news">ANTHROPIC_NEWS</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://www.anthropic.com/news/enterprise-frontier-safeguards">Sep 1, 2026AnnouncementsDeveloping Enterprise Frontier Safeguards with our customers</a></div>
+    <div class="item-meta">Sep 1, 202</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">その他未分類</div>
+  <div class="topic-summary">情報が不足しているか、分類が難しい項目。</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/bcherny/json-schema-to-typescript">Boris Cherny: bcherny/json-schema-to-typescript (PushEvent)</a></div>
+    <div class="item-desc">[master] New push</div>
+    <div class="item-meta">2026-09-01</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/bcherny/json-schema-to-typescript">Boris Cherny: bcherny/json-schema-to-typescript (PushEvent)</a></div>
+    <div class="item-desc">[master] New push</div>
+    <div class="item-meta">2026-09-01</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/bcherny/json-schema-to-typescript">Boris Cherny: bcherny/json-schema-to-typescript (PushEvent)</a></div>
+    <div class="item-desc">[simplify-parent-3b-355291] New push</div>
+    <div class="item-meta">2026-09-01</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/bcherny/json-schema-to-typescript">Boris Cherny: bcherny/json-schema-to-typescript (PushEvent)</a></div>
+    <div class="item-desc">[master] New push</div>
+    <div class="item-meta">2026-09-01</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/bcherny/json-schema-to-typescript">Boris Cherny: bcherny/json-schema-to-typescript (PushEvent)</a></div>
+    <div class="item-desc">[master] New push</div>
+    <div class="item-meta">2026-09-01</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/bcherny/json-schema-to-typescript">Boris Cherny: bcherny/json-schema-to-typescript (PushEvent)</a></div>
+    <div class="item-desc">[master] New push</div>
+    <div class="item-meta">2026-09-01</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/bcherny/json-schema-to-typescript">Boris Cherny: bcherny/json-schema-to-typescript (PushEvent)</a></div>
+    <div class="item-desc">[master] New push</div>
+    <div class="item-meta">2026-09-01</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/bcherny/json-schema-to-typescript">Boris Cherny: bcherny/json-schema-to-typescript (PushEvent)</a></div>
+    <div class="item-desc">[master] New push</div>
+    <div class="item-meta">2026-09-01</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/bcherny/json-schema-to-typescript">Boris Cherny: bcherny/json-schema-to-typescript (PushEvent)</a></div>
+    <div class="item-desc">[master] New push</div>
+    <div class="item-meta">2026-09-01</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/bcherny/json-schema-to-typescript">Boris Cherny: bcherny/json-schema-to-typescript (PushEvent)</a></div>
+    <div class="item-desc">[master] New push</div>
+    <div class="item-meta">2026-09-01</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/bcherny/json-schema-to-typescript">Boris Cherny: bcherny/json-schema-to-typescript (PushEvent)</a></div>
+    <div class="item-desc">[master] New push</div>
+    <div class="item-meta">2026-09-01</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/bcherny/json-schema-to-typescript">Boris Cherny: bcherny/json-schema-to-typescript (PushEvent)</a></div>
+    <div class="item-desc">[master] New push</div>
+    <div class="item-meta">2026-09-01</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/bcherny/json-schema-to-typescript">Boris Cherny: bcherny/json-schema-to-typescript (PushEvent)</a></div>
+    <div class="item-desc">[master] New push</div>
+    <div class="item-meta">2026-09-01</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/bcherny/json-schema-to-typescript">Boris Cherny: bcherny/json-schema-to-typescript (PushEvent)</a></div>
+    <div class="item-desc">[master] New push</div>
+    <div class="item-meta">2026-09-01</div>
+  </div>
+</div>
+</div>
+
+<footer class="footer">
+  Generated at 2026-09-02 07:55 JST<br>
+  Sources: Claude Code CHANGELOG, GitHub Releases, awesome-claude-code,
+  anthropics/skills, PulseMCP, Claude Plugins, GitHub Trending
+</footer>
+
+</div>
+</body>
+</html>
