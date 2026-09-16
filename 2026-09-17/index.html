@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Weekly Tech Watch — 2026-09-17</title>
+<style>
+:root {
+  --bg: #f8fafc;
+  --bg-card: #ffffff;
+  --bg-highlight: #eff6ff;
+  --text: #1e293b;
+  --text-muted: #64748b;
+  --text-light: #94a3b8;
+  --accent: #3b82f6;
+  --border: #e2e8f0;
+  --shadow: 0 1px 3px rgba(0,0,0,.08);
+  --badge-changelog: #3b82f6;
+  --badge-mcp: #8b5cf6;
+  --badge-trending: #f59e0b;
+  --badge-plugin: #10b981;
+  --badge-awesome: #f43f5e;
+  --badge-skills: #06b6d4;
+}
+@media(prefers-color-scheme:dark){
+:root {
+  --bg: #0f172a;
+  --bg-card: #1e293b;
+  --bg-highlight: #1e3a5f;
+  --text: #e2e8f0;
+  --text-muted: #94a3b8;
+  --text-light: #64748b;
+  --accent: #60a5fa;
+  --border: #334155;
+  --shadow: 0 1px 3px rgba(0,0,0,.3);
+}}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  background:var(--bg);color:var(--text);
+  line-height:1.6;padding:16px;
+}
+.container{max-width:760px;margin:0 auto}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* Header */
+.header{text-align:center;padding:32px 0 24px}
+.header h1{font-size:1.5rem;font-weight:700;letter-spacing:-.02em}
+.header .date-range{color:var(--text-muted);font-size:.875rem;margin-top:4px}
+
+/* Stats */
+.stat-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));
+  gap:8px;margin:0 0 32px;
+}
+.stat-card{
+  background:var(--bg-card);border:1px solid var(--border);border-radius:8px;
+  padding:12px;text-align:center;box-shadow:var(--shadow);
+}
+.stat-card .num{font-size:1.5rem;font-weight:700;color:var(--accent)}
+.stat-card .label{font-size:.75rem;color:var(--text-muted);margin-top:2px}
+
+/* Section heading */
+.section-heading{
+  font-size:1.125rem;font-weight:700;margin:32px 0 16px;
+  padding-bottom:8px;border-bottom:2px solid var(--accent);
+}
+
+/* Highlight cards */
+.highlight-card{
+  background:var(--bg-highlight);border:1px solid var(--border);
+  border-radius:12px;padding:20px;margin-bottom:16px;
+  border-left:4px solid var(--accent);
+}
+.highlight-card .hl-badge{
+  display:inline-block;font-size:.6875rem;font-weight:700;
+  color:var(--accent);background:var(--bg-card);
+  border:1px solid var(--border);border-radius:999px;
+  padding:2px 8px;margin-bottom:8px;
+}
+.highlight-card .hl-title{font-size:1rem;font-weight:700;margin-bottom:8px}
+.highlight-card .hl-title a{color:var(--text)}
+.highlight-card .hl-desc{font-size:.875rem;color:var(--text-muted);margin-bottom:8px}
+.highlight-card .hl-desc strong,
+.highlight-card .hl-scenario strong{
+  display:block;color:var(--text);font-size:.75rem;margin-bottom:2px;
+}
+.highlight-card .hl-link{font-size:.8125rem;margin-bottom:12px}
+.highlight-card .hl-scenario{
+  font-size:.875rem;line-height:1.7;
+  background:var(--bg-card);border-radius:8px;padding:12px;margin-bottom:8px;
+}
+.highlight-card .hl-action{
+  font-size:.8125rem;color:var(--accent);font-weight:600;
+}
+.highlight-card .hl-action::before{content:"→ "}
+
+/* Topic section */
+.topic{
+  background:var(--bg-card);border:1px solid var(--border);
+  border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:var(--shadow);
+}
+.topic-title{font-size:1rem;font-weight:700;margin-bottom:4px}
+.topic-summary{font-size:.8125rem;color:var(--text-muted);margin-bottom:16px}
+
+/* Item list */
+.item{
+  padding:10px 0;border-bottom:1px solid var(--border);
+  display:flex;gap:10px;align-items:flex-start;
+}
+.item:last-child{border-bottom:none;padding-bottom:0}
+.badge{
+  display:inline-block;font-size:.625rem;font-weight:700;
+  color:#fff;padding:2px 8px;border-radius:10px;white-space:nowrap;
+  flex-shrink:0;margin-top:3px;text-transform:uppercase;letter-spacing:.03em;
+}
+.badge-changelog{background:var(--badge-changelog)}
+.badge-mcp{background:var(--badge-mcp)}
+.badge-trending{background:var(--badge-trending)}
+.badge-plugin{background:var(--badge-plugin)}
+.badge-awesome{background:var(--badge-awesome)}
+.badge-skills{background:var(--badge-skills)}
+.item-body{flex:1;min-width:0}
+.item-title{font-size:.875rem;font-weight:600}
+.item-desc{font-size:.8125rem;color:var(--text-muted);margin-top:2px}
+.item-meta{font-size:.75rem;color:var(--text-light);margin-top:4px}
+.item-meta .stars::before{content:"\2B50 "}
+
+/* Footer */
+.footer{
+  text-align:center;color:var(--text-light);font-size:.75rem;
+  padding:32px 0 16px;border-top:1px solid var(--border);margin-top:32px;
+}
+
+/* No items */
+.empty{color:var(--text-light);font-style:italic;font-size:.875rem;padding:8px 0}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header class="header">
+  <h1>Weekly Tech Watch</h1>
+  <div class="date-range">2026-09-15 ~ 2026-09-17</div>
+</header>
+
+<div class="stat-grid">
+<div class="stat-card"><div class="num">2</div><div class="label">Trending</div></div>
+<div class="stat-card"><div class="num">9</div><div class="label">Plugins</div></div>
+<div class="stat-card"><div class="num">8</div><div class="label">awesome-cc</div></div>
+</div>
+
+<h2 class="section-heading">Highlights</h2>
+<div class="highlight-card">
+  <div class="hl-badge">ニュース</div>
+  <div class="hl-title"><a href="https://github.com/harvard-edge/cs249r_book">GitHub: harvard-edge/cs249r_book</a></div>
+  <div class="hl-desc"><strong>概要</strong>Machine Learning Systems: Foundations, Scaling, Agentic AI, and Physical AI (Vols I–IV) • Harvard CS249r | https://mlsysbook.ai</div>
+  <div class="hl-link"><a href="https://github.com/harvard-edge/cs249r_book">詳細を見る</a></div>
+</div>
+<div class="highlight-card">
+  <div class="hl-badge">ニュース</div>
+  <div class="hl-title"><a href="https://github.com/zenstory-ai/drama-skills">GitHub: zenstory-ai/drama-skills</a></div>
+  <div class="hl-desc"><strong>概要</strong>开源 AI 短剧/漫剧创作 skill 合集：剧本、角色资产、分镜 storyboard、图片/视频提示词、审查，适配 Claude Code 与 Codex | Open-source AI short drama / micro-drama skills for Claude Code &amp; Codex: script, assets, storyboard, image &amp; video prompts, review. MIT.</div>
+  <div class="hl-link"><a href="https://github.com/zenstory-ai/drama-skills">詳細を見る</a></div>
+</div>
+<div class="highlight-card">
+  <div class="hl-badge">ニュース</div>
+  <div class="hl-title"><a href="https://github.com/anthropics/claude-code">Boris Cherny: anthropics/claude-code</a></div>
+  <div class="hl-desc"><strong>概要</strong>Created branch: claude/diff-pane-empty-auto-open</div>
+  <div class="hl-link"><a href="https://github.com/anthropics/claude-code">詳細を見る</a></div>
+</div>
+
+<h2 class="section-heading">Topics</h2>
+<div class="topic">
+  <div class="topic-title">GitHub Trending</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/harvard-edge/cs249r_book">harvard-edge/cs249r_book</a></div>
+    <div class="item-desc">Machine Learning Systems: Foundations, Scaling, Agentic AI, and Physical AI (Vols I–IV) • Harvard CS249r | https://mlsysbook.ai</div>
+    <div class="item-meta"><span class="stars">28250</span></div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/zenstory-ai/drama-skills">zenstory-ai/drama-skills</a></div>
+    <div class="item-desc">开源 AI 短剧/漫剧创作 skill 合集：剧本、角色资产、分镜 storyboard、图片/视频提示词、审查，适配 Claude Code 与 Codex | Open-source AI short drama / micro-drama skills for Claude Code &amp; Codex: script, assets, storyboard, image &amp; video prompts, review. MIT.</div>
+    <div class="item-meta"><span class="stars">1989</span></div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">New Plugins</div>
+<div class="item">
+  <span class="badge badge-plugin">PLUGIN</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/clay-run/agent-plugins/tree/main/clay">clay</a></div>
+    <div class="item-desc">Work with Clay from Claude Code: set up and sign in to the clay CLI, query and analyze Clay tables, search Clay&#x27;s GTM database for people and companies, manage audiences, signals, routines and workflows, and draft and review Sequencer campaigns. Includes hooks that auto-approve the plugin&#x27;s own clay CLI calls and Clay skills; requires a Clay account.</div>
+    <div class="item-meta">productivity</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-plugin">PLUGIN</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/forcedotcom/informatica-claude-plugins/tree/main/informatica-for-claude-platform">informatica-for-claude-platform</a></div>
+    <div class="item-desc">Governed catalog discovery for Informatica Intelligent Data Management Cloud (CDGC): find tables, columns, files, glossary terms and policies across the enterprise catalog, check ownership, certification, sensitivity and applicable policy, and get safe-usage guidance grounded in catalog metadata before querying any data. Requires an Informatica IDMC tenant and the Informatica Catalog Discovery connector.</div>
+    <div class="item-meta">database</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-plugin">PLUGIN</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/intuit/quickbooks-claude-plugin">intuit-quickbooks</a></div>
+    <div class="item-desc">QuickBooks business insights and actions: financial health briefings across P&amp;L, cash flow, balance sheet and A/R, industry benchmarking, payroll cost analysis, overdue-invoice reminders, estimate/invoice drafting from email, payroll onboarding and base-pay changes (with confirmation), and QuickBooks Capital lending guidance. Requires the Intuit QuickBooks connector.</div>
+    <div class="item-meta">productivity</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-plugin">PLUGIN</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/pendo-io/claude-pendo-plugin/tree/main/plugins/pendo-analytics">pendo-analytics</a></div>
+    <div class="item-desc">Bring Pendo product analytics into Claude Code: account health, feature adoption, session replay lookup and triage, feedback analysis, and data-informed planning grounded in real usage data. Requires the Pendo connector and a Pendo subscription.</div>
+    <div class="item-meta">productivity</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-plugin">PLUGIN</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/pendo-io/claude-pendo-plugin/tree/main/plugins/pendo-guides">pendo-guides</a></div>
+    <div class="item-desc">Create production-ready Pendo in-app guides (walkthroughs, announcements, alerts, polls, promotions) as HTML/CSS/JS from a short intake conversation, using Pendo&#x27;s guide components.</div>
+    <div class="item-meta">productivity</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-plugin">PLUGIN</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/pendo-io/claude-pendo-plugin/tree/main/plugins/pendo-orchestrate">pendo-orchestrate</a></div>
+    <div class="item-desc">Create, configure and edit draft Pendo Orchestrate email journeys, including multi-email and conditional split flows, via the Pendo connector. Journeys stay in draft; activation happens in the Orchestrate UI.</div>
+    <div class="item-meta">productivity</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-plugin">PLUGIN</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/pendo-io/claude-pendo-plugin/tree/main/plugins/setup-agent-analytics">setup-agent-analytics</a></div>
+    <div class="item-desc">Detect AI agents in your codebase and instrument them with Pendo Agent Analytics via the best-fit path: Python SDK, TypeScript SDK, client-side trackAgent(), or the Conversations API.</div>
+    <div class="item-meta">development</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-plugin">PLUGIN</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/pendo-io/claude-pendo-plugin/tree/main/plugins/setup-mcp-agent-analytics">setup-mcp-agent-analytics</a></div>
+    <div class="item-desc">Detect an MCP server&#x27;s language (Python, TypeScript or Go) and instrument it with the matching Pendo SDK so MCP tool calls flow into Pendo Agent Analytics.</div>
+    <div class="item-meta">development</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-plugin">PLUGIN</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/zocks-communications/zocks-agent-plugins">zocks-advisor</a></div>
+    <div class="item-desc">Seven skills for financial advisors built on Zocks meeting intelligence: client behavioral profiles, attrition-risk ranking, held-away asset radar, client journey dossiers, household review packs, next-best-action analysis and a tax opportunity scan. Requires the Zocks connector and a Zocks account.</div>
+    <div class="item-meta">productivity</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">awesome-claude-code</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/79253ca">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-09-16</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/6d2e823">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-09-16</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/99950f2">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-09-16</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/6278fae">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-09-16</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/62ed03d">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-09-16</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/716b98f">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-09-16</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/f27a467">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-09-16</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/4bd4802">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-09-16</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">Developer Voices</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/anthropics/claude-code">Boris Cherny: anthropics/claude-code (CreateEvent)</a></div>
+    <div class="item-desc">Created branch: claude/diff-pane-empty-auto-open</div>
+    <div class="item-meta">2026-09-16</div>
+  </div>
+</div>
+</div>
+
+<footer class="footer">
+  Generated at 2026-09-17 07:56 JST<br>
+  Sources: Claude Code CHANGELOG, GitHub Releases, awesome-claude-code,
+  anthropics/skills, PulseMCP, Claude Plugins, GitHub Trending
+</footer>
+
+</div>
+</body>
+</html>
