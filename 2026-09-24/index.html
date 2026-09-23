@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Weekly Tech Watch — 2026-09-24</title>
+<style>
+:root {
+  --bg: #f8fafc;
+  --bg-card: #ffffff;
+  --bg-highlight: #eff6ff;
+  --text: #1e293b;
+  --text-muted: #64748b;
+  --text-light: #94a3b8;
+  --accent: #3b82f6;
+  --border: #e2e8f0;
+  --shadow: 0 1px 3px rgba(0,0,0,.08);
+  --badge-changelog: #3b82f6;
+  --badge-mcp: #8b5cf6;
+  --badge-trending: #f59e0b;
+  --badge-plugin: #10b981;
+  --badge-awesome: #f43f5e;
+  --badge-skills: #06b6d4;
+}
+@media(prefers-color-scheme:dark){
+:root {
+  --bg: #0f172a;
+  --bg-card: #1e293b;
+  --bg-highlight: #1e3a5f;
+  --text: #e2e8f0;
+  --text-muted: #94a3b8;
+  --text-light: #64748b;
+  --accent: #60a5fa;
+  --border: #334155;
+  --shadow: 0 1px 3px rgba(0,0,0,.3);
+}}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  background:var(--bg);color:var(--text);
+  line-height:1.6;padding:16px;
+}
+.container{max-width:760px;margin:0 auto}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* Header */
+.header{text-align:center;padding:32px 0 24px}
+.header h1{font-size:1.5rem;font-weight:700;letter-spacing:-.02em}
+.header .date-range{color:var(--text-muted);font-size:.875rem;margin-top:4px}
+
+/* Stats */
+.stat-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));
+  gap:8px;margin:0 0 32px;
+}
+.stat-card{
+  background:var(--bg-card);border:1px solid var(--border);border-radius:8px;
+  padding:12px;text-align:center;box-shadow:var(--shadow);
+}
+.stat-card .num{font-size:1.5rem;font-weight:700;color:var(--accent)}
+.stat-card .label{font-size:.75rem;color:var(--text-muted);margin-top:2px}
+
+/* Section heading */
+.section-heading{
+  font-size:1.125rem;font-weight:700;margin:32px 0 16px;
+  padding-bottom:8px;border-bottom:2px solid var(--accent);
+}
+
+/* Highlight cards */
+.highlight-card{
+  background:var(--bg-highlight);border:1px solid var(--border);
+  border-radius:12px;padding:20px;margin-bottom:16px;
+  border-left:4px solid var(--accent);
+}
+.highlight-card .hl-badge{
+  display:inline-block;font-size:.6875rem;font-weight:700;
+  color:var(--accent);background:var(--bg-card);
+  border:1px solid var(--border);border-radius:999px;
+  padding:2px 8px;margin-bottom:8px;
+}
+.highlight-card .hl-title{font-size:1rem;font-weight:700;margin-bottom:8px}
+.highlight-card .hl-title a{color:var(--text)}
+.highlight-card .hl-desc{font-size:.875rem;color:var(--text-muted);margin-bottom:8px}
+.highlight-card .hl-desc strong,
+.highlight-card .hl-scenario strong{
+  display:block;color:var(--text);font-size:.75rem;margin-bottom:2px;
+}
+.highlight-card .hl-link{font-size:.8125rem;margin-bottom:12px}
+.highlight-card .hl-scenario{
+  font-size:.875rem;line-height:1.7;
+  background:var(--bg-card);border-radius:8px;padding:12px;margin-bottom:8px;
+}
+.highlight-card .hl-action{
+  font-size:.8125rem;color:var(--accent);font-weight:600;
+}
+.highlight-card .hl-action::before{content:"→ "}
+
+/* Topic section */
+.topic{
+  background:var(--bg-card);border:1px solid var(--border);
+  border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:var(--shadow);
+}
+.topic-title{font-size:1rem;font-weight:700;margin-bottom:4px}
+.topic-summary{font-size:.8125rem;color:var(--text-muted);margin-bottom:16px}
+
+/* Item list */
+.item{
+  padding:10px 0;border-bottom:1px solid var(--border);
+  display:flex;gap:10px;align-items:flex-start;
+}
+.item:last-child{border-bottom:none;padding-bottom:0}
+.badge{
+  display:inline-block;font-size:.625rem;font-weight:700;
+  color:#fff;padding:2px 8px;border-radius:10px;white-space:nowrap;
+  flex-shrink:0;margin-top:3px;text-transform:uppercase;letter-spacing:.03em;
+}
+.badge-changelog{background:var(--badge-changelog)}
+.badge-mcp{background:var(--badge-mcp)}
+.badge-trending{background:var(--badge-trending)}
+.badge-plugin{background:var(--badge-plugin)}
+.badge-awesome{background:var(--badge-awesome)}
+.badge-skills{background:var(--badge-skills)}
+.item-body{flex:1;min-width:0}
+.item-title{font-size:.875rem;font-weight:600}
+.item-desc{font-size:.8125rem;color:var(--text-muted);margin-top:2px}
+.item-meta{font-size:.75rem;color:var(--text-light);margin-top:4px}
+.item-meta .stars::before{content:"\2B50 "}
+
+/* Footer */
+.footer{
+  text-align:center;color:var(--text-light);font-size:.75rem;
+  padding:32px 0 16px;border-top:1px solid var(--border);margin-top:32px;
+}
+
+/* No items */
+.empty{color:var(--text-light);font-style:italic;font-size:.875rem;padding:8px 0}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header class="header">
+  <h1>Weekly Tech Watch</h1>
+  <div class="date-range">2026-09-23 ~ 2026-09-24</div>
+</header>
+
+<div class="stat-grid">
+<div class="stat-card"><div class="num">4</div><div class="label">Trending</div></div>
+<div class="stat-card"><div class="num">1</div><div class="label">Plugins</div></div>
+<div class="stat-card"><div class="num">7</div><div class="label">awesome-cc</div></div>
+</div>
+
+<h2 class="section-heading">Highlights</h2>
+<div class="highlight-card">
+  <div class="hl-badge">ニュース</div>
+  <div class="hl-title"><a href="https://github.com/hypit-ai/hypit">GitHub: hypit-ai/hypit</a></div>
+  <div class="hl-desc"><strong>概要</strong>GitHub Trendingに登場した「hypit-ai/hypit」は、バイラル動画をAIエージェントでクローンするOSSです。台本の生成だけでなく、ワークフロー全体を扱うと説明されています。具体的には、顔(face)の差し替え、セリフ(words)の差し替え、B-rollの差し替えを行います。さらに1コマンドで100バリエーションを量産できるとされ、「1億再生を狙う」という訴求も付いています。詳細な対応モデルや動作条件は原文の説明からは分からず、リポジトリのREADMEで確認する必要があります。</div>
+  <div class="hl-link"><a href="https://github.com/hypit-ai/hypit">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>そのまま導入するより、「バズ動画の構造を分解して再構築する」考え方を参考にする使い方が現実的だと思います。たとえばうま藻やりゅうさんちのSNS動画で、冒頭フック、テロップ、B-rollの順序といった型だけを抽出し、自社素材で複数パターンを作って反応を比較する、といった使い方が考えられます。READMEで、構造分析・台本生成・素材差し替えの各工程がどう分かれているかを見ると、自分のワークフローに部分的に取り込めるかもしれません。一方で注意点があります。顔の差し替えは他人の肖像や著作権、プラットフォーム規約に抵触しやすく、他人の動画のクローンはブランド信頼を損なうリスクがあります。また、100本量産は品質より量に寄りがちで、りゅうさんの「信頼と本質」の方針とは相性が悪い面もあります。他人の動画は使わず、自社素材の型の検証に限定するのが安全です。</div>
+  <div class="hl-action">ブラウザで https://github.com/hypit-ai/hypit を開き、READMEの「How it works」や「Usage」にあたる節を確認してください。見るポイントは、①使うAIモデルと外部API(課金の有無)、②顔差し替え機能の仕組みと利用条件、③ライセンスの3点です。加えて、リポジトリの構成からワークフローの工程分割(分析→台本→素材差し替え→書き出し)の設計を読むと、自社の動画量産フローの参考になります。実際に動かす場合は、他人の動画ではなく自分の動画1本で試すことをおすすめします。</div>
+</div>
+<div class="highlight-card">
+  <div class="hl-badge">ニュース</div>
+  <div class="hl-title"><a href="https://github.com/Capsize-Games/airunner">GitHub: Capsize-Games/airunner</a></div>
+  <div class="hl-desc"><strong>概要</strong>GitHub Trendingに登場した Capsize-Games/airunner は、インターネット接続なしで動かせるオフライン推論エンジンです。説明文によると、画像・アート生成、リアルタイムの音声会話、LLMを使ったチャットボット、自動化ワークフローを1つの環境でローカル実行できます。クラウドAPIに依存せず、手元のPCのGPU/CPUでモデルを動かす設計で、データを外部へ送らずに生成AIを使いたい人向けのプロジェクトです。詳細な対応モデルや動作要件は、リポジトリのREADMEで確認する必要があります。</div>
+  <div class="hl-link"><a href="https://github.com/Capsize-Games/airunner">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>個人情報や顧客データを外部APIに出したくない場面で、ローカルLLMの検証環境として使える可能性があります。たとえばクライアントのヒアリングメモや議事録の要約、社内向けチャットボットの試作を、送信なしで試す用途です。AIコンサルでは「まずローカルで動くデモを見せ、効果が出たらクラウドに移す」という段階的な提案の材料にもなりそうです。また、音声会話機能は、店舗の問い合わせ応答などの音声UIを検証する足場になるかもしれません。ただし、まず手元のWindows機のGPUメモリで実用的な速度が出るかを確認するのが先です。動かないなら、既存のOllamaなどで足りる可能性が高いです。また、音声クローンや顧客利用に踏み込む場合は、モデルのライセンスと権利面の確認が必要です。</div>
+  <div class="hl-action">ブラウザで https://github.com/Capsize-Games/airunner を開き、READMEの「Requirements」「Installation」「Supported models」を確認してください。Windows対応の有無、必要なGPU/VRAM、対応するLLMや音声モデルが分かれば、手元の機材で動かせるか判断できます。試すなら、本番環境とは別のフォルダや仮想環境に入れて、READMEのインストール手順どおりに起動し、短い日本語の要約テストを1件だけ流してみてください。</div>
+</div>
+<div class="highlight-card">
+  <div class="hl-badge">ニュース</div>
+  <div class="hl-title"><a href="https://github.com/suboss87/FDEOps">GitHub: suboss87/FDEOps</a></div>
+  <div class="hl-desc"><strong>概要</strong>GitHub Trendingに登場した「suboss87/FDEOps」は、AIコーディングエージェント向けの「Forward Deployed Engineering(FDE)スキル集」です。FDEとは、顧客の現場に入り込んで課題把握から実装・導入までを一気通貫で担うエンジニアリングの型を指します。このリポジトリは、その進め方をエージェントが再利用できるスキルとしてまとめたものと読めます。提供された説明は一文のみで、具体的なスキル名、コマンド、対応エージェントなどの詳細は未確認です。</div>
+  <div class="hl-link"><a href="https://github.com/suboss87/FDEOps">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>りゅうさんの働き方(ヒアリング、設計、実装して見せる、自走させる)は、FDEの型とかなり近い可能性があります。使える場面は、クライアント導入案件の着手時です。たとえば学童NPOやPUMPGYMのような案件で、現場ヒアリング→課題の分解→小さく作る→引き渡し、という流れをClaude CodeやCodexに一貫して踏ませる際の型として参考にできそうです。具体的には、リポジトリ内のスキル定義(SKILL.md想定)を読み、自分の既存スキルやクライアント導入標準パッケージの手順と見比べます。足りない観点(現場でのリスク確認、引き渡し条件、運用後の検証など)だけを自前のスキルへ取り込む使い方が考えられます。注意点として、中身は未確認で、星数だけで品質は測れません。そのまま丸ごと導入すると既存の運用と二重になるため、まず読んで良い部分だけ拝借する形が無難です。</div>
+  <div class="hl-action">ブラウザで https://github.com/suboss87/FDEOps を開き、READMEとスキル定義のファイル(SKILL.mdなど)を10分ほど読みます。既存のクライアント導入の手順と比べ、自分の手順に無い観点が3つ以上あれば、その部分だけメモして自前のスキルに反映するか判断します。導入や実行はせず、読むだけにとどめます。</div>
+</div>
+
+<h2 class="section-heading">Topics</h2>
+<div class="topic">
+  <div class="topic-title">AI動画・コンテンツ生成</div>
+  <div class="topic-summary">AIエージェントでバイラル動画を複製・量産するワークフローツール</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hypit-ai/hypit">hypit-ai/hypit</a></div>
+    <div class="item-desc">Clone any viral video with AI agents. Not just a script, the whole workflow: swap the face, the words, the B-roll, ship 100 variants in one command, and get your 100M views.</div>
+    <div class="item-meta"><span class="stars">15384</span></div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">オフラインAI・音声</div>
+  <div class="topic-summary">ローカルで動作する推論エンジンや音声入力ツール</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/Capsize-Games/airunner">Capsize-Games/airunner</a></div>
+    <div class="item-desc">Offline inference engine for art, real-time voice conversations, LLM powered chatbots and automated workflows</div>
+    <div class="item-meta"><span class="stars">1318</span></div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/VocaHQ/vocalinux">VocaHQ/vocalinux</a></div>
+    <div class="item-desc">Free, open-source, 100% offline voice dictation for Linux. Speak and type anywhere via whisper.cpp, Whisper &amp; VOSK engines, GPU-accelerated, works on X11 + Wayland!</div>
+    <div class="item-meta"><span class="stars">869</span></div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">AIエージェント拡張</div>
+  <div class="topic-summary">AIコーディングエージェント向けスキルやClaude連携コネクタ</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/suboss87/FDEOps">suboss87/FDEOps</a></div>
+    <div class="item-desc">Forward deployed engineering skills for AI coding agents.</div>
+    <div class="item-meta"><span class="stars">891</span></div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-plugin">PLUGIN</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/amzn/selling-partner-agentic-toolkit">amazon-selling-partner</a></div>
+    <div class="item-desc">Connect your Amazon Seller Central account to Claude. Ask about sales, inventory, and listing performance and get recommendations grounded in your own data, then review and approve every listing, inventory or FBA action before it runs. Bundles the Amazon Selling Partner MCP server (Seller Central OAuth on first use). Currently in beta.</div>
+    <div class="item-meta">productivity</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">リポジトリ自動更新</div>
+  <div class="topic-summary">ティッカーデータとSVGを更新する自動choreコミット</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/b364cae">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-09-23</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/e942c10">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-09-23</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/a805b2f">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-09-23</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/617772a">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-09-23</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/7818307">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-09-23</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/4b841fc">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-09-23</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/b36ea12">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-09-23</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">内容不明の項目</div>
+  <div class="topic-summary">タイトル・説明が空で分類できないアイテム</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/addyosmani/agent-skills">Addy Osmani: addyosmani/agent-skills (PushEvent)</a></div>
+    <div class="item-desc">[main] New push</div>
+    <div class="item-meta">2026-09-23</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/addyosmani/agent-skills">Addy Osmani: addyosmani/agent-skills (PushEvent)</a></div>
+    <div class="item-desc">[main] New push</div>
+    <div class="item-meta">2026-09-23</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/addyosmani/agent-skills">Addy Osmani: addyosmani/agent-skills (PushEvent)</a></div>
+    <div class="item-desc">[main] New push</div>
+    <div class="item-meta">2026-09-23</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/addyosmani/agent-skills">Addy Osmani: addyosmani/agent-skills (PushEvent)</a></div>
+    <div class="item-desc">[main] New push</div>
+    <div class="item-meta">2026-09-23</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/addyosmani/agent-skills">Addy Osmani: addyosmani/agent-skills (PushEvent)</a></div>
+    <div class="item-desc">[main] New push</div>
+    <div class="item-meta">2026-09-23</div>
+  </div>
+</div>
+</div>
+
+<footer class="footer">
+  Generated at 2026-09-24 07:56 JST<br>
+  Sources: Claude Code CHANGELOG, GitHub Releases, awesome-claude-code,
+  anthropics/skills, PulseMCP, Claude Plugins, GitHub Trending
+</footer>
+
+</div>
+</body>
+</html>
