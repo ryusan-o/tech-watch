@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Weekly Tech Watch — 2026-09-25</title>
+<style>
+:root {
+  --bg: #f8fafc;
+  --bg-card: #ffffff;
+  --bg-highlight: #eff6ff;
+  --text: #1e293b;
+  --text-muted: #64748b;
+  --text-light: #94a3b8;
+  --accent: #3b82f6;
+  --border: #e2e8f0;
+  --shadow: 0 1px 3px rgba(0,0,0,.08);
+  --badge-changelog: #3b82f6;
+  --badge-mcp: #8b5cf6;
+  --badge-trending: #f59e0b;
+  --badge-plugin: #10b981;
+  --badge-awesome: #f43f5e;
+  --badge-skills: #06b6d4;
+}
+@media(prefers-color-scheme:dark){
+:root {
+  --bg: #0f172a;
+  --bg-card: #1e293b;
+  --bg-highlight: #1e3a5f;
+  --text: #e2e8f0;
+  --text-muted: #94a3b8;
+  --text-light: #64748b;
+  --accent: #60a5fa;
+  --border: #334155;
+  --shadow: 0 1px 3px rgba(0,0,0,.3);
+}}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  background:var(--bg);color:var(--text);
+  line-height:1.6;padding:16px;
+}
+.container{max-width:760px;margin:0 auto}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* Header */
+.header{text-align:center;padding:32px 0 24px}
+.header h1{font-size:1.5rem;font-weight:700;letter-spacing:-.02em}
+.header .date-range{color:var(--text-muted);font-size:.875rem;margin-top:4px}
+
+/* Stats */
+.stat-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));
+  gap:8px;margin:0 0 32px;
+}
+.stat-card{
+  background:var(--bg-card);border:1px solid var(--border);border-radius:8px;
+  padding:12px;text-align:center;box-shadow:var(--shadow);
+}
+.stat-card .num{font-size:1.5rem;font-weight:700;color:var(--accent)}
+.stat-card .label{font-size:.75rem;color:var(--text-muted);margin-top:2px}
+
+/* Section heading */
+.section-heading{
+  font-size:1.125rem;font-weight:700;margin:32px 0 16px;
+  padding-bottom:8px;border-bottom:2px solid var(--accent);
+}
+
+/* Highlight cards */
+.highlight-card{
+  background:var(--bg-highlight);border:1px solid var(--border);
+  border-radius:12px;padding:20px;margin-bottom:16px;
+  border-left:4px solid var(--accent);
+}
+.highlight-card .hl-badge{
+  display:inline-block;font-size:.6875rem;font-weight:700;
+  color:var(--accent);background:var(--bg-card);
+  border:1px solid var(--border);border-radius:999px;
+  padding:2px 8px;margin-bottom:8px;
+}
+.highlight-card .hl-title{font-size:1rem;font-weight:700;margin-bottom:8px}
+.highlight-card .hl-title a{color:var(--text)}
+.highlight-card .hl-desc{font-size:.875rem;color:var(--text-muted);margin-bottom:8px}
+.highlight-card .hl-desc strong,
+.highlight-card .hl-scenario strong{
+  display:block;color:var(--text);font-size:.75rem;margin-bottom:2px;
+}
+.highlight-card .hl-link{font-size:.8125rem;margin-bottom:12px}
+.highlight-card .hl-scenario{
+  font-size:.875rem;line-height:1.7;
+  background:var(--bg-card);border-radius:8px;padding:12px;margin-bottom:8px;
+}
+.highlight-card .hl-action{
+  font-size:.8125rem;color:var(--accent);font-weight:600;
+}
+.highlight-card .hl-action::before{content:"→ "}
+
+/* Topic section */
+.topic{
+  background:var(--bg-card);border:1px solid var(--border);
+  border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:var(--shadow);
+}
+.topic-title{font-size:1rem;font-weight:700;margin-bottom:4px}
+.topic-summary{font-size:.8125rem;color:var(--text-muted);margin-bottom:16px}
+
+/* Item list */
+.item{
+  padding:10px 0;border-bottom:1px solid var(--border);
+  display:flex;gap:10px;align-items:flex-start;
+}
+.item:last-child{border-bottom:none;padding-bottom:0}
+.badge{
+  display:inline-block;font-size:.625rem;font-weight:700;
+  color:#fff;padding:2px 8px;border-radius:10px;white-space:nowrap;
+  flex-shrink:0;margin-top:3px;text-transform:uppercase;letter-spacing:.03em;
+}
+.badge-changelog{background:var(--badge-changelog)}
+.badge-mcp{background:var(--badge-mcp)}
+.badge-trending{background:var(--badge-trending)}
+.badge-plugin{background:var(--badge-plugin)}
+.badge-awesome{background:var(--badge-awesome)}
+.badge-skills{background:var(--badge-skills)}
+.item-body{flex:1;min-width:0}
+.item-title{font-size:.875rem;font-weight:600}
+.item-desc{font-size:.8125rem;color:var(--text-muted);margin-top:2px}
+.item-meta{font-size:.75rem;color:var(--text-light);margin-top:4px}
+.item-meta .stars::before{content:"\2B50 "}
+
+/* Footer */
+.footer{
+  text-align:center;color:var(--text-light);font-size:.75rem;
+  padding:32px 0 16px;border-top:1px solid var(--border);margin-top:32px;
+}
+
+/* No items */
+.empty{color:var(--text-light);font-style:italic;font-size:.875rem;padding:8px 0}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header class="header">
+  <h1>Weekly Tech Watch</h1>
+  <div class="date-range">2026-09-23 ~ 2026-09-25</div>
+</header>
+
+<div class="stat-grid">
+<div class="stat-card"><div class="num">1</div><div class="label">Claude Code</div></div>
+<div class="stat-card"><div class="num">3</div><div class="label">Plugins</div></div>
+<div class="stat-card"><div class="num">8</div><div class="label">awesome-cc</div></div>
+<div class="stat-card"><div class="num">1</div><div class="label">Skills</div></div>
+</div>
+
+<h2 class="section-heading">Highlights</h2>
+<div class="highlight-card">
+  <div class="hl-badge">ニュース</div>
+  <div class="hl-title"><a href="https://code.claude.com/docs/en/changelog">Claude Code v2.1.282</a></div>
+  <div class="hl-desc"><strong>概要</strong>Claude Code v2.1.282 で、新しい設定 maxProseWidth が追加されました。幅の広いターミナルで、Claude が出力する文章(prose)の表示幅に上限をかけられる設定です。文章だけが対象で、テーブルとコードブロックは従来どおりターミナルの全幅を使って表示されます。ウルトラワイドモニターや全画面ターミナルでは1行が非常に長くなり読みにくかったため、その読みやすさを改善する変更です。changelog に記載された1項目の追加で、設定値の具体的な単位や既定値は上記の説明文からは分かりません。</div>
+  <div class="hl-link"><a href="https://code.claude.com/docs/en/changelog">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>ウルトラワイドや27インチ以上のモニターでターミナルを最大化して使うと、Claude の説明文が横に間延びして目が追いにくくなることがあります。そんなとき settings.json に maxProseWidth を入れて、文章だけ100文字前後に収める使い方が考えられます。表やコードは全幅のままなので、差分確認や比較表の見やすさは落ちません。長い提案や調査結果を読むことが多いりゅうさんの作業(議事録の要約確認、クライアント向け提案書の下書きレビューなど)で、読み疲れを減らせる可能性があります。日本語は全角で幅を取るため、英語と同じ数値感で設定すると狭く感じるかもしれません。まず少し広めの値から試して調整するのが無難です。ターミナルを小さめのウィンドウで使っているなら効果は出にくいので、その場合は無理に設定しなくて大丈夫です。</div>
+  <div class="hl-action">まず claude --version で v2.1.282 以降か確認し、古ければ更新します。その後 https://code.claude.com/docs/en/changelog の該当行と設定ドキュメントで maxProseWidth の値の形式(文字数か列数か)を確認してください。確認できたら ~/.claude/settings.json に追記して、ターミナルを最大化した状態で表示を見比べると効果が分かります。</div>
+</div>
+<div class="highlight-card">
+  <div class="hl-badge">ニュース</div>
+  <div class="hl-title"><a href="https://github.com/jaredpalmer/kev">Jared Palmer: jaredpalmer/kev</a></div>
+  <div class="hl-desc"><strong>概要</strong>Vercel系の開発者Jared Palmer氏が、GitHubリポジトリ「jaredpalmer/kev」で「evals/breadth-v1」というブランチを作成した。ソース情報にあるのはブランチ作成の事実のみで、READMEの内容やコミット、kevの正体(ツールなのか実験用リポジトリなのか)は不明。ブランチ名からは、幅広いタスクを対象にした評価(evals)の初版を作る意図がうかがえる。ただし、これは名前からの推測であり、公開時点では機能追加やリリースの発表ではない。</div>
+  <div class="hl-link"><a href="https://github.com/jaredpalmer/kev">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>現時点でこのニュース自体をすぐ使える場面は少ない。ただ「evals/breadth-v1」という命名は、AI活用の品質確認で参考にできる可能性があります。たとえばクライアント向けに作るLineBotや業務自動化の診断では、プロンプトやモデルを変えるたびに手作業で確認しがちです。そこで、代表的な質問・入力を20〜30件ほど1つのCSVかJSONにまとめ、期待する答えの条件を1行ずつ添えた「幅広さ重視の評価セット」を作る方法が考えられます。モデル更新やプロンプト修正の前後で同じセットを流せば、9割の出来を10割へ上げる際の抜け漏れ確認になります。注意点として、リポジトリの中身が未確認のため、kevの設計をそのまま真似する前に、まず中身を見て自分の用途に合うか判断するのがよさそうです。</div>
+  <div class="hl-action">ブラウザで https://github.com/jaredpalmer/kev を開き、README、ブランチ一覧の evals/breadth-v1、およびそのコミット履歴を確認する。evalsフォルダがあれば、テストケースの書式(入力・期待値・採点方法)だけ読んで、自分のLineBotや診断用の評価セットに転用できる形か見る。中身が薄ければ追わなくてよい。</div>
+</div>
+<div class="highlight-card">
+  <div class="hl-badge">ニュース</div>
+  <div class="hl-title"><a href="https://github.com/jaredpalmer/kev">Jared Palmer: jaredpalmer/kev</a></div>
+  <div class="hl-desc"><strong>概要</strong>Jared Palmer(Vercelのエンジニアリング責任者として知られる開発者)が公開しているGitHubリポジトリ「jaredpalmer/kev」で、「docs/refresh」というブランチが作成されました。手元の情報で確認できるのはこのブランチ作成の通知のみで、kev が何のツールなのか、ドキュメントのどの部分をどう更新するのかといった具体的な内容、機能名、コマンド、数値は含まれていません。ブランチ名からはドキュメント刷新の作業が始まったことが推測できますが、機能追加やリリースの発表ではなく、開発途中の動きです。現時点でニュースとしての実質的な新規性は小さく、リポジトリの中身を見て初めて価値が判断できる状況です。</div>
+  <div class="hl-link"><a href="https://github.com/jaredpalmer/kev">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>現時点では kev の中身が分からないため、りゅうさんの特定の事業やプロジェクトに結びつけるのは無理があります。一般的な使い所としては、開発者として評価の高い人が公開している小さなリポジトリを、設計やドキュメントの書き方の参考にする、という見方が考えられます。たとえば README や docs の構成が整理されているなら、クライアントに納品する自走支援用の手順書、あるいはClaude Code/Codexで共有しているリポジトリのドキュメントを整える際の型として流用できる可能性があります。ブランチ名が docs/refresh なので、ドキュメントの更新が進んだ後にマージされた状態を見ると、更新前後の差分から書き方の工夫を学べるかもしれません。注意点として、現段階ではブランチが作られただけで、内容が未完成のまま止まる場合もあります。今は深追いせず、README が充実した時点で見る程度がよいと思います。</div>
+  <div class="hl-action">ブラウザで https://github.com/jaredpalmer/kev を開き、README の冒頭で kev が何のツールかを確認してください。あわせて「Branches」から docs/refresh を選び、main との差分(Compare)を見ると、どのドキュメントが更新されているかが分かります。役に立ちそうなツールなら、右上の Watch から Releases のみ通知にしておくと、次の動きを見逃さずに済みます。</div>
+</div>
+
+<h2 class="section-heading">Topics</h2>
+<div class="topic">
+  <div class="topic-title">Claude Code更新</div>
+  <div class="topic-summary">maxProseWidth設定の追加など、Claude Codeの新バージョンv2.1.282のリリース。</div>
+<div class="item">
+  <span class="badge badge-changelog">CHANGELOG</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://code.claude.com/docs/en/changelog">v2.1.282</a></div>
+    <div class="item-desc">Added a maxProseWidth setting that caps the width of Claude’s prose in wide terminals while tables and code blocks keep the full width, Added a startup notice, and /status and claude doctor entries, listing telemetry variables in a project’s settings files that were ignored or that turned telemetry off, Added the allowClaudeInChromeWithManagedMcp managed setting to let claude --chrome run alongside an exclusive managed-mcp.json; the error shown when Chrome is blocked now names it</div>
+    <div class="item-meta">September 24, 2026</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">金融・調達向け連携</div>
+  <div class="topic-summary">GovTribe、LinqAlpha、Vanguardなど、業界特化のClaude向けスキル・コネクタ。</div>
+<div class="item">
+  <span class="badge badge-plugin">PLUGIN</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://govtribe.com">govtribe</a></div>
+    <div class="item-desc">Government contracting research and capture workflows in Claude: opportunity and pipeline briefs, bid/no-bid and competitor analysis, price-to-win and proposal prep, powered by the GovTribe connector.</div>
+    <div class="item-meta">productivity</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-plugin">PLUGIN</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://www.linqalpha.com">linq-alpha</a></div>
+    <div class="item-desc">LinqAlpha financial research in Claude: guided setup for the LinqAlpha connector, capability-based source selection for fundamentals, estimates, transcripts, filings and market data, and an optional, opt-in default-source preference you can remove at any time. Requires a LinqAlpha account.</div>
+    <div class="item-meta">productivity</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-plugin">PLUGIN</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://advisors.vanguard.com">vanguard-advisor-tools</a></div>
+    <div class="item-desc">Vanguard Advisor Tools for financial professionals: research and compare funds and ETFs across the industry and prepare for client conversations, using Vanguard&#x27;s advisor connector in Claude.</div>
+    <div class="item-meta">productivity</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">ティッカーデータ更新</div>
+  <div class="topic-summary">リポジトリのティッカーデータとSVGを自動更新するchoreコミット群。</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/80c8694">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-09-24</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/11797a8">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-09-24</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/0ef04e7">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-09-24</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/ffe3699">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-09-24</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/d31a7f6">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-09-24</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/d8e3342">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-09-24</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/b4d1422">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-09-24</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/3fe38a6">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-09-24</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">claude-apiスキル</div>
+  <div class="topic-summary">claude-apiスキルの拒否時課金に関するドキュメントリンクの更新。</div>
+<div class="item">
+  <span class="badge badge-skills">SKILLS</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/anthropics/skills/commit/3337550">Update claude-api skill: link refusal billing to the docs (#1825)</a></div>
+    <div class="item-meta">2026-09-24</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">内容不明の項目</div>
+  <div class="topic-summary">タイトルも説明もなく、内容を判別できない項目群。</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/jaredpalmer/kev">Jared Palmer: jaredpalmer/kev (CreateEvent)</a></div>
+    <div class="item-desc">Created branch: evals/breadth-v1</div>
+    <div class="item-meta">2026-09-24</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/jaredpalmer/kev">Jared Palmer: jaredpalmer/kev (CreateEvent)</a></div>
+    <div class="item-desc">Created branch: docs/refresh</div>
+    <div class="item-meta">2026-09-24</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/jaredpalmer/kev">Jared Palmer: jaredpalmer/kev (PushEvent)</a></div>
+    <div class="item-desc">[breadth-v1] New push</div>
+    <div class="item-meta">2026-09-24</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/jaredpalmer/kev">Jared Palmer: jaredpalmer/kev (CreateEvent)</a></div>
+    <div class="item-desc">Created branch: checkpoint/full-parameter</div>
+    <div class="item-meta">2026-09-24</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/jaredpalmer/kev">Jared Palmer: jaredpalmer/kev (CreateEvent)</a></div>
+    <div class="item-desc">Created branch: serve/27b</div>
+    <div class="item-meta">2026-09-24</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/jaredpalmer/kev">Jared Palmer: jaredpalmer/kev (PushEvent)</a></div>
+    <div class="item-desc">[main] New push</div>
+    <div class="item-meta">2026-09-24</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/jaredpalmer/kev">Jared Palmer: jaredpalmer/kev (PushEvent)</a></div>
+    <div class="item-desc">[main] New push</div>
+    <div class="item-meta">2026-09-24</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/jaredpalmer/kev">Jared Palmer: jaredpalmer/kev (PushEvent)</a></div>
+    <div class="item-desc">[export-contract] New push</div>
+    <div class="item-meta">2026-09-24</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/jaredpalmer/kev">Jared Palmer: jaredpalmer/kev (PushEvent)</a></div>
+    <div class="item-desc">[main] New push</div>
+    <div class="item-meta">2026-09-24</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/jaredpalmer/kev">Jared Palmer: jaredpalmer/kev (CreateEvent)</a></div>
+    <div class="item-desc">Created branch: docs/consolidate-plan</div>
+    <div class="item-meta">2026-09-24</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/jaredpalmer/kev">Jared Palmer: jaredpalmer/kev (PushEvent)</a></div>
+    <div class="item-desc">[27b] New push</div>
+    <div class="item-meta">2026-09-24</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/jaredpalmer/kev">Jared Palmer: jaredpalmer/kev (PushEvent)</a></div>
+    <div class="item-desc">[autoresearch-lean] New push</div>
+    <div class="item-meta">2026-09-24</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/jaredpalmer/kev">Jared Palmer: jaredpalmer/kev (PushEvent)</a></div>
+    <div class="item-desc">[full-parameter] New push</div>
+    <div class="item-meta">2026-09-24</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/jaredpalmer/kev">Jared Palmer: jaredpalmer/kev (PushEvent)</a></div>
+    <div class="item-desc">[readme-restructure] New push</div>
+    <div class="item-meta">2026-09-24</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/jaredpalmer/kev">Jared Palmer: jaredpalmer/kev (PushEvent)</a></div>
+    <div class="item-desc">[27b] New push</div>
+    <div class="item-meta">2026-09-24</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/jaredpalmer/kev">Jared Palmer: jaredpalmer/kev (CreateEvent)</a></div>
+    <div class="item-desc">Created branch: docs/readme-restructure</div>
+    <div class="item-meta">2026-09-24</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/jaredpalmer/kev">Jared Palmer: jaredpalmer/kev (PushEvent)</a></div>
+    <div class="item-desc">[kev-4b-r10-08b-r15] New push</div>
+    <div class="item-meta">2026-09-24</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/jaredpalmer/kev">Jared Palmer: jaredpalmer/kev (PushEvent)</a></div>
+    <div class="item-desc">[main] New push</div>
+    <div class="item-meta">2026-09-24</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/jaredpalmer/kev">Jared Palmer: jaredpalmer/kev (PushEvent)</a></div>
+    <div class="item-desc">[consolidate-plan] New push</div>
+    <div class="item-meta">2026-09-24</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/jaredpalmer/kev">Jared Palmer: jaredpalmer/kev (PushEvent)</a></div>
+    <div class="item-desc">[consolidate-plan] New push</div>
+    <div class="item-meta">2026-09-24</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/jaredpalmer/kev">Jared Palmer: jaredpalmer/kev (CreateEvent)</a></div>
+    <div class="item-desc">Created branch: deploy/27b-ref</div>
+    <div class="item-meta">2026-09-24</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/jaredpalmer/kev">Jared Palmer: jaredpalmer/kev (PushEvent)</a></div>
+    <div class="item-desc">[overnight-r6] New push</div>
+    <div class="item-meta">2026-09-24</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/jaredpalmer/kev">Jared Palmer: jaredpalmer/kev (PushEvent)</a></div>
+    <div class="item-desc">[overnight-r6] New push</div>
+    <div class="item-meta">2026-09-24</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/jaredpalmer/kev">Jared Palmer: jaredpalmer/kev (PushEvent)</a></div>
+    <div class="item-desc">[main] New push</div>
+    <div class="item-meta">2026-09-24</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/jaredpalmer/kev">Jared Palmer: jaredpalmer/kev (PushEvent)</a></div>
+    <div class="item-desc">[main] New push</div>
+    <div class="item-meta">2026-09-24</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/jaredpalmer/kev">Jared Palmer: jaredpalmer/kev (PushEvent)</a></div>
+    <div class="item-desc">[kev-4b-r10-08b-r15] New push</div>
+    <div class="item-meta">2026-09-24</div>
+  </div>
+</div>
+</div>
+
+<footer class="footer">
+  Generated at 2026-09-25 07:56 JST<br>
+  Sources: Claude Code CHANGELOG, GitHub Releases, awesome-claude-code,
+  anthropics/skills, PulseMCP, Claude Plugins, GitHub Trending
+</footer>
+
+</div>
+</body>
+</html>
