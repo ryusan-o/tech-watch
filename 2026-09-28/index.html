@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Weekly Tech Watch — 2026-09-28</title>
+<style>
+:root {
+  --bg: #f8fafc;
+  --bg-card: #ffffff;
+  --bg-highlight: #eff6ff;
+  --text: #1e293b;
+  --text-muted: #64748b;
+  --text-light: #94a3b8;
+  --accent: #3b82f6;
+  --border: #e2e8f0;
+  --shadow: 0 1px 3px rgba(0,0,0,.08);
+  --badge-changelog: #3b82f6;
+  --badge-mcp: #8b5cf6;
+  --badge-trending: #f59e0b;
+  --badge-plugin: #10b981;
+  --badge-awesome: #f43f5e;
+  --badge-skills: #06b6d4;
+}
+@media(prefers-color-scheme:dark){
+:root {
+  --bg: #0f172a;
+  --bg-card: #1e293b;
+  --bg-highlight: #1e3a5f;
+  --text: #e2e8f0;
+  --text-muted: #94a3b8;
+  --text-light: #64748b;
+  --accent: #60a5fa;
+  --border: #334155;
+  --shadow: 0 1px 3px rgba(0,0,0,.3);
+}}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  background:var(--bg);color:var(--text);
+  line-height:1.6;padding:16px;
+}
+.container{max-width:760px;margin:0 auto}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* Header */
+.header{text-align:center;padding:32px 0 24px}
+.header h1{font-size:1.5rem;font-weight:700;letter-spacing:-.02em}
+.header .date-range{color:var(--text-muted);font-size:.875rem;margin-top:4px}
+
+/* Stats */
+.stat-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));
+  gap:8px;margin:0 0 32px;
+}
+.stat-card{
+  background:var(--bg-card);border:1px solid var(--border);border-radius:8px;
+  padding:12px;text-align:center;box-shadow:var(--shadow);
+}
+.stat-card .num{font-size:1.5rem;font-weight:700;color:var(--accent)}
+.stat-card .label{font-size:.75rem;color:var(--text-muted);margin-top:2px}
+
+/* Section heading */
+.section-heading{
+  font-size:1.125rem;font-weight:700;margin:32px 0 16px;
+  padding-bottom:8px;border-bottom:2px solid var(--accent);
+}
+
+/* Highlight cards */
+.highlight-card{
+  background:var(--bg-highlight);border:1px solid var(--border);
+  border-radius:12px;padding:20px;margin-bottom:16px;
+  border-left:4px solid var(--accent);
+}
+.highlight-card .hl-badge{
+  display:inline-block;font-size:.6875rem;font-weight:700;
+  color:var(--accent);background:var(--bg-card);
+  border:1px solid var(--border);border-radius:999px;
+  padding:2px 8px;margin-bottom:8px;
+}
+.highlight-card .hl-title{font-size:1rem;font-weight:700;margin-bottom:8px}
+.highlight-card .hl-title a{color:var(--text)}
+.highlight-card .hl-desc{font-size:.875rem;color:var(--text-muted);margin-bottom:8px}
+.highlight-card .hl-desc strong,
+.highlight-card .hl-scenario strong{
+  display:block;color:var(--text);font-size:.75rem;margin-bottom:2px;
+}
+.highlight-card .hl-link{font-size:.8125rem;margin-bottom:12px}
+.highlight-card .hl-scenario{
+  font-size:.875rem;line-height:1.7;
+  background:var(--bg-card);border-radius:8px;padding:12px;margin-bottom:8px;
+}
+.highlight-card .hl-action{
+  font-size:.8125rem;color:var(--accent);font-weight:600;
+}
+.highlight-card .hl-action::before{content:"→ "}
+
+/* Topic section */
+.topic{
+  background:var(--bg-card);border:1px solid var(--border);
+  border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:var(--shadow);
+}
+.topic-title{font-size:1rem;font-weight:700;margin-bottom:4px}
+.topic-summary{font-size:.8125rem;color:var(--text-muted);margin-bottom:16px}
+
+/* Item list */
+.item{
+  padding:10px 0;border-bottom:1px solid var(--border);
+  display:flex;gap:10px;align-items:flex-start;
+}
+.item:last-child{border-bottom:none;padding-bottom:0}
+.badge{
+  display:inline-block;font-size:.625rem;font-weight:700;
+  color:#fff;padding:2px 8px;border-radius:10px;white-space:nowrap;
+  flex-shrink:0;margin-top:3px;text-transform:uppercase;letter-spacing:.03em;
+}
+.badge-changelog{background:var(--badge-changelog)}
+.badge-mcp{background:var(--badge-mcp)}
+.badge-trending{background:var(--badge-trending)}
+.badge-plugin{background:var(--badge-plugin)}
+.badge-awesome{background:var(--badge-awesome)}
+.badge-skills{background:var(--badge-skills)}
+.item-body{flex:1;min-width:0}
+.item-title{font-size:.875rem;font-weight:600}
+.item-desc{font-size:.8125rem;color:var(--text-muted);margin-top:2px}
+.item-meta{font-size:.75rem;color:var(--text-light);margin-top:4px}
+.item-meta .stars::before{content:"\2B50 "}
+
+/* Footer */
+.footer{
+  text-align:center;color:var(--text-light);font-size:.75rem;
+  padding:32px 0 16px;border-top:1px solid var(--border);margin-top:32px;
+}
+
+/* No items */
+.empty{color:var(--text-light);font-style:italic;font-size:.875rem;padding:8px 0}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header class="header">
+  <h1>Weekly Tech Watch</h1>
+  <div class="date-range">2026-09-24 ~ 2026-09-28</div>
+</header>
+
+<div class="stat-grid">
+<div class="stat-card"><div class="num">1</div><div class="label">Claude Code</div></div>
+<div class="stat-card"><div class="num">2</div><div class="label">Trending</div></div>
+<div class="stat-card"><div class="num">16</div><div class="label">awesome-cc</div></div>
+</div>
+
+<h2 class="section-heading">Highlights</h2>
+<div class="highlight-card">
+  <div class="hl-badge">ニュース</div>
+  <div class="hl-title"><a href="https://code.claude.com/docs/en/changelog">Claude Code v2.1.283</a></div>
+  <div class="hl-desc"><strong>概要</strong>Claude Code v2.1.283で、LLMゲートウェイ向けのヒントヘッダーに `x-claude-code-prompt-id` が追加された。これは1つのユーザープロンプトに対して実行される一連のリクエスト群を、ゲートウェイ側で1つのグループとして識別できるようにするIDで、環境変数 `CLAUDE_CODE_GATEWAY_HINT_HEADERS=1` を設定することでオプトインで有効化される。デフォルトでは送信されない設定変更であり、既存の挙動には影響しない。</div>
+  <div class="hl-link"><a href="https://code.claude.com/docs/en/changelog">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>これは自社でLLMゲートウェイ(社内プロキシやAPIコスト管理層)を運用・監視している場合に効く機能で、りゅうさんの場合はAPICostPatrolのようなAPIコスト管理の仕組みと相性が良い可能性があります。具体的には、環境変数 `CLAUDE_CODE_GATEWAY_HINT_HEADERS=1` を設定した状態でClaude Codeを起動すると、1回のプロンプト実行が裏で複数リクエストに分解されても、ゲートウェイ側のログで `x-claude-code-prompt-id` によって同一プロンプト由来のリクエストをグルーピング集計できます。これにより「1回の指示にどれだけコストがかかったか」を粒度細かく可視化する分析基盤を作る際の入力になり得ます。ただし、これは自前でゲートウェイ(プロキシサーバー)を構築・運用している場合にのみ意味を持つ機能で、Anthropic公式API/claude.aiを直接使っているだけなら恩恵はありません。</div>
+  <div class="hl-action">自社でLLMゲートウェイやプロキシを運用していないか確認し、もし今後APIコスト集計の仕組みを作るなら、`CLAUDE_CODE_GATEWAY_HINT_HEADERS=1` を環境変数に設定してヘッダーの中身を一度ログ出力で確認してみると良いでしょう。</div>
+</div>
+<div class="highlight-card">
+  <div class="hl-badge">ニュース</div>
+  <div class="hl-title"><a href="https://github.com/jub0t/Concat">GitHub: jub0t/Concat</a></div>
+  <div class="hl-desc"><strong>概要</strong>Concatは、動画編集ソフトCapCutの代替を目指すオープンソース・クロスプラットフォームのプロジェクト「jub0t/Concat」。GitHubで公開されており、CapCut同様のカット編集・タイムライン操作などの機能を無料で提供することを狙う点が特徴。加えてMCP(Model Context Protocol)対応を謳っており、AIエージェントやツールから動画編集の操作を呼び出せる設計になっている可能性がある点が、通常の動画編集ソフトとは異なる。</div>
+  <div class="hl-link"><a href="https://github.com/jub0t/Concat">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>りゅうさんちやAlgaleXのSNS投稿・レシピ動画、料理教室の告知動画など、短尺動画の編集作業がある場面で候補になりえます。CapCutは無料だが商用利用規約やデータの扱いが不透明な部分があるため、オープンソースでローカル完結できる代替があるのは、顧客提供物や社外秘素材を扱う際の選択肢として意味があります。MCP対応という点が本命で、もし実際にMCPサーバーとして動画編集操作(カット・字幕挿入・書き出し等)を公開しているなら、Claude Codeから「この素材をカットして書き出して」のように編集フローの一部を自動化できる可能性があります。ただし現時点ではプロジェクトの成熟度・安定性・実際のMCP機能の範囲が未検証なので、本番の顧客向け動画にいきなり使うのではなく、まずは社内の試し撮り素材やSNS用の軽い編集で試すのが無難です。</div>
+  <div class="hl-action">手が空いた時にhttps://github.com/jub0t/Concat のREADMEを開き、対応OS・MCPサーバーとして公開されている機能一覧・開発の活発さ(Star数、直近コミット日)を確認する。実用に足りそうならローカル環境にインストールして、SNS用の短い動画素材でカット編集を試してみる。</div>
+</div>
+<div class="highlight-card">
+  <div class="hl-badge">深掘り候補</div>
+  <div class="hl-title"><a href="https://github.com/irinabuht12-oss/marketing-skills">GitHub: irinabuht12-oss/marketing-skills</a></div>
+  <div class="hl-desc"><strong>概要</strong>GitHubリポジトリ「marketing-skills」が公開され、Claude Code/claude.ai向けのマーケティング特化スキル49個が無料公開されました。Google Ads、Meta Ads、SEO、AI visibility(AI検索での言及・表示対策)などの領域をカバーするスキル集です。加えて、Ryze社が提供するGoogle Ads MCPサーバーとMeta Ads MCPサーバーも紹介されており、`claude mcp add ryze --transport http https://connector.get-ryze.ai/mcp` の1コマンドでClaude CodeにMCP接続を追加し、Claude経由でGoogle Ads/Meta Adsのデータ取得や操作ができるようになる、という内容です。</div>
+  <div class="hl-link"><a href="https://github.com/irinabuht12-oss/marketing-skills">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>うま藻/AlgaleXの推販先開拓やDevLogSNSの運用、WONDAY Growth Engineの診断メニューに「広告運用の型」を組み込みたい場面で候補になりそうです。49スキルはSKILL.mdの形で配布されているはずなので、まずはリポジトリをclone(または該当スキルだけダウンロード)して`.claude/skills/`配下に置き、SEOやAI visibility系のスキルをりゅうさん自身のコンサル資料作成や診断チェックリストの下敷きとして読む、という使い方が軽くて安全です。一方、Ryze MCP(`claude mcp add ryze --transport http ...`)は外部の第三者サーバーにGoogle Ads/Meta Adsの広告アカウント接続を許可する形になるため、クライアントの広告アカウントに繋ぐ前提だと個人情報・アクセス権限・課金操作のリスクが伴います。導入するとしても、まず自分のテスト用アカウントか、権限を絞った状態で動作確認してからクライアント案件に持ち込む、という順序が安全だと考えられます。</div>
+  <div class="hl-action">https://github.com/irinabuht12-oss/marketing-skills を開き、READMEでスキル一覧とSKILL.mdの構成を確認する。気になるスキル(SEO/AI visibility系など)があればそのフォルダだけ読んで内容を確認し、Ryze MCPについては connector.get-ryze.ai の提供元情報とプライバシーポリシーを確認してから接続の是非を判断する。</div>
+</div>
+
+<h2 class="section-heading">Topics</h2>
+<div class="topic">
+  <div class="topic-title">Claude Code更新</div>
+  <div class="topic-summary">Claude Codeのゲートウェイヘッダー機能追加など最新バージョン情報。</div>
+<div class="item">
+  <span class="badge badge-changelog">CHANGELOG</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://code.claude.com/docs/en/changelog">v2.1.283</a></div>
+    <div class="item-desc">Added x-claude-code-prompt-id to the gateway hint headers so LLM gateways can group the requests that serve one user prompt; opt in with CLAUDE_CODE_GATEWAY_HINT_HEADERS=1, Added availableModelsMatch managed setting: with &quot;exact&quot;, an availableModels entry allows only the model version it names, so new releases stay blocked until listed, Added deniedModels managed setting to block specific models, even when availableModels allows them</div>
+    <div class="item-meta">September 25, 2026</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">OSS動画編集ツール</div>
+  <div class="topic-summary">MCP対応の無料オープンソースCapCut代替ツールが公開。</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/jub0t/Concat">jub0t/Concat</a></div>
+    <div class="item-desc">The truly free, and open-source cross-platform CapCut replacement (supports MCPs).</div>
+    <div class="item-meta"><span class="stars">3794</span></div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">Claudeマーケティングスキル</div>
+  <div class="topic-summary">広告運用やSEO向けの無料Claudeスキル集が公開。</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/irinabuht12-oss/marketing-skills">irinabuht12-oss/marketing-skills</a></div>
+    <div class="item-desc">Claude skills for marketing: 49 free marketing skills for Claude Code and claude.ai (Google Ads, Meta Ads, SEO, AI visibility) + the Ryze Google Ads MCP / Meta Ads MCP: claude mcp add ryze --transport http https://connector.get-ryze.ai/mcp</div>
+    <div class="item-meta"><span class="stars">2485</span></div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">リポジトリ定期更新</div>
+  <div class="topic-summary">ティッカーデータとSVGを自動更新する定型コミット群。</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/c1cb4c1">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-09-27</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/5f9e196">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-09-27</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/2c724b9">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-09-27</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/103e282">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-09-27</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/87bb497">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-09-27</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/da12136">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-09-27</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/5842be4">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-09-27</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/6eea301">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-09-27</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/38b5962">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-09-26</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/89d74fe">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-09-26</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/bb032c8">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-09-26</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/ab9bfc2">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-09-26</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/e4ecb7a">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-09-26</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/766c47d">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-09-26</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/6f482a4">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-09-26</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/4018625">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-09-26</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">その他・データなし</div>
+  <div class="topic-summary">タイトルや説明が空で内容を判別できない項目。</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/addyosmani/agent-skills">Addy Osmani: addyosmani/agent-skills (PushEvent)</a></div>
+    <div class="item-desc">[main] New push</div>
+    <div class="item-meta">2026-09-26</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/addyosmani/agent-skills">Addy Osmani: addyosmani/agent-skills (PushEvent)</a></div>
+    <div class="item-desc">[main] New push</div>
+    <div class="item-meta">2026-09-26</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/addyosmani/agent-skills">Addy Osmani: addyosmani/agent-skills (PushEvent)</a></div>
+    <div class="item-desc">[main] New push</div>
+    <div class="item-meta">2026-09-26</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/addyosmani/agent-skills">Addy Osmani: addyosmani/agent-skills (PushEvent)</a></div>
+    <div class="item-desc">[main] New push</div>
+    <div class="item-meta">2026-09-26</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/addyosmani/agent-skills/releases/tag/0.6.11">Addy Osmani: addyosmani/agent-skills (ReleaseEvent)</a></div>
+    <div class="item-desc">Release published: Agent Skills 0.6.11</div>
+    <div class="item-meta">2026-09-26</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/addyosmani/agent-skills">Addy Osmani: addyosmani/agent-skills (PushEvent)</a></div>
+    <div class="item-desc">[main] New push</div>
+    <div class="item-meta">2026-09-26</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/addyosmani/agent-skills">Addy Osmani: addyosmani/agent-skills (PushEvent)</a></div>
+    <div class="item-desc">[main] New push</div>
+    <div class="item-meta">2026-09-26</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/addyosmani/agent-skills">Addy Osmani: addyosmani/agent-skills (PushEvent)</a></div>
+    <div class="item-desc">[main] New push</div>
+    <div class="item-meta">2026-09-26</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/addyosmani/agent-skills">Addy Osmani: addyosmani/agent-skills (PushEvent)</a></div>
+    <div class="item-desc">[main] New push</div>
+    <div class="item-meta">2026-09-26</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/jaredpalmer/kev">Jared Palmer: jaredpalmer/kev (CreateEvent)</a></div>
+    <div class="item-desc">Created branch: rounds/r23</div>
+    <div class="item-meta">2026-09-27</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/jaredpalmer/kev">Jared Palmer: jaredpalmer/kev (PushEvent)</a></div>
+    <div class="item-desc">[main] New push</div>
+    <div class="item-meta">2026-09-27</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/jaredpalmer/kev">Jared Palmer: jaredpalmer/kev (PushEvent)</a></div>
+    <div class="item-desc">[full-trial-retries] New push</div>
+    <div class="item-meta">2026-09-27</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/jaredpalmer/kev">Jared Palmer: jaredpalmer/kev (CreateEvent)</a></div>
+    <div class="item-desc">Created branch: modal/full-trial-retries</div>
+    <div class="item-meta">2026-09-27</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/jaredpalmer/kev">Jared Palmer: jaredpalmer/kev (CreateEvent)</a></div>
+    <div class="item-desc">Created branch: rounds/r22</div>
+    <div class="item-meta">2026-09-26</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/jaredpalmer/kev">Jared Palmer: jaredpalmer/kev (CreateEvent)</a></div>
+    <div class="item-desc">Created branch: train/none-pair-max-state</div>
+    <div class="item-meta">2026-09-26</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/jaredpalmer/kev">Jared Palmer: jaredpalmer/kev (PushEvent)</a></div>
+    <div class="item-desc">[main] New push</div>
+    <div class="item-meta">2026-09-26</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/jaredpalmer/kev">Jared Palmer: jaredpalmer/kev (PushEvent)</a></div>
+    <div class="item-desc">[main] New push</div>
+    <div class="item-meta">2026-09-26</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/jaredpalmer/kev">Jared Palmer: jaredpalmer/kev (PushEvent)</a></div>
+    <div class="item-desc">[main] New push</div>
+    <div class="item-meta">2026-09-26</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/jaredpalmer/kev">Jared Palmer: jaredpalmer/kev (PushEvent)</a></div>
+    <div class="item-desc">[main] New push</div>
+    <div class="item-meta">2026-09-26</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/jaredpalmer/kev">Jared Palmer: jaredpalmer/kev (PushEvent)</a></div>
+    <div class="item-desc">[r22] New push</div>
+    <div class="item-meta">2026-09-26</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/jaredpalmer/kev">Jared Palmer: jaredpalmer/kev (PushEvent)</a></div>
+    <div class="item-desc">[r22] New push</div>
+    <div class="item-meta">2026-09-26</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/jaredpalmer/kev">Jared Palmer: jaredpalmer/kev (PushEvent)</a></div>
+    <div class="item-desc">[r22] New push</div>
+    <div class="item-meta">2026-09-26</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/jaredpalmer/kev">Jared Palmer: jaredpalmer/kev (PushEvent)</a></div>
+    <div class="item-desc">[pass-tokens-max] New push</div>
+    <div class="item-meta">2026-09-26</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/jaredpalmer/kev">Jared Palmer: jaredpalmer/kev (CreateEvent)</a></div>
+    <div class="item-desc">Created branch: trainer/pass-tokens-max</div>
+    <div class="item-meta">2026-09-26</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/jaredpalmer/kev">Jared Palmer: jaredpalmer/kev (PushEvent)</a></div>
+    <div class="item-desc">[calibration-guards] New push</div>
+    <div class="item-meta">2026-09-26</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/jaredpalmer/kev">Jared Palmer: jaredpalmer/kev (PushEvent)</a></div>
+    <div class="item-desc">[main] New push</div>
+    <div class="item-meta">2026-09-26</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/jaredpalmer/kev">Jared Palmer: jaredpalmer/kev (CreateEvent)</a></div>
+    <div class="item-desc">Created branch: tests/deterministic-mirror</div>
+    <div class="item-meta">2026-09-26</div>
+  </div>
+</div>
+</div>
+
+<footer class="footer">
+  Generated at 2026-09-28 07:56 JST<br>
+  Sources: Claude Code CHANGELOG, GitHub Releases, awesome-claude-code,
+  anthropics/skills, PulseMCP, Claude Plugins, GitHub Trending
+</footer>
+
+</div>
+</body>
+</html>
