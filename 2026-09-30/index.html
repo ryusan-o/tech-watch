@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Weekly Tech Watch — 2026-09-30</title>
+<style>
+:root {
+  --bg: #f8fafc;
+  --bg-card: #ffffff;
+  --bg-highlight: #eff6ff;
+  --text: #1e293b;
+  --text-muted: #64748b;
+  --text-light: #94a3b8;
+  --accent: #3b82f6;
+  --border: #e2e8f0;
+  --shadow: 0 1px 3px rgba(0,0,0,.08);
+  --badge-changelog: #3b82f6;
+  --badge-mcp: #8b5cf6;
+  --badge-trending: #f59e0b;
+  --badge-plugin: #10b981;
+  --badge-awesome: #f43f5e;
+  --badge-skills: #06b6d4;
+}
+@media(prefers-color-scheme:dark){
+:root {
+  --bg: #0f172a;
+  --bg-card: #1e293b;
+  --bg-highlight: #1e3a5f;
+  --text: #e2e8f0;
+  --text-muted: #94a3b8;
+  --text-light: #64748b;
+  --accent: #60a5fa;
+  --border: #334155;
+  --shadow: 0 1px 3px rgba(0,0,0,.3);
+}}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  background:var(--bg);color:var(--text);
+  line-height:1.6;padding:16px;
+}
+.container{max-width:760px;margin:0 auto}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* Header */
+.header{text-align:center;padding:32px 0 24px}
+.header h1{font-size:1.5rem;font-weight:700;letter-spacing:-.02em}
+.header .date-range{color:var(--text-muted);font-size:.875rem;margin-top:4px}
+
+/* Stats */
+.stat-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));
+  gap:8px;margin:0 0 32px;
+}
+.stat-card{
+  background:var(--bg-card);border:1px solid var(--border);border-radius:8px;
+  padding:12px;text-align:center;box-shadow:var(--shadow);
+}
+.stat-card .num{font-size:1.5rem;font-weight:700;color:var(--accent)}
+.stat-card .label{font-size:.75rem;color:var(--text-muted);margin-top:2px}
+
+/* Section heading */
+.section-heading{
+  font-size:1.125rem;font-weight:700;margin:32px 0 16px;
+  padding-bottom:8px;border-bottom:2px solid var(--accent);
+}
+
+/* Highlight cards */
+.highlight-card{
+  background:var(--bg-highlight);border:1px solid var(--border);
+  border-radius:12px;padding:20px;margin-bottom:16px;
+  border-left:4px solid var(--accent);
+}
+.highlight-card .hl-badge{
+  display:inline-block;font-size:.6875rem;font-weight:700;
+  color:var(--accent);background:var(--bg-card);
+  border:1px solid var(--border);border-radius:999px;
+  padding:2px 8px;margin-bottom:8px;
+}
+.highlight-card .hl-title{font-size:1rem;font-weight:700;margin-bottom:8px}
+.highlight-card .hl-title a{color:var(--text)}
+.highlight-card .hl-desc{font-size:.875rem;color:var(--text-muted);margin-bottom:8px}
+.highlight-card .hl-desc strong,
+.highlight-card .hl-scenario strong{
+  display:block;color:var(--text);font-size:.75rem;margin-bottom:2px;
+}
+.highlight-card .hl-link{font-size:.8125rem;margin-bottom:12px}
+.highlight-card .hl-scenario{
+  font-size:.875rem;line-height:1.7;
+  background:var(--bg-card);border-radius:8px;padding:12px;margin-bottom:8px;
+}
+.highlight-card .hl-action{
+  font-size:.8125rem;color:var(--accent);font-weight:600;
+}
+.highlight-card .hl-action::before{content:"→ "}
+
+/* Topic section */
+.topic{
+  background:var(--bg-card);border:1px solid var(--border);
+  border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:var(--shadow);
+}
+.topic-title{font-size:1rem;font-weight:700;margin-bottom:4px}
+.topic-summary{font-size:.8125rem;color:var(--text-muted);margin-bottom:16px}
+
+/* Item list */
+.item{
+  padding:10px 0;border-bottom:1px solid var(--border);
+  display:flex;gap:10px;align-items:flex-start;
+}
+.item:last-child{border-bottom:none;padding-bottom:0}
+.badge{
+  display:inline-block;font-size:.625rem;font-weight:700;
+  color:#fff;padding:2px 8px;border-radius:10px;white-space:nowrap;
+  flex-shrink:0;margin-top:3px;text-transform:uppercase;letter-spacing:.03em;
+}
+.badge-changelog{background:var(--badge-changelog)}
+.badge-mcp{background:var(--badge-mcp)}
+.badge-trending{background:var(--badge-trending)}
+.badge-plugin{background:var(--badge-plugin)}
+.badge-awesome{background:var(--badge-awesome)}
+.badge-skills{background:var(--badge-skills)}
+.item-body{flex:1;min-width:0}
+.item-title{font-size:.875rem;font-weight:600}
+.item-desc{font-size:.8125rem;color:var(--text-muted);margin-top:2px}
+.item-meta{font-size:.75rem;color:var(--text-light);margin-top:4px}
+.item-meta .stars::before{content:"\2B50 "}
+
+/* Footer */
+.footer{
+  text-align:center;color:var(--text-light);font-size:.75rem;
+  padding:32px 0 16px;border-top:1px solid var(--border);margin-top:32px;
+}
+
+/* No items */
+.empty{color:var(--text-light);font-style:italic;font-size:.875rem;padding:8px 0}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header class="header">
+  <h1>Weekly Tech Watch</h1>
+  <div class="date-range">2026-09-28 ~ 2026-09-30</div>
+</header>
+
+<div class="stat-grid">
+<div class="stat-card"><div class="num">1</div><div class="label">Claude Code</div></div>
+<div class="stat-card"><div class="num">1</div><div class="label">Trending</div></div>
+<div class="stat-card"><div class="num">8</div><div class="label">awesome-cc</div></div>
+<div class="stat-card"><div class="num">1</div><div class="label">Skills</div></div>
+</div>
+
+<h2 class="section-heading">Highlights</h2>
+<div class="highlight-card">
+  <div class="hl-badge">ニュース</div>
+  <div class="hl-title"><a href="https://code.claude.com/docs/en/changelog">Claude Code v2.1.285</a></div>
+  <div class="hl-desc"><strong>概要</strong>Claude Code v2.1.285 のチェンジログで、環境変数 CLAUDE_CODE_DISABLE_WEB_FETCH が追加されました。この変数を設定すると、Claude Code が URL の内容を取得する WebFetch ツールが無効になります。Webページの取得をツール単位で止められるため、外部サイトの内容をエージェントに読み込ませたくない環境や、プロンプトインジェクションのリスクを下げたい場面で、設定だけで制御できます。なお、この説明文から確認できるのは WebFetch の無効化のみです。WebSearch など他のツールへの影響は、説明には書かれていません。</div>
+  <div class="hl-link"><a href="https://code.claude.com/docs/en/changelog">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>顧客の情報が入るリポジトリで Claude Code を動かすときに、外部の任意ページを読み込ませない安全策として効く可能性があります。たとえばクライアント支援や CRM 関連の作業では、Webページに仕込まれた指示がエージェントに混入するのを避けたい場面があります。使い方の例は、.claude/settings.json の env に &quot;CLAUDE_CODE_DISABLE_WEB_FETCH&quot;: &quot;1&quot; を書き、そのリポジトリだけ WebFetch を止める形です。無効化されたことは、Claude Code に「WebFetchを使ってURLを読んで」と頼み、実際に使えないことで確認できます。注意点として、値の書き方(1 か true か)は説明文に明記がないため、公式ドキュメントで確認してください。また、調べ物をさせる作業では WebFetch が使えないと不便なので、常時オフにせず、プロジェクト単位で切り替える運用が現実的です。</div>
+  <div class="hl-action">https://code.claude.com/docs/en/changelog を開いて v2.1.285 の項目を確認してください。あわせて、公式ドキュメントの環境変数一覧で CLAUDE_CODE_DISABLE_WEB_FETCH の設定値の書き方を調べます。試すなら、顧客データを扱うリポジトリの .claude/settings.json の env に追記し、Claude Code を再起動して WebFetch が拒否されることを確認します。</div>
+</div>
+<div class="highlight-card">
+  <div class="hl-badge">ニュース</div>
+  <div class="hl-title"><a href="https://github.com/blader/humanizer">GitHub: blader/humanizer</a></div>
+  <div class="hl-desc"><strong>概要</strong>GitHub Trendingに入った blader/humanizer は、「AI生成文の兆候をテキストから取り除く」ことを目的としたエージェント用スキルです。ChatGPT系の文章に出やすい定型表現や、過剰な強調、不自然な言い回し、機械的な構成といったパターンを検出し、人間が書いたような自然な文体へ書き直す指示をスキルとして提供します。Claude Codeなどのエージェントにスキルとして組み込み、文章の推敲工程で呼び出す使い方が想定されています。ここでは説明文のみを根拠にしており、具体的な検出ルールの数やインストール手順はリポジトリのREADMEで確認が必要です。</div>
+  <div class="hl-link"><a href="https://github.com/blader/humanizer">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>SNS投稿やブログ、提案書、メルマガなど、AIに下書きさせた文章を仕上げる場面で効く可能性があります。たとえばDevLogSNSやコンサル提案書の下書きをAIが作ったあと、最後の推敲ステップとしてこのスキルを通し、「〜と言えるでしょう」「重要です」の連発や、きれいすぎる三点列挙といったAIっぽさを削る使い方が考えられます。使い方の案としては、リポジトリのSKILL.mdを自分の.claude/skillsに置いて、「この下書きをhumanizerで直して」と呼ぶ形です。ただし本スキルは英語圏のAI文体を想定している可能性が高く、日本語には効きが弱いかもしれません。また、りゅうさん自身の声や価値観はbrand-voice.mdが正本なので、汎用の人間らしさ変換に任せると個性が薄まる恐れがあります。まず英語圏向けの発信や、日本語の実験用に1〜2本だけ試すのが安全です。「AIで書いたことを隠す」目的で顧客向けに使う場合は、開示方針との整合も先に考える必要があります。</div>
+  <div class="hl-action">ブラウザで https://github.com/blader/humanizer を開き、READMEとSKILL.mdの本文を読んで、検出パターンが英語前提か日本語にも通用するかを確認してください。試すなら、手元の下書き1本を用意し、スキルを一時フォルダに置いて適用前後を並べて比べる形が安全です。日本語の違和感が残る場合は、パターン部分だけを参考に、brand-voice.mdに沿った自前の推敲チェックリストへ移す道もあります。</div>
+</div>
+<div class="highlight-card">
+  <div class="hl-badge">ニュース</div>
+  <div class="hl-title"><a href="https://github.com/jaredpalmer/kev">Jared Palmer: jaredpalmer/kev</a></div>
+  <div class="hl-desc"><strong>概要</strong>Jared Palmer(Vercel関連の開発者として知られる人物)がGitHubに公開したリポジトリ「jaredpalmer/kev」で、「rounds/r26-result」というブランチが作成されました。元の情報に書かれている具体的な内容はブランチ作成の通知のみで、READMEの中身、機能、コマンド、使い方、目的などの説明は含まれていません。ブランチ名の「rounds」「r26-result」からは、何らかの試行や評価を回(ラウンド)ごとに記録し、第26回の結果を保存している運用が推測されますが、これは名前からの推測にとどまり、リポジトリの用途は確認できていません。</div>
+  <div class="hl-link"><a href="https://github.com/jaredpalmer/kev">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>現時点では中身が不明なため、特定のプロジェクトに結びつけた活用提案はできません。一般的な使い所として、「rounds/rNN-result」のように『1回の試行=1ブランチ』で結果を残す運用は、AIエージェントやプロンプトを繰り返し改善する場面で参考になる可能性があります。たとえばClaude Codeに業務自動化の指示文を何度か調整させる際、ラウンドごとにブランチを切り、入力・出力・評価メモをコミットしておけば、後から「どの版が良かったか」を差分で比較できます。まず公開リポジトリのREADMEとブランチ一覧を眺め、評価ループの作り方として真似できる部分があるかを見るのが良さそうです。ただし、用途が分からないまま自分のリポジトリやクライアント案件のデータを連携させるのは避けたほうがよく、内容を確認してから判断するのが安全です。</div>
+  <div class="hl-action">ブラウザで https://github.com/jaredpalmer/kev を開き、READMEと「Branches」タブの rounds/r26-result を確認してください。手元で見るなら `git clone https://github.com/jaredpalmer/kev` のあと `git branch -a` と `git log --oneline -20 origin/rounds/r26-result` でコミット履歴を追えます。何のためのリポジトリか分かってから、使えるかを判断すれば十分です。</div>
+</div>
+
+<h2 class="section-heading">Topics</h2>
+<div class="topic">
+  <div class="topic-title">Claude Code更新</div>
+  <div class="topic-summary">v2.1.285でWebFetch無効化用の環境変数やデスクトップアプリ起動オプションが追加された。</div>
+<div class="item">
+  <span class="badge badge-changelog">CHANGELOG</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://code.claude.com/docs/en/changelog">v2.1.285</a></div>
+    <div class="item-desc">Added CLAUDE_CODE_DISABLE_WEB_FETCH environment variable to turn off the WebFetch tool, Added claude --desktop to open the Claude desktop app on the current directory, or on a session with --continue / --resume &lt;id&gt;, Added claude plugin configure &lt;plugin&gt; to show a plugin’s options and which are unset, or save new values read from stdin with --values-stdin</div>
+    <div class="item-meta">September 29, 2026</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">Claude APIスキル更新</div>
+  <div class="topic-summary">claude-apiスキルが更新され、Opus 5.5が既定になりSonnet 5.5やbuild-evalが追加された。</div>
+<div class="item">
+  <span class="badge badge-skills">SKILLS</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/anthropics/skills/commit/8a1541c">Update claude-api skill: Claude Opus 5.5 default, Claude Sonnet 5.5, build-eval </a></div>
+    <div class="item-meta">2026-09-29</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">AI文章の人間化</div>
+  <div class="topic-summary">AI生成文の特徴を取り除くエージェントスキル「humanizer」が紹介された。</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/blader/humanizer">blader/humanizer</a></div>
+    <div class="item-desc">Agent skill that removes signs of AI-generated writing from text</div>
+    <div class="item-meta"><span class="stars">52885</span></div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">リポジトリ自動更新</div>
+  <div class="topic-summary">リポジトリのティッカーデータとSVGを更新する自動choreコミット群。</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/410d908">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-09-29</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/b33b7d7">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-09-29</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/b75efa6">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-09-29</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/9e54c97">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-09-29</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/1c72ada">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-09-29</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/7488732">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-09-29</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/4c6b3ed">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-09-29</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/4486810">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-09-29</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">内容不明の項目</div>
+  <div class="topic-summary">タイトルと説明が空で、内容を判別できない項目群。</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/jaredpalmer/kev">Jared Palmer: jaredpalmer/kev (CreateEvent)</a></div>
+    <div class="item-desc">Created branch: rounds/r26-result</div>
+    <div class="item-meta">2026-09-29</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/jaredpalmer/kev">Jared Palmer: jaredpalmer/kev (CreateEvent)</a></div>
+    <div class="item-desc">Created branch: rounds/r26</div>
+    <div class="item-meta">2026-09-29</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/jaredpalmer/kev">Jared Palmer: jaredpalmer/kev (CreateEvent)</a></div>
+    <div class="item-desc">Created branch: rounds/r25-result</div>
+    <div class="item-meta">2026-09-29</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/jaredpalmer/kev">Jared Palmer: jaredpalmer/kev (PushEvent)</a></div>
+    <div class="item-desc">[main] New push</div>
+    <div class="item-meta">2026-09-29</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/jaredpalmer/kev">Jared Palmer: jaredpalmer/kev (CreateEvent)</a></div>
+    <div class="item-desc">Created branch: rounds/r25-plan</div>
+    <div class="item-meta">2026-09-29</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/jaredpalmer/kev">Jared Palmer: jaredpalmer/kev (PushEvent)</a></div>
+    <div class="item-desc">[main] New push</div>
+    <div class="item-meta">2026-09-29</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/jaredpalmer/kev">Jared Palmer: jaredpalmer/kev (PushEvent)</a></div>
+    <div class="item-desc">[main] New push</div>
+    <div class="item-meta">2026-09-29</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/jaredpalmer/kev">Jared Palmer: jaredpalmer/kev (PushEvent)</a></div>
+    <div class="item-desc">[main] New push</div>
+    <div class="item-meta">2026-09-29</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/jaredpalmer/kev">Jared Palmer: jaredpalmer/kev (PushEvent)</a></div>
+    <div class="item-desc">[main] New push</div>
+    <div class="item-meta">2026-09-29</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/jaredpalmer/kev">Jared Palmer: jaredpalmer/kev (PushEvent)</a></div>
+    <div class="item-desc">[kev-27b-v2] New push</div>
+    <div class="item-meta">2026-09-29</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/jaredpalmer/kev">Jared Palmer: jaredpalmer/kev (CreateEvent)</a></div>
+    <div class="item-desc">Created branch: rounds/r25</div>
+    <div class="item-meta">2026-09-29</div>
+  </div>
+</div>
+</div>
+
+<footer class="footer">
+  Generated at 2026-09-30 07:56 JST<br>
+  Sources: Claude Code CHANGELOG, GitHub Releases, awesome-claude-code,
+  anthropics/skills, PulseMCP, Claude Plugins, GitHub Trending
+</footer>
+
+</div>
+</body>
+</html>
