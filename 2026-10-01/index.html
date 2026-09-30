@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Weekly Tech Watch — 2026-10-01</title>
+<style>
+:root {
+  --bg: #f8fafc;
+  --bg-card: #ffffff;
+  --bg-highlight: #eff6ff;
+  --text: #1e293b;
+  --text-muted: #64748b;
+  --text-light: #94a3b8;
+  --accent: #3b82f6;
+  --border: #e2e8f0;
+  --shadow: 0 1px 3px rgba(0,0,0,.08);
+  --badge-changelog: #3b82f6;
+  --badge-mcp: #8b5cf6;
+  --badge-trending: #f59e0b;
+  --badge-plugin: #10b981;
+  --badge-awesome: #f43f5e;
+  --badge-skills: #06b6d4;
+}
+@media(prefers-color-scheme:dark){
+:root {
+  --bg: #0f172a;
+  --bg-card: #1e293b;
+  --bg-highlight: #1e3a5f;
+  --text: #e2e8f0;
+  --text-muted: #94a3b8;
+  --text-light: #64748b;
+  --accent: #60a5fa;
+  --border: #334155;
+  --shadow: 0 1px 3px rgba(0,0,0,.3);
+}}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  background:var(--bg);color:var(--text);
+  line-height:1.6;padding:16px;
+}
+.container{max-width:760px;margin:0 auto}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* Header */
+.header{text-align:center;padding:32px 0 24px}
+.header h1{font-size:1.5rem;font-weight:700;letter-spacing:-.02em}
+.header .date-range{color:var(--text-muted);font-size:.875rem;margin-top:4px}
+
+/* Stats */
+.stat-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));
+  gap:8px;margin:0 0 32px;
+}
+.stat-card{
+  background:var(--bg-card);border:1px solid var(--border);border-radius:8px;
+  padding:12px;text-align:center;box-shadow:var(--shadow);
+}
+.stat-card .num{font-size:1.5rem;font-weight:700;color:var(--accent)}
+.stat-card .label{font-size:.75rem;color:var(--text-muted);margin-top:2px}
+
+/* Section heading */
+.section-heading{
+  font-size:1.125rem;font-weight:700;margin:32px 0 16px;
+  padding-bottom:8px;border-bottom:2px solid var(--accent);
+}
+
+/* Highlight cards */
+.highlight-card{
+  background:var(--bg-highlight);border:1px solid var(--border);
+  border-radius:12px;padding:20px;margin-bottom:16px;
+  border-left:4px solid var(--accent);
+}
+.highlight-card .hl-badge{
+  display:inline-block;font-size:.6875rem;font-weight:700;
+  color:var(--accent);background:var(--bg-card);
+  border:1px solid var(--border);border-radius:999px;
+  padding:2px 8px;margin-bottom:8px;
+}
+.highlight-card .hl-title{font-size:1rem;font-weight:700;margin-bottom:8px}
+.highlight-card .hl-title a{color:var(--text)}
+.highlight-card .hl-desc{font-size:.875rem;color:var(--text-muted);margin-bottom:8px}
+.highlight-card .hl-desc strong,
+.highlight-card .hl-scenario strong{
+  display:block;color:var(--text);font-size:.75rem;margin-bottom:2px;
+}
+.highlight-card .hl-link{font-size:.8125rem;margin-bottom:12px}
+.highlight-card .hl-scenario{
+  font-size:.875rem;line-height:1.7;
+  background:var(--bg-card);border-radius:8px;padding:12px;margin-bottom:8px;
+}
+.highlight-card .hl-action{
+  font-size:.8125rem;color:var(--accent);font-weight:600;
+}
+.highlight-card .hl-action::before{content:"→ "}
+
+/* Topic section */
+.topic{
+  background:var(--bg-card);border:1px solid var(--border);
+  border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:var(--shadow);
+}
+.topic-title{font-size:1rem;font-weight:700;margin-bottom:4px}
+.topic-summary{font-size:.8125rem;color:var(--text-muted);margin-bottom:16px}
+
+/* Item list */
+.item{
+  padding:10px 0;border-bottom:1px solid var(--border);
+  display:flex;gap:10px;align-items:flex-start;
+}
+.item:last-child{border-bottom:none;padding-bottom:0}
+.badge{
+  display:inline-block;font-size:.625rem;font-weight:700;
+  color:#fff;padding:2px 8px;border-radius:10px;white-space:nowrap;
+  flex-shrink:0;margin-top:3px;text-transform:uppercase;letter-spacing:.03em;
+}
+.badge-changelog{background:var(--badge-changelog)}
+.badge-mcp{background:var(--badge-mcp)}
+.badge-trending{background:var(--badge-trending)}
+.badge-plugin{background:var(--badge-plugin)}
+.badge-awesome{background:var(--badge-awesome)}
+.badge-skills{background:var(--badge-skills)}
+.item-body{flex:1;min-width:0}
+.item-title{font-size:.875rem;font-weight:600}
+.item-desc{font-size:.8125rem;color:var(--text-muted);margin-top:2px}
+.item-meta{font-size:.75rem;color:var(--text-light);margin-top:4px}
+.item-meta .stars::before{content:"\2B50 "}
+
+/* Footer */
+.footer{
+  text-align:center;color:var(--text-light);font-size:.75rem;
+  padding:32px 0 16px;border-top:1px solid var(--border);margin-top:32px;
+}
+
+/* No items */
+.empty{color:var(--text-light);font-style:italic;font-size:.875rem;padding:8px 0}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header class="header">
+  <h1>Weekly Tech Watch</h1>
+  <div class="date-range">2026-09-29 ~ 2026-10-01</div>
+</header>
+
+<div class="stat-grid">
+<div class="stat-card"><div class="num">1</div><div class="label">Claude Code</div></div>
+<div class="stat-card"><div class="num">2</div><div class="label">Trending</div></div>
+<div class="stat-card"><div class="num">1</div><div class="label">Plugins</div></div>
+<div class="stat-card"><div class="num">7</div><div class="label">awesome-cc</div></div>
+</div>
+
+<h2 class="section-heading">Highlights</h2>
+<div class="highlight-card">
+  <div class="hl-badge">ニュース</div>
+  <div class="hl-title"><a href="https://code.claude.com/docs/en/changelog">Claude Code v2.1.286</a></div>
+  <div class="hl-desc"><strong>概要</strong>Claude Code v2.1.286 の変更履歴に、権限確認(パーミッションプロンプト)の表示改善が入りました。複数の許可リクエストが同時に溜まった場合、プロンプトに「2 of 5」のような件数表示が追加されます。これまでは何件の確認が待っているのか分からないまま、1件ずつ承認を繰り返す必要がありました。今回の変更で、あと何件残っているかが一目で分かります。説明文に書かれている変更はこの1点です。詳細は公式の changelog(https://code.claude.com/docs/en/changelog)に掲載されています。</div>
+  <div class="hl-link"><a href="https://code.claude.com/docs/en/changelog">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>効きそうな場面は、サブエージェントや複数ツールが並列に動き、権限確認が一気に溜まる時です。例えば、CodexとClaude Codeを共有リポジトリで使う作業や、複数ファイルの編集とBash実行を含むまとめ作業が該当します。「2 of 5」と出れば、残りが少ないのでこのまま承認するか、多いので中身を確認するかを判断しやすくなります。件数が想定より多い時は、意図しない操作が混ざっていないかを立ち止まって見る合図にもなります。また、毎回出る確認が多いと分かった場合は、読み取り専用コマンドを allowlist に入れる fewer-permission-prompts スキルの出番かもしれません。注意点として、件数が分かっても、承認を流れ作業にしてよいわけではありません。削除や外部送信を伴う操作は、件数に関係なく内容を読んで判断するほうが安全です。</div>
+  <div class="hl-action">ターミナルで `claude --version` を実行し、v2.1.286 以降か確認します。古ければ `claude update` で更新できます。その後、複数ファイルを並列で編集させる作業を依頼し、権限確認に「N of M」が出るか見てみてください。詳細は https://code.claude.com/docs/en/changelog の v2.1.286 の項にあります。</div>
+</div>
+<div class="highlight-card">
+  <div class="hl-badge">深掘り候補</div>
+  <div class="hl-title"><a href="https://github.com/SYSTRAN/faster-whisper">GitHub: SYSTRAN/faster-whisper</a></div>
+  <div class="hl-desc"><strong>概要</strong>SYSTRAN/faster-whisperがGitHubのトレンド入りしている。OpenAIのWhisperを推論エンジンCTranslate2で再実装したもので、説明文は「Faster Whisper transcription with CTranslate2」。CTranslate2はTransformerモデルを高速・省メモリで動かすライブラリで、同じ精度のまま本家Whisperより高速、かつGPUメモリ消費が少ない点が特徴とされる。8bit量子化にも対応し、CPUのみでも実用速度で動かせる。Pythonから WhisperModel を呼ぶだけで文字起こしができ、VAD(無音区間除去)や単語単位のタイムスタンプも扱える。</div>
+  <div class="hl-link"><a href="https://github.com/SYSTRAN/faster-whisper">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>議事録の自動生成(MeetingMinutes)で音声認識を使っているので、そこが主な活用場面になる可能性があります。現在はOpenAIのWhisper APIを使っているようで、clients/wonday.yamlのopenai_promptに固有名詞を入れて精度を補っています。faster-whisperをローカルで動かす構成なら、API課金を減らせ、商談音声を外部に送らずに済みます。具体的には WhisperModel(&quot;large-v3&quot;, device=&quot;cpu&quot;, compute_type=&quot;int8&quot;) で読み込み、transcribe(audio, language=&quot;ja&quot;, vad_filter=True, initial_prompt=&quot;ズケヤマセイラ 日高栄祐 濱地心&quot;) のように渡すと、固有名詞の誤変換対策(initial_prompt)も今の方式に近い形で再現できます。vad_filter=Trueは無音時のハルシネーション抑制にも効く可能性があります。注意点として、Windows機のCPUだとlarge-v3は長時間会議で処理が重くなるため、最初はmediumやsmall、またはGPUの有無を確認してから比較するのがよさそうです。また、精度はAPI版と同一とは限らないので、既存の議事録数本で並べて確認する必要があります。</div>
+  <div class="hl-action">まず `pip install faster-whisper` を別の仮想環境で実行し、手元の短い会議音声(5〜10分)で次を試す。`from faster_whisper import WhisperModel; m=WhisperModel(&#x27;small&#x27;, device=&#x27;cpu&#x27;, compute_type=&#x27;int8&#x27;); segs,_=m.transcribe(&#x27;sample.mp3&#x27;, language=&#x27;ja&#x27;, vad_filter=True, initial_prompt=&#x27;ズケヤマセイラ&#x27;); print(&#x27;&#x27;.join(s.text for s in segs))`。処理時間と、人名の誤変換が出るかをAPI版の出力と見比べる。READMEの「Usage」と「Benchmark」の節も確認する。</div>
+</div>
+<div class="highlight-card">
+  <div class="hl-badge">ニュース</div>
+  <div class="hl-title"><a href="https://github.com/eatmoreduck/boss-zhipin-scraper">GitHub: eatmoreduck/boss-zhipin-scraper</a></div>
+  <div class="hl-desc"><strong>概要</strong>GitHubで話題のリポジトリ「eatmoreduck/boss-zhipin-scraper」は、中国の求人サイトBOSS直聘(Boss Zhipin)の求人データを抓取するツールです。Chrome CDP(Chrome DevTools Protocol)で、実際にログイン済みのブラウザ状態を再利用します。サイト側が使うフォント難読化による反スクレイピング対策を回避し、給与を平文で取得できるとされています。出力はJSONとCSVの2形式です。取得した給与とスキル要件をもとに、給与・スキルの分析機能も備えています。説明文は中英併記で、Chrome-CDPベースの求人クローラーと位置づけられています。</div>
+  <div class="hl-link"><a href="https://github.com/eatmoreduck/boss-zhipin-scraper">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>求人スクレイパーそのものは、りゅうさんの事業にほぼ直結しません。かつ、ログイン状態の再利用と反スクレイピング回避は、利用規約違反や法的リスクを含みます。ただし、中身の発想は一般的な道具として参考になる可能性があります。ひとつは「Chrome CDPで手元のログイン済みブラウザを操作し、APIのないWebサービスから業務データを取る」方式です。たとえば、自分のアカウントで見られる予約サイトや管理画面の数字をCSV化し、月次集計に回す場面で効きます。具体的には、Chromeを `--remote-debugging-port=9222` 付きで起動し、PlaywrightやPuppeteerの `connectOverCDP` で接続する形です。もうひとつは、取得後に「JSON/CSV出力→集計・分析」まで一気通貫にする構成です。注意点として、他社サイトの規約で自動取得が禁止されている場合や、個人情報を含むデータには使わない方がよいです。クライアントへの提案に使うなら、自社アカウントの範囲に限るのが安全です。</div>
+  <div class="hl-action">まずリポジトリのREADME(https://github.com/eatmoreduck/boss-zhipin-scraper)を開き、CDP接続部分の説明だけ読めば十分です。手を動かすなら、PowerShellで `chrome.exe --remote-debugging-port=9222 --user-data-dir=C:\temp\cdp-test` を起動し、`http://localhost:9222/json` にタブ一覧が出るかを確認してください。スクレイピング対象は自分が権限を持つ画面だけにしましょう。</div>
+</div>
+
+<h2 class="section-heading">Topics</h2>
+<div class="topic">
+  <div class="topic-title">Claude Code更新</div>
+  <div class="topic-summary">Claude Code v2.1.286の権限プロンプトの件数表示やリストのマウス操作対応などの更新。</div>
+<div class="item">
+  <span class="badge badge-changelog">CHANGELOG</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://code.claude.com/docs/en/changelog">v2.1.286</a></div>
+    <div class="item-desc">Added a count such as “2 of 5” to the permission prompt when several permission requests stack up, Added mouse support for the “N more” rows of lists in fullscreen mode: click one to jump to that end of the list, with hover and pressed states, Fixed several Claude Code processes and IDE extensions each opening a login browser when gcpAuthRefresh or awsAuthRefresh credentials expire</div>
+    <div class="item-meta">September 30, 2026</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">音声認識ツール</div>
+  <div class="topic-summary">CTranslate2を使った高速な文字起こしライブラリfaster-whisper。</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/SYSTRAN/faster-whisper">SYSTRAN/faster-whisper</a></div>
+    <div class="item-desc">Faster Whisper transcription with CTranslate2</div>
+    <div class="item-meta"><span class="stars">25650</span></div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">求人データ収集</div>
+  <div class="topic-summary">Chrome CDPを使いBOSS直聘の求人・給与データを取得して分析するスクレイパー。</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/eatmoreduck/boss-zhipin-scraper">eatmoreduck/boss-zhipin-scraper</a></div>
+    <div class="item-desc">Boss直聘爬虫 / BOSS直聘职位数据抓取工具，基于 Chrome CDP 协议复用真实登录态，绕过字体反爬，输出明文薪资 JSON/CSV + 薪资技能分析。A Chrome-CDP-based BOSS Zhipin job scraper/crawler.</div>
+    <div class="item-meta"><span class="stars">1497</span></div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">数学証明スキル</div>
+  <div class="topic-summary">難解な数学問題を解いてproof.mdにまとめる2種類のスキル。</div>
+<div class="item">
+  <span class="badge badge-plugin">PLUGIN</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/anthropics/claude-plugins-official/tree/main/plugins/math-proof">math-proof</a></div>
+    <div class="item-desc">Two skills for hard mathematics problems, each ending in a self-contained proof.md: /math-proof:solo has the session work the problem itself in stages with a notes file; /math-proof:siege works on it for hours in rounds of judge and worker sub-agents and says plainly what is and is not proved.</div>
+    <div class="item-meta">math</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">ティッカー自動更新</div>
+  <div class="topic-summary">リポジトリのティッカーデータとSVGを更新する自動choreコミット。</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/8cc1bc0">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-09-30</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/6e3dec2">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-09-30</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/f719b2f">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-09-30</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/b3c3a8a">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-09-30</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/3e7ae8e">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-09-30</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/bafb8ff">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-09-30</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/5375714">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-09-30</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">内容なし項目</div>
+  <div class="topic-summary">タイトルも説明も空で、内容を判別できない項目。</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/jaredpalmer/kev">Jared Palmer: jaredpalmer/kev (PushEvent)</a></div>
+    <div class="item-desc">[main] New push</div>
+    <div class="item-meta">2026-09-30</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/jaredpalmer/kev">Jared Palmer: jaredpalmer/kev (PushEvent)</a></div>
+    <div class="item-desc">[main] New push</div>
+    <div class="item-meta">2026-09-30</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/jaredpalmer/kev">Jared Palmer: jaredpalmer/kev (PushEvent)</a></div>
+    <div class="item-desc">[main] New push</div>
+    <div class="item-meta">2026-09-30</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/jaredpalmer/kev">Jared Palmer: jaredpalmer/kev (PushEvent)</a></div>
+    <div class="item-desc">[main] New push</div>
+    <div class="item-meta">2026-09-30</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/jaredpalmer/kev">Jared Palmer: jaredpalmer/kev (PushEvent)</a></div>
+    <div class="item-desc">[kev-9b-v2] New push</div>
+    <div class="item-meta">2026-09-30</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/jaredpalmer/kev">Jared Palmer: jaredpalmer/kev (PushEvent)</a></div>
+    <div class="item-desc">[kev-9b-v2] New push</div>
+    <div class="item-meta">2026-09-30</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/jaredpalmer/kev">Jared Palmer: jaredpalmer/kev (CreateEvent)</a></div>
+    <div class="item-desc">Created branch: drift-v1-report</div>
+    <div class="item-meta">2026-09-30</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/jaredpalmer/kev">Jared Palmer: jaredpalmer/kev (PushEvent)</a></div>
+    <div class="item-desc">[kev-9b-v2] New push</div>
+    <div class="item-meta">2026-09-30</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/jaredpalmer/kev">Jared Palmer: jaredpalmer/kev (PushEvent)</a></div>
+    <div class="item-desc">[main] New push</div>
+    <div class="item-meta">2026-09-30</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/jaredpalmer/kev">Jared Palmer: jaredpalmer/kev (CreateEvent)</a></div>
+    <div class="item-desc">Created branch: skills/kev-ref-2ea5660</div>
+    <div class="item-meta">2026-09-30</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/jaredpalmer/kev">Jared Palmer: jaredpalmer/kev (CreateEvent)</a></div>
+    <div class="item-desc">Created branch: release/kev-9b-v2</div>
+    <div class="item-meta">2026-09-30</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/jaredpalmer/kev">Jared Palmer: jaredpalmer/kev (CreateEvent)</a></div>
+    <div class="item-desc">Created branch: release/kev-27b-v2-public</div>
+    <div class="item-meta">2026-09-30</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/jaredpalmer/kev">Jared Palmer: jaredpalmer/kev (PushEvent)</a></div>
+    <div class="item-desc">[main] New push</div>
+    <div class="item-meta">2026-09-30</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/jaredpalmer/kev">Jared Palmer: jaredpalmer/kev (PushEvent)</a></div>
+    <div class="item-desc">[no-silent-truncation] New push</div>
+    <div class="item-meta">2026-09-30</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/jaredpalmer/kev">Jared Palmer: jaredpalmer/kev (PushEvent)</a></div>
+    <div class="item-desc">[no-silent-truncation] New push</div>
+    <div class="item-meta">2026-09-30</div>
+  </div>
+</div>
+</div>
+
+<footer class="footer">
+  Generated at 2026-10-01 07:56 JST<br>
+  Sources: Claude Code CHANGELOG, GitHub Releases, awesome-claude-code,
+  anthropics/skills, PulseMCP, Claude Plugins, GitHub Trending
+</footer>
+
+</div>
+</body>
+</html>
