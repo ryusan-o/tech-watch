@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Weekly Tech Watch — 2026-10-06</title>
+<style>
+:root {
+  --bg: #f8fafc;
+  --bg-card: #ffffff;
+  --bg-highlight: #eff6ff;
+  --text: #1e293b;
+  --text-muted: #64748b;
+  --text-light: #94a3b8;
+  --accent: #3b82f6;
+  --border: #e2e8f0;
+  --shadow: 0 1px 3px rgba(0,0,0,.08);
+  --badge-changelog: #3b82f6;
+  --badge-mcp: #8b5cf6;
+  --badge-trending: #f59e0b;
+  --badge-plugin: #10b981;
+  --badge-awesome: #f43f5e;
+  --badge-skills: #06b6d4;
+}
+@media(prefers-color-scheme:dark){
+:root {
+  --bg: #0f172a;
+  --bg-card: #1e293b;
+  --bg-highlight: #1e3a5f;
+  --text: #e2e8f0;
+  --text-muted: #94a3b8;
+  --text-light: #64748b;
+  --accent: #60a5fa;
+  --border: #334155;
+  --shadow: 0 1px 3px rgba(0,0,0,.3);
+}}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  background:var(--bg);color:var(--text);
+  line-height:1.6;padding:16px;
+}
+.container{max-width:760px;margin:0 auto}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* Header */
+.header{text-align:center;padding:32px 0 24px}
+.header h1{font-size:1.5rem;font-weight:700;letter-spacing:-.02em}
+.header .date-range{color:var(--text-muted);font-size:.875rem;margin-top:4px}
+
+/* Stats */
+.stat-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));
+  gap:8px;margin:0 0 32px;
+}
+.stat-card{
+  background:var(--bg-card);border:1px solid var(--border);border-radius:8px;
+  padding:12px;text-align:center;box-shadow:var(--shadow);
+}
+.stat-card .num{font-size:1.5rem;font-weight:700;color:var(--accent)}
+.stat-card .label{font-size:.75rem;color:var(--text-muted);margin-top:2px}
+
+/* Section heading */
+.section-heading{
+  font-size:1.125rem;font-weight:700;margin:32px 0 16px;
+  padding-bottom:8px;border-bottom:2px solid var(--accent);
+}
+
+/* Highlight cards */
+.highlight-card{
+  background:var(--bg-highlight);border:1px solid var(--border);
+  border-radius:12px;padding:20px;margin-bottom:16px;
+  border-left:4px solid var(--accent);
+}
+.highlight-card .hl-badge{
+  display:inline-block;font-size:.6875rem;font-weight:700;
+  color:var(--accent);background:var(--bg-card);
+  border:1px solid var(--border);border-radius:999px;
+  padding:2px 8px;margin-bottom:8px;
+}
+.highlight-card .hl-title{font-size:1rem;font-weight:700;margin-bottom:8px}
+.highlight-card .hl-title a{color:var(--text)}
+.highlight-card .hl-desc{font-size:.875rem;color:var(--text-muted);margin-bottom:8px}
+.highlight-card .hl-desc strong,
+.highlight-card .hl-scenario strong{
+  display:block;color:var(--text);font-size:.75rem;margin-bottom:2px;
+}
+.highlight-card .hl-link{font-size:.8125rem;margin-bottom:12px}
+.highlight-card .hl-scenario{
+  font-size:.875rem;line-height:1.7;
+  background:var(--bg-card);border-radius:8px;padding:12px;margin-bottom:8px;
+}
+.highlight-card .hl-action{
+  font-size:.8125rem;color:var(--accent);font-weight:600;
+}
+.highlight-card .hl-action::before{content:"→ "}
+
+/* Topic section */
+.topic{
+  background:var(--bg-card);border:1px solid var(--border);
+  border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:var(--shadow);
+}
+.topic-title{font-size:1rem;font-weight:700;margin-bottom:4px}
+.topic-summary{font-size:.8125rem;color:var(--text-muted);margin-bottom:16px}
+
+/* Item list */
+.item{
+  padding:10px 0;border-bottom:1px solid var(--border);
+  display:flex;gap:10px;align-items:flex-start;
+}
+.item:last-child{border-bottom:none;padding-bottom:0}
+.badge{
+  display:inline-block;font-size:.625rem;font-weight:700;
+  color:#fff;padding:2px 8px;border-radius:10px;white-space:nowrap;
+  flex-shrink:0;margin-top:3px;text-transform:uppercase;letter-spacing:.03em;
+}
+.badge-changelog{background:var(--badge-changelog)}
+.badge-mcp{background:var(--badge-mcp)}
+.badge-trending{background:var(--badge-trending)}
+.badge-plugin{background:var(--badge-plugin)}
+.badge-awesome{background:var(--badge-awesome)}
+.badge-skills{background:var(--badge-skills)}
+.item-body{flex:1;min-width:0}
+.item-title{font-size:.875rem;font-weight:600}
+.item-desc{font-size:.8125rem;color:var(--text-muted);margin-top:2px}
+.item-meta{font-size:.75rem;color:var(--text-light);margin-top:4px}
+.item-meta .stars::before{content:"\2B50 "}
+
+/* Footer */
+.footer{
+  text-align:center;color:var(--text-light);font-size:.75rem;
+  padding:32px 0 16px;border-top:1px solid var(--border);margin-top:32px;
+}
+
+/* No items */
+.empty{color:var(--text-light);font-style:italic;font-size:.875rem;padding:8px 0}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header class="header">
+  <h1>Weekly Tech Watch</h1>
+  <div class="date-range">2026-10-04 ~ 2026-10-06</div>
+</header>
+
+<div class="stat-grid">
+<div class="stat-card"><div class="num">1</div><div class="label">Trending</div></div>
+<div class="stat-card"><div class="num">8</div><div class="label">awesome-cc</div></div>
+<div class="stat-card"><div class="num">1</div><div class="label">Skills</div></div>
+</div>
+
+<h2 class="section-heading">Highlights</h2>
+<div class="highlight-card">
+  <div class="hl-badge">深掘り候補</div>
+  <div class="hl-title"><a href="https://github.com/coldteadotai/pr-lens">GitHub: coldteadotai/pr-lens</a></div>
+  <div class="hl-desc"><strong>概要</strong>coldteadotai/pr-lens は、GitHubのプルリクエストを「アニメーション付きのアーキテクチャ図とデータフロー解説」として描き起こすツールで、トレンド入りしている。キャッチコピーは「コードレビューを100倍速く」。差分のテキストを読む代わりに、変更が構造のどこに効き、データがどう流れるかをPR画面の中で動く図として見せる。提供形態はGitHub App、GitHub Action、CLI、コーディングエージェント向けSkillの4種類。なお100倍という数値は作者側の主張で、第三者の検証は説明文からは確認できない。</div>
+  <div class="hl-link"><a href="https://github.com/coldteadotai/pr-lens">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>りゅうさんはCodexやClaude Codeが書いたコードを、プログラマーではない立場でレビューする場面が多いはずです。そこで効く可能性があります。差分を行単位で読む代わりに「この変更はどの部品に触り、データがどこへ流れるか」を図で掴めるので、AIが出したPRの承認前チェックが速くなるかもしれません。使い方としては、まずCLIを手元の小さなリポジトリで1本のPRに試し、図が実態と合っているか確認する方法が考えられます。気に入れば、GitHub Actionとして1つのリポジトリにだけ入れる流れが現実的です。クライアントに渡すコードの変更説明や、自走支援での「何を変えたか」の共有資料にも流用できる可能性があります。注意点は、GitHub AppやActionにするとPRのコードが外部サービスに渡る可能性があることです。顧客案件や未公開のコードに入れる前に、データの送信先と利用するLLMのAPIキー・課金の有無を必ず確認してください。図が正しいとは限らないので、重要な変更は元の差分も併せて見るのが安全です。</div>
+  <div class="hl-action">まず https://github.com/coldteadotai/pr-lens のREADMEを開き、インストール方法、動作に必要なAPIキー、コードの送信先(データの扱い)の3点を確認する。問題なければ、公開してよい個人リポジトリでCLIを試し、直近のPRを1本図にして、実際の変更内容と図が合っているかを見る。顧客コードへの導入は、その確認が済んでから判断する。</div>
+</div>
+<div class="highlight-card">
+  <div class="hl-badge">ニュース</div>
+  <div class="hl-title"><a href="https://github.com/jaredpalmer/kev">Jared Palmer: jaredpalmer/kev</a></div>
+  <div class="hl-desc"><strong>概要</strong>Jared Palmer(Vercel元VP of AI、Turborepo作者)が、GitHubリポジトリ jaredpalmer/kev に「skills/kev-knowledge-cloud-native」というブランチを作成しました。原文の説明はこのブランチ作成の一文だけです。READMEやコミット内容は確認していないため、kev が何をするツールかは不明です。ブランチ名からは、kev という仕組みに「cloud-native に関する知識」をSkill(エージェント向けの知識パッケージ)として載せる試みだと推測できます。ただし、これは名前からの推測にすぎません。</div>
+  <div class="hl-link"><a href="https://github.com/jaredpalmer/kev">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>現時点で確実に言えるのは、「知識をSkillとして切り出し、エージェントに読ませる」流れを、著名開発者が実際に試しているという点です。りゅうさんのClaude Code環境でも、クライアント導入のたびに繰り返す知識(例: 電子契約サービス選定の比較軸、LINE Bot導入の定型手順、うま藻メニュー開発の制約条件)を、1ファイル1テーマのSkillにまとめておけば、毎回プロンプトで説明し直す手間が減る可能性があります。kevの中身が分かれば、Skillの粒度や書き方の参考になるかもしれません。ただし内容が未確認の段階で導入判断はできません。READMEを読んで、自分の運用と合うかを見てからで十分です。新規着手を増やさず、既存業務の仕組み化に効くかどうかを基準にするのがよいと思います。</div>
+  <div class="hl-action">ブラウザで https://github.com/jaredpalmer/kev を開き、README.mdと、ブランチ一覧から skills/kev-knowledge-cloud-native を選んでSKILL.mdなどのファイル構成を確認します。kevの目的と、Skillの1ファイルあたりの粒度や書き方を見て、自分のSkill設計に流用できる点があるかを5分ほどで判断してください。</div>
+</div>
+<div class="highlight-card">
+  <div class="hl-badge">ニュース</div>
+  <div class="hl-title"><a href="https://github.com/jaredpalmer/kev">Jared Palmer: jaredpalmer/kev</a></div>
+  <div class="hl-desc"><strong>概要</strong>Jared Palmer(Turborepo、Formik、現在はVercel/GitHub周辺で知られる開発者)が、GitHubリポジトリ「jaredpalmer/kev」に「skills/kev-knowledge-cloud」というブランチを作成しました。確認できる情報はこのブランチ作成のイベントだけです。README、コミット内容、機能名、コマンド、数値は未確認です。ブランチ名からは、kevというツールにSkills(エージェント向けの手順書や知識パッケージ)を追加し、「knowledge cloud」としてクラウド側で知識を扱う構想が読み取れます。ただしこれは名前からの推測で、仕様やリリース予定は公表されていません。</div>
+  <div class="hl-link"><a href="https://github.com/jaredpalmer/kev">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>現時点では、実装内容が分からないため具体的な導入提案はできません。一般的な使い所として、「Skills」と「知識のクラウド化」という方向性は、りゅうさんがCodexとClaude Codeを共有リポジトリで使う運用に近い話題です。もし、複数のAIやPC間で同じ知識(クライアントの固有名詞、業務ルール、手順書)を共有できる仕組みなら、既存のMarkdown運用を補強する可能性があります。コードを持たない場面でも、クライアントの自走支援で『AIに渡す知識セットの作り方』の参考になるかもしれません。注意点は、顧客情報や個人情報をクラウドの知識基盤に載せる場合、保存先、アクセス権、削除方法を先に確認する必要があることです。ブランチが実験段階で、mainに入らないまま終わる可能性もあります。今は仕様確認を優先し、導入判断は後回しにするのが無難です。</div>
+  <div class="hl-action">ブラウザで https://github.com/jaredpalmer/kev を開き、README、skills/kev-knowledge-cloud ブランチのコミット履歴、Issues、Discussionsを確認してください。ブランチ内に skills/ ディレクトリがあれば、SKILL.md の中身を読むと、Skillsとして何を扱い、知識をどこに保存するのかが分かります。READMEが空のままなら、数週間後に再確認する程度で十分です。</div>
+</div>
+
+<h2 class="section-heading">Topics</h2>
+<div class="topic">
+  <div class="topic-title">PRレビュー支援ツール</div>
+  <div class="topic-summary">PRのアーキテクチャやデータフローをアニメーションで可視化し、コードレビューを高速化するGitHub向けツール。</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/coldteadotai/pr-lens">coldteadotai/pr-lens</a></div>
+    <div class="item-desc">Review code 100X faster. Lens draws every PR as animated architecture and data-flow walkthroughs, inside the pull request itself. Use it as a GitHub App, GitHub Action, CLI, or a Skill for your coding agent</div>
+    <div class="item-meta"><span class="stars">1857</span></div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">リポジトリ自動更新</div>
+  <div class="topic-summary">リポジトリのティッカーデータとSVGを自動更新するchoreコミットが繰り返し発生。</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/7c7eb62">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-05</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/a7b9a6d">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-05</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/9649408">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-05</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/ff6952a">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-05</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/f861145">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-05</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/81a1f57">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-05</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/11ded84">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-05</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/06479c6">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-05</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">Claude APIスキル更新</div>
+  <div class="topic-summary">claude-apiスキルが更新され、クイックスタート名やURLからmanaged-agentsをオンボードできるようになった。</div>
+<div class="item">
+  <span class="badge badge-skills">SKILLS</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/anthropics/skills/commit/683bc88">Update claude-api skill: managed-agents-onboard from a quickstart name or a URL </a></div>
+    <div class="item-meta">2026-10-05</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">情報なしの項目</div>
+  <div class="topic-summary">タイトルも説明も空で、内容を判別できない項目群。</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/jaredpalmer/kev">Jared Palmer: jaredpalmer/kev (CreateEvent)</a></div>
+    <div class="item-desc">Created branch: skills/kev-knowledge-cloud-native</div>
+    <div class="item-meta">2026-10-05</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/jaredpalmer/kev">Jared Palmer: jaredpalmer/kev (PushEvent)</a></div>
+    <div class="item-desc">[main] New push</div>
+    <div class="item-meta">2026-10-05</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/jaredpalmer/kev">Jared Palmer: jaredpalmer/kev (CreateEvent)</a></div>
+    <div class="item-desc">Created branch: skills/kev-knowledge-cloud</div>
+    <div class="item-meta">2026-10-05</div>
+  </div>
+</div>
+</div>
+
+<footer class="footer">
+  Generated at 2026-10-06 07:56 JST<br>
+  Sources: Claude Code CHANGELOG, GitHub Releases, awesome-claude-code,
+  anthropics/skills, PulseMCP, Claude Plugins, GitHub Trending
+</footer>
+
+</div>
+</body>
+</html>
