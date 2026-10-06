@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Weekly Tech Watch — 2026-10-07</title>
+<style>
+:root {
+  --bg: #f8fafc;
+  --bg-card: #ffffff;
+  --bg-highlight: #eff6ff;
+  --text: #1e293b;
+  --text-muted: #64748b;
+  --text-light: #94a3b8;
+  --accent: #3b82f6;
+  --border: #e2e8f0;
+  --shadow: 0 1px 3px rgba(0,0,0,.08);
+  --badge-changelog: #3b82f6;
+  --badge-mcp: #8b5cf6;
+  --badge-trending: #f59e0b;
+  --badge-plugin: #10b981;
+  --badge-awesome: #f43f5e;
+  --badge-skills: #06b6d4;
+}
+@media(prefers-color-scheme:dark){
+:root {
+  --bg: #0f172a;
+  --bg-card: #1e293b;
+  --bg-highlight: #1e3a5f;
+  --text: #e2e8f0;
+  --text-muted: #94a3b8;
+  --text-light: #64748b;
+  --accent: #60a5fa;
+  --border: #334155;
+  --shadow: 0 1px 3px rgba(0,0,0,.3);
+}}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  background:var(--bg);color:var(--text);
+  line-height:1.6;padding:16px;
+}
+.container{max-width:760px;margin:0 auto}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* Header */
+.header{text-align:center;padding:32px 0 24px}
+.header h1{font-size:1.5rem;font-weight:700;letter-spacing:-.02em}
+.header .date-range{color:var(--text-muted);font-size:.875rem;margin-top:4px}
+
+/* Stats */
+.stat-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));
+  gap:8px;margin:0 0 32px;
+}
+.stat-card{
+  background:var(--bg-card);border:1px solid var(--border);border-radius:8px;
+  padding:12px;text-align:center;box-shadow:var(--shadow);
+}
+.stat-card .num{font-size:1.5rem;font-weight:700;color:var(--accent)}
+.stat-card .label{font-size:.75rem;color:var(--text-muted);margin-top:2px}
+
+/* Section heading */
+.section-heading{
+  font-size:1.125rem;font-weight:700;margin:32px 0 16px;
+  padding-bottom:8px;border-bottom:2px solid var(--accent);
+}
+
+/* Highlight cards */
+.highlight-card{
+  background:var(--bg-highlight);border:1px solid var(--border);
+  border-radius:12px;padding:20px;margin-bottom:16px;
+  border-left:4px solid var(--accent);
+}
+.highlight-card .hl-badge{
+  display:inline-block;font-size:.6875rem;font-weight:700;
+  color:var(--accent);background:var(--bg-card);
+  border:1px solid var(--border);border-radius:999px;
+  padding:2px 8px;margin-bottom:8px;
+}
+.highlight-card .hl-title{font-size:1rem;font-weight:700;margin-bottom:8px}
+.highlight-card .hl-title a{color:var(--text)}
+.highlight-card .hl-desc{font-size:.875rem;color:var(--text-muted);margin-bottom:8px}
+.highlight-card .hl-desc strong,
+.highlight-card .hl-scenario strong{
+  display:block;color:var(--text);font-size:.75rem;margin-bottom:2px;
+}
+.highlight-card .hl-link{font-size:.8125rem;margin-bottom:12px}
+.highlight-card .hl-scenario{
+  font-size:.875rem;line-height:1.7;
+  background:var(--bg-card);border-radius:8px;padding:12px;margin-bottom:8px;
+}
+.highlight-card .hl-action{
+  font-size:.8125rem;color:var(--accent);font-weight:600;
+}
+.highlight-card .hl-action::before{content:"→ "}
+
+/* Topic section */
+.topic{
+  background:var(--bg-card);border:1px solid var(--border);
+  border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:var(--shadow);
+}
+.topic-title{font-size:1rem;font-weight:700;margin-bottom:4px}
+.topic-summary{font-size:.8125rem;color:var(--text-muted);margin-bottom:16px}
+
+/* Item list */
+.item{
+  padding:10px 0;border-bottom:1px solid var(--border);
+  display:flex;gap:10px;align-items:flex-start;
+}
+.item:last-child{border-bottom:none;padding-bottom:0}
+.badge{
+  display:inline-block;font-size:.625rem;font-weight:700;
+  color:#fff;padding:2px 8px;border-radius:10px;white-space:nowrap;
+  flex-shrink:0;margin-top:3px;text-transform:uppercase;letter-spacing:.03em;
+}
+.badge-changelog{background:var(--badge-changelog)}
+.badge-mcp{background:var(--badge-mcp)}
+.badge-trending{background:var(--badge-trending)}
+.badge-plugin{background:var(--badge-plugin)}
+.badge-awesome{background:var(--badge-awesome)}
+.badge-skills{background:var(--badge-skills)}
+.item-body{flex:1;min-width:0}
+.item-title{font-size:.875rem;font-weight:600}
+.item-desc{font-size:.8125rem;color:var(--text-muted);margin-top:2px}
+.item-meta{font-size:.75rem;color:var(--text-light);margin-top:4px}
+.item-meta .stars::before{content:"\2B50 "}
+
+/* Footer */
+.footer{
+  text-align:center;color:var(--text-light);font-size:.75rem;
+  padding:32px 0 16px;border-top:1px solid var(--border);margin-top:32px;
+}
+
+/* No items */
+.empty{color:var(--text-light);font-style:italic;font-size:.875rem;padding:8px 0}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header class="header">
+  <h1>Weekly Tech Watch</h1>
+  <div class="date-range">2026-10-05 ~ 2026-10-07</div>
+</header>
+
+<div class="stat-grid">
+<div class="stat-card"><div class="num">2</div><div class="label">Claude Code</div></div>
+<div class="stat-card"><div class="num">10</div><div class="label">awesome-cc</div></div>
+</div>
+
+<h2 class="section-heading">Highlights</h2>
+<div class="highlight-card">
+  <div class="hl-badge">ニュース</div>
+  <div class="hl-title"><a href="https://code.claude.com/docs/en/changelog">Claude Code v2.1.292</a></div>
+  <div class="hl-desc"><strong>概要</strong>Claude Code v2.1.292 で、`claude plugin install` に `--marketplace &lt;source&gt;` オプションが追加されました。これまでは、マーケットプレイスを `claude plugin marketplace add` で登録してからプラグインをインストールする2段階の手順でした。新オプションを使うと、指定したマーケットプレイスが未登録なら追加し、そのままそこからプラグインをインストールします。マーケットプレイス追加時のポリシーチェックは `claude plugin marketplace add` と同じ条件で適用されます。</div>
+  <div class="hl-link"><a href="https://code.claude.com/docs/en/changelog">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>効きそうなのは、クライアント先やPCの新規セットアップなど、Claude Code環境を一から整える場面です。「マーケットプレイス追加→プラグインインストール」の2コマンドが `claude plugin install &lt;plugin&gt; --marketplace &lt;source&gt;` の1行にまとまるので、セットアップ手順書やスクリプトに書くコマンドが減ります。りゅうさんの「やってみせて自走させる」方針とも相性がよく、導入支援先に渡す手順を1行にできる可能性があります。社内で共通のプラグインを配る場合も、「このコマンドを貼るだけ」という形にできます。注意点として、マーケットプレイスの追加は外部ソースを信頼する行為です。ポリシーチェックは通常の追加と同じで、緩和されるわけではありません。出所不明のソースを1行で入れてしまわないよう、source の中身は事前に確認したほうが安全です。</div>
+  <div class="hl-action">次に新しい環境へプラグインを入れる機会に、これまでの2コマンドの代わりに `claude plugin install &lt;プラグイン名&gt; --marketplace &lt;ソース&gt;` を1回試せます。使い方は `claude plugin install --help` で確認できます。変更点の原文は https://code.claude.com/docs/en/changelog の v2.1.292 の項にあります。</div>
+</div>
+<div class="highlight-card">
+  <div class="hl-badge">ニュース</div>
+  <div class="hl-title"><a href="https://www.anthropic.com/news/cyber-verification-program">Oct 6, 2026AnnouncementsExpanding the Cyber Verification Program</a></div>
+  <div class="hl-desc"><strong>概要</strong>Anthropic は 2026年10月6日、Cyber Verification Program(CVP)を拡張しました。従来のCVPとProject Glasswingを統合し、3段階のアクセスにしています。①Defense Access は、インシデント対応、マルウェア解析、脆弱性の検証といった防御業務向けです。企業のセキュリティチーム、NPO、大学、OSSメンテナ、個人研究者も対象で、審査は数日です。②Red Team Access は、許可を得たペネトレーションテストやレッドチーム向けです。組織のみが対象で、審査は数週間かかります。③Specialized Access は、航空OSや電力網など安全性が重要なシステムの検証向けで、米政府と連携して審査します。対象モデルはOpus 5.5、Sonnet 5.5、Mythos 5.1などです。Defense Access では攻撃的タスクの約92%がブロックされます。一般提供モデルでは従来どおり厳しいブロックが残ります。申請は portal.anthropic.com/programs/cvp から行い、データ保持への同意が必要です。</div>
+  <div class="hl-link"><a href="https://www.anthropic.com/news/cyber-verification-program">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>りゅうさんが日常的に使うClaude CodeやAPIで、セキュリティ系の依頼がたまに拒否されることがあれば、Defense Accessが候補になります。例えば、クライアントに導入したLineBotやWebアプリの脆弱性確認、VPSの設定点検、不審なスクリプトの解析です。WONDAYとして、AI導入支援の納品前チェックを防御目的で行うのは筋が通ります。ただし対象は「セキュリティ業務をする組織・個人」で、申請には組織のセキュリティ統制の確認が要るため、通常業務の拒否を減らす手段としては合いません。Red Teamは組織限定で、WONDAYの現状には不要と思われます。また、Defense Accessでも攻撃的タスクの約92%はブロックされます。さらに、データ保持への同意が条件です。クライアントの個人情報や機密を扱う場面では、何を流すかを先に決めておく必要があります。現状でセキュリティ関連の拒否に困っていなければ、「そういう枠がある」と把握しておけば十分です。</div>
+  <div class="hl-action">困った場面が出たときに動けるよう、https://www.anthropic.com/news/cyber-verification-program の「Defense Access」の対象者・必要書類の項を確認してください。実際に申請するなら portal.anthropic.com/programs/cvp を開き、必要な「セキュリティ統制の確認」項目を見ます。その際、データ保持への同意がクライアント案件の契約や守秘義務と矛盾しないか、先に確認してください。VPSの点検がClaudeに拒否された時が、申請を検討する目安です。</div>
+</div>
+
+<h2 class="section-heading">Topics</h2>
+<div class="topic">
+  <div class="topic-title">Claude Code更新</div>
+  <div class="topic-summary">Claude Code v2.1.291・v2.1.292のリリース。プラグイン導入オプション追加と回帰バグ修正。</div>
+<div class="item">
+  <span class="badge badge-changelog">CHANGELOG</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://code.claude.com/docs/en/changelog">v2.1.292</a></div>
+    <div class="item-desc">Added --marketplace &lt;source&gt; to claude plugin install: adds the marketplace if needed, under the same policy checks as claude plugin marketplace add, then installs the plugin from it, Added an effort parameter to the Agent tool, so Claude runs a sub-agent at the effort level you ask for, Added CLAUDE_CODE_OVERLOADED_RETRY_BASE_DELAY_MS environment variable to set a longer base delay for the backoff when retrying an overloaded (529) request</div>
+    <div class="item-meta">October 6, 2026</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-changelog">CHANGELOG</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://code.claude.com/docs/en/changelog">v2.1.291</a></div>
+    <div class="item-desc">Fixed a regression in 2.1.290 where cloud sessions could drop answers to permission prompts, Fixed a regression in 2.1.288 where the last messages of a session could be lost when quitting</div>
+    <div class="item-meta">October 6, 2026</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">リソース集の更新</div>
+  <div class="topic-summary">READMEとカルーセルの再生成、新規リソースpwa2playの追加。</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/eba2484">chore: regenerate README + carousel from CSV [skip ci]</a></div>
+    <div class="item-meta">2026-10-06</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/8064a75">Add resource: pwa2play (#3097)</a></div>
+    <div class="item-meta">2026-10-06</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">リポジトリ自動更新</div>
+  <div class="topic-summary">リポジトリのティッカーデータとSVGを更新する定期的な自動コミット群。</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/fd39ed9">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-06</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/6825107">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-06</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/f2c8fab">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-06</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/fa32dbc">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-06</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/dd7fab1">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-06</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/bba9ba8">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-06</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/d4813ba">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-06</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/7112e22">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-06</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">セキュリティ発表</div>
+  <div class="topic-summary">Cyber Verification Programの拡大に関するお知らせ。</div>
+<div class="item">
+  <span class="badge badge-anthropic_news">ANTHROPIC_NEWS</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://www.anthropic.com/news/cyber-verification-program">Oct 6, 2026AnnouncementsExpanding the Cyber Verification Program</a></div>
+    <div class="item-meta">Oct 6, 202</div>
+  </div>
+</div>
+</div>
+
+<footer class="footer">
+  Generated at 2026-10-07 07:56 JST<br>
+  Sources: Claude Code CHANGELOG, GitHub Releases, awesome-claude-code,
+  anthropics/skills, PulseMCP, Claude Plugins, GitHub Trending
+</footer>
+
+</div>
+</body>
+</html>
