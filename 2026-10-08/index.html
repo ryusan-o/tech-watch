@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Weekly Tech Watch — 2026-10-08</title>
+<style>
+:root {
+  --bg: #f8fafc;
+  --bg-card: #ffffff;
+  --bg-highlight: #eff6ff;
+  --text: #1e293b;
+  --text-muted: #64748b;
+  --text-light: #94a3b8;
+  --accent: #3b82f6;
+  --border: #e2e8f0;
+  --shadow: 0 1px 3px rgba(0,0,0,.08);
+  --badge-changelog: #3b82f6;
+  --badge-mcp: #8b5cf6;
+  --badge-trending: #f59e0b;
+  --badge-plugin: #10b981;
+  --badge-awesome: #f43f5e;
+  --badge-skills: #06b6d4;
+}
+@media(prefers-color-scheme:dark){
+:root {
+  --bg: #0f172a;
+  --bg-card: #1e293b;
+  --bg-highlight: #1e3a5f;
+  --text: #e2e8f0;
+  --text-muted: #94a3b8;
+  --text-light: #64748b;
+  --accent: #60a5fa;
+  --border: #334155;
+  --shadow: 0 1px 3px rgba(0,0,0,.3);
+}}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  background:var(--bg);color:var(--text);
+  line-height:1.6;padding:16px;
+}
+.container{max-width:760px;margin:0 auto}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* Header */
+.header{text-align:center;padding:32px 0 24px}
+.header h1{font-size:1.5rem;font-weight:700;letter-spacing:-.02em}
+.header .date-range{color:var(--text-muted);font-size:.875rem;margin-top:4px}
+
+/* Stats */
+.stat-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));
+  gap:8px;margin:0 0 32px;
+}
+.stat-card{
+  background:var(--bg-card);border:1px solid var(--border);border-radius:8px;
+  padding:12px;text-align:center;box-shadow:var(--shadow);
+}
+.stat-card .num{font-size:1.5rem;font-weight:700;color:var(--accent)}
+.stat-card .label{font-size:.75rem;color:var(--text-muted);margin-top:2px}
+
+/* Section heading */
+.section-heading{
+  font-size:1.125rem;font-weight:700;margin:32px 0 16px;
+  padding-bottom:8px;border-bottom:2px solid var(--accent);
+}
+
+/* Highlight cards */
+.highlight-card{
+  background:var(--bg-highlight);border:1px solid var(--border);
+  border-radius:12px;padding:20px;margin-bottom:16px;
+  border-left:4px solid var(--accent);
+}
+.highlight-card .hl-badge{
+  display:inline-block;font-size:.6875rem;font-weight:700;
+  color:var(--accent);background:var(--bg-card);
+  border:1px solid var(--border);border-radius:999px;
+  padding:2px 8px;margin-bottom:8px;
+}
+.highlight-card .hl-title{font-size:1rem;font-weight:700;margin-bottom:8px}
+.highlight-card .hl-title a{color:var(--text)}
+.highlight-card .hl-desc{font-size:.875rem;color:var(--text-muted);margin-bottom:8px}
+.highlight-card .hl-desc strong,
+.highlight-card .hl-scenario strong{
+  display:block;color:var(--text);font-size:.75rem;margin-bottom:2px;
+}
+.highlight-card .hl-link{font-size:.8125rem;margin-bottom:12px}
+.highlight-card .hl-scenario{
+  font-size:.875rem;line-height:1.7;
+  background:var(--bg-card);border-radius:8px;padding:12px;margin-bottom:8px;
+}
+.highlight-card .hl-action{
+  font-size:.8125rem;color:var(--accent);font-weight:600;
+}
+.highlight-card .hl-action::before{content:"→ "}
+
+/* Topic section */
+.topic{
+  background:var(--bg-card);border:1px solid var(--border);
+  border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:var(--shadow);
+}
+.topic-title{font-size:1rem;font-weight:700;margin-bottom:4px}
+.topic-summary{font-size:.8125rem;color:var(--text-muted);margin-bottom:16px}
+
+/* Item list */
+.item{
+  padding:10px 0;border-bottom:1px solid var(--border);
+  display:flex;gap:10px;align-items:flex-start;
+}
+.item:last-child{border-bottom:none;padding-bottom:0}
+.badge{
+  display:inline-block;font-size:.625rem;font-weight:700;
+  color:#fff;padding:2px 8px;border-radius:10px;white-space:nowrap;
+  flex-shrink:0;margin-top:3px;text-transform:uppercase;letter-spacing:.03em;
+}
+.badge-changelog{background:var(--badge-changelog)}
+.badge-mcp{background:var(--badge-mcp)}
+.badge-trending{background:var(--badge-trending)}
+.badge-plugin{background:var(--badge-plugin)}
+.badge-awesome{background:var(--badge-awesome)}
+.badge-skills{background:var(--badge-skills)}
+.item-body{flex:1;min-width:0}
+.item-title{font-size:.875rem;font-weight:600}
+.item-desc{font-size:.8125rem;color:var(--text-muted);margin-top:2px}
+.item-meta{font-size:.75rem;color:var(--text-light);margin-top:4px}
+.item-meta .stars::before{content:"\2B50 "}
+
+/* Footer */
+.footer{
+  text-align:center;color:var(--text-light);font-size:.75rem;
+  padding:32px 0 16px;border-top:1px solid var(--border);margin-top:32px;
+}
+
+/* No items */
+.empty{color:var(--text-light);font-style:italic;font-size:.875rem;padding:8px 0}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header class="header">
+  <h1>Weekly Tech Watch</h1>
+  <div class="date-range">2026-10-06 ~ 2026-10-08</div>
+</header>
+
+<div class="stat-grid">
+<div class="stat-card"><div class="num">1</div><div class="label">Claude Code</div></div>
+<div class="stat-card"><div class="num">4</div><div class="label">Trending</div></div>
+<div class="stat-card"><div class="num">27</div><div class="label">awesome-cc</div></div>
+</div>
+
+<h2 class="section-heading">Highlights</h2>
+<div class="highlight-card">
+  <div class="hl-badge">ニュース</div>
+  <div class="hl-title"><a href="https://code.claude.com/docs/en/changelog">Claude Code v2.1.293</a></div>
+  <div class="hl-desc"><strong>概要</strong>Claude Code v2.1.293で、新モデル「Claude Haiku 5.5」(モデルID: claude-haiku-5-5)が追加されました。Anthropic APIにおけるHaikuの既定モデルになります。コンテキストは1Mトークンで、料金は説明文では「0.10/0.10/0.10/0.50 per Mtok」と記載されています。100Kトークン超のプロンプトでは「0.50/0.50/0.50/2.50」になります。4つの数値が何の単価の並びかは、原文からは読み取れません。Haikuは軽量・高速枠のモデルです。今回、長文脈への対応と低単価が同時に示されました。</div>
+  <div class="hl-link"><a href="https://code.claude.com/docs/en/changelog">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>Haiku 5.5は、毎回の精度よりも回数と速さが効く定型処理に向いている可能性があります。たとえば議事録の要約、クライアント問い合わせの分類、LINE Botの一次応答、レシピ生成の下書きなどです。Claude Codeでもサブエージェントや軽い調査だけをHaikuに回せます。設定は、エージェント定義のfrontmatterで model: haiku を指定するか、/model で切り替えます。上位モデルは設計判断や最終確認に残すと、利用量を抑えやすくなります。切り替える前に、既存の定型プロンプトを5〜10件ほどHaiku 5.5で流してみてください。出力品質を上位モデルと見比べる価値があります。注意点として、顧客の個人情報や対外的な最終文面は、安さを理由に任せず、人の確認を挟むほうが安全です。また100K超で単価が上がるため、長文を丸ごと渡す運用では、実コストを少量で測ってから判断すると安心です。</div>
+  <div class="hl-action">公式の変更履歴(https://code.claude.com/docs/en/changelog)でv2.1.293の項目を開き、Haiku 5.5の記述を確認してください。料金の4つの数値が何の単価なのかは、Anthropicの料金ページで照合できます。試すなら、Claude Codeで /model を開いてHaiku 5.5を選び、普段の軽い作業を1つ流して、品質と速度を確認してください。</div>
+</div>
+<div class="highlight-card">
+  <div class="hl-badge">深掘り候補</div>
+  <div class="hl-title"><a href="https://github.com/coreyhaines31/marketingskills">GitHub: coreyhaines31/marketingskills</a></div>
+  <div class="hl-desc"><strong>概要</strong>GitHubのトレンドに入った coreyhaines31/marketingskills は、Claude Code などのAIエージェント向けに作られたマーケティング用スキル集です。説明文によると、対象はCRO(コンバージョン率最適化)、コピーライティング、SEO、アナリティクス、グロースエンジニアリングです。スキルは、エージェントが特定の業務を一定の手順と観点で進めるための指示書のようなものです。このリポジトリは、マーケティング業務をその単位でまとめて配布する試みといえます。個別のスキル名や導入手順は説明文には書かれておらず、READMEで確認する必要があります。</div>
+  <div class="hl-link"><a href="https://github.com/coreyhaines31/marketingskills">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>効きやすい場面は、LPや提案書の文面を直す作業、SEO記事の構成づくり、計測設計の見直しなどです。たとえばWONDAYのAI業務診断の紹介ページや、りゅうさんちの予約導線、うま藻関連のEC・LPで、「CRO観点で改善点を洗い出す」「コピーの訴求軸を3案出す」といった依頼の型として使える可能性があります。使うなら、リポジトリをクローンして中身を読み、必要なスキルだけを自分の環境に取り込む形が安全です。丸ごと入れると、既存のブランドトーン(brand-voice)や自分のルールと衝突しやすくなります。他人が書いたスキルは、そのまま使うより「構成の参考にして自社版に書き換える」ほうが、自走支援を重視するりゅうさんの方針にも合います。英語圏向けの前提で書かれている場合は、日本語や沖縄の文脈に合わせた調整が必要です。</div>
+  <div class="hl-action">ブラウザで https://github.com/coreyhaines31/marketingskills を開き、READMEのスキル一覧と導入方法を確認してください。次に、CROかコピーライティングのスキルを1つ選び、中身の指示文を読みます。自分のLPや提案文の構成と比べて、使える観点があるかを見る流れです。試すときは、本番の環境ではなく別フォルダにクローンして、1スキルだけ動かしてください。</div>
+</div>
+<div class="highlight-card">
+  <div class="hl-badge">ニュース</div>
+  <div class="hl-title"><a href="https://github.com/feder-cr/invisible_dots">GitHub: feder-cr/invisible_dots</a></div>
+  <div class="hl-desc"><strong>概要</strong>GitHubのトレンドに載ったOSSリポジトリ「feder-cr/invisible_dots」の紹介です。説明文は「OpenAI DotsやGrok Botのセルフホスト版代替」で、「アンチボットシステムに検出されないように作られている」としています。OpenAIやGrokが提供するブラウザ操作・自動化系エージェントを、自分の環境で動かせるようにする狙いと読めます。説明文にあるのは、オープンソースであること、セルフホスト型であること、アンチボット検知の回避を売りにしていることの3点だけです。対応機能、コマンド、動作条件、数値は書かれていません。実装内容は未確認なので、詳細はREADMEを見ないと分かりません。</div>
+  <div class="hl-link"><a href="https://github.com/feder-cr/invisible_dots">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>活用の主眼は、検知回避を売りにする点を業務に使わないという線引きに置くのがよさそうです。「アンチボットに検出されない」仕組みは、サイトの利用規約や不正アクセス対策を迂回する用途と隣り合わせです。クライアント案件や自社の業務自動化に載せると、アカウント凍結や契約上の問題になる可能性があります。使えるとすれば、自分が管理するサイトや社内ツールの定型操作を自動化する場面に限られます。例えばりゅうさんち予約管理画面の入力や、自社CRMの定期チェックです。その場合も、検知回避機能は使わず、公式APIやPlaywrightなど正規の手段を優先する方が安全です。比較材料としては、セルフホスト型のブラウザ自動化エージェントの設計(ブラウザ操作、LLM呼び出し、ログの持ち方)を眺め、AI業務自動化診断の説明素材にする程度が現実的です。</div>
+  <div class="hl-action">試す前に、ブラウザで https://github.com/feder-cr/invisible_dots を開き、READMEの「対応機能」「ライセンス」「Disclaimer(免責・利用上の注意)」の3箇所だけ確認してください。あわせて、Issuesタブで悪用や規約違反の指摘が出ていないかも見ておくと安全です。自社管理下の画面の自動化を試すなら、検知回避機能を使わない公式API、またはPlaywrightで代替できないかを先に検討してください。</div>
+</div>
+
+<h2 class="section-heading">Topics</h2>
+<div class="topic">
+  <div class="topic-title">Haiku 5.5リリース</div>
+  <div class="topic-summary">Claude Code v2.1.293でClaude Haiku 5.5が追加され、APIの既定Haikuモデルになった。</div>
+<div class="item">
+  <span class="badge badge-changelog">CHANGELOG</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://code.claude.com/docs/en/changelog">v2.1.293</a></div>
+    <div class="item-desc">Added Claude Haiku 5.5 (claude-haiku-5-5), now the default Haiku model on the Anthropic API — 1M context, 0.10/0.10/0.10/0.50 per Mtok (0.50/0.50/0.50/2.50 for prompts over 100K), Added agentType to the subagentStatusLine payload, so scripts can tell custom subagent types apart, Added isDeferred to $.tool.register for mods: false lists the tool’s schema in the prompt from the start instead of behind tool search</div>
+    <div class="item-meta">October 7, 2026</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">Claude向けスキル・エージェント</div>
+  <div class="topic-summary">マーケティングやObsidian連携など、AIエージェント向けのスキルやメモリ基盤のリポジトリ。</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/coreyhaines31/marketingskills">coreyhaines31/marketingskills</a></div>
+    <div class="item-desc">Marketing skills for Claude Code and AI agents. CRO, copywriting, SEO, analytics, and growth engineering.</div>
+    <div class="item-meta"><span class="stars">53591</span></div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/Ar9av/obsidian-wiki">Ar9av/obsidian-wiki</a></div>
+    <div class="item-desc">Framework for AI agents to build and maintain a digital brain through Obsidian wiki | Memory System for Agents</div>
+    <div class="item-meta"><span class="stars">3531</span></div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">ボット・ML系OSS</div>
+  <div class="topic-summary">アンチボット回避を謳う自己ホスト型ツールと、TensorFlowのLingvoフレームワーク。</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/feder-cr/invisible_dots">feder-cr/invisible_dots</a></div>
+    <div class="item-desc">Open-source, self-hosted alternative to OpenAI Dots, Grok Bot. Built to be undetectable by anti-bot systems.</div>
+    <div class="item-meta"><span class="stars">31801</span></div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/tensorflow/lingvo">tensorflow/lingvo</a></div>
+    <div class="item-desc">Lingvo</div>
+    <div class="item-meta"><span class="stars">2864</span></div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">Claude Codeリソース追加</div>
+  <div class="topic-summary">Awesome Claude Code Mods、Agent Workbench、ralph-harness、localpr、vir、Cooklang skills、oh-my-patent、Scientific Writing Skillsなど、新規リソースの追加とカテゴリ新設。</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/256147c">Add resource: Awesome Claude Code Mods (#3116)</a></div>
+    <div class="item-meta">2026-10-07</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/a5d7766">add new category - Lists &amp; Collections (#3115)</a></div>
+    <div class="item-meta">2026-10-07</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/c51fbbf">Add resource: Agent Workbench (#3114)</a></div>
+    <div class="item-meta">2026-10-07</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/36965c0">Add resource: ralph-harness (#3113)</a></div>
+    <div class="item-meta">2026-10-07</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/9d82ad2">Add resource: localpr (#3112)</a></div>
+    <div class="item-meta">2026-10-07</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/a66e368">Add resource: vir (#3111)</a></div>
+    <div class="item-meta">2026-10-07</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/1b5cf77">Add resource: Cooklang skills (#3109)</a></div>
+    <div class="item-meta">2026-10-07</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/db34df5">Add resource: oh-my-patent (#3108)</a></div>
+    <div class="item-meta">2026-10-07</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/71103fe">Add resource: Scientific Writing Skills (#3107)</a></div>
+    <div class="item-meta">2026-10-07</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">リンク修正・項目整理</div>
+  <div class="topic-summary">リポジトリやリンクの修正、項目名の変更・削除といったメンテナンス。</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/2646080">rename two entries, remove</a></div>
+    <div class="item-meta">2026-10-07</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/aac305b">fix stale repo and author links (#3104)</a></div>
+    <div class="item-meta">2026-10-07</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">README自動再生成</div>
+  <div class="topic-summary">CSVからREADMEとカルーセルを再生成する自動コミット。</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/6b649d7">chore: regenerate README + carousel from CSV [skip ci]</a></div>
+    <div class="item-meta">2026-10-07</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/66e6b0b">chore: regenerate README + carousel from CSV [skip ci]</a></div>
+    <div class="item-meta">2026-10-07</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/27059cf">chore: regenerate README + carousel from CSV [skip ci]</a></div>
+    <div class="item-meta">2026-10-07</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/3b7dfb9">chore: regenerate README + carousel from CSV [skip ci]</a></div>
+    <div class="item-meta">2026-10-07</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/836550e">chore: regenerate README + carousel from CSV [skip ci]</a></div>
+    <div class="item-meta">2026-10-07</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/dff0458">chore: regenerate README + carousel from CSV [skip ci]</a></div>
+    <div class="item-meta">2026-10-07</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/9063d6e">chore: regenerate README + carousel from CSV [skip ci]</a></div>
+    <div class="item-meta">2026-10-07</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/54bdec9">chore: regenerate README + carousel from CSV [skip ci]</a></div>
+    <div class="item-meta">2026-10-07</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">リポジトリ指標更新</div>
+  <div class="topic-summary">リポジトリのティッカーデータとSVGを更新する自動chore。</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/039763e">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-07</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/032e9ce">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-07</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/e5c6981">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-07</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/635731e">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-07</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/955dd3d">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-07</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/eb899cf">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-07</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/ded987b">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-07</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/9685211">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-07</div>
+  </div>
+</div>
+</div>
+
+<footer class="footer">
+  Generated at 2026-10-08 07:56 JST<br>
+  Sources: Claude Code CHANGELOG, GitHub Releases, awesome-claude-code,
+  anthropics/skills, PulseMCP, Claude Plugins, GitHub Trending
+</footer>
+
+</div>
+</body>
+</html>
