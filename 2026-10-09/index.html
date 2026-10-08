@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Weekly Tech Watch — 2026-10-09</title>
+<style>
+:root {
+  --bg: #f8fafc;
+  --bg-card: #ffffff;
+  --bg-highlight: #eff6ff;
+  --text: #1e293b;
+  --text-muted: #64748b;
+  --text-light: #94a3b8;
+  --accent: #3b82f6;
+  --border: #e2e8f0;
+  --shadow: 0 1px 3px rgba(0,0,0,.08);
+  --badge-changelog: #3b82f6;
+  --badge-mcp: #8b5cf6;
+  --badge-trending: #f59e0b;
+  --badge-plugin: #10b981;
+  --badge-awesome: #f43f5e;
+  --badge-skills: #06b6d4;
+}
+@media(prefers-color-scheme:dark){
+:root {
+  --bg: #0f172a;
+  --bg-card: #1e293b;
+  --bg-highlight: #1e3a5f;
+  --text: #e2e8f0;
+  --text-muted: #94a3b8;
+  --text-light: #64748b;
+  --accent: #60a5fa;
+  --border: #334155;
+  --shadow: 0 1px 3px rgba(0,0,0,.3);
+}}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  background:var(--bg);color:var(--text);
+  line-height:1.6;padding:16px;
+}
+.container{max-width:760px;margin:0 auto}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* Header */
+.header{text-align:center;padding:32px 0 24px}
+.header h1{font-size:1.5rem;font-weight:700;letter-spacing:-.02em}
+.header .date-range{color:var(--text-muted);font-size:.875rem;margin-top:4px}
+
+/* Stats */
+.stat-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));
+  gap:8px;margin:0 0 32px;
+}
+.stat-card{
+  background:var(--bg-card);border:1px solid var(--border);border-radius:8px;
+  padding:12px;text-align:center;box-shadow:var(--shadow);
+}
+.stat-card .num{font-size:1.5rem;font-weight:700;color:var(--accent)}
+.stat-card .label{font-size:.75rem;color:var(--text-muted);margin-top:2px}
+
+/* Section heading */
+.section-heading{
+  font-size:1.125rem;font-weight:700;margin:32px 0 16px;
+  padding-bottom:8px;border-bottom:2px solid var(--accent);
+}
+
+/* Highlight cards */
+.highlight-card{
+  background:var(--bg-highlight);border:1px solid var(--border);
+  border-radius:12px;padding:20px;margin-bottom:16px;
+  border-left:4px solid var(--accent);
+}
+.highlight-card .hl-badge{
+  display:inline-block;font-size:.6875rem;font-weight:700;
+  color:var(--accent);background:var(--bg-card);
+  border:1px solid var(--border);border-radius:999px;
+  padding:2px 8px;margin-bottom:8px;
+}
+.highlight-card .hl-title{font-size:1rem;font-weight:700;margin-bottom:8px}
+.highlight-card .hl-title a{color:var(--text)}
+.highlight-card .hl-desc{font-size:.875rem;color:var(--text-muted);margin-bottom:8px}
+.highlight-card .hl-desc strong,
+.highlight-card .hl-scenario strong{
+  display:block;color:var(--text);font-size:.75rem;margin-bottom:2px;
+}
+.highlight-card .hl-link{font-size:.8125rem;margin-bottom:12px}
+.highlight-card .hl-scenario{
+  font-size:.875rem;line-height:1.7;
+  background:var(--bg-card);border-radius:8px;padding:12px;margin-bottom:8px;
+}
+.highlight-card .hl-action{
+  font-size:.8125rem;color:var(--accent);font-weight:600;
+}
+.highlight-card .hl-action::before{content:"→ "}
+
+/* Topic section */
+.topic{
+  background:var(--bg-card);border:1px solid var(--border);
+  border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:var(--shadow);
+}
+.topic-title{font-size:1rem;font-weight:700;margin-bottom:4px}
+.topic-summary{font-size:.8125rem;color:var(--text-muted);margin-bottom:16px}
+
+/* Item list */
+.item{
+  padding:10px 0;border-bottom:1px solid var(--border);
+  display:flex;gap:10px;align-items:flex-start;
+}
+.item:last-child{border-bottom:none;padding-bottom:0}
+.badge{
+  display:inline-block;font-size:.625rem;font-weight:700;
+  color:#fff;padding:2px 8px;border-radius:10px;white-space:nowrap;
+  flex-shrink:0;margin-top:3px;text-transform:uppercase;letter-spacing:.03em;
+}
+.badge-changelog{background:var(--badge-changelog)}
+.badge-mcp{background:var(--badge-mcp)}
+.badge-trending{background:var(--badge-trending)}
+.badge-plugin{background:var(--badge-plugin)}
+.badge-awesome{background:var(--badge-awesome)}
+.badge-skills{background:var(--badge-skills)}
+.item-body{flex:1;min-width:0}
+.item-title{font-size:.875rem;font-weight:600}
+.item-desc{font-size:.8125rem;color:var(--text-muted);margin-top:2px}
+.item-meta{font-size:.75rem;color:var(--text-light);margin-top:4px}
+.item-meta .stars::before{content:"\2B50 "}
+
+/* Footer */
+.footer{
+  text-align:center;color:var(--text-light);font-size:.75rem;
+  padding:32px 0 16px;border-top:1px solid var(--border);margin-top:32px;
+}
+
+/* No items */
+.empty{color:var(--text-light);font-style:italic;font-size:.875rem;padding:8px 0}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header class="header">
+  <h1>Weekly Tech Watch</h1>
+  <div class="date-range">2026-10-07 ~ 2026-10-09</div>
+</header>
+
+<div class="stat-grid">
+<div class="stat-card"><div class="num">2</div><div class="label">Claude Code</div></div>
+<div class="stat-card"><div class="num">3</div><div class="label">Trending</div></div>
+<div class="stat-card"><div class="num">19</div><div class="label">awesome-cc</div></div>
+</div>
+
+<h2 class="section-heading">Highlights</h2>
+<div class="highlight-card">
+  <div class="hl-badge">ニュース</div>
+  <div class="hl-title"><a href="https://code.claude.com/docs/en/changelog">Claude Code v2.1.295</a></div>
+  <div class="hl-desc"><strong>概要</strong>Claude Code v2.1.295 のチェンジログで、command フックと HTTP フックに `onFailure: &quot;block&quot;` が追加された。従来、フックが起動できない、タイムアウトする、想定外の終了コードで終わるといった失敗時は、フックが無かったかのように処理が通り抜けていた。このオプションを指定すると、そのような失敗時に対象のアクション自体をブロックする。フックを安全確認の関門として使う場合に、フック自体の故障で関門が素通しになる穴を塞げる。</div>
+  <div class="hl-link"><a href="https://code.claude.com/docs/en/changelog">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>効くのは、フックを「ガード」として使っている場面です。たとえば PreToolUse で、本番サーバーへの ssh、`rm -rf`、外部への課金API呼び出しなどを検査するスクリプトを置いている場合、スクリプトのパス誤り、Windows/PowerShell 側の環境差、タイムアウトで落ちると、チェックなしで実行されてしまう恐れがありました。そこで settings.json の該当フックに `&quot;onFailure&quot;: &quot;block&quot;` を足すと、検査できなかった時は止まる方向（フェイルクローズ）に倒せる可能性があります。VPSインフラや顧客データに触る操作、秘密情報の書き込み検知などが候補です。逆に、ログ記録や通知のような補助的フックに付けると、フックの不調だけで作業全体が止まって煩わしいので、安全系だけに絞るのがよさそうです。なお、設定の書き方はバージョンで変わりうるため、公式ドキュメントで確認してからの導入が安心です。</div>
+  <div class="hl-action">まず `claude --version` で v2.1.295 以上か確認し、https://code.claude.com/docs/en/changelog の該当項目と Hooks のドキュメントで `onFailure` の記載位置と対象イベントを読む。そのうえで、今 settings.json（または settings.local.json）に入れている PreToolUse の安全系フックを一覧し、どれが「失敗したら止めたい」ものかを洗い出す。</div>
+</div>
+<div class="highlight-card">
+  <div class="hl-badge">ニュース</div>
+  <div class="hl-title"><a href="https://code.claude.com/docs/en/changelog">Claude Code v2.1.294</a></div>
+  <div class="hl-desc"><strong>概要</strong>Claude Code v2.1.294 の変更履歴の1項目です。StopおよびSubagentStopのプロンプトフック(Claudeが止まろうとした時に、別のモデル呼び出しで「止めてよいか」を判定する仕組み)について、判定の精度が上がりました。たとえば「ビルドが壊れているなら続行して」のように、条件を指示文の形で書いたフックの解釈が改善され、Claudeが途中で早く止まってしまうことが減るとされています。フックの書き方の形式自体は変わらず、判定ロジック側の改善です。</div>
+  <div class="hl-link"><a href="https://code.claude.com/docs/en/changelog">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>Claudeに長めの作業(複数ファイルの修正やテスト修正)を任せたとき、まだ壊れたまま「できました」と止まってしまう場面で効く可能性があります。たとえば .claude/settings.json の hooks.Stop に type: &quot;prompt&quot; のフックを置き、「テストかビルドが失敗している、または未対応のTODOが残っているなら続行する。すべて通っていれば止まってよい」と指示文で書いておく使い方です。これまで判定が曖昧で効きが悪かった場合は、書き直さず再度試す価値があるかもしれません。SubagentStopにも同様に置けば、サブエージェントが中途半端に返ってくるのも抑えられる可能性があります。注意点として、判定のたびにモデル呼び出しが増えるため、応答時間とコストが少し上がります。また条件が緩いと止まらずに延々と続行するループになりうるので、「最大何回まで」などの終了条件も文中に入れておくと安心です。</div>
+  <div class="hl-action">すでにStopフックを設定している場合は、ターミナルで `claude update` を実行して v2.1.294 以降にし、`/hooks` コマンドで現在の設定を確認してください。未設定なら、変更履歴(https://code.claude.com/docs/en/changelog)と Hooks ドキュメントの「prompt-based hooks」の節を読み、次の長めの作業で試せば十分です。</div>
+</div>
+<div class="highlight-card">
+  <div class="hl-badge">深掘り候補</div>
+  <div class="hl-title"><a href="https://www.anthropic.com/news/2026-usage-policy-update">Oct 8, 2026Announcements2026 Usage Policy update</a></div>
+  <div class="hl-desc"><strong>概要</strong>Anthropicが2026年10月8日に「2026 Usage Policy update」という告知を出しました。Usage Policy(利用規約の中の利用方針)を更新したというお知らせです。ただし今回渡された情報はタイトルと日付だけで、説明文は空でした。禁止事項、条件、適用開始日などの具体的な変更点は、この時点では確認できていません。そのため、内容を推測して書くことは避けます。Claude APIやClaude Codeなどを使う事業者が守るべきルールの改定にあたるため、本文の確認が前提になります。</div>
+  <div class="hl-link"><a href="https://www.anthropic.com/news/2026-usage-policy-update">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>AIコンサルとして、クライアントにClaudeを使った業務自動化や顧客向けの仕組みを納めている場面で効く可能性があります。利用方針が変わると、提供済みの仕組みやこれから提案する仕組みが新しい基準に触れていないかを見直す必要が出ます。たとえば、顧客の個人情報を扱う自動応答、レシピや健康・食品まわりの文章を自動生成するもの、外部へ公開するコンテンツ生成などです。具体的には、公式ページを読んで「変更点」「適用日」「高リスク用途の扱い」「個人情報・健康情報に関する条項」の4点を抜き出します。次に、自分が運用中・提案中のAI活用を一覧にして、どれに関係しそうかを照らし合わせる方法があります。注意点として、変更内容を確認する前に、クライアントへ「規約が変わったので対応が必要です」と伝えるのは避けた方がよいでしょう。</div>
+  <div class="hl-action">ブラウザで https://www.anthropic.com/news/2026-usage-policy-update を開き、変更点の要約と適用開始日を確認します。続けて、ページ内にあるUsage Policy本文へのリンクを開き、個人情報、健康・医療、金融、自動化された意思決定に関する節だけ読みます。そのうえで、運用中のClaude利用で該当しそうなものを3件ほどメモしておくと判断しやすくなります。</div>
+</div>
+
+<h2 class="section-heading">Topics</h2>
+<div class="topic">
+  <div class="topic-title">Claude Codeフック更新</div>
+  <div class="topic-summary">v2.1.294・v2.1.295でフックのonFailure blockやプロンプトフックの修正が行われた。</div>
+<div class="item">
+  <span class="badge badge-changelog">CHANGELOG</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://code.claude.com/docs/en/changelog">v2.1.295</a></div>
+    <div class="item-desc">Added onFailure: &quot;block&quot; for command and HTTP hooks: a hook that can’t start, times out, or exits with an unexpected code blocks the action instead of letting it through, Added Program Status Protocol (OSC 7501) support: terminals that implement it can show whether Claude Code is working, waiting on you, or done, Added quoted text to the /copy picker, so a drafted message copies without its &gt; markers</div>
+    <div class="item-meta">October 8, 2026</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-changelog">CHANGELOG</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://code.claude.com/docs/en/changelog">v2.1.294</a></div>
+    <div class="item-desc">Fixed prompt and agent hooks written as instructions (such as “Block commands that…”) allowing what they should block, Improved how prompt hooks on Stop and SubagentStop written as instructions (such as “Carry on if the build is broken”) are judged, so Claude is less likely to stop early</div>
+    <div class="item-meta">October 8, 2026</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">新着エージェントスキル</div>
+  <div class="topic-summary">HTML回答、pstack移植版、UX/UIデザイン支援などの新しいエージェントスキルが登場。</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/QingYunA/answer-me-with-html">QingYunA/answer-me-with-html</a></div>
+    <div class="item-desc">Answer me with HTML — an agent skill that answers hard questions with a one-page HTML you can actually read. 让 AI Agent 用一页 HTML 回答复杂问题。</div>
+    <div class="item-meta"><span class="stars">2319</span></div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/michael-denyer/pstack-claude">michael-denyer/pstack-claude</a></div>
+    <div class="item-desc">Claude Code, Codex, Copilot, Pi, OpenCode, Gemini, and Prime Agent versions of Poteto&#x27;s pstack. Rigorous agent workflows with Cursor primitives translated for other harnesses.</div>
+    <div class="item-meta"><span class="stars">1647</span></div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/plugin87/ux-ui-agent-skills">plugin87/ux-ui-agent-skills</a></div>
+    <div class="item-desc">Turn Claude into a senior design architect: DTCG tokens, 52 components, WCAG 2.2 AA-AAA, 138 design systems, any-framework code, and 50 objective gates that fail the build instead of faking success.</div>
+    <div class="item-meta"><span class="stars">1556</span></div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">リソース追加と一覧更新</div>
+  <div class="topic-summary">clausonaやOpenRigなど新規リソースが追加され、README・カルーセルが再生成された。</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/5988fcb">chore: regenerate README + carousel from CSV [skip ci]</a></div>
+    <div class="item-meta">2026-10-08</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/bd2dd47">Add resource: clausona (#3122)</a></div>
+    <div class="item-meta">2026-10-08</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/b7ae681">chore: regenerate README + carousel from CSV [skip ci]</a></div>
+    <div class="item-meta">2026-10-08</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/e1fee93">Add resource: OpenRig (#3121)</a></div>
+    <div class="item-meta">2026-10-08</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/c61fd67">chore: regenerate README + carousel from CSV [skip ci]</a></div>
+    <div class="item-meta">2026-10-08</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/68af8ac">Add resource: Archify (#3120)</a></div>
+    <div class="item-meta">2026-10-08</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/3382aaa">add sub-category - Data Visualization (#3119)</a></div>
+    <div class="item-meta">2026-10-08</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/399387e">chore: regenerate README + carousel from CSV [skip ci]</a></div>
+    <div class="item-meta">2026-10-08</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/81ecadf">Add resource: Logo Designer Skill (#3118)</a></div>
+    <div class="item-meta">2026-10-08</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/587d5fb">chore: regenerate README + carousel from CSV [skip ci]</a></div>
+    <div class="item-meta">2026-10-08</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/aacdfea">Add resource: claude-code-zsh-completion (#3117)</a></div>
+    <div class="item-meta">2026-10-08</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">リポジトリ自動更新</div>
+  <div class="topic-summary">リポジトリのティッカーデータとSVGを更新する定期的な自動コミット。</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/d46918a">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-08</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/3ee4639">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-08</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/0475624">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-08</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/0377f95">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-08</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/6e8dd63">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-08</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/eed26f4">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-08</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/3d5e588">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-08</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/7533fd4">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-08</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">Anthropic公式発表</div>
+  <div class="topic-summary">2026年10月8日付で利用ポリシー更新、米国の科学研究支援、サイバーミッションが発表された。</div>
+<div class="item">
+  <span class="badge badge-anthropic_news">ANTHROPIC_NEWS</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://www.anthropic.com/news/2026-usage-policy-update">Oct 8, 2026Announcements2026 Usage Policy update</a></div>
+    <div class="item-meta">Oct 8, 202</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-anthropic_news">ANTHROPIC_NEWS</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://www.anthropic.com/news/genesis-mission-commitment">Oct 8, 2026AnnouncementsBuilding on our commitment to American scientific discovery</a></div>
+    <div class="item-meta">Oct 8, 202</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-anthropic_news">ANTHROPIC_NEWS</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://www.anthropic.com/news/anthropic-cyber-mission">Oct 8, 2026AnnouncementsIntroducing the Anthropic Cyber Mission</a></div>
+    <div class="item-meta">Oct 8, 202</div>
+  </div>
+</div>
+</div>
+
+<footer class="footer">
+  Generated at 2026-10-09 07:57 JST<br>
+  Sources: Claude Code CHANGELOG, GitHub Releases, awesome-claude-code,
+  anthropics/skills, PulseMCP, Claude Plugins, GitHub Trending
+</footer>
+
+</div>
+</body>
+</html>
