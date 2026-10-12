@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Weekly Tech Watch — 2026-10-12</title>
+<style>
+:root {
+  --bg: #f8fafc;
+  --bg-card: #ffffff;
+  --bg-highlight: #eff6ff;
+  --text: #1e293b;
+  --text-muted: #64748b;
+  --text-light: #94a3b8;
+  --accent: #3b82f6;
+  --border: #e2e8f0;
+  --shadow: 0 1px 3px rgba(0,0,0,.08);
+  --badge-changelog: #3b82f6;
+  --badge-mcp: #8b5cf6;
+  --badge-trending: #f59e0b;
+  --badge-plugin: #10b981;
+  --badge-awesome: #f43f5e;
+  --badge-skills: #06b6d4;
+}
+@media(prefers-color-scheme:dark){
+:root {
+  --bg: #0f172a;
+  --bg-card: #1e293b;
+  --bg-highlight: #1e3a5f;
+  --text: #e2e8f0;
+  --text-muted: #94a3b8;
+  --text-light: #64748b;
+  --accent: #60a5fa;
+  --border: #334155;
+  --shadow: 0 1px 3px rgba(0,0,0,.3);
+}}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  background:var(--bg);color:var(--text);
+  line-height:1.6;padding:16px;
+}
+.container{max-width:760px;margin:0 auto}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* Header */
+.header{text-align:center;padding:32px 0 24px}
+.header h1{font-size:1.5rem;font-weight:700;letter-spacing:-.02em}
+.header .date-range{color:var(--text-muted);font-size:.875rem;margin-top:4px}
+
+/* Stats */
+.stat-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));
+  gap:8px;margin:0 0 32px;
+}
+.stat-card{
+  background:var(--bg-card);border:1px solid var(--border);border-radius:8px;
+  padding:12px;text-align:center;box-shadow:var(--shadow);
+}
+.stat-card .num{font-size:1.5rem;font-weight:700;color:var(--accent)}
+.stat-card .label{font-size:.75rem;color:var(--text-muted);margin-top:2px}
+
+/* Section heading */
+.section-heading{
+  font-size:1.125rem;font-weight:700;margin:32px 0 16px;
+  padding-bottom:8px;border-bottom:2px solid var(--accent);
+}
+
+/* Highlight cards */
+.highlight-card{
+  background:var(--bg-highlight);border:1px solid var(--border);
+  border-radius:12px;padding:20px;margin-bottom:16px;
+  border-left:4px solid var(--accent);
+}
+.highlight-card .hl-badge{
+  display:inline-block;font-size:.6875rem;font-weight:700;
+  color:var(--accent);background:var(--bg-card);
+  border:1px solid var(--border);border-radius:999px;
+  padding:2px 8px;margin-bottom:8px;
+}
+.highlight-card .hl-title{font-size:1rem;font-weight:700;margin-bottom:8px}
+.highlight-card .hl-title a{color:var(--text)}
+.highlight-card .hl-desc{font-size:.875rem;color:var(--text-muted);margin-bottom:8px}
+.highlight-card .hl-desc strong,
+.highlight-card .hl-scenario strong{
+  display:block;color:var(--text);font-size:.75rem;margin-bottom:2px;
+}
+.highlight-card .hl-link{font-size:.8125rem;margin-bottom:12px}
+.highlight-card .hl-scenario{
+  font-size:.875rem;line-height:1.7;
+  background:var(--bg-card);border-radius:8px;padding:12px;margin-bottom:8px;
+}
+.highlight-card .hl-action{
+  font-size:.8125rem;color:var(--accent);font-weight:600;
+}
+.highlight-card .hl-action::before{content:"→ "}
+
+/* Topic section */
+.topic{
+  background:var(--bg-card);border:1px solid var(--border);
+  border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:var(--shadow);
+}
+.topic-title{font-size:1rem;font-weight:700;margin-bottom:4px}
+.topic-summary{font-size:.8125rem;color:var(--text-muted);margin-bottom:16px}
+
+/* Item list */
+.item{
+  padding:10px 0;border-bottom:1px solid var(--border);
+  display:flex;gap:10px;align-items:flex-start;
+}
+.item:last-child{border-bottom:none;padding-bottom:0}
+.badge{
+  display:inline-block;font-size:.625rem;font-weight:700;
+  color:#fff;padding:2px 8px;border-radius:10px;white-space:nowrap;
+  flex-shrink:0;margin-top:3px;text-transform:uppercase;letter-spacing:.03em;
+}
+.badge-changelog{background:var(--badge-changelog)}
+.badge-mcp{background:var(--badge-mcp)}
+.badge-trending{background:var(--badge-trending)}
+.badge-plugin{background:var(--badge-plugin)}
+.badge-awesome{background:var(--badge-awesome)}
+.badge-skills{background:var(--badge-skills)}
+.item-body{flex:1;min-width:0}
+.item-title{font-size:.875rem;font-weight:600}
+.item-desc{font-size:.8125rem;color:var(--text-muted);margin-top:2px}
+.item-meta{font-size:.75rem;color:var(--text-light);margin-top:4px}
+.item-meta .stars::before{content:"\2B50 "}
+
+/* Footer */
+.footer{
+  text-align:center;color:var(--text-light);font-size:.75rem;
+  padding:32px 0 16px;border-top:1px solid var(--border);margin-top:32px;
+}
+
+/* No items */
+.empty{color:var(--text-light);font-style:italic;font-size:.875rem;padding:8px 0}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header class="header">
+  <h1>Weekly Tech Watch</h1>
+  <div class="date-range">2026-10-08 ~ 2026-10-12</div>
+</header>
+
+<div class="stat-grid">
+<div class="stat-card"><div class="num">1</div><div class="label">Claude Code</div></div>
+<div class="stat-card"><div class="num">1</div><div class="label">Trending</div></div>
+<div class="stat-card"><div class="num">1</div><div class="label">Plugins</div></div>
+<div class="stat-card"><div class="num">59</div><div class="label">awesome-cc</div></div>
+</div>
+
+<h2 class="section-heading">Highlights</h2>
+<div class="highlight-card">
+  <div class="hl-badge">ニュース</div>
+  <div class="hl-title"><a href="https://code.claude.com/docs/en/changelog">Claude Code v2.1.296</a></div>
+  <div class="hl-desc"><strong>概要</strong>Claude Code v2.1.296 の変更履歴です。Claude appsゲートウェイの managed.policies[] に新しく `code` キーが追加されました。`code` は既存の `cli` と同じ設定項目を持ち、Claude Desktop の Code タブにも適用されます。`code` を desktop と併記すると、Claude Desktop のゲートウェイモードが有効になります。組織で管理するポリシーを、ターミナルのCLIとデスクトップアプリのCodeタブの両方へ同じ内容で配れるようになる変更です。</div>
+  <div class="hl-link"><a href="https://code.claude.com/docs/en/changelog">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>管理者がポリシーを一括配布するための機能なので、りゅうさんが1人で使う分には直接の出番は少ないです。効く可能性があるのは、AIコンサルでクライアント企業にClaude Codeを導入し、自走してもらう場面です。その際、権限の許可・拒否ルールやモデル制限などを `managed.policies[]` に一度書けば、CLIを使う人にもDesktopのCodeタブを使う人にも同じ統制をかけられます。導入標準パッケージに「ポリシー雛形」として組み込む案もあり得ます。たとえば `cli` と `code` に同じ設定を持たせ、Desktop利用者がいる場合だけ `code` と desktop を併記してゲートウェイモードにする、という運用です。注意点として、ゲートウェイモードが有効になると接続経路や挙動が変わる可能性があります。本番のクライアント環境へ入れる前に、検証用の環境で挙動を確かめるのが安全です。ゲートウェイ自体を使っていない現状では、導入は急がなくてよさそうです。</div>
+  <div class="hl-action">まず https://code.claude.com/docs/en/changelog を開き、v2.1.296 の該当項目を確認します。続けて同じドキュメントサイトで「managed.policies」や「Claude apps gateway」を検索し、`cli` と `code` の設定項目の違い、desktop 併記時のゲートウェイモードの条件を読みます。クライアントに管理者向けの統制が必要な案件が出たら、そのときに検証環境で試します。</div>
+</div>
+<div class="highlight-card">
+  <div class="hl-badge">ニュース</div>
+  <div class="hl-title"><a href="https://github.com/morluto/rea">GitHub: morluto/rea</a></div>
+  <div class="hl-desc"><strong>概要</strong>Reverse engineer anything with agents, from app behavior down to native binaries.</div>
+  <div class="hl-link"><a href="https://github.com/morluto/rea">詳細を見る</a></div>
+</div>
+<div class="highlight-card">
+  <div class="hl-badge">ニュース</div>
+  <div class="hl-title"><a href="https://cloud.google.com/products/data-agent-kit">Plugin: data-agent-kit</a></div>
+  <div class="hl-desc"><strong>概要</strong>Googleが「Data Agent Kit」というプラグインを公開しました。Google Cloud上で作業するデータエンジニアやDB実務者向けの専門スキル群で、好みのコーディングエージェントに自然言語で指示するだけで使えます。できることは、複雑なデータパイプラインの設計、dbtによるデータ変換、SparkやBigQuery SQLのノートブック作成、GCPのデータ関連サービスをまたぐエンドツーエンドのワークフローの組み立てです。エージェントがGCPデータ基盤の専門アシスタントとして振る舞う位置づけです。</div>
+  <div class="hl-link"><a href="https://cloud.google.com/products/data-agent-kit">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>りゅうさんの現状では、GCPのデータ基盤を本格運用している場面は多くなさそうなので、今すぐ導入する類のものではないと思います。ただ、AIコンサルとして中堅企業のデータ活用を支援する場面で効く可能性があります。たとえばクライアントが「BigQueryにデータはあるが集計やパイプラインを組める人がいない」という状況で、ヒアリングの場でClaude Codeにこのプラグインを入れ、自然言語で『売上と予約データを日次で統合するパイプラインを設計して』と頼み、dbtモデルとBigQuery SQLの叩き台をその場で出して見せる、という「やってみせて自走させる」型のデモに使えそうです。AlgaleXのCRMや売上分析をBigQueryに寄せる構想が出た場合の試作にも使えるかもしれません。注意点として、本番データに接続するとGCPの課金や権限・個人情報の扱いが絡むため、最初はサンプルデータと読み取り専用権限のサンドボックスプロジェクトで試すのが安全です。</div>
+  <div class="hl-action">まず公式ページ https://cloud.google.com/products/data-agent-kit を開き、対応するコーディングエージェント(Claude Code対応の有無)とインストール方法、必要なIAM権限の記載を確認します。対応していれば、BigQueryの公開サンプルデータセット(bigquery-public-data)を使い、サンドボックス用の新規GCPプロジェクトで『このテーブルから月次集計のdbtモデルを作って』と試すのが低リスクな一歩です。</div>
+</div>
+
+<h2 class="section-heading">Topics</h2>
+<div class="topic">
+  <div class="topic-title">Claude Code更新</div>
+  <div class="topic-summary">Claude Code v2.1.296でゲートウェイのmanaged.policiesにcodeキーが追加され、Desktopのコードタブにも適用される。</div>
+<div class="item">
+  <span class="badge badge-changelog">CHANGELOG</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://code.claude.com/docs/en/changelog">v2.1.296</a></div>
+    <div class="item-desc">Added a code key to the Claude apps gateway’s managed.policies[]: the same settings as cli, also applied in Claude Desktop’s Code tab; beside desktop, it turns on Claude Desktop’s gateway mode, Added autoCompactWindow to subagent frontmatter and --agents definitions, so a subagent can auto-compact earlier than the main conversation’s window, Added CLAUDE_CODE_WORKFLOW_SUBAGENT_MODEL to run every workflow agent on one model while other subagents keep theirs</div>
+    <div class="item-meta">October 9, 2026</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">エージェント連携ツール</div>
+  <div class="topic-summary">複数エージェントの通信・協調・オーケストレーションを扱うリソースが追加された（cc-semaphore、Repowire、ACC、Consort、Charrette、SDLCサブカテゴリなど）。</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/a2c7f6c">Add resource: cc-semaphore (#3144)</a></div>
+    <div class="item-meta">2026-10-10</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/6e5d6fa">Add resource: Repowire (#3142)</a></div>
+    <div class="item-meta">2026-10-10</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/6309141">Add resource: Agents Can Communicate (ACC) (#3140)</a></div>
+    <div class="item-meta">2026-10-10</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/000c0a9">Add resource: Charrette (#3138)</a></div>
+    <div class="item-meta">2026-10-10</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/b984444">add sub-category - Agent Orchestration &gt; SDLC (#3134)</a></div>
+    <div class="item-meta">2026-10-10</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/ed4fb42">Add resource: Consort (#3131)</a></div>
+    <div class="item-meta">2026-10-10</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/b5d927e">Add resource: Agent 007 (#3129)</a></div>
+    <div class="item-meta">2026-10-10</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">コスト・利用状況の可視化</div>
+  <div class="topic-summary">トークン消費や電力・炭素排出、コンテキスト負荷を計測・監視するツール群が登録された。</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/d7857c3">Add resource: context-tax (#3139)</a></div>
+    <div class="item-meta">2026-10-10</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/ca94c7f">Add resource: wattop (#3137)</a></div>
+    <div class="item-meta">2026-10-10</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/51e55c1">Add resource: claude-carbon (#3124)</a></div>
+    <div class="item-meta">2026-10-10</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/3d8eda6">Add resource: Codeburn (#3125)</a></div>
+    <div class="item-meta">2026-10-10</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/4f1b1a7">Add resource: Gryph (#3126)</a></div>
+    <div class="item-meta">2026-10-10</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">開発・デバッグ支援ツール</div>
+  <div class="topic-summary">リバースエンジニアリング、ブラウザデバッグ、Kubernetes連携、データ基盤向けスキルなど開発者向けリソース。</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/morluto/rea">morluto/rea</a></div>
+    <div class="item-desc">Reverse engineer anything with agents, from app behavior down to native binaries.</div>
+    <div class="item-meta"><span class="stars">102080</span></div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-plugin">PLUGIN</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://cloud.google.com/products/data-agent-kit">data-agent-kit</a></div>
+    <div class="item-desc">This plugin provides a specialized suite of skills for data engineers and database practitioners working on Google Cloud. It acts as an expert assistant, allowing you to use natural language prompts in your preferred coding agent to architect complex data pipelines, transform data with dbt, write Spark and BigQuery SQL notebooks, and orchestrate end-to-end workflows across GCP&#x27;s data ecosystem.</div>
+    <div class="item-meta">development</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/4aaeefe">Add resource: Claude Code Local (#3145)</a></div>
+    <div class="item-meta">2026-10-10</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/4a5f928">Add resource: bough (#3143)</a></div>
+    <div class="item-meta">2026-10-10</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/4406eac">Add resource: napkin-to-blueprint (#3141)</a></div>
+    <div class="item-meta">2026-10-10</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/a7fea63">Add resource: OctoShell (#3136)</a></div>
+    <div class="item-meta">2026-10-10</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/530d16c">Add resource: mirrord (#3135)</a></div>
+    <div class="item-meta">2026-10-10</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/1bd9db1">Add resource: Pinpoint (#3133)</a></div>
+    <div class="item-meta">2026-10-10</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/a901396">Add resource: atelier (#3132)</a></div>
+    <div class="item-meta">2026-10-10</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/c3c25d1">Add resource: geo-sleuth (#3130)</a></div>
+    <div class="item-meta">2026-10-10</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/669201a">Add resource: Story Skills (#3128)</a></div>
+    <div class="item-meta">2026-10-10</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/96074c2">Add resource: bdg (Browser Debugger CLI) (#3127)</a></div>
+    <div class="item-meta">2026-10-10</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">READMEの自動更新</div>
+  <div class="topic-summary">CSVからREADME・カルーセルを再生成するボットによる定期的なメンテナンスコミット。</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/f8d0bd1">chore: regenerate README + carousel from CSV [skip ci]</a></div>
+    <div class="item-meta">2026-10-10</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/7dedacc">chore: regenerate README + carousel from CSV [skip ci]</a></div>
+    <div class="item-meta">2026-10-10</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/c2739f6">chore: regenerate README + carousel from CSV [skip ci]</a></div>
+    <div class="item-meta">2026-10-10</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/f36eadb">chore: regenerate README + carousel from CSV [skip ci]</a></div>
+    <div class="item-meta">2026-10-10</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/e935bc6">chore: regenerate README + carousel from CSV [skip ci]</a></div>
+    <div class="item-meta">2026-10-10</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/f69f514">chore: regenerate README + carousel from CSV [skip ci]</a></div>
+    <div class="item-meta">2026-10-10</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/87ae48e">chore: regenerate README + carousel from CSV [skip ci]</a></div>
+    <div class="item-meta">2026-10-10</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/c03348f">chore: regenerate README + carousel from CSV [skip ci]</a></div>
+    <div class="item-meta">2026-10-10</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/e9219c6">chore: regenerate README + carousel from CSV [skip ci]</a></div>
+    <div class="item-meta">2026-10-10</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/ac84ab8">chore: regenerate README + carousel from CSV [skip ci]</a></div>
+    <div class="item-meta">2026-10-10</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/8ea13f8">chore: regenerate README + carousel from CSV [skip ci]</a></div>
+    <div class="item-meta">2026-10-10</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/70b4753">chore: regenerate README + carousel from CSV [skip ci]</a></div>
+    <div class="item-meta">2026-10-10</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/5fee2e0">chore: regenerate README + carousel from CSV [skip ci]</a></div>
+    <div class="item-meta">2026-10-10</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/d5b6beb">chore: regenerate README + carousel from CSV [skip ci]</a></div>
+    <div class="item-meta">2026-10-10</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/5f2dd18">chore: regenerate README + carousel from CSV [skip ci]</a></div>
+    <div class="item-meta">2026-10-10</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/cd44c80">chore: regenerate README + carousel from CSV [skip ci]</a></div>
+    <div class="item-meta">2026-10-10</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/bc8f384">chore: regenerate README + carousel from CSV [skip ci]</a></div>
+    <div class="item-meta">2026-10-10</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/9626338">chore: regenerate README + carousel from CSV [skip ci]</a></div>
+    <div class="item-meta">2026-10-10</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/7a61917">chore: regenerate README + carousel from CSV [skip ci]</a></div>
+    <div class="item-meta">2026-10-10</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/c7d0335">chore: regenerate README + carousel from CSV [skip ci]</a></div>
+    <div class="item-meta">2026-10-10</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/37c0553">chore: regenerate README + carousel from CSV [skip ci]</a></div>
+    <div class="item-meta">2026-10-10</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">リポジトリ統計の更新</div>
+  <div class="topic-summary">リポジトリのティッカーデータとSVGを更新する自動コミットや、内容が空の項目。</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/3aaade9">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-11</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/ab189a2">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-11</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/7af93c8">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-11</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/7d1e0af">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-11</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/edf4442">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-11</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/cc79677">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-11</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/c1065e7">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-11</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/6d52883">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-11</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/96e6652">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-10</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/68a3e0c">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-10</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/099b1f6">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-10</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/fbc7109">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-10</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/ac78f1c">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-10</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/bc386a6">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-10</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/6f87280">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-10</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/35faa18">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-10</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/addyosmani/agent-skills">Addy Osmani: addyosmani/agent-skills (PushEvent)</a></div>
+    <div class="item-desc">[main] New push</div>
+    <div class="item-meta">2026-10-10</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/addyosmani/agent-skills">Addy Osmani: addyosmani/agent-skills (PushEvent)</a></div>
+    <div class="item-desc">[main] New push</div>
+    <div class="item-meta">2026-10-10</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/rudycelekli/agent-skills">Addy Osmani: rudycelekli/agent-skills (PushEvent)</a></div>
+    <div class="item-desc">[workspace-cleanup-20261003] New push</div>
+    <div class="item-meta">2026-10-10</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/addyosmani/agent-skills">Addy Osmani: addyosmani/agent-skills (PushEvent)</a></div>
+    <div class="item-desc">[main] New push</div>
+    <div class="item-meta">2026-10-10</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/addyosmani/agent-skills">Addy Osmani: addyosmani/agent-skills (PushEvent)</a></div>
+    <div class="item-desc">[main] New push</div>
+    <div class="item-meta">2026-10-10</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/addyosmani/agent-skills">Addy Osmani: addyosmani/agent-skills (PushEvent)</a></div>
+    <div class="item-desc">[main] New push</div>
+    <div class="item-meta">2026-10-10</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/addyosmani/agent-skills">Addy Osmani: addyosmani/agent-skills (PushEvent)</a></div>
+    <div class="item-desc">[main] New push</div>
+    <div class="item-meta">2026-10-10</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/addyosmani/agent-skills">Addy Osmani: addyosmani/agent-skills (PushEvent)</a></div>
+    <div class="item-desc">[main] New push</div>
+    <div class="item-meta">2026-10-10</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/rudycelekli/agent-skills">Addy Osmani: rudycelekli/agent-skills (PushEvent)</a></div>
+    <div class="item-desc">[eval-ids-20261003] New push</div>
+    <div class="item-meta">2026-10-10</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/addyosmani/agent-skills">Addy Osmani: addyosmani/agent-skills (PushEvent)</a></div>
+    <div class="item-desc">[main] New push</div>
+    <div class="item-meta">2026-10-10</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/addyosmani/agent-skills">Addy Osmani: addyosmani/agent-skills (PushEvent)</a></div>
+    <div class="item-desc">[main] New push</div>
+    <div class="item-meta">2026-10-10</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/addyosmani/agent-skills">Addy Osmani: addyosmani/agent-skills (PushEvent)</a></div>
+    <div class="item-desc">[main] New push</div>
+    <div class="item-meta">2026-10-10</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/ALANDVO/agent-skills">Addy Osmani: ALANDVO/agent-skills (PushEvent)</a></div>
+    <div class="item-desc">[1ab25ea1c8a1] New push</div>
+    <div class="item-meta">2026-10-10</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/jaredpalmer/kev">Jared Palmer: jaredpalmer/kev (PushEvent)</a></div>
+    <div class="item-desc">[main] New push</div>
+    <div class="item-meta">2026-10-09</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/jaredpalmer/kev">Jared Palmer: jaredpalmer/kev (PushEvent)</a></div>
+    <div class="item-desc">[main] New push</div>
+    <div class="item-meta">2026-10-10</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/jaredpalmer/kev">Jared Palmer: jaredpalmer/kev (PushEvent)</a></div>
+    <div class="item-desc">[main] New push</div>
+    <div class="item-meta">2026-10-09</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/jaredpalmer/kev">Jared Palmer: jaredpalmer/kev (PushEvent)</a></div>
+    <div class="item-desc">[main] New push</div>
+    <div class="item-meta">2026-10-09</div>
+  </div>
+</div>
+</div>
+
+<footer class="footer">
+  Generated at 2026-10-12 13:55 JST<br>
+  Sources: Claude Code CHANGELOG, GitHub Releases, awesome-claude-code,
+  anthropics/skills, PulseMCP, Claude Plugins, GitHub Trending
+</footer>
+
+</div>
+</body>
+</html>
