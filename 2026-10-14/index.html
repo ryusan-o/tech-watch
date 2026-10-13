@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Weekly Tech Watch — 2026-10-14</title>
+<style>
+:root {
+  --bg: #f8fafc;
+  --bg-card: #ffffff;
+  --bg-highlight: #eff6ff;
+  --text: #1e293b;
+  --text-muted: #64748b;
+  --text-light: #94a3b8;
+  --accent: #3b82f6;
+  --border: #e2e8f0;
+  --shadow: 0 1px 3px rgba(0,0,0,.08);
+  --badge-changelog: #3b82f6;
+  --badge-mcp: #8b5cf6;
+  --badge-trending: #f59e0b;
+  --badge-plugin: #10b981;
+  --badge-awesome: #f43f5e;
+  --badge-skills: #06b6d4;
+}
+@media(prefers-color-scheme:dark){
+:root {
+  --bg: #0f172a;
+  --bg-card: #1e293b;
+  --bg-highlight: #1e3a5f;
+  --text: #e2e8f0;
+  --text-muted: #94a3b8;
+  --text-light: #64748b;
+  --accent: #60a5fa;
+  --border: #334155;
+  --shadow: 0 1px 3px rgba(0,0,0,.3);
+}}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  background:var(--bg);color:var(--text);
+  line-height:1.6;padding:16px;
+}
+.container{max-width:760px;margin:0 auto}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* Header */
+.header{text-align:center;padding:32px 0 24px}
+.header h1{font-size:1.5rem;font-weight:700;letter-spacing:-.02em}
+.header .date-range{color:var(--text-muted);font-size:.875rem;margin-top:4px}
+
+/* Stats */
+.stat-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));
+  gap:8px;margin:0 0 32px;
+}
+.stat-card{
+  background:var(--bg-card);border:1px solid var(--border);border-radius:8px;
+  padding:12px;text-align:center;box-shadow:var(--shadow);
+}
+.stat-card .num{font-size:1.5rem;font-weight:700;color:var(--accent)}
+.stat-card .label{font-size:.75rem;color:var(--text-muted);margin-top:2px}
+
+/* Section heading */
+.section-heading{
+  font-size:1.125rem;font-weight:700;margin:32px 0 16px;
+  padding-bottom:8px;border-bottom:2px solid var(--accent);
+}
+
+/* Highlight cards */
+.highlight-card{
+  background:var(--bg-highlight);border:1px solid var(--border);
+  border-radius:12px;padding:20px;margin-bottom:16px;
+  border-left:4px solid var(--accent);
+}
+.highlight-card .hl-badge{
+  display:inline-block;font-size:.6875rem;font-weight:700;
+  color:var(--accent);background:var(--bg-card);
+  border:1px solid var(--border);border-radius:999px;
+  padding:2px 8px;margin-bottom:8px;
+}
+.highlight-card .hl-title{font-size:1rem;font-weight:700;margin-bottom:8px}
+.highlight-card .hl-title a{color:var(--text)}
+.highlight-card .hl-desc{font-size:.875rem;color:var(--text-muted);margin-bottom:8px}
+.highlight-card .hl-desc strong,
+.highlight-card .hl-scenario strong{
+  display:block;color:var(--text);font-size:.75rem;margin-bottom:2px;
+}
+.highlight-card .hl-link{font-size:.8125rem;margin-bottom:12px}
+.highlight-card .hl-scenario{
+  font-size:.875rem;line-height:1.7;
+  background:var(--bg-card);border-radius:8px;padding:12px;margin-bottom:8px;
+}
+.highlight-card .hl-action{
+  font-size:.8125rem;color:var(--accent);font-weight:600;
+}
+.highlight-card .hl-action::before{content:"→ "}
+
+/* Topic section */
+.topic{
+  background:var(--bg-card);border:1px solid var(--border);
+  border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:var(--shadow);
+}
+.topic-title{font-size:1rem;font-weight:700;margin-bottom:4px}
+.topic-summary{font-size:.8125rem;color:var(--text-muted);margin-bottom:16px}
+
+/* Item list */
+.item{
+  padding:10px 0;border-bottom:1px solid var(--border);
+  display:flex;gap:10px;align-items:flex-start;
+}
+.item:last-child{border-bottom:none;padding-bottom:0}
+.badge{
+  display:inline-block;font-size:.625rem;font-weight:700;
+  color:#fff;padding:2px 8px;border-radius:10px;white-space:nowrap;
+  flex-shrink:0;margin-top:3px;text-transform:uppercase;letter-spacing:.03em;
+}
+.badge-changelog{background:var(--badge-changelog)}
+.badge-mcp{background:var(--badge-mcp)}
+.badge-trending{background:var(--badge-trending)}
+.badge-plugin{background:var(--badge-plugin)}
+.badge-awesome{background:var(--badge-awesome)}
+.badge-skills{background:var(--badge-skills)}
+.item-body{flex:1;min-width:0}
+.item-title{font-size:.875rem;font-weight:600}
+.item-desc{font-size:.8125rem;color:var(--text-muted);margin-top:2px}
+.item-meta{font-size:.75rem;color:var(--text-light);margin-top:4px}
+.item-meta .stars::before{content:"\2B50 "}
+
+/* Footer */
+.footer{
+  text-align:center;color:var(--text-light);font-size:.75rem;
+  padding:32px 0 16px;border-top:1px solid var(--border);margin-top:32px;
+}
+
+/* No items */
+.empty{color:var(--text-light);font-style:italic;font-size:.875rem;padding:8px 0}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header class="header">
+  <h1>Weekly Tech Watch</h1>
+  <div class="date-range">2026-10-12 ~ 2026-10-14</div>
+</header>
+
+<div class="stat-grid">
+<div class="stat-card"><div class="num">1</div><div class="label">MCP</div></div>
+<div class="stat-card"><div class="num">14</div><div class="label">awesome-cc</div></div>
+</div>
+
+<h2 class="section-heading">Highlights</h2>
+<div class="highlight-card">
+  <div class="hl-badge">ニュース</div>
+  <div class="hl-title"><a href="https://www.pulsemcp.com/servers/rper2001-rigshare">MCP: RigShare</a></div>
+  <div class="hl-desc"><strong>概要</strong>PulseMCPに掲載されたMCPサーバー「RigShare」の紹介です。RigShareは、GPU、ロボット、ドローン、建設機材といった機材をレンタルできるマーケットプレイスで、MCPサーバー経由でAIエージェントから操作できるようになります。借りる側として機材を探してレンタルできるほか、オーナー側として自分の機材をRigShareに登録(オンボード)して貸し出すこともできます。掲載情報からは、詳細なツール名や料金体系、対応地域までは読み取れません。</div>
+  <div class="hl-link"><a href="https://www.pulsemcp.com/servers/rper2001-rigshare">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>直接の業務接点は薄めですが、一般的な使い所は2つ考えられます。(1) AI案件で一時的に大きなGPUが要るとき(画像生成や音声処理のバッチ、ローカルLLMの検証など)に、Claude Codeから「この条件でGPUを借りるといくらか」を比較させる下調べ役として使う方法です。常設のGPUを買う前の見積もり材料になり得ます。(2) 「機材をAIエージェントが借りる」という設計そのものが、クライアント向けの自動化提案のネタになる可能性があります。たとえば建設・設備系の中小企業で、機材手配の問い合わせ対応をエージェント化する構想です。注意点として、実際のレンタル契約や決済が発生しうるため、最初は検索・料金確認だけに絞り、予約や支払いに関わる操作は人が承認する形が安全です。信頼性や運営実態は未確認のため、使う前に確認が必要です。</div>
+  <div class="hl-action">ブラウザで https://www.pulsemcp.com/servers/rper2001-rigshare を開き、提供ツール一覧(検索・予約・出品の別)、認証方式、GitHubリポジトリの有無を確認してください。試すなら、決済系を使わず読み取り専用の範囲で `claude mcp add` に登録し、「A100相当のGPUを1日借りる場合の候補を出して」と聞いて、出力の実用度を見るところまでが手頃です。</div>
+</div>
+<div class="highlight-card">
+  <div class="hl-badge">ニュース</div>
+  <div class="hl-title"><a href="https://github.com/addyosmani/agent-skills/releases/tag/0.6.13">Addy Osmani: addyosmani/agent-skills</a></div>
+  <div class="hl-desc"><strong>概要</strong>Addy Osmani氏(Google Chrome所属のエンジニア)が公開しているGitHubリポジトリ「addyosmani/agent-skills」が、Agent Skills 0.6.13としてリリースされました。リリースノートの説明欄には「Release published: Agent Skills 0.6.13」とあるだけで、個別の変更内容、追加されたスキル名、フラグ、コマンド、数値は記載されていません。そのため、このリリースで何が変わったかは、リリースページ(GitHub上のタグ0.6.13)を開かないと分かりません。確認できるのは、Claude Codeなどのコーディングエージェント向けにスキル(手順書)を整備する公開リポジトリが、バージョン0.6系で継続的に更新されている、という点までです。</div>
+  <div class="hl-link"><a href="https://github.com/addyosmani/agent-skills/releases/tag/0.6.13">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>中身が未確認なので、断定はできません。そのうえで、りゅうさんの環境ではスキルの設計見本として使える可能性があります。CodexとClaude Codeを共有リポジトリで併用しているため、他者が書いたSKILL.mdの構成(descriptionの書き方、手順の粒度、検証ステップの置き方)を見ておくと、自作スキルの精度を上げる参考になるかもしれません。具体的には、リポジトリをcloneしてskillsディレクトリ内の気になるものを1〜2個だけ読み、自分のスキルのdescriptionや「いつ発動するか」の書き方と比べる使い方が考えられます。レビューや計画立案など、すでに自作している領域と重なるスキルがあれば、差分だけ取り込む形が現実的です。注意点として、第三者のスキルをそのまま丸ごと導入すると、既存のルールや運用と衝突したり、不要なスキルがコンテキストを圧迫したりする恐れがあります。必要なものだけ選んで読む形が安全です。</div>
+  <div class="hl-action">ブラウザで https://github.com/addyosmani/agent-skills/releases/tag/0.6.13 を開き、Release notesの変更点(追加・変更されたスキル名)を確認してください。気になるスキルがあれば、別の空フォルダで `git clone https://github.com/addyosmani/agent-skills` を実行し、該当のSKILL.mdだけを読んで、自分のスキルのdescriptionの書き方と比較します。内容が自分の運用に合うと分かるまでは、既存の環境には何も入れずに読むだけにしてください。</div>
+</div>
+
+<h2 class="section-heading">Topics</h2>
+<div class="topic">
+  <div class="topic-title">機材レンタル共有</div>
+  <div class="topic-summary">GPUやロボット、ドローン、建設機材を貸し借りできるRigShareのサービス紹介。</div>
+<div class="item">
+  <span class="badge badge-mcp">MCP</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://www.pulsemcp.com/servers/rper2001-rigshare">RigShare</a></div>
+    <div class="item-desc">Rent GPUs, robots, drones, and construction gear on RigShare, and onboard your own equipment as an owner.</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">リポジトリ指標の自動更新</div>
+  <div class="topic-summary">リポジトリのティッカーデータとSVGを更新する自動choreコミットが多数。</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/b6063e9">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-13</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/fd316b6">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-13</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/82ed6f2">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-13</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/8678b30">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-13</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/4fcad79">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-13</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/79bcecc">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-13</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/9fda41b">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-13</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/54fdcaf">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-13</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">README・カルーセル再生成</div>
+  <div class="topic-summary">CSVからREADMEとカルーセルを再生成する自動更新コミット。</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/12f602f">chore: regenerate README + carousel from CSV [skip ci]</a></div>
+    <div class="item-meta">2026-10-13</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/537da24">chore: regenerate README + carousel from CSV [skip ci]</a></div>
+    <div class="item-meta">2026-10-13</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/8cafb06">chore: regenerate README + carousel from CSV [skip ci]</a></div>
+    <div class="item-meta">2026-10-13</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">新規リソース追加</div>
+  <div class="topic-summary">Agent Skills for Knowledge Work、Universal Exam Cram Coach、PLURなどのリソースが追加された。</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/30ea0cf">Add resource: Agent Skills for Knowledge Work (#3154)</a></div>
+    <div class="item-meta">2026-10-13</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/82cccab">Add resource: Universal Exam Cram Coach (#3153)</a></div>
+    <div class="item-meta">2026-10-13</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/5edf966">Add resource: PLUR (#3152)</a></div>
+    <div class="item-meta">2026-10-13</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">内容不明の項目</div>
+  <div class="topic-summary">タイトルも説明もなく、内容を判別できない項目群。</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/addyosmani/agent-skills">Addy Osmani: addyosmani/agent-skills (PushEvent)</a></div>
+    <div class="item-desc">[agent-plugins-manifest] New push</div>
+    <div class="item-meta">2026-10-13</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/addyosmani/agent-skills/releases/tag/0.6.13">Addy Osmani: addyosmani/agent-skills (ReleaseEvent)</a></div>
+    <div class="item-desc">Release published: Agent Skills 0.6.13</div>
+    <div class="item-meta">2026-10-13</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/addyosmani/agent-skills">Addy Osmani: addyosmani/agent-skills (PushEvent)</a></div>
+    <div class="item-desc">[main] New push</div>
+    <div class="item-meta">2026-10-13</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/addyosmani/agent-skills">Addy Osmani: addyosmani/agent-skills (PushEvent)</a></div>
+    <div class="item-desc">[main] New push</div>
+    <div class="item-meta">2026-10-13</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/addyosmani/agent-skills">Addy Osmani: addyosmani/agent-skills (PushEvent)</a></div>
+    <div class="item-desc">[main] New push</div>
+    <div class="item-meta">2026-10-13</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/zhujunxiongfeiyi/agent-skills">Addy Osmani: zhujunxiongfeiyi/agent-skills (PushEvent)</a></div>
+    <div class="item-desc">[main] New push</div>
+    <div class="item-meta">2026-10-13</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/addyosmani/agent-skills">Addy Osmani: addyosmani/agent-skills (PushEvent)</a></div>
+    <div class="item-desc">[main] New push</div>
+    <div class="item-meta">2026-10-13</div>
+  </div>
+</div>
+</div>
+
+<footer class="footer">
+  Generated at 2026-10-14 07:56 JST<br>
+  Sources: Claude Code CHANGELOG, GitHub Releases, awesome-claude-code,
+  anthropics/skills, PulseMCP, Claude Plugins, GitHub Trending
+</footer>
+
+</div>
+</body>
+</html>
