@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Weekly Tech Watch — 2026-10-15</title>
+<style>
+:root {
+  --bg: #f8fafc;
+  --bg-card: #ffffff;
+  --bg-highlight: #eff6ff;
+  --text: #1e293b;
+  --text-muted: #64748b;
+  --text-light: #94a3b8;
+  --accent: #3b82f6;
+  --border: #e2e8f0;
+  --shadow: 0 1px 3px rgba(0,0,0,.08);
+  --badge-changelog: #3b82f6;
+  --badge-mcp: #8b5cf6;
+  --badge-trending: #f59e0b;
+  --badge-plugin: #10b981;
+  --badge-awesome: #f43f5e;
+  --badge-skills: #06b6d4;
+}
+@media(prefers-color-scheme:dark){
+:root {
+  --bg: #0f172a;
+  --bg-card: #1e293b;
+  --bg-highlight: #1e3a5f;
+  --text: #e2e8f0;
+  --text-muted: #94a3b8;
+  --text-light: #64748b;
+  --accent: #60a5fa;
+  --border: #334155;
+  --shadow: 0 1px 3px rgba(0,0,0,.3);
+}}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  background:var(--bg);color:var(--text);
+  line-height:1.6;padding:16px;
+}
+.container{max-width:760px;margin:0 auto}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* Header */
+.header{text-align:center;padding:32px 0 24px}
+.header h1{font-size:1.5rem;font-weight:700;letter-spacing:-.02em}
+.header .date-range{color:var(--text-muted);font-size:.875rem;margin-top:4px}
+
+/* Stats */
+.stat-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));
+  gap:8px;margin:0 0 32px;
+}
+.stat-card{
+  background:var(--bg-card);border:1px solid var(--border);border-radius:8px;
+  padding:12px;text-align:center;box-shadow:var(--shadow);
+}
+.stat-card .num{font-size:1.5rem;font-weight:700;color:var(--accent)}
+.stat-card .label{font-size:.75rem;color:var(--text-muted);margin-top:2px}
+
+/* Section heading */
+.section-heading{
+  font-size:1.125rem;font-weight:700;margin:32px 0 16px;
+  padding-bottom:8px;border-bottom:2px solid var(--accent);
+}
+
+/* Highlight cards */
+.highlight-card{
+  background:var(--bg-highlight);border:1px solid var(--border);
+  border-radius:12px;padding:20px;margin-bottom:16px;
+  border-left:4px solid var(--accent);
+}
+.highlight-card .hl-badge{
+  display:inline-block;font-size:.6875rem;font-weight:700;
+  color:var(--accent);background:var(--bg-card);
+  border:1px solid var(--border);border-radius:999px;
+  padding:2px 8px;margin-bottom:8px;
+}
+.highlight-card .hl-title{font-size:1rem;font-weight:700;margin-bottom:8px}
+.highlight-card .hl-title a{color:var(--text)}
+.highlight-card .hl-desc{font-size:.875rem;color:var(--text-muted);margin-bottom:8px}
+.highlight-card .hl-desc strong,
+.highlight-card .hl-scenario strong{
+  display:block;color:var(--text);font-size:.75rem;margin-bottom:2px;
+}
+.highlight-card .hl-link{font-size:.8125rem;margin-bottom:12px}
+.highlight-card .hl-scenario{
+  font-size:.875rem;line-height:1.7;
+  background:var(--bg-card);border-radius:8px;padding:12px;margin-bottom:8px;
+}
+.highlight-card .hl-action{
+  font-size:.8125rem;color:var(--accent);font-weight:600;
+}
+.highlight-card .hl-action::before{content:"→ "}
+
+/* Topic section */
+.topic{
+  background:var(--bg-card);border:1px solid var(--border);
+  border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:var(--shadow);
+}
+.topic-title{font-size:1rem;font-weight:700;margin-bottom:4px}
+.topic-summary{font-size:.8125rem;color:var(--text-muted);margin-bottom:16px}
+
+/* Item list */
+.item{
+  padding:10px 0;border-bottom:1px solid var(--border);
+  display:flex;gap:10px;align-items:flex-start;
+}
+.item:last-child{border-bottom:none;padding-bottom:0}
+.badge{
+  display:inline-block;font-size:.625rem;font-weight:700;
+  color:#fff;padding:2px 8px;border-radius:10px;white-space:nowrap;
+  flex-shrink:0;margin-top:3px;text-transform:uppercase;letter-spacing:.03em;
+}
+.badge-changelog{background:var(--badge-changelog)}
+.badge-mcp{background:var(--badge-mcp)}
+.badge-trending{background:var(--badge-trending)}
+.badge-plugin{background:var(--badge-plugin)}
+.badge-awesome{background:var(--badge-awesome)}
+.badge-skills{background:var(--badge-skills)}
+.item-body{flex:1;min-width:0}
+.item-title{font-size:.875rem;font-weight:600}
+.item-desc{font-size:.8125rem;color:var(--text-muted);margin-top:2px}
+.item-meta{font-size:.75rem;color:var(--text-light);margin-top:4px}
+.item-meta .stars::before{content:"\2B50 "}
+
+/* Footer */
+.footer{
+  text-align:center;color:var(--text-light);font-size:.75rem;
+  padding:32px 0 16px;border-top:1px solid var(--border);margin-top:32px;
+}
+
+/* No items */
+.empty{color:var(--text-light);font-style:italic;font-size:.875rem;padding:8px 0}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header class="header">
+  <h1>Weekly Tech Watch</h1>
+  <div class="date-range">2026-10-13 ~ 2026-10-15</div>
+</header>
+
+<div class="stat-grid">
+<div class="stat-card"><div class="num">2</div><div class="label">Claude Code</div></div>
+<div class="stat-card"><div class="num">8</div><div class="label">awesome-cc</div></div>
+</div>
+
+<h2 class="section-heading">Highlights</h2>
+<div class="highlight-card">
+  <div class="hl-badge">ニュース</div>
+  <div class="hl-title"><a href="https://code.claude.com/docs/en/changelog">Claude Code v2.1.299</a></div>
+  <div class="hl-desc"><strong>概要</strong>Claude Code v2.1.299で、環境変数 CLAUDE_CODE_DISABLE_FILE_MENTIONS が追加されました。これを設定すると、プロンプト内で @ を使ってファイルを指定したとき、ファイルの中身が自動で会話に展開されなくなります。代わりにClaudeには@で指したファイルのパスだけが渡され、中身が必要ならClaude自身がReadなどのファイル用ツールで読みに行く動作になります。従来は@メンションの時点で内容がコンテキストに入っていたため、大きなファイルや多数のファイルを指定するとコンテキストを大きく消費していました。今回の変更は、その展開をオプトインで止められるスイッチです。</div>
+  <div class="hl-link"><a href="https://code.claude.com/docs/en/changelog">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>効きそうなのは、巨大なログ、議事録の文字起こし、長いCSVやYAMLなどを@で指す場面です。中身が先に全部展開されるとコンテキストを圧迫しますが、パスだけ渡せばClaudeが必要な範囲だけ読みに行けます。たとえばMeetingMinutes関連の長いテキストや、複数ファイルをまとめて@指定する作業で、コンテキスト節約になる可能性があります。使い方は、settings.json の env に &quot;CLAUDE_CODE_DISABLE_FILE_MENTIONS&quot;: &quot;1&quot; を入れるか、起動前にシェルで環境変数を設定する形が考えられます。値の書式は公式changelogで確認が必要です。注意点として、中身が自動で入らなくなるため、短いファイルでも毎回Readの1往復が発生し、かえって手間や遅延が増えることがあります。常時オンにせず、大きなファイルを扱う作業のときだけ試すのが無難かもしれません。</div>
+  <div class="hl-action">https://code.claude.com/docs/en/changelog を開いてv2.1.299の該当行を読み、値の書式を確認してください。そのうえで、PowerShellなら `$env:CLAUDE_CODE_DISABLE_FILE_MENTIONS=&quot;1&quot;; claude` のように一時的に設定して起動し、大きめのファイルを@指定して `/context` でコンテキスト消費が通常時と変わるかを比べると、効果を体感できます。</div>
+</div>
+<div class="highlight-card">
+  <div class="hl-badge">ニュース</div>
+  <div class="hl-title"><a href="https://code.claude.com/docs/en/changelog">Claude Code v2.1.300</a></div>
+  <div class="hl-desc"><strong>概要</strong>Claude Code v2.1.300 のchangelogで、mod(Claude Codeの画面や挙動を拡張する仕組み)の「prompt decorations」に virtualText が追加されました。これはプロンプト入力欄の中に表示される文字で、下書き(draft)にも送信されるプロンプトにも一切入らない、表示専用のテキストです。これまでmod側でプロンプト欄に補助的な文字を出そうとすると、入力内容に混ざるリスクがありましたが、見た目だけの注釈やヒントを安全に重ねられるようになります。</div>
+  <div class="hl-link"><a href="https://code.claude.com/docs/en/changelog">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>りゅうさんがClaude Codeのmodを自作・導入する場面で効く可能性があります。たとえば、プロンプト欄に「今日のブランチ」「このリポジトリは本番VPSに触れる」「APIコストが今月上限の8割」といった警告やコンテキストを薄く表示しておけば、送信内容を汚さずに誤操作の抑止ができます。CodexとClaude Codeを共有リポジトリで使い分ける運用なら、現在のモードや注意点を常時表示するヒント欄としても使えそうです。実装は plugin-authoring スキル(mod作成用)を使い、prompt decorations に virtualText を指定する形が出発点になります。注意点として、これは表示専用でAIには渡らないため、AIに読ませたい指示の代わりにはなりません。必要な情報はCLAUDE.mdやrulesに置く使い分けが前提です。また、modの自作は優先順位の高い案件(クロージング優先)を押しのけてまで取り組むものではなく、困りごとが出てから触れば十分だと思います。</div>
+  <div class="hl-action">mod自作に関心が出たら、Claude Codeで /plugin-authoring を呼び出して prompt decorations の項目を確認し、virtualText の指定例を読んでください。あわせて https://code.claude.com/docs/en/changelog の v2.1.300 の記載原文も目を通しておくと、対応する設定項目名を正確に把握できます。</div>
+</div>
+<div class="highlight-card">
+  <div class="hl-badge">ニュース</div>
+  <div class="hl-title"><a href="https://www.anthropic.com/news/2026-us-midterms">Oct 14, 2026PolicyPreparing for the 2026 US midterms</a></div>
+  <div class="hl-desc"><strong>概要</strong>Anthropicが2026年10月14日付で、2026年の米国中間選挙に向けた準備方針(Policyカテゴリ)を公開した。提供された説明文は空で、記事本文の具体(対策の名称、数値、適用条件)は確認できていない。一般にこの種の発表は、選挙関連の誤情報や影響工作への悪用防止、選挙情報の正確性確保、利用ポリシーの運用方針を扱う。個別の機能や設定の変更を伴うかは、本文を読むまで判断できない。</div>
+  <div class="hl-link"><a href="https://www.anthropic.com/news/2026-us-midterms">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>りゅうさんの事業に直結する技術変更ではなく、選挙という限定領域のポリシー発表なので、日常業務への影響は小さいと思われます。ただ、クライアント向けにAIの安全運用を説明する場面では、AI事業者が高リスク領域でどんなガードレールを置くかの実例として使える可能性があります。たとえばAI経営スキル講座やコンサル提案で「AIの利用ポリシーと自社ルールの関係」を話す際に、Anthropicが選挙のような領域で何を制限し何を許可しているかを一例として引けます。また、SNS発信やクライアントのコンテンツ生成で政治的な話題を扱う場合に、モデルが拒否や注意喚起をする可能性があるため、その背景理解にもなります。注意点として、本文を読んでいない段階で具体的な挙動を断定せず、必要な部分だけ原文で確認するのが安全です。</div>
+  <div class="hl-action">ブラウザで https://www.anthropic.com/news/2026-us-midterms を開き、見出しと「何を禁止・許可するか」「利用者側に影響する変更」の段落だけ拾い読みしてください。あわせて Anthropic の Usage Policy ページで選挙・政治関連の項目を確認すると、業務でコンテンツ生成を行う際の線引きが把握できます。</div>
+</div>
+
+<h2 class="section-heading">Topics</h2>
+<div class="topic">
+  <div class="topic-title">Claude Codeリリース</div>
+  <div class="topic-summary">Claude Code v2.1.299・v2.1.300の新機能と環境変数・プロンプト装飾などの追加</div>
+<div class="item">
+  <span class="badge badge-changelog">CHANGELOG</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://code.claude.com/docs/en/changelog">v2.1.300</a></div>
+    <div class="item-desc">Added virtualText to a mod’s prompt decorations: text drawn in the prompt box that never enters the draft or the submitted prompt, Added cache_creation_5m_tokens and cache_creation_1h_tokens to the OpenTelemetry api_request event, splitting cache writes by lifetime, Added $.ui.view({ agentId }) for mods: shows an agent’s transcript in the main view when you ask, and $.ui.view({}) goes back</div>
+    <div class="item-meta">October 14, 2026</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-changelog">CHANGELOG</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://code.claude.com/docs/en/changelog">v2.1.299</a></div>
+    <div class="item-desc">Added CLAUDE_CODE_DISABLE_FILE_MENTIONS environment variable: Claude gets the paths of @ file mentions to read with its file tools, not the files’ contents, Added idle compaction in the terminal: a 200K+ token conversation left idle for about 54 minutes is compacted before its one-hour prompt cache expires, so your next message doesn’t reprocess it all, Added CLAUDE_CODE_IDLE_COMPACT_MIN_TOKENS to change idle compaction’s 200K-token minimum; &quot;idleCompaction&quot;: false in settings.json turns it off. Both need v2.1.290 or later</div>
+    <div class="item-meta">October 14, 2026</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">リポジトリ自動更新</div>
+  <div class="topic-summary">ティッカーデータとSVGを更新する定期的な自動コミット群</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/21529a1">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-14</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/d2a7b64">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-14</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/964d4d6">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-14</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/f51b5f3">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-14</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/7d1ac3d">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-14</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/cdcebc7">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-14</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/520eb25">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-14</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/114214f">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-14</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">米中間選挙への備え</div>
+  <div class="topic-summary">2026年米中間選挙に向けたAnthropicの方針・取り組み</div>
+<div class="item">
+  <span class="badge badge-anthropic_news">ANTHROPIC_NEWS</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://www.anthropic.com/news/2026-us-midterms">Oct 14, 2026PolicyPreparing for the 2026 US midterms</a></div>
+    <div class="item-meta">Oct 14, 20</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">シンガポール進出</div>
+  <div class="topic-summary">Anthropicがシンガポールに拠点を開設しMOUを締結</div>
+<div class="item">
+  <span class="badge badge-anthropic_news">ANTHROPIC_NEWS</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://www.anthropic.com/news/singapore-office-opening">Oct 14, 2026AnnouncementsAnthropic opens Singapore office and signs MOU with the Government of Singapore</a></div>
+    <div class="item-meta">Oct 14, 20</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">その他・内容不明</div>
+  <div class="topic-summary">タイトルや説明がなく内容を特定できない項目</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/jaredpalmer/kev">Jared Palmer: jaredpalmer/kev (PushEvent)</a></div>
+    <div class="item-desc">[main] New push</div>
+    <div class="item-meta">2026-10-14</div>
+  </div>
+</div>
+</div>
+
+<footer class="footer">
+  Generated at 2026-10-15 07:57 JST<br>
+  Sources: Claude Code CHANGELOG, GitHub Releases, awesome-claude-code,
+  anthropics/skills, PulseMCP, Claude Plugins, GitHub Trending
+</footer>
+
+</div>
+</body>
+</html>
