@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Weekly Tech Watch — 2026-10-16</title>
+<style>
+:root {
+  --bg: #f8fafc;
+  --bg-card: #ffffff;
+  --bg-highlight: #eff6ff;
+  --text: #1e293b;
+  --text-muted: #64748b;
+  --text-light: #94a3b8;
+  --accent: #3b82f6;
+  --border: #e2e8f0;
+  --shadow: 0 1px 3px rgba(0,0,0,.08);
+  --badge-changelog: #3b82f6;
+  --badge-mcp: #8b5cf6;
+  --badge-trending: #f59e0b;
+  --badge-plugin: #10b981;
+  --badge-awesome: #f43f5e;
+  --badge-skills: #06b6d4;
+}
+@media(prefers-color-scheme:dark){
+:root {
+  --bg: #0f172a;
+  --bg-card: #1e293b;
+  --bg-highlight: #1e3a5f;
+  --text: #e2e8f0;
+  --text-muted: #94a3b8;
+  --text-light: #64748b;
+  --accent: #60a5fa;
+  --border: #334155;
+  --shadow: 0 1px 3px rgba(0,0,0,.3);
+}}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  background:var(--bg);color:var(--text);
+  line-height:1.6;padding:16px;
+}
+.container{max-width:760px;margin:0 auto}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* Header */
+.header{text-align:center;padding:32px 0 24px}
+.header h1{font-size:1.5rem;font-weight:700;letter-spacing:-.02em}
+.header .date-range{color:var(--text-muted);font-size:.875rem;margin-top:4px}
+
+/* Stats */
+.stat-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));
+  gap:8px;margin:0 0 32px;
+}
+.stat-card{
+  background:var(--bg-card);border:1px solid var(--border);border-radius:8px;
+  padding:12px;text-align:center;box-shadow:var(--shadow);
+}
+.stat-card .num{font-size:1.5rem;font-weight:700;color:var(--accent)}
+.stat-card .label{font-size:.75rem;color:var(--text-muted);margin-top:2px}
+
+/* Section heading */
+.section-heading{
+  font-size:1.125rem;font-weight:700;margin:32px 0 16px;
+  padding-bottom:8px;border-bottom:2px solid var(--accent);
+}
+
+/* Highlight cards */
+.highlight-card{
+  background:var(--bg-highlight);border:1px solid var(--border);
+  border-radius:12px;padding:20px;margin-bottom:16px;
+  border-left:4px solid var(--accent);
+}
+.highlight-card .hl-badge{
+  display:inline-block;font-size:.6875rem;font-weight:700;
+  color:var(--accent);background:var(--bg-card);
+  border:1px solid var(--border);border-radius:999px;
+  padding:2px 8px;margin-bottom:8px;
+}
+.highlight-card .hl-title{font-size:1rem;font-weight:700;margin-bottom:8px}
+.highlight-card .hl-title a{color:var(--text)}
+.highlight-card .hl-desc{font-size:.875rem;color:var(--text-muted);margin-bottom:8px}
+.highlight-card .hl-desc strong,
+.highlight-card .hl-scenario strong{
+  display:block;color:var(--text);font-size:.75rem;margin-bottom:2px;
+}
+.highlight-card .hl-link{font-size:.8125rem;margin-bottom:12px}
+.highlight-card .hl-scenario{
+  font-size:.875rem;line-height:1.7;
+  background:var(--bg-card);border-radius:8px;padding:12px;margin-bottom:8px;
+}
+.highlight-card .hl-action{
+  font-size:.8125rem;color:var(--accent);font-weight:600;
+}
+.highlight-card .hl-action::before{content:"→ "}
+
+/* Topic section */
+.topic{
+  background:var(--bg-card);border:1px solid var(--border);
+  border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:var(--shadow);
+}
+.topic-title{font-size:1rem;font-weight:700;margin-bottom:4px}
+.topic-summary{font-size:.8125rem;color:var(--text-muted);margin-bottom:16px}
+
+/* Item list */
+.item{
+  padding:10px 0;border-bottom:1px solid var(--border);
+  display:flex;gap:10px;align-items:flex-start;
+}
+.item:last-child{border-bottom:none;padding-bottom:0}
+.badge{
+  display:inline-block;font-size:.625rem;font-weight:700;
+  color:#fff;padding:2px 8px;border-radius:10px;white-space:nowrap;
+  flex-shrink:0;margin-top:3px;text-transform:uppercase;letter-spacing:.03em;
+}
+.badge-changelog{background:var(--badge-changelog)}
+.badge-mcp{background:var(--badge-mcp)}
+.badge-trending{background:var(--badge-trending)}
+.badge-plugin{background:var(--badge-plugin)}
+.badge-awesome{background:var(--badge-awesome)}
+.badge-skills{background:var(--badge-skills)}
+.item-body{flex:1;min-width:0}
+.item-title{font-size:.875rem;font-weight:600}
+.item-desc{font-size:.8125rem;color:var(--text-muted);margin-top:2px}
+.item-meta{font-size:.75rem;color:var(--text-light);margin-top:4px}
+.item-meta .stars::before{content:"\2B50 "}
+
+/* Footer */
+.footer{
+  text-align:center;color:var(--text-light);font-size:.75rem;
+  padding:32px 0 16px;border-top:1px solid var(--border);margin-top:32px;
+}
+
+/* No items */
+.empty{color:var(--text-light);font-style:italic;font-size:.875rem;padding:8px 0}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header class="header">
+  <h1>Weekly Tech Watch</h1>
+  <div class="date-range">2026-10-14 ~ 2026-10-16</div>
+</header>
+
+<div class="stat-grid">
+<div class="stat-card"><div class="num">1</div><div class="label">Claude Code</div></div>
+<div class="stat-card"><div class="num">14</div><div class="label">awesome-cc</div></div>
+</div>
+
+<h2 class="section-heading">Highlights</h2>
+<div class="highlight-card">
+  <div class="hl-badge">ニュース</div>
+  <div class="hl-title"><a href="https://code.claude.com/docs/en/changelog">Claude Code v2.1.301</a></div>
+  <div class="hl-desc"><strong>概要</strong>Claude Code v2.1.301で、環境変数 CLAUDE_CODE_RETRY_WATCHDOG_MAX_USAGE_LIMIT_WAIT_MS が追加されました。無人実行向けのリトライモード(CLAUDE_CODE_RETRY_WATCHDOG)では、利用上限に達するとリセットまで待って再試行を続ける挙動でした。新しい変数にミリ秒で上限を設定すると、リセットまでの待ち時間がその値を超えるリクエストは、待たずに終了します。たとえば次のリセットが数時間先の場合に、いつまでもプロセスが居座るのを防げます。</div>
+  <div class="hl-link"><a href="https://code.claude.com/docs/en/changelog">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>夜間バッチや定期実行でClaude Codeを無人で回しているときに効く可能性があります。たとえば CLAUDE_CODE_RETRY_WATCHDOG=1 を付けた自動処理で使用量上限に当たると、これまでは数時間後のリセットまで待ち続け、タスクスケジューラのジョブが詰まったり、後続の処理が止まったりしえました。そこで CLAUDE_CODE_RETRY_WATCHDOG_MAX_USAGE_LIMIT_WAIT_MS=900000(15分)のように設定すると、短い待ちなら粘り、長い待ちなら失敗として終了するので、呼び出し側のスクリプトが終了コードを見て通知や翌朝の再実行に切り替えられます。Windowsなら実行バッチ内で set して渡す形が考えられます。注意点として、上限を短くしすぎると、少し待てば再開できた処理まで打ち切られる点があります。まずは想定リセット間隔より少し短い値から試すのがよさそうです。手動で対話的に使う場面では影響がありません。</div>
+  <div class="hl-action">公式の変更履歴 https://code.claude.com/docs/en/changelog の v2.1.301 の項目を開き、CLAUDE_CODE_RETRY_WATCHDOG 系の説明と、打ち切り時の終了コードやメッセージを確認してください。無人実行のジョブがある場合は、ジョブ側の環境変数に値を1つ追加して、上限に当たった時の挙動を確かめられます。</div>
+</div>
+<div class="highlight-card">
+  <div class="hl-badge">ニュース</div>
+  <div class="hl-title"><a href="https://www.anthropic.com/news/an-update-on-independent-evaluators">Oct 15, 2026AnnouncementsAn update on independent evaluators</a></div>
+  <div class="hl-desc"><strong>概要</strong>Anthropicが2026年10月15日、第三者評価機関の位置づけを更新した。非営利のAI評価機関METRの6名に、社用PC、オフィス、社内ツールを備えた「従業員に近いアクセス」を与え始めた。METRはリスク評価を公表する。Anthropicによる公表拒否権はない。ただし顧客データ、弁護士秘匿情報、モデルアーキテクチャ情報は、黒塗りを求められる。アクセスは3段階になる。Tier1は限定調査で、公表にAnthropicの承認が必要。Tier2は公表に承認が不要。Tier3がMETR型。SecureBioは2026年8月のRisk Reportの化学・生物兵器章をレビューする。AccentureとFacultyは、モデル評価とレッドチーミングで協業を計画している。Hugging Faceは協議の初期段階にある。製品、API、価格の変更はない。</div>
+  <div class="hl-link"><a href="https://www.anthropic.com/news/an-update-on-independent-evaluators">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>製品の機能変更ではないため、直接の作業は発生しません。使い所は、クライアントへのAI導入提案で「このモデルを使って安全か」を問われた場面です。たとえばPUMPGYMや学童NPOのような、個人情報を扱う可能性のある相手です。その際、独立評価者の評価枠組みを根拠として紹介できる可能性があります。具体的には、METRなどが公開するレポートを、ベンダー選定資料の「第三者による検証状況」の欄に、出典付きで一行引用する形です。注意点が一つあります。公表物は黒塗りを含み、アーキテクチャ情報などは出ません。「第三者が全部見て保証した」とは書かず、「独立評価者が公表した範囲では」と限定して書く必要があります。Anthropic側の説明であり、評価結果そのものではない点も区別が必要です。</div>
+  <div class="hl-action">METRの公式サイト(metr.org)の公開レポート一覧を開き、Anthropicのモデルを扱った評価が出た時点で、結論部分だけ読む。現時点で何かを実装する必要はない。クライアント向けのAI選定資料を作る機会があれば、その時に出典として使えるよう、元記事のURL(https://www.anthropic.com/news/an-update-on-independent-evaluators)をブックマークしておく。</div>
+</div>
+
+<h2 class="section-heading">Topics</h2>
+<div class="topic">
+  <div class="topic-title">Claude Codeの更新</div>
+  <div class="topic-summary">v2.1.301でリトライ監視の使用上限待機時間を制御する環境変数が追加された。</div>
+<div class="item">
+  <span class="badge badge-changelog">CHANGELOG</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://code.claude.com/docs/en/changelog">v2.1.301</a></div>
+    <div class="item-desc">Added CLAUDE_CODE_RETRY_WATCHDOG_MAX_USAGE_LIMIT_WAIT_MS so unattended retry mode (CLAUDE_CODE_RETRY_WATCHDOG) ends a request at a usage limit that resets too far away instead of waiting, Added OpenTelemetry tracing guidance to the claude-api skill, including setting up trace destinations with the ant CLI, Added the % motion to vim mode: jump to the matching bracket, alone or with d/c/y</div>
+    <div class="item-meta">October 15, 2026</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">新規リソース追加</div>
+  <div class="topic-summary">funes、LinkedIn Skills、mcu-skillsなどのリソースがリストに追加された。</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/936b0f4">Add resource: funes (#3179)</a></div>
+    <div class="item-meta">2026-10-15</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/aed2f6b">Add resource: LinkedIn Skills (#3177)</a></div>
+    <div class="item-meta">2026-10-15</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/c0a71b3">Add resource: mcu-skills (#3176)</a></div>
+    <div class="item-meta">2026-10-15</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">ティッカーとSVG更新</div>
+  <div class="topic-summary">リポジトリのティッカーデータとSVGを自動更新するchoreコミット群。</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/ec1820e">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-15</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/2d657f1">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-15</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/f882ae4">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-15</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/e5df677">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-15</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/30ec328">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-15</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/123c23e">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-15</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/4bebc12">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-15</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/d0dfd7e">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-15</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">README自動再生成</div>
+  <div class="topic-summary">CSVからREADMEとカルーセルを再生成する自動メンテナンスコミット。</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/62b322a">chore: regenerate README + carousel from CSV [skip ci]</a></div>
+    <div class="item-meta">2026-10-15</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/eb40c09">chore: regenerate README + carousel from CSV [skip ci]</a></div>
+    <div class="item-meta">2026-10-15</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/fb865f5">chore: regenerate README + carousel from CSV [skip ci]</a></div>
+    <div class="item-meta">2026-10-15</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">独立評価者の発表</div>
+  <div class="topic-summary">独立した評価者に関する最新情報のアナウンス。</div>
+<div class="item">
+  <span class="badge badge-anthropic_news">ANTHROPIC_NEWS</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://www.anthropic.com/news/an-update-on-independent-evaluators">Oct 15, 2026AnnouncementsAn update on independent evaluators</a></div>
+    <div class="item-meta">Oct 15, 20</div>
+  </div>
+</div>
+</div>
+
+<footer class="footer">
+  Generated at 2026-10-16 07:57 JST<br>
+  Sources: Claude Code CHANGELOG, GitHub Releases, awesome-claude-code,
+  anthropics/skills, PulseMCP, Claude Plugins, GitHub Trending
+</footer>
+
+</div>
+</body>
+</html>
