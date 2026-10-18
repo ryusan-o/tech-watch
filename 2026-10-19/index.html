@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Weekly Tech Watch — 2026-10-19</title>
+<style>
+:root {
+  --bg: #f8fafc;
+  --bg-card: #ffffff;
+  --bg-highlight: #eff6ff;
+  --text: #1e293b;
+  --text-muted: #64748b;
+  --text-light: #94a3b8;
+  --accent: #3b82f6;
+  --border: #e2e8f0;
+  --shadow: 0 1px 3px rgba(0,0,0,.08);
+  --badge-changelog: #3b82f6;
+  --badge-mcp: #8b5cf6;
+  --badge-trending: #f59e0b;
+  --badge-plugin: #10b981;
+  --badge-awesome: #f43f5e;
+  --badge-skills: #06b6d4;
+}
+@media(prefers-color-scheme:dark){
+:root {
+  --bg: #0f172a;
+  --bg-card: #1e293b;
+  --bg-highlight: #1e3a5f;
+  --text: #e2e8f0;
+  --text-muted: #94a3b8;
+  --text-light: #64748b;
+  --accent: #60a5fa;
+  --border: #334155;
+  --shadow: 0 1px 3px rgba(0,0,0,.3);
+}}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  background:var(--bg);color:var(--text);
+  line-height:1.6;padding:16px;
+}
+.container{max-width:760px;margin:0 auto}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* Header */
+.header{text-align:center;padding:32px 0 24px}
+.header h1{font-size:1.5rem;font-weight:700;letter-spacing:-.02em}
+.header .date-range{color:var(--text-muted);font-size:.875rem;margin-top:4px}
+
+/* Stats */
+.stat-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));
+  gap:8px;margin:0 0 32px;
+}
+.stat-card{
+  background:var(--bg-card);border:1px solid var(--border);border-radius:8px;
+  padding:12px;text-align:center;box-shadow:var(--shadow);
+}
+.stat-card .num{font-size:1.5rem;font-weight:700;color:var(--accent)}
+.stat-card .label{font-size:.75rem;color:var(--text-muted);margin-top:2px}
+
+/* Section heading */
+.section-heading{
+  font-size:1.125rem;font-weight:700;margin:32px 0 16px;
+  padding-bottom:8px;border-bottom:2px solid var(--accent);
+}
+
+/* Highlight cards */
+.highlight-card{
+  background:var(--bg-highlight);border:1px solid var(--border);
+  border-radius:12px;padding:20px;margin-bottom:16px;
+  border-left:4px solid var(--accent);
+}
+.highlight-card .hl-badge{
+  display:inline-block;font-size:.6875rem;font-weight:700;
+  color:var(--accent);background:var(--bg-card);
+  border:1px solid var(--border);border-radius:999px;
+  padding:2px 8px;margin-bottom:8px;
+}
+.highlight-card .hl-title{font-size:1rem;font-weight:700;margin-bottom:8px}
+.highlight-card .hl-title a{color:var(--text)}
+.highlight-card .hl-desc{font-size:.875rem;color:var(--text-muted);margin-bottom:8px}
+.highlight-card .hl-desc strong,
+.highlight-card .hl-scenario strong{
+  display:block;color:var(--text);font-size:.75rem;margin-bottom:2px;
+}
+.highlight-card .hl-link{font-size:.8125rem;margin-bottom:12px}
+.highlight-card .hl-scenario{
+  font-size:.875rem;line-height:1.7;
+  background:var(--bg-card);border-radius:8px;padding:12px;margin-bottom:8px;
+}
+.highlight-card .hl-action{
+  font-size:.8125rem;color:var(--accent);font-weight:600;
+}
+.highlight-card .hl-action::before{content:"→ "}
+
+/* Topic section */
+.topic{
+  background:var(--bg-card);border:1px solid var(--border);
+  border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:var(--shadow);
+}
+.topic-title{font-size:1rem;font-weight:700;margin-bottom:4px}
+.topic-summary{font-size:.8125rem;color:var(--text-muted);margin-bottom:16px}
+
+/* Item list */
+.item{
+  padding:10px 0;border-bottom:1px solid var(--border);
+  display:flex;gap:10px;align-items:flex-start;
+}
+.item:last-child{border-bottom:none;padding-bottom:0}
+.badge{
+  display:inline-block;font-size:.625rem;font-weight:700;
+  color:#fff;padding:2px 8px;border-radius:10px;white-space:nowrap;
+  flex-shrink:0;margin-top:3px;text-transform:uppercase;letter-spacing:.03em;
+}
+.badge-changelog{background:var(--badge-changelog)}
+.badge-mcp{background:var(--badge-mcp)}
+.badge-trending{background:var(--badge-trending)}
+.badge-plugin{background:var(--badge-plugin)}
+.badge-awesome{background:var(--badge-awesome)}
+.badge-skills{background:var(--badge-skills)}
+.item-body{flex:1;min-width:0}
+.item-title{font-size:.875rem;font-weight:600}
+.item-desc{font-size:.8125rem;color:var(--text-muted);margin-top:2px}
+.item-meta{font-size:.75rem;color:var(--text-light);margin-top:4px}
+.item-meta .stars::before{content:"\2B50 "}
+
+/* Footer */
+.footer{
+  text-align:center;color:var(--text-light);font-size:.75rem;
+  padding:32px 0 16px;border-top:1px solid var(--border);margin-top:32px;
+}
+
+/* No items */
+.empty{color:var(--text-light);font-style:italic;font-size:.875rem;padding:8px 0}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header class="header">
+  <h1>Weekly Tech Watch</h1>
+  <div class="date-range">2026-10-15 ~ 2026-10-19</div>
+</header>
+
+<div class="stat-grid">
+<div class="stat-card"><div class="num">2</div><div class="label">Claude Code</div></div>
+<div class="stat-card"><div class="num">1</div><div class="label">MCP</div></div>
+<div class="stat-card"><div class="num">1</div><div class="label">Trending</div></div>
+<div class="stat-card"><div class="num">20</div><div class="label">awesome-cc</div></div>
+</div>
+
+<h2 class="section-heading">Highlights</h2>
+<div class="highlight-card">
+  <div class="hl-badge">ニュース</div>
+  <div class="hl-title"><a href="https://code.claude.com/docs/en/changelog">Claude Code v2.1.302</a></div>
+  <div class="hl-desc"><strong>概要</strong>Claude Code v2.1.302のチェンジログで、新しい環境変数 CLAUDE_CODE_AUTO_MODE_MODEL が追加された。auto mode(権限確認を自動判定して進めるモード)では、ツール実行を許可してよいか判断する分類器(classifier)が動く。この変数は、そのうちクライアント側の分類器が使うモデルを指定するためのもの。サーバー側のauto modeで使われるモデルは変わらない。つまり、変わるのは判定役のモデルだけで、作業を担当するメインモデルには影響しない。</div>
+  <div class="hl-link"><a href="https://code.claude.com/docs/en/changelog">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>auto modeで「確認が多くて止まる」「判定が遅い」と感じる場面で効く可能性があります。たとえばCodexとClaude Codeを共有リポジトリで回していて、長いタスクを放置して進めたい時です。判定役を軽量・高速なモデルに寄せれば待ち時間やコストを抑えられ、逆に本番に近い作業(請求系の見積・請求システムやVPS操作など)では、判定を厳しめの上位モデルに固定して誤許可を減らす、という使い分けも考えられます。設定は、起動前に環境変数 CLAUDE_CODE_AUTO_MODE_MODEL にモデルIDを入れるか、settings.jsonのenvに書く形が候補です。注意点として、クライアント側の分類器にだけ効き、サーバー側auto modeには効かないため、自分の環境がどちらで動いているかを先に確認しないと「設定したのに変わらない」となり得ます。また、判定を軽いモデルにすると危険な操作の見逃しが増えうるので、破壊的操作が多いリポジトリでは慎重に試すのがよさそうです。</div>
+  <div class="hl-action">まず https://code.claude.com/docs/en/changelog で v2.1.302 の該当行と、auto modeの説明ページ(クライアント側/サーバー側の違い)を読む。試す場合は PowerShell で `$env:CLAUDE_CODE_AUTO_MODE_MODEL=&quot;&lt;モデルID&gt;&quot;; claude` と起動し、`claude --version` で2.1.302以上であることを確認したうえで、いつもの作業での確認の出方や待ち時間を比べる。</div>
+</div>
+<div class="highlight-card">
+  <div class="hl-badge">ニュース</div>
+  <div class="hl-title"><a href="https://www.anthropic.com/news/public-benefit-fund">Oct 18, 2026AnnouncementsInvesting in the public benefit</a></div>
+  <div class="hl-desc"><strong>概要</strong>2026年10月18日、Anthropicは新設の「Anthropic Public Benefit Fund」に自社株の5%を拠出すると発表した(株主承認が前提)。基準となる企業価値から50%上昇するごとに、取締役会の裁量で最大2%を追加する仕組みで、既存のコミットメントを含めると最終的に約20%が公益目的になる。ファンドは100%子会社のLLCで、501(c)(3)などの非営利法人ではない。給付の自由度を確保するためで、株式は米国内外を問わずロビー活動や政治献金には使わない。用途は大手非営利団体への大型寄付や特定の人々への直接給付などで、例として労働市場への影響が挙がっている。この分野には既にEconomic Futures研究ファンドから2億ドルのコミットがある。創業者は株式の80%を寄付すると約束済みで、従業員の寄付にも会社がマッチングする制度があり、約半数が参加している。基準額、給付対象の条件、具体的な受取先、株主承認の時期は未公表。構造やガバナンスの詳細は今後数か月で出る予定。</div>
+  <div class="hl-link"><a href="https://www.anthropic.com/news/public-benefit-fund">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>これは技術機能のニュースではなく、直接使えるものではない。ただ、りゅうさんの仕事に効く場面が2つあると思います。1つ目はAIコンサルの提案です。「AIで仕事が変わる」という話の裏づけとして、労働市場への影響にAI企業が資金を出し始めていることを、クライアントへの説明材料に使えるかもしれません。学童運営NPOのようなクライアントなら、Claudeの非営利向け割引や、今後ファンドから出る支援の可能性も話題にできます。2つ目は自社のベンダー判断です。主要AIベンダーの経営の方向性を把握しておくと、中長期でClaudeに依存する設計をするときの安心材料の一つになります。たとえば月次の振り返りで、利用サービスのニュースを一行メモする運用が考えられます。注意点は、給付の条件や対象が未公表であることです。ファンドの支援を受けられる前提で提案や計画を組むのは避け、詳細が出てから判断するのがよいと思います。</div>
+  <div class="hl-action">原文 https://www.anthropic.com/news/public-benefit-fund を開き、「Initial commitment」「Structure」の段落だけ読めば十分です。非営利のクライアントに話す可能性があるなら、Claudeの非営利向け割引のページ(Anthropicサイトで「Claude for Nonprofits」を検索)も確認してください。ファンドの詳細は「今後数か月」に出る予定なので、その時点でもう一度ニュースを見れば足ります。</div>
+</div>
+<div class="highlight-card">
+  <div class="hl-badge">ニュース</div>
+  <div class="hl-title"><a href="https://www.pulsemcp.com/servers/elvirafa-memory-fabric">MCP: Memory Fabric</a></div>
+  <div class="hl-desc"><strong>概要</strong>PulseMCPに掲載されたMCPサーバー「Memory Fabric」(elvirafa-memory-fabric)は、AIコーディングアシスタント向けにファイルファースト・ローカルファーストの記憶を提供する。記憶の保存にベクトルDBを使わず、MarkdownとYAMLのファイルで管理する方式。埋め込みやDBの運用なしに、人間が読める形式でエージェントの記憶を持たせ、中身を直接開いて確認・編集できる設計。掲載情報にはこれ以上の仕様(提供ツール名やインストール手順)は書かれていない。</div>
+  <div class="hl-link"><a href="https://www.pulsemcp.com/servers/elvirafa-memory-fabric">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>りゅうさんはCodexとClaude Codeを共有リポジトリで使い分けているので、モデルをまたいで同じ記憶を参照できる仕組みとして相性が良い可能性があります。Markdown/YAMLならGitで差分管理でき、AIが何を覚えているかをレビューできます。たとえば「クライアントごとの前提や決定事項」「AIが誤記しやすい固有名詞の正規形」(clients.mdで起きた人名ハルシネーションのような事故の再発防止)を記憶として持たせ、セッションをまたいで再説明する手間を減らす使い方が考えられます。まずは業務データを入れず、作業メモ程度の小さな範囲で、既存のCLAUDE.mdや自動メモリと役割が重複しないかを見る形が安全です。注意点として、記憶に顧客情報や個人情報が溜まるとそのままファイルに残るため、保存先をGit管理するなら公開範囲や除外設定を先に決める必要があります。また既に自前のメモリ運用があるなら、二重管理になるだけの恐れもあります。</div>
+  <div class="hl-action">まず https://www.pulsemcp.com/servers/elvirafa-memory-fabric を開き、リンク先のGitHubリポジトリのREADMEで、(1)提供ツール一覧、(2)記憶ファイルの保存先とフォーマット、(3)Claude Code/Codexへの登録方法(claude mcp add の記述例)を確認する。現在のメモリ運用と役割が被るかを読んで判断し、被らなければ試す価値ありと見なす。</div>
+</div>
+
+<h2 class="section-heading">Topics</h2>
+<div class="topic">
+  <div class="topic-title">Claude Code更新</div>
+  <div class="topic-summary">Claude Codeの最新バージョンv2.1.302・v2.1.303でのモデル選択環境変数の追加と不具合修正。</div>
+<div class="item">
+  <span class="badge badge-changelog">CHANGELOG</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://code.claude.com/docs/en/changelog">v2.1.303</a></div>
+    <div class="item-desc">Bug fixes and reliability improvements</div>
+    <div class="item-meta">October 18, 2026</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-changelog">CHANGELOG</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://code.claude.com/docs/en/changelog">v2.1.302</a></div>
+    <div class="item-desc">Added CLAUDE_CODE_AUTO_MODE_MODEL to choose the model the client-side auto mode classifier uses; it does not change the model for server-side auto mode, Added an Idle compaction row to /config for turning idle compaction off or back on; the notices shown after an idle compaction now say how to turn it off, Added a notice to /design-sync and /design-login that standalone Claude Design (claude.ai/design) closes by December 14, 2026</div>
+    <div class="item-meta">October 16, 2026</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">AI開発支援ツール</div>
+  <div class="topic-summary">Markdownベースのローカルメモリや、チャットでdraw.ioを編集するMCP対応ツールなど、AIコーディング支援を拡張する新ツール。</div>
+<div class="item">
+  <span class="badge badge-mcp">MCP</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://www.pulsemcp.com/servers/elvirafa-memory-fabric">Memory Fabric</a></div>
+    <div class="item-desc">Provides file-first, local-first memory for AI coding assistants using Markdown and YAML instead of a vector database.</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/DayuanJiang/next-ai-draw-io">DayuanJiang/next-ai-draw-io</a></div>
+    <div class="item-desc">Draw and edit draw.io diagrams by chatting with an AI. Web app, desktop app, and an MCP server for Claude Code, Cursor, Codex and VS Code.</div>
+    <div class="item-meta"><span class="stars">36315</span></div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">リポジトリ自動更新</div>
+  <div class="topic-summary">リポジトリのティッカーデータやSVG、README、カルーセルを自動生成・更新するchikコミット群。</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/664ad2e">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-18</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/e2dd23a">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-18</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/28197c0">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-18</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/ea644f5">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-18</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/5ccec1c">chore: regenerate README + carousel from CSV [skip ci]</a></div>
+    <div class="item-meta">2026-10-18</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/c577df9">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-18</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/5f36925">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-18</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/feadf11">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-18</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/0562c93">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-18</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/a2ebff2">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-17</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/ec75501">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-17</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/1366b34">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-17</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/6f5ff53">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-17</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/2f4c992">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-17</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/d9b87c2">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-17</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/3dde39b">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-17</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/51230b9">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-17</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">リソース一覧の整理</div>
+  <div class="topic-summary">カテゴリ名の変更や新カテゴリ「Mods」の追加、新リソースprismantisの掲載など一覧の拡充。</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/470c107">rename Open Source Software to Open Source Contribution &amp; Maintenance (#3187)</a></div>
+    <div class="item-meta">2026-10-18</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/857c5a4">Add resource: prismantis (#3186)</a></div>
+    <div class="item-meta">2026-10-18</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/4748ea9">add new category - Mods (#3184)</a></div>
+    <div class="item-meta">2026-10-18</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">公益への投資発表</div>
+  <div class="topic-summary">2026年10月18日付の「公益への投資」に関するお知らせ。</div>
+<div class="item">
+  <span class="badge badge-anthropic_news">ANTHROPIC_NEWS</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://www.anthropic.com/news/public-benefit-fund">Oct 18, 2026AnnouncementsInvesting in the public benefit</a></div>
+    <div class="item-meta">Oct 18, 20</div>
+  </div>
+</div>
+</div>
+
+<footer class="footer">
+  Generated at 2026-10-19 07:56 JST<br>
+  Sources: Claude Code CHANGELOG, GitHub Releases, awesome-claude-code,
+  anthropics/skills, PulseMCP, Claude Plugins, GitHub Trending
+</footer>
+
+</div>
+</body>
+</html>
