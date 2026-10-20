@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Weekly Tech Watch — 2026-10-21</title>
+<style>
+:root {
+  --bg: #f8fafc;
+  --bg-card: #ffffff;
+  --bg-highlight: #eff6ff;
+  --text: #1e293b;
+  --text-muted: #64748b;
+  --text-light: #94a3b8;
+  --accent: #3b82f6;
+  --border: #e2e8f0;
+  --shadow: 0 1px 3px rgba(0,0,0,.08);
+  --badge-changelog: #3b82f6;
+  --badge-mcp: #8b5cf6;
+  --badge-trending: #f59e0b;
+  --badge-plugin: #10b981;
+  --badge-awesome: #f43f5e;
+  --badge-skills: #06b6d4;
+}
+@media(prefers-color-scheme:dark){
+:root {
+  --bg: #0f172a;
+  --bg-card: #1e293b;
+  --bg-highlight: #1e3a5f;
+  --text: #e2e8f0;
+  --text-muted: #94a3b8;
+  --text-light: #64748b;
+  --accent: #60a5fa;
+  --border: #334155;
+  --shadow: 0 1px 3px rgba(0,0,0,.3);
+}}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  background:var(--bg);color:var(--text);
+  line-height:1.6;padding:16px;
+}
+.container{max-width:760px;margin:0 auto}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* Header */
+.header{text-align:center;padding:32px 0 24px}
+.header h1{font-size:1.5rem;font-weight:700;letter-spacing:-.02em}
+.header .date-range{color:var(--text-muted);font-size:.875rem;margin-top:4px}
+
+/* Stats */
+.stat-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));
+  gap:8px;margin:0 0 32px;
+}
+.stat-card{
+  background:var(--bg-card);border:1px solid var(--border);border-radius:8px;
+  padding:12px;text-align:center;box-shadow:var(--shadow);
+}
+.stat-card .num{font-size:1.5rem;font-weight:700;color:var(--accent)}
+.stat-card .label{font-size:.75rem;color:var(--text-muted);margin-top:2px}
+
+/* Section heading */
+.section-heading{
+  font-size:1.125rem;font-weight:700;margin:32px 0 16px;
+  padding-bottom:8px;border-bottom:2px solid var(--accent);
+}
+
+/* Highlight cards */
+.highlight-card{
+  background:var(--bg-highlight);border:1px solid var(--border);
+  border-radius:12px;padding:20px;margin-bottom:16px;
+  border-left:4px solid var(--accent);
+}
+.highlight-card .hl-badge{
+  display:inline-block;font-size:.6875rem;font-weight:700;
+  color:var(--accent);background:var(--bg-card);
+  border:1px solid var(--border);border-radius:999px;
+  padding:2px 8px;margin-bottom:8px;
+}
+.highlight-card .hl-title{font-size:1rem;font-weight:700;margin-bottom:8px}
+.highlight-card .hl-title a{color:var(--text)}
+.highlight-card .hl-desc{font-size:.875rem;color:var(--text-muted);margin-bottom:8px}
+.highlight-card .hl-desc strong,
+.highlight-card .hl-scenario strong{
+  display:block;color:var(--text);font-size:.75rem;margin-bottom:2px;
+}
+.highlight-card .hl-link{font-size:.8125rem;margin-bottom:12px}
+.highlight-card .hl-scenario{
+  font-size:.875rem;line-height:1.7;
+  background:var(--bg-card);border-radius:8px;padding:12px;margin-bottom:8px;
+}
+.highlight-card .hl-action{
+  font-size:.8125rem;color:var(--accent);font-weight:600;
+}
+.highlight-card .hl-action::before{content:"→ "}
+
+/* Topic section */
+.topic{
+  background:var(--bg-card);border:1px solid var(--border);
+  border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:var(--shadow);
+}
+.topic-title{font-size:1rem;font-weight:700;margin-bottom:4px}
+.topic-summary{font-size:.8125rem;color:var(--text-muted);margin-bottom:16px}
+
+/* Item list */
+.item{
+  padding:10px 0;border-bottom:1px solid var(--border);
+  display:flex;gap:10px;align-items:flex-start;
+}
+.item:last-child{border-bottom:none;padding-bottom:0}
+.badge{
+  display:inline-block;font-size:.625rem;font-weight:700;
+  color:#fff;padding:2px 8px;border-radius:10px;white-space:nowrap;
+  flex-shrink:0;margin-top:3px;text-transform:uppercase;letter-spacing:.03em;
+}
+.badge-changelog{background:var(--badge-changelog)}
+.badge-mcp{background:var(--badge-mcp)}
+.badge-trending{background:var(--badge-trending)}
+.badge-plugin{background:var(--badge-plugin)}
+.badge-awesome{background:var(--badge-awesome)}
+.badge-skills{background:var(--badge-skills)}
+.item-body{flex:1;min-width:0}
+.item-title{font-size:.875rem;font-weight:600}
+.item-desc{font-size:.8125rem;color:var(--text-muted);margin-top:2px}
+.item-meta{font-size:.75rem;color:var(--text-light);margin-top:4px}
+.item-meta .stars::before{content:"\2B50 "}
+
+/* Footer */
+.footer{
+  text-align:center;color:var(--text-light);font-size:.75rem;
+  padding:32px 0 16px;border-top:1px solid var(--border);margin-top:32px;
+}
+
+/* No items */
+.empty{color:var(--text-light);font-style:italic;font-size:.875rem;padding:8px 0}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header class="header">
+  <h1>Weekly Tech Watch</h1>
+  <div class="date-range">2026-10-19 ~ 2026-10-21</div>
+</header>
+
+<div class="stat-grid">
+<div class="stat-card"><div class="num">1</div><div class="label">Trending</div></div>
+<div class="stat-card"><div class="num">8</div><div class="label">awesome-cc</div></div>
+</div>
+
+<h2 class="section-heading">Highlights</h2>
+<div class="highlight-card">
+  <div class="hl-badge">ニュース</div>
+  <div class="hl-title"><a href="https://www.anthropic.com/news/announcements">Announcements</a></div>
+  <div class="hl-desc"><strong>概要</strong>今回のハイライトは Anthropic のニュース一覧ページ(anthropic.com/news/announcements)です。特定の発表を指すものではなく、説明文も空でした。そのため、新機能名、モデル名、料金、提供条件、日付といった具体的な変更点はこの入力からは読み取れません。内容を推測して書くと誤情報になるため、ここでは「Anthropic の公式発表をまとめた一覧ページが今週のウォッチ対象になった」という事実だけを記します。個別の発表は、ページ内で今週付けの項目を開いて確認する必要があります。</div>
+  <div class="hl-link"><a href="https://www.anthropic.com/news/announcements">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>一覧ページは、個別ニュースを追う入口として使えます。特にりゅうさんは、AIコンサルでクライアントに説明する立場で、CodexとClaude Codeを併用しています。モデルの追加や廃止、料金改定、利用規約や提供地域の変更は、提案書の前提や自動化の設計に直接響く可能性があります。そのため、週1回このページで見出しだけ拾い、「自分の運用に関わる項目か」を30秒で仕分ける使い方が考えられます。見るポイントは、①新モデルや旧モデルの提供終了、②API料金やプランの変更、③企業向け機能や法人向けの条件です。①と②はサブスク契約や自動化ジョブの設定に影響し得ます。一方、一覧の見出しだけで判断すると、実際の条件や適用範囲を見誤るおそれがあります。導入や契約の判断は、必ず個別記事の本文を読んでからにしてください。</div>
+  <div class="hl-action">ブラウザで https://www.anthropic.com/news/announcements を開き、直近1〜2週間の見出しを上から確認してください。次の3点に当てはまる記事だけ本文を開くと効率的です。(1)モデルの追加・廃止、(2)料金・プランの変更、(3)企業向け機能や利用条件の変更。該当した記事のURLと要点を、次回のウォッチ対象として控えておくと追いやすくなります。</div>
+</div>
+<div class="highlight-card">
+  <div class="hl-badge">深掘り候補</div>
+  <div class="hl-title"><a href="https://www.anthropic.com/news/partnerships">Partnerships</a></div>
+  <div class="hl-desc"><strong>概要</strong>AnthropicのPartnershipsページは、2026年1〜10月に発表された提携の一覧です(全51件)。個別の新機能の発表ではなく、提携の動きをまとめたものです。企業・コンサル系では、Accenture(9/18、5年で最低10億ドル規模の投資と、フロンティアAIの共同評価)、Cognizant(7/27、3万人超を研修)、UST(2万人の技術者を研修)、TCS(5万人に提供)、KPMG(27.6万人超)、PwC(Claude CodeとCoworkを展開、3万人を認定)があります。日本ではNEC(4/24)が、Anthropic初の日本拠点のグローバルパートナーになり、3万人に展開されます。制度面では、3/12に1億ドルでClaude Partner Networkが始まり、6/3にはServices TrackとPartner Hubが加わりました。Appleは、Xcode 26.3にClaude Agent SDKを統合しています(2/3)。政府・教育の分野では、Gates Foundationの2億ドル助成やUK政府のGOV.UKアシスタントなどがあります。</div>
+  <div class="hl-link"><a href="https://www.anthropic.com/news/partnerships">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>りゅうさんにとって一番関係が深いのは、Partner NetworkのServices TrackとPartner Hubです。大手SIerやコンサルがClaude導入の人材を大量に育てているので、AI経営コンサルでは、AI導入の実績を持つ個人事業の窓口として差別化しやすくなります。そこでPartner Hubを開き、実装パートナーの探し方、掲載や参加の条件、中小規模でも参加できるかを確認する手があります。条件が合えば、WONDAYの紹介ページに「Claude Code等でクライアントを自走させる支援」と実績を書いて、Hubへの掲載や紹介経路に使えます。NECの事例は、日本の中堅・大企業にもClaude導入が進むことの裏づけになります。提案書では、導入後の定着と自走支援を打ち出すと、大手と競合せずに済みます。注意点は、Partner Networkの参加条件や費用が、個人や小規模法人に合うかどうかが未確認なことです。内容を確認してから判断するのが安全で、確認前に公開物へ「パートナー」と書くのは避けたほうがよいです。</div>
+  <div class="hl-action">https://www.anthropic.com/news/partnerships を開き、3/12の「Claude Partner Network」発表と6/3の「Services Track / Partner Hub」発表の本文を読みます。確認するのは、(1) 参加資格と費用、(2) 個人・小規模法人の申請可否、(3) Hubへの掲載方法、の3点です。続いてNEC(4/24)の記事で、日本市場向けの展開内容を確認し、WONDAYの提案資料の差別化ポイントに使えるかを検討します。</div>
+</div>
+<div class="highlight-card">
+  <div class="hl-badge">ニュース</div>
+  <div class="hl-title"><a href="https://www.anthropic.com/news/product">Product</a></div>
+  <div class="hl-desc"><strong>概要</strong>今回のハイライトは、Anthropic公式ニュースの「Product」カテゴリの一覧ページ(anthropic.com/news/product)です。タイトルは「Product」だけで、説明文も空でした。そのため、個別の新機能名、フラグ名、コマンド、数値、条件は、この入力からは読み取れません。具体的に何が発表されたかは、この通知だけでは確定できません。</div>
+  <div class="hl-link"><a href="https://www.anthropic.com/news/product">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>個別の発表内容が分からないので、特定機能の導入提案はできません。代わりに、このページを「Claude関連の製品アップデートを拾う定点観測の入口」として使う案があります。たとえば週1回開き、直近の記事タイトルを見て、Claude Codeの新機能、モデル更新、料金やプラン変更に当たるものだけ拾います。クライアント向けのAI業務設計やCRM支援の提案では、使えるモデルや機能が変わると見積もりや構成も変わる可能性があります。そのため、変更点を先に把握しておく価値はあります。注意点として、一覧ページの見出しだけで判断すると、機能の提供範囲(対象プラン、対象地域、ベータかどうか)を取り違えるおそれがあります。導入を考える場合は、個別記事の本文と公式ドキュメントで条件を確認してからにするのが安全です。</div>
+  <div class="hl-action">ブラウザで https://www.anthropic.com/news/product を開き、日付が直近1〜2週間の記事を上から順に確認してください。その中で、Claude Code、モデル名、料金・プランに関するものがあれば、個別記事の本文を読んで、対象プランと提供開始日を控えます。該当記事がなければ、今週は何もしなくて大丈夫です。</div>
+</div>
+
+<h2 class="section-heading">Topics</h2>
+<div class="topic">
+  <div class="topic-title">動画生成ツール</div>
+  <div class="topic-summary">HTMLを書くだけでエージェント向けに動画をレンダリングするhyperframesが登場。</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/heygen-com/hyperframes">heygen-com/hyperframes</a></div>
+    <div class="item-desc">Write HTML. Render video. Built for agents.</div>
+    <div class="item-meta"><span class="stars">68453</span></div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">リポジトリ自動更新</div>
+  <div class="topic-summary">リポジトリのティッカーデータとSVGを更新する自動choreコミットが相次いだ。</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/e7c0a20">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-20</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/e4dd8f6">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-20</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/bae161c">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-20</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/2231395">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-20</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/696d1db">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-20</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/ed62cff">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-20</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/1eb7887">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-20</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/410eabe">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-20</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">発表とパートナーシップ</div>
+  <div class="topic-summary">新たな発表やパートナーシップに関するお知らせ。</div>
+<div class="item">
+  <span class="badge badge-anthropic_news">ANTHROPIC_NEWS</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://www.anthropic.com/news/announcements">Announcements</a></div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-anthropic_news">ANTHROPIC_NEWS</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://www.anthropic.com/news/partnerships">Partnerships</a></div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">製品・ポリシー</div>
+  <div class="topic-summary">製品やポリシーに関する更新情報。</div>
+<div class="item">
+  <span class="badge badge-anthropic_news">ANTHROPIC_NEWS</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://www.anthropic.com/news/product">Product</a></div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-anthropic_news">ANTHROPIC_NEWS</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://www.anthropic.com/news/policy">Policy</a></div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">蒸留攻撃への防御</div>
+  <div class="topic-summary">蒸留攻撃に対する防御強化とセーフガードの取り組み。</div>
+<div class="item">
+  <span class="badge badge-anthropic_news">ANTHROPIC_NEWS</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://www.anthropic.com/news/safeguards">Safeguards</a></div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-anthropic_news">ANTHROPIC_NEWS</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://www.anthropic.com/news/distillation-defenses">Strengthening our defenses against distillation attacks</a></div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-anthropic_news">ANTHROPIC_NEWS</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://www.anthropic.com/news/security">Security</a></div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">テキスト透かし技術</div>
+  <div class="topic-summary">Claudeのテキスト透かしの仕組みを解説。</div>
+<div class="item">
+  <span class="badge badge-anthropic_news">ANTHROPIC_NEWS</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://www.anthropic.com/news/claude-text-watermark">How Claude’s text watermark works</a></div>
+  </div>
+</div>
+</div>
+
+<footer class="footer">
+  Generated at 2026-10-21 07:56 JST<br>
+  Sources: Claude Code CHANGELOG, GitHub Releases, awesome-claude-code,
+  anthropics/skills, PulseMCP, Claude Plugins, GitHub Trending
+</footer>
+
+</div>
+</body>
+</html>
