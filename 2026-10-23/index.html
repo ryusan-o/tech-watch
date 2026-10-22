@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Weekly Tech Watch — 2026-10-23</title>
+<style>
+:root {
+  --bg: #f8fafc;
+  --bg-card: #ffffff;
+  --bg-highlight: #eff6ff;
+  --text: #1e293b;
+  --text-muted: #64748b;
+  --text-light: #94a3b8;
+  --accent: #3b82f6;
+  --border: #e2e8f0;
+  --shadow: 0 1px 3px rgba(0,0,0,.08);
+  --badge-changelog: #3b82f6;
+  --badge-mcp: #8b5cf6;
+  --badge-trending: #f59e0b;
+  --badge-plugin: #10b981;
+  --badge-awesome: #f43f5e;
+  --badge-skills: #06b6d4;
+}
+@media(prefers-color-scheme:dark){
+:root {
+  --bg: #0f172a;
+  --bg-card: #1e293b;
+  --bg-highlight: #1e3a5f;
+  --text: #e2e8f0;
+  --text-muted: #94a3b8;
+  --text-light: #64748b;
+  --accent: #60a5fa;
+  --border: #334155;
+  --shadow: 0 1px 3px rgba(0,0,0,.3);
+}}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  background:var(--bg);color:var(--text);
+  line-height:1.6;padding:16px;
+}
+.container{max-width:760px;margin:0 auto}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* Header */
+.header{text-align:center;padding:32px 0 24px}
+.header h1{font-size:1.5rem;font-weight:700;letter-spacing:-.02em}
+.header .date-range{color:var(--text-muted);font-size:.875rem;margin-top:4px}
+
+/* Stats */
+.stat-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));
+  gap:8px;margin:0 0 32px;
+}
+.stat-card{
+  background:var(--bg-card);border:1px solid var(--border);border-radius:8px;
+  padding:12px;text-align:center;box-shadow:var(--shadow);
+}
+.stat-card .num{font-size:1.5rem;font-weight:700;color:var(--accent)}
+.stat-card .label{font-size:.75rem;color:var(--text-muted);margin-top:2px}
+
+/* Section heading */
+.section-heading{
+  font-size:1.125rem;font-weight:700;margin:32px 0 16px;
+  padding-bottom:8px;border-bottom:2px solid var(--accent);
+}
+
+/* Highlight cards */
+.highlight-card{
+  background:var(--bg-highlight);border:1px solid var(--border);
+  border-radius:12px;padding:20px;margin-bottom:16px;
+  border-left:4px solid var(--accent);
+}
+.highlight-card .hl-badge{
+  display:inline-block;font-size:.6875rem;font-weight:700;
+  color:var(--accent);background:var(--bg-card);
+  border:1px solid var(--border);border-radius:999px;
+  padding:2px 8px;margin-bottom:8px;
+}
+.highlight-card .hl-title{font-size:1rem;font-weight:700;margin-bottom:8px}
+.highlight-card .hl-title a{color:var(--text)}
+.highlight-card .hl-desc{font-size:.875rem;color:var(--text-muted);margin-bottom:8px}
+.highlight-card .hl-desc strong,
+.highlight-card .hl-scenario strong{
+  display:block;color:var(--text);font-size:.75rem;margin-bottom:2px;
+}
+.highlight-card .hl-link{font-size:.8125rem;margin-bottom:12px}
+.highlight-card .hl-scenario{
+  font-size:.875rem;line-height:1.7;
+  background:var(--bg-card);border-radius:8px;padding:12px;margin-bottom:8px;
+}
+.highlight-card .hl-action{
+  font-size:.8125rem;color:var(--accent);font-weight:600;
+}
+.highlight-card .hl-action::before{content:"→ "}
+
+/* Topic section */
+.topic{
+  background:var(--bg-card);border:1px solid var(--border);
+  border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:var(--shadow);
+}
+.topic-title{font-size:1rem;font-weight:700;margin-bottom:4px}
+.topic-summary{font-size:.8125rem;color:var(--text-muted);margin-bottom:16px}
+
+/* Item list */
+.item{
+  padding:10px 0;border-bottom:1px solid var(--border);
+  display:flex;gap:10px;align-items:flex-start;
+}
+.item:last-child{border-bottom:none;padding-bottom:0}
+.badge{
+  display:inline-block;font-size:.625rem;font-weight:700;
+  color:#fff;padding:2px 8px;border-radius:10px;white-space:nowrap;
+  flex-shrink:0;margin-top:3px;text-transform:uppercase;letter-spacing:.03em;
+}
+.badge-changelog{background:var(--badge-changelog)}
+.badge-mcp{background:var(--badge-mcp)}
+.badge-trending{background:var(--badge-trending)}
+.badge-plugin{background:var(--badge-plugin)}
+.badge-awesome{background:var(--badge-awesome)}
+.badge-skills{background:var(--badge-skills)}
+.item-body{flex:1;min-width:0}
+.item-title{font-size:.875rem;font-weight:600}
+.item-desc{font-size:.8125rem;color:var(--text-muted);margin-top:2px}
+.item-meta{font-size:.75rem;color:var(--text-light);margin-top:4px}
+.item-meta .stars::before{content:"\2B50 "}
+
+/* Footer */
+.footer{
+  text-align:center;color:var(--text-light);font-size:.75rem;
+  padding:32px 0 16px;border-top:1px solid var(--border);margin-top:32px;
+}
+
+/* No items */
+.empty{color:var(--text-light);font-style:italic;font-size:.875rem;padding:8px 0}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header class="header">
+  <h1>Weekly Tech Watch</h1>
+  <div class="date-range">2026-10-21 ~ 2026-10-23</div>
+</header>
+
+<div class="stat-grid">
+<div class="stat-card"><div class="num">2</div><div class="label">Claude Code</div></div>
+<div class="stat-card"><div class="num">1</div><div class="label">Trending</div></div>
+<div class="stat-card"><div class="num">12</div><div class="label">awesome-cc</div></div>
+</div>
+
+<h2 class="section-heading">Highlights</h2>
+<div class="highlight-card">
+  <div class="hl-badge">ニュース</div>
+  <div class="hl-title"><a href="https://code.claude.com/docs/en/changelog">Claude Code v2.1.309</a></div>
+  <div class="hl-desc"><strong>概要</strong>Claude Code v2.1.309 の変更履歴です。主な変更は2点あります。1つ目は、Claude Code が自分自身のために実行する多くの git コマンドが Windows 上で高速化されたことです。2つ目は、それらのコマンドで起きるエラーが、git のロケール設定が他言語でも全プラットフォームで英語表示になることです。ユーザーが手で打つ git コマンドは対象外で、Claude Code が内部で呼ぶ git 処理(状態確認や差分取得など)が対象です。</div>
+  <div class="hl-link"><a href="https://code.claude.com/docs/en/changelog">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>りゅうさんの実行環境は Windows 10 なので、高速化の恩恵を直接受けやすいアップデートです。特にリポジトリが大きい場合や、Codex と共有している複数のリポジトリで作業する場合に、セッション開始時やファイル編集のたびに起きる待ちが短くなる可能性があります。体感の変化は、作業中の「もたつき」が減るかどうかで見られます。
+
+エラーの英語固定は、日本語ロケールの git だと日本語メッセージが混ざり、AI がエラーを誤読したり、エラーの種類を判定できなかったりする問題を減らす狙いがあると考えられます。自動化フックやスクリプトが git の出力文字列を grep している場合は、英語固定で判定が安定する可能性があります。
+
+注意点として、更新後に git 関連の挙動が変わっていないか、最初の数セッションは様子を見るのがよいでしょう。自分で書いた git ラッパーが日本語の出力に依存している場合は、あらかじめ確認が必要です。</div>
+  <div class="hl-action">ターミナルで `claude --version` を実行して 2.1.309 以上か確認します。古ければ `claude update` で更新します。変更内容の原文は https://code.claude.com/docs/en/changelog の v2.1.309 の項で読めます。更新後、大きめのリポジトリで普段のセッションを開き、起動やコミット作業の待ち時間が前より短いかを確認します。</div>
+</div>
+<div class="highlight-card">
+  <div class="hl-badge">深掘り候補</div>
+  <div class="hl-title"><a href="https://www.anthropic.com/news/donating-agent-skills-to-the-agentic-ai-foundation">Donating Agent Skills to the Agentic AI Foundation</a></div>
+  <div class="hl-desc"><strong>概要</strong>Anthropicは、Claudeのエージェント機能で使われてきた「Agent Skills」を、Agentic AI Foundation(AAIF)へ寄贈すると発表しました。Agent Skillsは、SKILL.mdと補助ファイルをフォルダにまとめ、エージェントが必要な時だけ読み込んで手順やノウハウを再利用する仕組みです。今回の発表は、この仕様の管理をAnthropic単独から中立的な財団へ移すものです。目的は、特定ベンダーに閉じない共通フォーマットにすることだと読めます。なお取得できた情報はタイトルとURLのみで、仕様の変更点や移管の条件といった詳細は未確認です。</div>
+  <div class="hl-link"><a href="https://www.anthropic.com/news/donating-agent-skills-to-the-agentic-ai-foundation">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>りゅうさんはCodexとClaude Codeを共有リポジトリで使っているので、同じスキル資産を両方で使い回せる方向に進む点が効く可能性があります。たとえば議事録の整形、見積書のチェック、クライアント導入の標準手順のように、毎回プロンプトで説明している「型」をSKILL.md(説明文+手順+参照ファイル)として1つ作っておく使い方です。寄贈後は仕様が安定し、他社ツールも対応しやすくなると期待できます。クライアント向けには、導入後に残る成果物を特定ツール専用ではなく「持ち運べるスキル」にすると、自走支援の方針とも合います。注意点は、スキルに顧客情報やAPIキーを書き込まないことです。また、他ツール側の対応状況は実際に読み込ませて確かめるまで前提にしない方が安全です。</div>
+  <div class="hl-action">まず元記事(https://www.anthropic.com/news/donating-agent-skills-to-the-agentic-ai-foundation)を開き、寄贈の範囲(仕様のみか、実装やサンプルも含むか)とAAIFの参加企業を確認してください。次に、日常で繰り返している手順を1つ選び、フォルダを作ってSKILL.md(冒頭にnameとdescription、本文に手順)を書きます。それをClaude Codeで呼び出し、Codex側でも同じフォルダを読めるか試すと、相互運用の現状が体感できます。</div>
+</div>
+<div class="highlight-card">
+  <div class="hl-badge">ニュース</div>
+  <div class="hl-title"><a href="https://www.anthropic.com/news/open-call-guest-investigators-life-sciences">Open call for guest investigators in the life sciences</a></div>
+  <div class="hl-desc"><strong>概要</strong>Anthropicが生命科学分野の「ゲストインベスティゲーター(客員研究者)」を募集するオープンコールを公表した。ニュースの説明文は空で、募集要件・期間・報酬・応募方法などの具体は原文URLを見ないと分からない。タイトルから確認できるのは、生命科学の研究者を外部から受け入れ、Claudeを使った研究を進める枠組みであるという点まで。要件や条件の詳細は未確認。</div>
+  <div class="hl-link"><a href="https://www.anthropic.com/news/open-call-guest-investigators-life-sciences">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>りゅうさんの事業から見ると、直接応募して使う話というより「Claudeが科学研究の現場でどう使われるか」を知る材料として価値があります。うま藻(微細藻類)は機能性成分や栄養の分野なので、AlgaleXが八木澤さんの藻類由来成分探索の知見を持つ点とは接点があるかもしれません。例えば、募集要件に研究テーマや所属条件が書かれていれば、AlgaleX側に共有して共同研究や外部連携の足がかりになるか検討できます。また、AIコンサルの場面では「専門家がAIと協働する公式な枠組み」の実例として顧客への説明に使える可能性があります。ただし内容が未確認の段階で、AlgaleXに案内したり応募を前提に動いたりするのは早いので、まず原文の要件(対象機関、研究内容、データの扱い)を読んでからの判断がよさそうです。</div>
+  <div class="hl-action">ブラウザで https://www.anthropic.com/news/open-call-guest-investigators-life-sciences を開き、①対象者・所属の条件、②応募期限、③提供される内容(APIクレジット等)、④研究データや成果の扱い、の4点だけ確認する。藻類・栄養・食品分野が対象に含まれそうなら、AlgaleXの濱地専務か八木澤さんにURLを共有して反応を見る。</div>
+</div>
+
+<h2 class="section-heading">Topics</h2>
+<div class="topic">
+  <div class="topic-title">Claude Codeリリース</div>
+  <div class="topic-summary">Claude Code v2.1.308・v2.1.309の更新。VSCodeの証明書検証エラー時の警告追加や不具合修正が含まれる。</div>
+<div class="item">
+  <span class="badge badge-changelog">CHANGELOG</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://code.claude.com/docs/en/changelog">v2.1.309</a></div>
+    <div class="item-desc">[VSCode] Added a log warning that says what to do when dictation or the extension’s own requests fail certificate verification, such as behind a TLS-inspecting proxy, Updated the bundled dataviz skill to accept APCA as a text-contrast measure (keeping WCAG 2 ratios where AA conformance is required), add an apca(text, background) function to its palette validator scripts, and say whether a label inside a colored chart fill should be white or near-black, Updated the /claude-api skill: service account keys and Workload Identity Federation tokens can now manage OpenTelemetry destinations</div>
+    <div class="item-meta">October 22, 2026</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-changelog">CHANGELOG</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://code.claude.com/docs/en/changelog">v2.1.308</a></div>
+    <div class="item-desc">Bug fixes and reliability improvements</div>
+    <div class="item-meta">October 22, 2026</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">AI求人活動ツール</div>
+  <div class="topic-summary">Claude Code上に構築された、求人評価・履歴書調整・カバーレター作成を行うAI就活フレームワーク。</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/ai-job-search-dev/ai-job-search">ai-job-search-dev/ai-job-search</a></div>
+    <div class="item-desc">The job search that runs on your machine. AI job application framework built on Claude Code: evaluate postings, tailor CVs, write cover letters, prep interviews. Fork it and own it.</div>
+    <div class="item-meta"><span class="stars">63528</span></div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">リポジトリ自動更新</div>
+  <div class="topic-summary">ティッカーデータやSVGを更新する、CI自動生成のメンテナンス用コミット。</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/ca473cc">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-22</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/71e519b">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-22</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/447099f">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-22</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/cb8d781">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-22</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/b23b45d">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-22</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/7ddd46b">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-22</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/f5d6c90">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-22</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/bffc8a2">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-22</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">リソース追加とREADME再生成</div>
+  <div class="topic-summary">新規リソース(Review Inbox、Molecular Animation)の追加と、CSVからのREADME・カルーセル再生成。</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/0f44325">chore: regenerate README + carousel from CSV [skip ci]</a></div>
+    <div class="item-meta">2026-10-22</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/ae57b2b">Add resource: Review Inbox (#3202)</a></div>
+    <div class="item-meta">2026-10-22</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/067a487">chore: regenerate README + carousel from CSV [skip ci]</a></div>
+    <div class="item-meta">2026-10-22</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/d40449b">Add resource: Molecular Animation (#3200)</a></div>
+    <div class="item-meta">2026-10-22</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">Agent Skills寄贈と研究公募</div>
+  <div class="topic-summary">Agent SkillsのAgentic AI Foundationへの寄贈と、ライフサイエンス分野のゲスト研究者の公募。</div>
+<div class="item">
+  <span class="badge badge-anthropic_news">ANTHROPIC_NEWS</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://www.anthropic.com/news/donating-agent-skills-to-the-agentic-ai-foundation">Donating Agent Skills to the Agentic AI Foundation</a></div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-anthropic_news">ANTHROPIC_NEWS</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://www.anthropic.com/news/open-call-guest-investigators-life-sciences">Open call for guest investigators in the life sciences</a></div>
+  </div>
+</div>
+</div>
+
+<footer class="footer">
+  Generated at 2026-10-23 07:56 JST<br>
+  Sources: Claude Code CHANGELOG, GitHub Releases, awesome-claude-code,
+  anthropics/skills, PulseMCP, Claude Plugins, GitHub Trending
+</footer>
+
+</div>
+</body>
+</html>
