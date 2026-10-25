@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Weekly Tech Watch — 2026-10-26</title>
+<style>
+:root {
+  --bg: #f8fafc;
+  --bg-card: #ffffff;
+  --bg-highlight: #eff6ff;
+  --text: #1e293b;
+  --text-muted: #64748b;
+  --text-light: #94a3b8;
+  --accent: #3b82f6;
+  --border: #e2e8f0;
+  --shadow: 0 1px 3px rgba(0,0,0,.08);
+  --badge-changelog: #3b82f6;
+  --badge-mcp: #8b5cf6;
+  --badge-trending: #f59e0b;
+  --badge-plugin: #10b981;
+  --badge-awesome: #f43f5e;
+  --badge-skills: #06b6d4;
+}
+@media(prefers-color-scheme:dark){
+:root {
+  --bg: #0f172a;
+  --bg-card: #1e293b;
+  --bg-highlight: #1e3a5f;
+  --text: #e2e8f0;
+  --text-muted: #94a3b8;
+  --text-light: #64748b;
+  --accent: #60a5fa;
+  --border: #334155;
+  --shadow: 0 1px 3px rgba(0,0,0,.3);
+}}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  background:var(--bg);color:var(--text);
+  line-height:1.6;padding:16px;
+}
+.container{max-width:760px;margin:0 auto}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* Header */
+.header{text-align:center;padding:32px 0 24px}
+.header h1{font-size:1.5rem;font-weight:700;letter-spacing:-.02em}
+.header .date-range{color:var(--text-muted);font-size:.875rem;margin-top:4px}
+
+/* Stats */
+.stat-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));
+  gap:8px;margin:0 0 32px;
+}
+.stat-card{
+  background:var(--bg-card);border:1px solid var(--border);border-radius:8px;
+  padding:12px;text-align:center;box-shadow:var(--shadow);
+}
+.stat-card .num{font-size:1.5rem;font-weight:700;color:var(--accent)}
+.stat-card .label{font-size:.75rem;color:var(--text-muted);margin-top:2px}
+
+/* Section heading */
+.section-heading{
+  font-size:1.125rem;font-weight:700;margin:32px 0 16px;
+  padding-bottom:8px;border-bottom:2px solid var(--accent);
+}
+
+/* Highlight cards */
+.highlight-card{
+  background:var(--bg-highlight);border:1px solid var(--border);
+  border-radius:12px;padding:20px;margin-bottom:16px;
+  border-left:4px solid var(--accent);
+}
+.highlight-card .hl-badge{
+  display:inline-block;font-size:.6875rem;font-weight:700;
+  color:var(--accent);background:var(--bg-card);
+  border:1px solid var(--border);border-radius:999px;
+  padding:2px 8px;margin-bottom:8px;
+}
+.highlight-card .hl-title{font-size:1rem;font-weight:700;margin-bottom:8px}
+.highlight-card .hl-title a{color:var(--text)}
+.highlight-card .hl-desc{font-size:.875rem;color:var(--text-muted);margin-bottom:8px}
+.highlight-card .hl-desc strong,
+.highlight-card .hl-scenario strong{
+  display:block;color:var(--text);font-size:.75rem;margin-bottom:2px;
+}
+.highlight-card .hl-link{font-size:.8125rem;margin-bottom:12px}
+.highlight-card .hl-scenario{
+  font-size:.875rem;line-height:1.7;
+  background:var(--bg-card);border-radius:8px;padding:12px;margin-bottom:8px;
+}
+.highlight-card .hl-action{
+  font-size:.8125rem;color:var(--accent);font-weight:600;
+}
+.highlight-card .hl-action::before{content:"→ "}
+
+/* Topic section */
+.topic{
+  background:var(--bg-card);border:1px solid var(--border);
+  border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:var(--shadow);
+}
+.topic-title{font-size:1rem;font-weight:700;margin-bottom:4px}
+.topic-summary{font-size:.8125rem;color:var(--text-muted);margin-bottom:16px}
+
+/* Item list */
+.item{
+  padding:10px 0;border-bottom:1px solid var(--border);
+  display:flex;gap:10px;align-items:flex-start;
+}
+.item:last-child{border-bottom:none;padding-bottom:0}
+.badge{
+  display:inline-block;font-size:.625rem;font-weight:700;
+  color:#fff;padding:2px 8px;border-radius:10px;white-space:nowrap;
+  flex-shrink:0;margin-top:3px;text-transform:uppercase;letter-spacing:.03em;
+}
+.badge-changelog{background:var(--badge-changelog)}
+.badge-mcp{background:var(--badge-mcp)}
+.badge-trending{background:var(--badge-trending)}
+.badge-plugin{background:var(--badge-plugin)}
+.badge-awesome{background:var(--badge-awesome)}
+.badge-skills{background:var(--badge-skills)}
+.item-body{flex:1;min-width:0}
+.item-title{font-size:.875rem;font-weight:600}
+.item-desc{font-size:.8125rem;color:var(--text-muted);margin-top:2px}
+.item-meta{font-size:.75rem;color:var(--text-light);margin-top:4px}
+.item-meta .stars::before{content:"\2B50 "}
+
+/* Footer */
+.footer{
+  text-align:center;color:var(--text-light);font-size:.75rem;
+  padding:32px 0 16px;border-top:1px solid var(--border);margin-top:32px;
+}
+
+/* No items */
+.empty{color:var(--text-light);font-style:italic;font-size:.875rem;padding:8px 0}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header class="header">
+  <h1>Weekly Tech Watch</h1>
+  <div class="date-range">2026-10-22 ~ 2026-10-26</div>
+</header>
+
+<div class="stat-grid">
+<div class="stat-card"><div class="num">1</div><div class="label">Claude Code</div></div>
+<div class="stat-card"><div class="num">1</div><div class="label">MCP</div></div>
+<div class="stat-card"><div class="num">1</div><div class="label">Trending</div></div>
+<div class="stat-card"><div class="num">16</div><div class="label">awesome-cc</div></div>
+</div>
+
+<h2 class="section-heading">Highlights</h2>
+<div class="highlight-card">
+  <div class="hl-badge">ニュース</div>
+  <div class="hl-title"><a href="https://code.claude.com/docs/en/changelog">Claude Code v2.1.310</a></div>
+  <div class="hl-desc"><strong>概要</strong>Claude Code v2.1.310 の変更履歴です。Bedrock・Vertex・Foundry といった外部クラウド経由の構成で、Monitor ツールとプラグインモニターが使えるようになりました。テレメトリや nonessential traffic(必須でない通信)を無効にしている場合も同様に使えます。あわせて、これらの環境では長い foreground の sleep がブロックされるようになりました。Monitor は、バックグラウンドで動くコマンドや条件を監視し、結果が出たときに通知を受け取るためのツールです。従来は使えなかった構成でも、待機を sleep ではなく Monitor で行う運用に揃います。</div>
+  <div class="hl-link"><a href="https://code.claude.com/docs/en/changelog">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>効いてくるのは、長いビルドやデプロイ、ログ出力を待つ場面です。foreground で `sleep 300` のように待つと、このバージョンではブロックされることがあります。代わりに Bash を `run_in_background` で起動し、Monitor で完了や特定の出力を待つ形にすると、待っている間も他の作業を進められるかもしれません。たとえば VPS 上のサービスの復旧確認や、議事録自動化・LineBot の処理完了待ちに向いている可能性があります。テレメトリを切っている環境でも使えるので、プライバシー重視の設定のまま運用できます。注意点として、sleep を含む既存のシェルスクリプトや自作の待機ループが、Bedrock などの構成で止められる可能性があります。普段 Anthropic 直結のプランで使っているなら影響は小さいので、まずは自分の環境が対象かを確認するくらいで十分です。</div>
+  <div class="hl-action">公式の changelog(https://code.claude.com/docs/en/changelog)で v2.1.310 の記載を読み、自分の環境が Bedrock/Vertex/Foundry かテレメトリ無効構成かを確認してください。対象なら、`claude --version` でバージョンを確認し、sleep で待っている手順があれば Monitor に置き換えられるか見てみてください。</div>
+</div>
+<div class="highlight-card">
+  <div class="hl-badge">ニュース</div>
+  <div class="hl-title"><a href="https://www.pulsemcp.com/servers/rosh-studio-rosh">MCP: Rosh</a></div>
+  <div class="hl-desc"><strong>概要</strong>PulseMCPに「Rosh」というMCPサーバーが掲載された。Roshは平易な英語で記述するプログラミング言語で、このMCPサーバー経由で、インタラクティブなWebアプリ、ゲーム、3Dシーンを作成して公開できるとされる。ClaudeなどMCP対応クライアントから自然言語で指示すると、Rosh言語のコードが生成され、そのまま公開まで進められる構成と読める。掲載ページの説明にあるのは作成と公開の機能のみで、料金体系、公開先、ホスティング条件、認証方式などの詳細は説明文からは分からない。</div>
+  <div class="hl-link"><a href="https://www.pulsemcp.com/servers/rosh-studio-rosh">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>りゅうさんの場合、本業の中核というより「軽いデモや体験物を最速で形にする道具」として使える可能性があります。たとえば、うま藻の料理教室やイベント向けに、簡単なクイズ、レシピ診断、3Dで見せる藻の培養イメージなどを、コードを書かずに試作して反応を見る使い方です。クライアント提案でも、AI業務自動化の画面イメージをインタラクティブなモックとして見せれば、説明より早く伝わるかもしれません。進め方は、MCPクライアントにRoshサーバーを追加し、「平易な英語で、3問のうま藻診断ページを作って」と依頼し、出力された画面を確認するだけです。注意点は、作成物が「公開」まで行える点です。公開先や公開範囲が不明なので、顧客情報・個人情報・社内資料は入れず、まず非公開か公開しても問題ない内容でのみ試すのが安全です。</div>
+  <div class="hl-action">まず https://www.pulsemcp.com/servers/rosh-studio-rosh を開き、インストール方法・公開先・利用条件(料金、認証、公開範囲)を確認する。試すなら、機密情報を含まないダミー題材(例: 3問のうま藻クイズ)で1本だけ作り、公開前にURLの公開範囲を確かめる。</div>
+</div>
+<div class="highlight-card">
+  <div class="hl-badge">深掘り候補</div>
+  <div class="hl-title"><a href="https://github.com/alchaincyf/huashu-design">GitHub: alchaincyf/huashu-design</a></div>
+  <div class="hl-desc"><strong>概要</strong>GitHub Trendingに入った alchaincyf/huashu-design(Huashu Design 3.0)は、Claude Code・Codex・Cursorなど任意のエージェント上で動く、HTMLネイティブのデザイン用スキルです。エージェントに一言指示するだけで、Webページ、アプリのプロトタイプ、編集可能なPPTX、アニメーション、インフォグラフィックといった『そのまま納品できる』成果物を出力します。特徴は、6つの候補から3つの方向性を選ぶ進め方、サンプル画像付きで84種類あるスタイルライブラリ、使うほど好みを学習する『外観台帳』、デザインの自己点検(デザイン体検)機能です。説明文は中国語が中心ですが、英語の補足もあります。</div>
+  <div class="hl-link"><a href="https://github.com/alchaincyf/huashu-design">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>提案資料やLPを作る場面で、デザインの方向性決めと手直しの手間を減らせる可能性があります。たとえば、AIコンサルの提案書や『りゅうさんち』『うま藻』の紹介ページを作るときに、まず6案から3方向を出させ、84種のスタイル見本から近いものを選べば、ゼロから指示を書く必要がなくなります。PPTXが編集可能な形で出るなら、クライアントに渡した後に先方が自走して直せる点も、『やってみせて自走させる』方針と相性が良さそうです。外観台帳が機能すれば、WONDAYらしい見た目を毎回言い直さずに済みます。やるなら、使い捨てのフォルダにcloneし、Claude Codeのスキルとして読み込んで、既に作ってある提案資料1本を作り直させて、今のやり方と比べるのが安全です。注意点として、出力の品質は未検証で、既存のbrand-voice.mdの表現と食い違う恐れもあります。また顧客向け資料に使う前には、必ずご自身の目で確認する必要があります。</div>
+  <div class="hl-action">ブラウザで https://github.com/alchaincyf/huashu-design を開き、READMEのインストール手順(Claude Code向けスキルとして入れる方法)と、84種のスタイル見本の画像を確認してください。良さそうなら、空の作業フォルダで `git clone https://github.com/alchaincyf/huashu-design` を実行し、README記載の手順でスキルとして読み込んで、『うま藻の料理教室の案内LPを作って』のような小さな依頼を1件だけ試します。ライセンス表記も先に確認してください。</div>
+</div>
+
+<h2 class="section-heading">Topics</h2>
+<div class="topic">
+  <div class="topic-title">Claude Code更新</div>
+  <div class="topic-summary">Claude Code v2.1.310でBedrock等へのMonitorツール対応が追加された。</div>
+<div class="item">
+  <span class="badge badge-changelog">CHANGELOG</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://code.claude.com/docs/en/changelog">v2.1.310</a></div>
+    <div class="item-desc">Added the Monitor tool and plugin monitors on Bedrock, Vertex, and Foundry, and when telemetry or nonessential traffic is disabled; long foreground sleeps are now blocked there too, [Cloud sessions] Added Claude Code cloud sessions and Remote Control permissions to Enterprise custom roles, so Owners can control access to each by role, [Cloud sessions] Added a Choose file button to load a cloud environment’s setup script from a file</div>
+    <div class="item-meta">October 23, 2026</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">対話型Webアプリ作成</div>
+  <div class="topic-summary">平易な英語で対話型Webアプリやゲーム、3Dシーンを作れるRosh言語。</div>
+<div class="item">
+  <span class="badge badge-mcp">MCP</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://www.pulsemcp.com/servers/rosh-studio-rosh">Rosh</a></div>
+    <div class="item-desc">Create and publish interactive web apps, games, and 3D scenes using the Rosh plain-English programming language.</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">AIデザインスキル</div>
+  <div class="topic-summary">エージェントから一言でWebやPPTX、アニメなどのデザインを生成するHuashu Design 3.0。</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/alchaincyf/huashu-design">alchaincyf/huashu-design</a></div>
+    <div class="item-desc">Huashu Design 3.0 · 在 agent 里打一句话，拿回能交付的设计：网页 / App 原型 / 可编辑 PPTX / 动画 / 信息图 · 六个候选挑三个方向 · 84 种带样张的风格库 · 越用越懂你的外观账本与设计体检 · HTML-native design skill for Claude Code, Codex, Cursor &amp; any agent</div>
+    <div class="item-meta"><span class="stars">26257</span></div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">リポジトリ自動更新</div>
+  <div class="topic-summary">リポジトリのティッカーデータとSVGを更新する定型の自動コミット群。</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/361b567">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-25</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/b18a04d">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-25</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/aca7eb3">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-25</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/e9d09f6">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-25</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/7447bb1">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-25</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/de401cf">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-25</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/c7f134f">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-25</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/6f74ecf">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-25</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/90805ca">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-24</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/8fe6240">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-24</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/45954c5">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-24</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/fc36caf">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-24</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/738cb13">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-24</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/15a8bf8">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-24</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/b1002da">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-24</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/3426cf1">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-24</div>
+  </div>
+</div>
+</div>
+
+<footer class="footer">
+  Generated at 2026-10-26 07:56 JST<br>
+  Sources: Claude Code CHANGELOG, GitHub Releases, awesome-claude-code,
+  anthropics/skills, PulseMCP, Claude Plugins, GitHub Trending
+</footer>
+
+</div>
+</body>
+</html>
