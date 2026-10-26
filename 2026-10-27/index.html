@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Weekly Tech Watch — 2026-10-27</title>
+<style>
+:root {
+  --bg: #f8fafc;
+  --bg-card: #ffffff;
+  --bg-highlight: #eff6ff;
+  --text: #1e293b;
+  --text-muted: #64748b;
+  --text-light: #94a3b8;
+  --accent: #3b82f6;
+  --border: #e2e8f0;
+  --shadow: 0 1px 3px rgba(0,0,0,.08);
+  --badge-changelog: #3b82f6;
+  --badge-mcp: #8b5cf6;
+  --badge-trending: #f59e0b;
+  --badge-plugin: #10b981;
+  --badge-awesome: #f43f5e;
+  --badge-skills: #06b6d4;
+}
+@media(prefers-color-scheme:dark){
+:root {
+  --bg: #0f172a;
+  --bg-card: #1e293b;
+  --bg-highlight: #1e3a5f;
+  --text: #e2e8f0;
+  --text-muted: #94a3b8;
+  --text-light: #64748b;
+  --accent: #60a5fa;
+  --border: #334155;
+  --shadow: 0 1px 3px rgba(0,0,0,.3);
+}}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  background:var(--bg);color:var(--text);
+  line-height:1.6;padding:16px;
+}
+.container{max-width:760px;margin:0 auto}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* Header */
+.header{text-align:center;padding:32px 0 24px}
+.header h1{font-size:1.5rem;font-weight:700;letter-spacing:-.02em}
+.header .date-range{color:var(--text-muted);font-size:.875rem;margin-top:4px}
+
+/* Stats */
+.stat-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));
+  gap:8px;margin:0 0 32px;
+}
+.stat-card{
+  background:var(--bg-card);border:1px solid var(--border);border-radius:8px;
+  padding:12px;text-align:center;box-shadow:var(--shadow);
+}
+.stat-card .num{font-size:1.5rem;font-weight:700;color:var(--accent)}
+.stat-card .label{font-size:.75rem;color:var(--text-muted);margin-top:2px}
+
+/* Section heading */
+.section-heading{
+  font-size:1.125rem;font-weight:700;margin:32px 0 16px;
+  padding-bottom:8px;border-bottom:2px solid var(--accent);
+}
+
+/* Highlight cards */
+.highlight-card{
+  background:var(--bg-highlight);border:1px solid var(--border);
+  border-radius:12px;padding:20px;margin-bottom:16px;
+  border-left:4px solid var(--accent);
+}
+.highlight-card .hl-badge{
+  display:inline-block;font-size:.6875rem;font-weight:700;
+  color:var(--accent);background:var(--bg-card);
+  border:1px solid var(--border);border-radius:999px;
+  padding:2px 8px;margin-bottom:8px;
+}
+.highlight-card .hl-title{font-size:1rem;font-weight:700;margin-bottom:8px}
+.highlight-card .hl-title a{color:var(--text)}
+.highlight-card .hl-desc{font-size:.875rem;color:var(--text-muted);margin-bottom:8px}
+.highlight-card .hl-desc strong,
+.highlight-card .hl-scenario strong{
+  display:block;color:var(--text);font-size:.75rem;margin-bottom:2px;
+}
+.highlight-card .hl-link{font-size:.8125rem;margin-bottom:12px}
+.highlight-card .hl-scenario{
+  font-size:.875rem;line-height:1.7;
+  background:var(--bg-card);border-radius:8px;padding:12px;margin-bottom:8px;
+}
+.highlight-card .hl-action{
+  font-size:.8125rem;color:var(--accent);font-weight:600;
+}
+.highlight-card .hl-action::before{content:"→ "}
+
+/* Topic section */
+.topic{
+  background:var(--bg-card);border:1px solid var(--border);
+  border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:var(--shadow);
+}
+.topic-title{font-size:1rem;font-weight:700;margin-bottom:4px}
+.topic-summary{font-size:.8125rem;color:var(--text-muted);margin-bottom:16px}
+
+/* Item list */
+.item{
+  padding:10px 0;border-bottom:1px solid var(--border);
+  display:flex;gap:10px;align-items:flex-start;
+}
+.item:last-child{border-bottom:none;padding-bottom:0}
+.badge{
+  display:inline-block;font-size:.625rem;font-weight:700;
+  color:#fff;padding:2px 8px;border-radius:10px;white-space:nowrap;
+  flex-shrink:0;margin-top:3px;text-transform:uppercase;letter-spacing:.03em;
+}
+.badge-changelog{background:var(--badge-changelog)}
+.badge-mcp{background:var(--badge-mcp)}
+.badge-trending{background:var(--badge-trending)}
+.badge-plugin{background:var(--badge-plugin)}
+.badge-awesome{background:var(--badge-awesome)}
+.badge-skills{background:var(--badge-skills)}
+.item-body{flex:1;min-width:0}
+.item-title{font-size:.875rem;font-weight:600}
+.item-desc{font-size:.8125rem;color:var(--text-muted);margin-top:2px}
+.item-meta{font-size:.75rem;color:var(--text-light);margin-top:4px}
+.item-meta .stars::before{content:"\2B50 "}
+
+/* Footer */
+.footer{
+  text-align:center;color:var(--text-light);font-size:.75rem;
+  padding:32px 0 16px;border-top:1px solid var(--border);margin-top:32px;
+}
+
+/* No items */
+.empty{color:var(--text-light);font-style:italic;font-size:.875rem;padding:8px 0}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header class="header">
+  <h1>Weekly Tech Watch</h1>
+  <div class="date-range">2026-10-25 ~ 2026-10-27</div>
+</header>
+
+<div class="stat-grid">
+<div class="stat-card"><div class="num">1</div><div class="label">Claude Code</div></div>
+<div class="stat-card"><div class="num">8</div><div class="label">awesome-cc</div></div>
+</div>
+
+<h2 class="section-heading">Highlights</h2>
+<div class="highlight-card">
+  <div class="hl-badge">ニュース</div>
+  <div class="hl-title"><a href="https://code.claude.com/docs/en/changelog">Claude Code v2.1.311</a></div>
+  <div class="hl-desc"><strong>概要</strong>Claude Code v2.1.311 の変更履歴で、self-hosted-runner に2つの新オプション `--hold-idle-file` と `--max-hold-min` が追加された。self-hosted-runner は自前のホスト上でClaude Codeのセッションを動かす仕組み。新オプションは、セッションがアイドルになっても、ホスト側が「まだ動いているプロセスがある」と報告している間はセッションを維持するためのもの。報告にはファイルを使う。`--max-hold-min` は維持する時間の上限(分)を決める。変更履歴の記載は1行で、ファイルの書式や既定値までは書かれていない。</div>
+  <div class="hl-link"><a href="https://code.claude.com/docs/en/changelog">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>自前のVPSやPCでClaude Codeを常駐させ、ビルド、スクレイピング、バッチ処理などの長い処理を走らせている場面で効く可能性があります。従来は、Claudeが待機状態に入ると、裏で動いている処理があってもセッションが閉じて、結果を拾えなくなる恐れがありました。たとえば `--hold-idle-file /tmp/busy` を指定し、処理側が動いている間だけそのファイルを置くか更新する運用です。処理が終われば、セッションは通常どおりアイドル終了に戻ると考えられます。`--max-hold-min 120` のように上限も付けておけば、処理が固まっても無期限には居座りません。ただし、りゅうさんのVPS運用が self-hosted-runner を使っているかどうかは、こちらでは確認できていません。使っていなければ今は関係が薄いです。また、ファイルの形式(存在確認か中身か)は公式ドキュメントで確かめてから試す方が安全です。</div>
+  <div class="hl-action">まず自分の環境で self-hosted-runner を使っているかを確認する。ターミナルで `claude self-hosted-runner --help` を打ち、`--hold-idle-file` と `--max-hold-min` が表示されるか見る。次に https://code.claude.com/docs/en/changelog の v2.1.311 の行を開き、リンク先のドキュメントでファイルの書式と既定値を読む。使っていなければ、何もしなくて構わない。</div>
+</div>
+<div class="highlight-card">
+  <div class="hl-badge">ニュース</div>
+  <div class="hl-title"><a href="https://www.anthropic.com/news/s1-sec">Anthropic files S-1 with the SEC for proposed initial public offering</a></div>
+  <div class="hl-desc"><strong>概要</strong>Anthropicが、米証券取引委員会(SEC)に対しS-1登録届出書を提出したと発表しました。S-1は新規株式公開(IPO)を行う際に米国で提出する登録書類で、IPOに向けた正式な手続きが始まったことを意味します。今回の通知に付いている説明文は空で、公開株数、価格帯、上場時期、上場先といった具体的な条件はここからは確認できません。ただしS-1には通常、財務状況、事業リスク、資金使途、ガバナンスなどが記載されます。そのため、Anthropicの収益構造やコスト構造が公式資料として読める可能性があります。</div>
+  <div class="hl-link"><a href="https://www.anthropic.com/news/s1-sec">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>りゅうさんの場合、株式投資の話というより、Claude APIやClaude Codeを業務基盤にしているので、供給元の経営の安定性を見る材料として使えるかもしれません。具体的には、公開されたS-1の「Risk Factors」「Business」「Management&#x27;s Discussion」あたりを読み、価格改定、利用制限、モデル提供方針、計算資源への依存といった記述を拾います。クライアントにAI導入を提案する際にも「ベンダーの財務や継続性をどう見るか」の説明材料になりえます。また特定ベンダー一社に固定しない方針(Codexとの併用)の裏付けとして整理するのも一案です。注意点として、S-1は投資家向けの法的書類で量が膨大です。全文を読み込むと時間を取られやすく、現場の運用が変わる情報とは限らないので、要点だけの確認に留めるのが現実的です。</div>
+  <div class="hl-action">ブラウザで https://www.anthropic.com/news/s1-sec を開いて発表内容を確認し、リンク先のS-1本文(SEC EDGARで「Anthropic」を検索すると出ます)から「Risk Factors」の章だけを先に目を通してください。見るポイントは、顧客集中度、計算資源の調達先、価格・利用制限に関する記述の3点です。気になった箇所があれば、AI導入提案時のベンダーリスク説明用に数行メモしておくと使えます。</div>
+</div>
+
+<h2 class="section-heading">Topics</h2>
+<div class="topic">
+  <div class="topic-title">Claude Code更新</div>
+  <div class="topic-summary">Claude Code v2.1.311のリリース。self-hosted-runnerにアイドルセッション維持用のオプションが追加された。</div>
+<div class="item">
+  <span class="badge badge-changelog">CHANGELOG</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://code.claude.com/docs/en/changelog">v2.1.311</a></div>
+    <div class="item-desc">Added --hold-idle-file and --max-hold-min to self-hosted-runner, to keep an idle session while your host reports processes it left running, Added a tip for the Explanatory output style, shown when you ask Claude for explanations, [VSCode] Added syntax coloring to code blocks in Claude’s replies, in light, dark and high contrast dark themes</div>
+    <div class="item-meta">October 26, 2026</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">Anthropic IPO申請</div>
+  <div class="topic-summary">AnthropicがSECにS-1を提出し、新規株式公開に向けた手続きを開始した。</div>
+<div class="item">
+  <span class="badge badge-anthropic_news">ANTHROPIC_NEWS</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://www.anthropic.com/news/s1-sec">Anthropic files S-1 with the SEC for proposed initial public offering</a></div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">ティッカー自動更新</div>
+  <div class="topic-summary">リポジトリのティッカーデータとSVGを更新する自動コミットが繰り返し実行された。</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/36283ed">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-26</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/6797f45">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-26</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/9374890">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-26</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/6e84fbf">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-26</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/ebce259">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-26</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/55851a9">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-26</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/0d0c623">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-26</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/b8f55de">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-26</div>
+  </div>
+</div>
+</div>
+
+<footer class="footer">
+  Generated at 2026-10-27 07:56 JST<br>
+  Sources: Claude Code CHANGELOG, GitHub Releases, awesome-claude-code,
+  anthropics/skills, PulseMCP, Claude Plugins, GitHub Trending
+</footer>
+
+</div>
+</body>
+</html>
