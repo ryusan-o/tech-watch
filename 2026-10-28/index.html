@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Weekly Tech Watch — 2026-10-28</title>
+<style>
+:root {
+  --bg: #f8fafc;
+  --bg-card: #ffffff;
+  --bg-highlight: #eff6ff;
+  --text: #1e293b;
+  --text-muted: #64748b;
+  --text-light: #94a3b8;
+  --accent: #3b82f6;
+  --border: #e2e8f0;
+  --shadow: 0 1px 3px rgba(0,0,0,.08);
+  --badge-changelog: #3b82f6;
+  --badge-mcp: #8b5cf6;
+  --badge-trending: #f59e0b;
+  --badge-plugin: #10b981;
+  --badge-awesome: #f43f5e;
+  --badge-skills: #06b6d4;
+}
+@media(prefers-color-scheme:dark){
+:root {
+  --bg: #0f172a;
+  --bg-card: #1e293b;
+  --bg-highlight: #1e3a5f;
+  --text: #e2e8f0;
+  --text-muted: #94a3b8;
+  --text-light: #64748b;
+  --accent: #60a5fa;
+  --border: #334155;
+  --shadow: 0 1px 3px rgba(0,0,0,.3);
+}}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  background:var(--bg);color:var(--text);
+  line-height:1.6;padding:16px;
+}
+.container{max-width:760px;margin:0 auto}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* Header */
+.header{text-align:center;padding:32px 0 24px}
+.header h1{font-size:1.5rem;font-weight:700;letter-spacing:-.02em}
+.header .date-range{color:var(--text-muted);font-size:.875rem;margin-top:4px}
+
+/* Stats */
+.stat-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));
+  gap:8px;margin:0 0 32px;
+}
+.stat-card{
+  background:var(--bg-card);border:1px solid var(--border);border-radius:8px;
+  padding:12px;text-align:center;box-shadow:var(--shadow);
+}
+.stat-card .num{font-size:1.5rem;font-weight:700;color:var(--accent)}
+.stat-card .label{font-size:.75rem;color:var(--text-muted);margin-top:2px}
+
+/* Section heading */
+.section-heading{
+  font-size:1.125rem;font-weight:700;margin:32px 0 16px;
+  padding-bottom:8px;border-bottom:2px solid var(--accent);
+}
+
+/* Highlight cards */
+.highlight-card{
+  background:var(--bg-highlight);border:1px solid var(--border);
+  border-radius:12px;padding:20px;margin-bottom:16px;
+  border-left:4px solid var(--accent);
+}
+.highlight-card .hl-badge{
+  display:inline-block;font-size:.6875rem;font-weight:700;
+  color:var(--accent);background:var(--bg-card);
+  border:1px solid var(--border);border-radius:999px;
+  padding:2px 8px;margin-bottom:8px;
+}
+.highlight-card .hl-title{font-size:1rem;font-weight:700;margin-bottom:8px}
+.highlight-card .hl-title a{color:var(--text)}
+.highlight-card .hl-desc{font-size:.875rem;color:var(--text-muted);margin-bottom:8px}
+.highlight-card .hl-desc strong,
+.highlight-card .hl-scenario strong{
+  display:block;color:var(--text);font-size:.75rem;margin-bottom:2px;
+}
+.highlight-card .hl-link{font-size:.8125rem;margin-bottom:12px}
+.highlight-card .hl-scenario{
+  font-size:.875rem;line-height:1.7;
+  background:var(--bg-card);border-radius:8px;padding:12px;margin-bottom:8px;
+}
+.highlight-card .hl-action{
+  font-size:.8125rem;color:var(--accent);font-weight:600;
+}
+.highlight-card .hl-action::before{content:"→ "}
+
+/* Topic section */
+.topic{
+  background:var(--bg-card);border:1px solid var(--border);
+  border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:var(--shadow);
+}
+.topic-title{font-size:1rem;font-weight:700;margin-bottom:4px}
+.topic-summary{font-size:.8125rem;color:var(--text-muted);margin-bottom:16px}
+
+/* Item list */
+.item{
+  padding:10px 0;border-bottom:1px solid var(--border);
+  display:flex;gap:10px;align-items:flex-start;
+}
+.item:last-child{border-bottom:none;padding-bottom:0}
+.badge{
+  display:inline-block;font-size:.625rem;font-weight:700;
+  color:#fff;padding:2px 8px;border-radius:10px;white-space:nowrap;
+  flex-shrink:0;margin-top:3px;text-transform:uppercase;letter-spacing:.03em;
+}
+.badge-changelog{background:var(--badge-changelog)}
+.badge-mcp{background:var(--badge-mcp)}
+.badge-trending{background:var(--badge-trending)}
+.badge-plugin{background:var(--badge-plugin)}
+.badge-awesome{background:var(--badge-awesome)}
+.badge-skills{background:var(--badge-skills)}
+.item-body{flex:1;min-width:0}
+.item-title{font-size:.875rem;font-weight:600}
+.item-desc{font-size:.8125rem;color:var(--text-muted);margin-top:2px}
+.item-meta{font-size:.75rem;color:var(--text-light);margin-top:4px}
+.item-meta .stars::before{content:"\2B50 "}
+
+/* Footer */
+.footer{
+  text-align:center;color:var(--text-light);font-size:.75rem;
+  padding:32px 0 16px;border-top:1px solid var(--border);margin-top:32px;
+}
+
+/* No items */
+.empty{color:var(--text-light);font-style:italic;font-size:.875rem;padding:8px 0}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header class="header">
+  <h1>Weekly Tech Watch</h1>
+  <div class="date-range">2026-10-26 ~ 2026-10-28</div>
+</header>
+
+<div class="stat-grid">
+<div class="stat-card"><div class="num">1</div><div class="label">Claude Code</div></div>
+<div class="stat-card"><div class="num">1</div><div class="label">Trending</div></div>
+<div class="stat-card"><div class="num">8</div><div class="label">awesome-cc</div></div>
+</div>
+
+<h2 class="section-heading">Highlights</h2>
+<div class="highlight-card">
+  <div class="hl-badge">ニュース</div>
+  <div class="hl-title"><a href="https://code.claude.com/docs/en/changelog">Claude Code v2.1.312</a></div>
+  <div class="hl-desc"><strong>概要</strong>Claude Code v2.1.312 の changelog に、Claude apps gateway 向けの設定 `oidc.user_id_claim` が追加されました。従来、gateway は OIDC の id_token の標準クレーム `sub` でユーザーを識別していましたが、この設定で別のクレームを識別子に指定できます。例として Microsoft Entra ID の `oid`(オブジェクトID)が挙げられています。組織の IdP の仕様に合わせて、ユーザー識別の軸を選べるようになる変更です。</div>
+  <div class="hl-link"><a href="https://code.claude.com/docs/en/changelog">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>これは主に、企業が Claude Code を gateway 経由で全社展開するときの管理者向け設定です。りゅうさんの現状(個人利用と少人数の共有リポジトリ運用)では、すぐ使う場面は多くないと思われます。効く可能性があるのは、AIコンサルで Microsoft 365 / Entra ID 環境のクライアントに Claude Code を導入する提案の場面です。Entra ID は `sub` がアプリごとに異なる値になるため、ユーザーの利用ログやコスト集計をアプリ間で突き合わせたいときに、不変の `oid` を識別子にできると便利です。導入設計書に「gateway の oidc.user_id_claim に oid を指定し、利用実績を社員ID単位で集計」と書ける、という程度の引き出しとして持っておくと提案に厚みが出ます。注意点として、途中で識別クレームを変えると既存ユーザーと別人扱いになる恐れがあるため、初期設計の段階で決めるのが安全です。</div>
+  <div class="hl-action">公式 changelog(https://code.claude.com/docs/en/changelog)の v2.1.312 の項を開き、`oidc.user_id_claim` の記述を確認してください。あわせて Claude apps gateway のドキュメントで OIDC 設定の節(設定ファイル上の書き方、未指定時の既定が `sub` かどうか)を読むと、クライアントへの提案時にそのまま使えます。</div>
+</div>
+<div class="highlight-card">
+  <div class="hl-badge">ニュース</div>
+  <div class="hl-title"><a href="https://www.anthropic.com/news/expanding-partnership-gsa">Expanding our partnership with GSA to bring Claude to all levels of government</a></div>
+  <div class="hl-desc"><strong>概要</strong>Anthropicが、米国の調達機関であるGSA(一般調達局)との提携を拡大し、Claudeを「政府のあらゆる階層」へ提供すると発表しました。タイトルから読み取れるのは、連邦政府だけでなく、州や地方の自治体にも調達ルートを広げる方向だということです。今回は記事の説明文が空で、料金、対象製品、開始時期、認証要件といった具体的な数値や条件は確認できていません。以前のGSA提携(OneGov)の延長線にある動きとみられますが、詳細は原文を読むまで断定できません。</div>
+  <div class="hl-link"><a href="https://www.anthropic.com/news/expanding-partnership-gsa">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>りゅうさんの事業に直接かかわる話ではありません。ただ、AIコンサルの立場では、自治体や公共機関向けのAI導入で何が標準になりつつあるかを知る材料になります。たとえば、学童運営NPO法人のような公共性の高いクライアントに提案するとき、「海外では政府調達の枠組みに載るレベルまで、セキュリティやコンプライアンスの要件が整理されている」という説明の裏付けに使える可能性があります。また、将来、沖縄の自治体や関連団体から相談が来たときのために、データの取り扱い、監査、認証の論点をチェックリスト化しておく発想もあります。注意点として、米国のGSA枠組みは日本の調達制度や個人情報保護法にそのまま当てはまりません。提案資料に引用する場合は、「米国の事例」と明記する必要があります。</div>
+  <div class="hl-action">ブラウザで https://www.anthropic.com/news/expanding-partnership-gsa を開き、次の3点だけ確認してください。1) 対象が州・地方政府まで含むか、2) 価格や提供条件の記載があるか、3) FedRAMPなどの認証への言及があるか。公共系の提案を書く機会が出たら、このメモを根拠として添えるのが現実的です。</div>
+</div>
+<div class="highlight-card">
+  <div class="hl-badge">深掘り候補</div>
+  <div class="hl-title"><a href="https://github.com/Ryze-AI-Adgent/open-seo-mcp-skills">GitHub: Ryze-AI-Adgent/open-seo-mcp-skills</a></div>
+  <div class="hl-desc"><strong>概要</strong>GitHub trendingに載った「Ryze-AI-Adgent/open-seo-mcp-skills」は、Claude向けの無料SEO用MCPサーバーと、オープンソースのSEO/GEOスキル集です。キーワード調査、順位トラッキング、サイト監査、被リンク分析、AI visibility(AI検索での露出度)の確認を、実際のGSC(Search Console)・GA4・広告データに基づいて行えるとされています。導入は `claude mcp add ryze --transport http https://connector.get-ryze.ai/mcp` の1コマンドで、HTTP経由のリモートMCPコネクタとして接続する形式です。GEO(生成AI検索最適化)まで範囲に含む点が特徴です。</div>
+  <div class="hl-link"><a href="https://github.com/Ryze-AI-Adgent/open-seo-mcp-skills">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>りゅうさんの場合、AI経営コンサルの提案材料づくりが主な使い所になる可能性があります。たとえば、クライアントの飲食店や小規模事業者のサイトについて、GSCを接続して「どの検索語で表示されているのに順位が低いか」を洗い出し、改善提案書の根拠データとして出す、といった使い方です。りゅうさんち(予約制レストラン)や、うま藻関連サイトのGEO面、つまりChatGPTやPerplexityに店名・商品名がどう出るかの確認にも向きそうです。スキル部分はオープンソースなので、まず中身(プロンプトの手順)だけ読んで自前のスキルに取り込む形でも十分価値があります。注意点として、このMCPは外部のホスト型サーバー(get-ryze.ai)にGSC/GA4/広告アカウントの権限を渡す構成です。自社データなら判断しやすいですが、クライアントのデータで使う場合は、事前の同意と、運営元・データの取り扱い方針の確認が必要です。まずは自社サイトで試すのが無難です。</div>
+  <div class="hl-action">まずリポジトリ https://github.com/Ryze-AI-Adgent/open-seo-mcp-skills のREADMEとスキルのフォルダを開き、提供ツール一覧と、要求される権限(GSC/GA4/広告のスコープ)を確認してください。あわせて get-ryze.ai のプライバシーポリシーと利用規約でデータの保存・学習利用の扱いを読みます。問題なさそうなら、自社の検証用サイトだけを対象に `claude mcp add ryze --transport http https://connector.get-ryze.ai/mcp` を実行し、キーワード調査を1回試して出力品質を見てください。</div>
+</div>
+
+<h2 class="section-heading">Topics</h2>
+<div class="topic">
+  <div class="topic-title">Claude製品アップデート</div>
+  <div class="topic-summary">Claudeアプリのゲートウェイにoidc.user_id_claimが追加されるなど、v2.1.312の更新内容。</div>
+<div class="item">
+  <span class="badge badge-changelog">CHANGELOG</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://code.claude.com/docs/en/changelog">v2.1.312</a></div>
+    <div class="item-desc">Added oidc.user_id_claim to the Claude apps gateway, to identify people by an id_token claim other than sub, such as Microsoft Entra ID’s oid, Added click to send: in fullscreen, clicking the “to send now” hint under a queued message sends it right away, as its key does, [Cloud sessions] Added an effort level to the model picker when you create or edit a routine that runs in the cloud</div>
+    <div class="item-meta">October 27, 2026</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">SEO向けMCPスキル</div>
+  <div class="topic-summary">キーワード調査や順位追跡、監査などを行う無料のSEO用MCPサーバーとオープンソースのスキル集。</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/Ryze-AI-Adgent/open-seo-mcp-skills">Ryze-AI-Adgent/open-seo-mcp-skills</a></div>
+    <div class="item-desc">Free SEO MCP server + open-source SEO and GEO skills for Claude: keyword research, rank tracking, audits, backlinks, AI visibility on your real GSC/GA4/ads data. claude mcp add ryze --transport http https://connector.get-ryze.ai/mcp</div>
+    <div class="item-meta"><span class="stars">7617</span></div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">リポジトリ自動更新</div>
+  <div class="topic-summary">リポジトリのティッカーデータとSVGを更新する自動choreコミットが繰り返し行われた。</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/7297f91">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-27</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/4c33afd">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-27</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/2968763">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-27</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/fe0ea5b">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-27</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/8e73920">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-27</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/0fe7ccd">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-27</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/62b0f9c">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-27</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/14c357d">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-27</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">政府向けClaude提携</div>
+  <div class="topic-summary">GSAとの提携を拡大し、あらゆる階層の政府機関にClaudeを提供する。</div>
+<div class="item">
+  <span class="badge badge-anthropic_news">ANTHROPIC_NEWS</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://www.anthropic.com/news/expanding-partnership-gsa">Expanding our partnership with GSA to bring Claude to all levels of government</a></div>
+  </div>
+</div>
+</div>
+
+<footer class="footer">
+  Generated at 2026-10-28 07:56 JST<br>
+  Sources: Claude Code CHANGELOG, GitHub Releases, awesome-claude-code,
+  anthropics/skills, PulseMCP, Claude Plugins, GitHub Trending
+</footer>
+
+</div>
+</body>
+</html>
