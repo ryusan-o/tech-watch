@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Weekly Tech Watch — 2026-10-29</title>
+<style>
+:root {
+  --bg: #f8fafc;
+  --bg-card: #ffffff;
+  --bg-highlight: #eff6ff;
+  --text: #1e293b;
+  --text-muted: #64748b;
+  --text-light: #94a3b8;
+  --accent: #3b82f6;
+  --border: #e2e8f0;
+  --shadow: 0 1px 3px rgba(0,0,0,.08);
+  --badge-changelog: #3b82f6;
+  --badge-mcp: #8b5cf6;
+  --badge-trending: #f59e0b;
+  --badge-plugin: #10b981;
+  --badge-awesome: #f43f5e;
+  --badge-skills: #06b6d4;
+}
+@media(prefers-color-scheme:dark){
+:root {
+  --bg: #0f172a;
+  --bg-card: #1e293b;
+  --bg-highlight: #1e3a5f;
+  --text: #e2e8f0;
+  --text-muted: #94a3b8;
+  --text-light: #64748b;
+  --accent: #60a5fa;
+  --border: #334155;
+  --shadow: 0 1px 3px rgba(0,0,0,.3);
+}}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  background:var(--bg);color:var(--text);
+  line-height:1.6;padding:16px;
+}
+.container{max-width:760px;margin:0 auto}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* Header */
+.header{text-align:center;padding:32px 0 24px}
+.header h1{font-size:1.5rem;font-weight:700;letter-spacing:-.02em}
+.header .date-range{color:var(--text-muted);font-size:.875rem;margin-top:4px}
+
+/* Stats */
+.stat-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));
+  gap:8px;margin:0 0 32px;
+}
+.stat-card{
+  background:var(--bg-card);border:1px solid var(--border);border-radius:8px;
+  padding:12px;text-align:center;box-shadow:var(--shadow);
+}
+.stat-card .num{font-size:1.5rem;font-weight:700;color:var(--accent)}
+.stat-card .label{font-size:.75rem;color:var(--text-muted);margin-top:2px}
+
+/* Section heading */
+.section-heading{
+  font-size:1.125rem;font-weight:700;margin:32px 0 16px;
+  padding-bottom:8px;border-bottom:2px solid var(--accent);
+}
+
+/* Highlight cards */
+.highlight-card{
+  background:var(--bg-highlight);border:1px solid var(--border);
+  border-radius:12px;padding:20px;margin-bottom:16px;
+  border-left:4px solid var(--accent);
+}
+.highlight-card .hl-badge{
+  display:inline-block;font-size:.6875rem;font-weight:700;
+  color:var(--accent);background:var(--bg-card);
+  border:1px solid var(--border);border-radius:999px;
+  padding:2px 8px;margin-bottom:8px;
+}
+.highlight-card .hl-title{font-size:1rem;font-weight:700;margin-bottom:8px}
+.highlight-card .hl-title a{color:var(--text)}
+.highlight-card .hl-desc{font-size:.875rem;color:var(--text-muted);margin-bottom:8px}
+.highlight-card .hl-desc strong,
+.highlight-card .hl-scenario strong{
+  display:block;color:var(--text);font-size:.75rem;margin-bottom:2px;
+}
+.highlight-card .hl-link{font-size:.8125rem;margin-bottom:12px}
+.highlight-card .hl-scenario{
+  font-size:.875rem;line-height:1.7;
+  background:var(--bg-card);border-radius:8px;padding:12px;margin-bottom:8px;
+}
+.highlight-card .hl-action{
+  font-size:.8125rem;color:var(--accent);font-weight:600;
+}
+.highlight-card .hl-action::before{content:"→ "}
+
+/* Topic section */
+.topic{
+  background:var(--bg-card);border:1px solid var(--border);
+  border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:var(--shadow);
+}
+.topic-title{font-size:1rem;font-weight:700;margin-bottom:4px}
+.topic-summary{font-size:.8125rem;color:var(--text-muted);margin-bottom:16px}
+
+/* Item list */
+.item{
+  padding:10px 0;border-bottom:1px solid var(--border);
+  display:flex;gap:10px;align-items:flex-start;
+}
+.item:last-child{border-bottom:none;padding-bottom:0}
+.badge{
+  display:inline-block;font-size:.625rem;font-weight:700;
+  color:#fff;padding:2px 8px;border-radius:10px;white-space:nowrap;
+  flex-shrink:0;margin-top:3px;text-transform:uppercase;letter-spacing:.03em;
+}
+.badge-changelog{background:var(--badge-changelog)}
+.badge-mcp{background:var(--badge-mcp)}
+.badge-trending{background:var(--badge-trending)}
+.badge-plugin{background:var(--badge-plugin)}
+.badge-awesome{background:var(--badge-awesome)}
+.badge-skills{background:var(--badge-skills)}
+.item-body{flex:1;min-width:0}
+.item-title{font-size:.875rem;font-weight:600}
+.item-desc{font-size:.8125rem;color:var(--text-muted);margin-top:2px}
+.item-meta{font-size:.75rem;color:var(--text-light);margin-top:4px}
+.item-meta .stars::before{content:"\2B50 "}
+
+/* Footer */
+.footer{
+  text-align:center;color:var(--text-light);font-size:.75rem;
+  padding:32px 0 16px;border-top:1px solid var(--border);margin-top:32px;
+}
+
+/* No items */
+.empty{color:var(--text-light);font-style:italic;font-size:.875rem;padding:8px 0}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header class="header">
+  <h1>Weekly Tech Watch</h1>
+  <div class="date-range">2026-10-27 ~ 2026-10-29</div>
+</header>
+
+<div class="stat-grid">
+<div class="stat-card"><div class="num">8</div><div class="label">awesome-cc</div></div>
+<div class="stat-card"><div class="num">1</div><div class="label">Skills</div></div>
+</div>
+
+<h2 class="section-heading">Highlights</h2>
+<div class="highlight-card">
+  <div class="hl-badge">ニュース</div>
+  <div class="hl-title"><a href="https://www.anthropic.com/news/ai-for-science-expands-foundations-research-institutions">AI for Science expands to foundations and research institutions</a></div>
+  <div class="hl-desc"><strong>概要</strong>Anthropicが「AI for Science」プログラムの対象を拡大し、財団や研究機関も参加できるようにしたと発表した。これまで研究者個人や一部の大学・組織向けが中心だった科学研究向けのClaude提供(API利用クレジットや支援)を、研究助成を行う財団と研究機関へ広げる内容。ただし今回受け取った説明文は空で、対象範囲・支援内容・応募条件・金額などの具体的な数値や条件は本文で確認できていない。詳細は記事本文の確認が必要。</div>
+  <div class="hl-link"><a href="https://www.anthropic.com/news/ai-for-science-expands-foundations-research-institutions">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>りゅうさんの事業に直接のものではなく、すぐ使える機能追加でもないため、「周辺の動き」として押さえる位置づけが合いそうです。可能性のある使い所は二つあります。①うま藻・AlgaleX側:八木澤さんが藻類由来の新規成分探索の研究出身なので、共同研究先の大学や財団が採択されている場合、成分探索や文献整理にClaudeを使う話を持ちかけられるかもしれません。②AIコンサル側:研究機関や助成財団を相手にした「AI導入の自走支援」という切り口の提案材料になり、沖縄の大学や研究機関向けに業務設計の話を持ちかけるきっかけにもなり得ます。注意点として、公式の本文を読む前に対象国・組織要件や応募期限を推測で相手に伝えると誤案内になるため、確認してから話すのが安全です。また外部の研究機関や支援金が絡む話は、課金・契約を伴うので、まずは情報収集にとどめるのが無難です。</div>
+  <div class="hl-action">ブラウザで https://www.anthropic.com/news/ai-for-science-expands-foundations-research-institutions を開き、①対象となる組織の種類、②支援内容(APIクレジットなど)、③日本・沖縄の組織が対象か、④応募方法と期限、の4点だけ確認する。該当しそうなら、AlgaleXの共同研究先や沖縄の研究機関に共有するか判断する。</div>
+</div>
+
+<h2 class="section-heading">Topics</h2>
+<div class="topic">
+  <div class="topic-title">リポジトリ自動更新</div>
+  <div class="topic-summary">ティッカーデータとSVGを更新する定期的な自動choreコミット群。</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/ffbbe73">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-28</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/73ab268">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-28</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/97b40c5">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-28</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/da3e98e">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-28</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/e0351d1">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-28</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/337151f">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-28</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/7c5fb59">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-28</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/47dc963">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-28</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">MCP SDK v2対応</div>
+  <div class="topic-summary">mcp-builderスキルがMCP TypeScript SDKのv2を扱う内容に更新された。</div>
+<div class="item">
+  <span class="badge badge-skills">SKILLS</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/anthropics/skills/commit/ca45fc4">Update mcp-builder skill: teach v2 of the MCP TypeScript SDK (#2087)</a></div>
+    <div class="item-meta">2026-10-28</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">AI for Science拡大</div>
+  <div class="topic-summary">AI for Scienceの取り組みが財団や研究機関へ広がった。</div>
+<div class="item">
+  <span class="badge badge-anthropic_news">ANTHROPIC_NEWS</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://www.anthropic.com/news/ai-for-science-expands-foundations-research-institutions">AI for Science expands to foundations and research institutions</a></div>
+  </div>
+</div>
+</div>
+
+<footer class="footer">
+  Generated at 2026-10-29 07:55 JST<br>
+  Sources: Claude Code CHANGELOG, GitHub Releases, awesome-claude-code,
+  anthropics/skills, PulseMCP, Claude Plugins, GitHub Trending
+</footer>
+
+</div>
+</body>
+</html>
