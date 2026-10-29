@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Weekly Tech Watch — 2026-10-30</title>
+<style>
+:root {
+  --bg: #f8fafc;
+  --bg-card: #ffffff;
+  --bg-highlight: #eff6ff;
+  --text: #1e293b;
+  --text-muted: #64748b;
+  --text-light: #94a3b8;
+  --accent: #3b82f6;
+  --border: #e2e8f0;
+  --shadow: 0 1px 3px rgba(0,0,0,.08);
+  --badge-changelog: #3b82f6;
+  --badge-mcp: #8b5cf6;
+  --badge-trending: #f59e0b;
+  --badge-plugin: #10b981;
+  --badge-awesome: #f43f5e;
+  --badge-skills: #06b6d4;
+}
+@media(prefers-color-scheme:dark){
+:root {
+  --bg: #0f172a;
+  --bg-card: #1e293b;
+  --bg-highlight: #1e3a5f;
+  --text: #e2e8f0;
+  --text-muted: #94a3b8;
+  --text-light: #64748b;
+  --accent: #60a5fa;
+  --border: #334155;
+  --shadow: 0 1px 3px rgba(0,0,0,.3);
+}}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  background:var(--bg);color:var(--text);
+  line-height:1.6;padding:16px;
+}
+.container{max-width:760px;margin:0 auto}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* Header */
+.header{text-align:center;padding:32px 0 24px}
+.header h1{font-size:1.5rem;font-weight:700;letter-spacing:-.02em}
+.header .date-range{color:var(--text-muted);font-size:.875rem;margin-top:4px}
+
+/* Stats */
+.stat-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));
+  gap:8px;margin:0 0 32px;
+}
+.stat-card{
+  background:var(--bg-card);border:1px solid var(--border);border-radius:8px;
+  padding:12px;text-align:center;box-shadow:var(--shadow);
+}
+.stat-card .num{font-size:1.5rem;font-weight:700;color:var(--accent)}
+.stat-card .label{font-size:.75rem;color:var(--text-muted);margin-top:2px}
+
+/* Section heading */
+.section-heading{
+  font-size:1.125rem;font-weight:700;margin:32px 0 16px;
+  padding-bottom:8px;border-bottom:2px solid var(--accent);
+}
+
+/* Highlight cards */
+.highlight-card{
+  background:var(--bg-highlight);border:1px solid var(--border);
+  border-radius:12px;padding:20px;margin-bottom:16px;
+  border-left:4px solid var(--accent);
+}
+.highlight-card .hl-badge{
+  display:inline-block;font-size:.6875rem;font-weight:700;
+  color:var(--accent);background:var(--bg-card);
+  border:1px solid var(--border);border-radius:999px;
+  padding:2px 8px;margin-bottom:8px;
+}
+.highlight-card .hl-title{font-size:1rem;font-weight:700;margin-bottom:8px}
+.highlight-card .hl-title a{color:var(--text)}
+.highlight-card .hl-desc{font-size:.875rem;color:var(--text-muted);margin-bottom:8px}
+.highlight-card .hl-desc strong,
+.highlight-card .hl-scenario strong{
+  display:block;color:var(--text);font-size:.75rem;margin-bottom:2px;
+}
+.highlight-card .hl-link{font-size:.8125rem;margin-bottom:12px}
+.highlight-card .hl-scenario{
+  font-size:.875rem;line-height:1.7;
+  background:var(--bg-card);border-radius:8px;padding:12px;margin-bottom:8px;
+}
+.highlight-card .hl-action{
+  font-size:.8125rem;color:var(--accent);font-weight:600;
+}
+.highlight-card .hl-action::before{content:"→ "}
+
+/* Topic section */
+.topic{
+  background:var(--bg-card);border:1px solid var(--border);
+  border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:var(--shadow);
+}
+.topic-title{font-size:1rem;font-weight:700;margin-bottom:4px}
+.topic-summary{font-size:.8125rem;color:var(--text-muted);margin-bottom:16px}
+
+/* Item list */
+.item{
+  padding:10px 0;border-bottom:1px solid var(--border);
+  display:flex;gap:10px;align-items:flex-start;
+}
+.item:last-child{border-bottom:none;padding-bottom:0}
+.badge{
+  display:inline-block;font-size:.625rem;font-weight:700;
+  color:#fff;padding:2px 8px;border-radius:10px;white-space:nowrap;
+  flex-shrink:0;margin-top:3px;text-transform:uppercase;letter-spacing:.03em;
+}
+.badge-changelog{background:var(--badge-changelog)}
+.badge-mcp{background:var(--badge-mcp)}
+.badge-trending{background:var(--badge-trending)}
+.badge-plugin{background:var(--badge-plugin)}
+.badge-awesome{background:var(--badge-awesome)}
+.badge-skills{background:var(--badge-skills)}
+.item-body{flex:1;min-width:0}
+.item-title{font-size:.875rem;font-weight:600}
+.item-desc{font-size:.8125rem;color:var(--text-muted);margin-top:2px}
+.item-meta{font-size:.75rem;color:var(--text-light);margin-top:4px}
+.item-meta .stars::before{content:"\2B50 "}
+
+/* Footer */
+.footer{
+  text-align:center;color:var(--text-light);font-size:.75rem;
+  padding:32px 0 16px;border-top:1px solid var(--border);margin-top:32px;
+}
+
+/* No items */
+.empty{color:var(--text-light);font-style:italic;font-size:.875rem;padding:8px 0}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header class="header">
+  <h1>Weekly Tech Watch</h1>
+  <div class="date-range">2026-10-28 ~ 2026-10-30</div>
+</header>
+
+<div class="stat-grid">
+<div class="stat-card"><div class="num">1</div><div class="label">MCP</div></div>
+<div class="stat-card"><div class="num">1</div><div class="label">Trending</div></div>
+<div class="stat-card"><div class="num">8</div><div class="label">awesome-cc</div></div>
+</div>
+
+<h2 class="section-heading">Highlights</h2>
+<div class="highlight-card">
+  <div class="hl-badge">ニュース</div>
+  <div class="hl-title"><a href="https://www.pulsemcp.com/servers/oviron-openrouter-admin">MCP: OpenRouter Admin</a></div>
+  <div class="hl-desc"><strong>概要</strong>PulseMCPに掲載された「OpenRouter Admin」は、OpenRouterのアカウント管理を26個のツールで操作できるMCPサーバーです。対象はAPIキーの管理、クレジット(残高)の確認、利用状況(アクティビティ)の分析、ガードレール(利用制限ルール)の設定です。これまでOpenRouterの管理画面で手作業していたキー発行・失効、残高確認、モデル別の使用量集計などを、Claude CodeやClaude DesktopなどのMCPクライアントから会話形式で実行できるようになります。提供元はoviron氏で、公式ではなくコミュニティ製のサーバーです。</div>
+  <div class="hl-link"><a href="https://www.pulsemcp.com/servers/oviron-openrouter-admin">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>OpenRouter経由で複数のLLMを使っている場合、「今月どのモデルにいくら使ったか」「残クレジットはあと何日分か」をチャットで聞くだけで集計できる可能性があります。たとえばAPI費用の見回り(APICostPatrolのような仕組み)があるなら、サービス別にキーを分け、キーごとのアクティビティを取得して月次レポートの材料にする使い方が考えられます。クライアント案件で検証用キーを発行し、期限や上限をガードレールで縛ってから渡し、終了後に失効させる運用にも向きそうです。導入するなら、まず読み取り系(残高・利用状況の確認)だけを使い、キーの発行・削除・ガードレール変更といった書き込み系は慎重に扱うのがよさそうです。注意点は、このサーバーにはAdmin権限のキー(Management Key)を渡す必要があることです。漏れると全キーの操作や課金に影響するため、コミュニティ製のコードを確認せずに本番アカウントへ接続するのは避け、可能なら読み取り専用の運用や検証用アカウントで試すのが安全です。</div>
+  <div class="hl-action">まずリンク先 https://www.pulsemcp.com/servers/oviron-openrouter-admin を開き、26ツールの一覧と配布元のGitHubリポジトリを確認してください。試すなら、OpenRouterの設定画面で管理用キー(Management Key)を新規発行し、クライアントのMCP設定にそのキーを環境変数として渡して、残高と利用状況の取得だけを実行します。書き込み系ツールの挙動はソースを読んでから判断するのが安全です。</div>
+</div>
+<div class="highlight-card">
+  <div class="hl-badge">深掘り候補</div>
+  <div class="hl-title"><a href="https://github.com/google/elephant-goldfish-model">GitHub: google/elephant-goldfish-model</a></div>
+  <div class="hl-desc"><strong>概要</strong>GitHub Trendingに、Googleが公開するリポジトリ「google/elephant-goldfish-model」が登場しました。説明文は「Open-source skills for designing and reviewing software with AI agents」です。AIエージェントを使ってソフトウェアを設計・レビューするための「スキル」をオープンソースでまとめたものと読み取れます。機能名、コマンド、対応エージェント、ライセンスなど、説明文にない詳細は今回の情報からは確認できていません。リポジトリ名の由来や中身の構成も未確認です。</div>
+  <div class="hl-link"><a href="https://github.com/google/elephant-goldfish-model">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>りゅうさんはClaude CodeとCodexを共有リポジトリで使っています。そこに「設計」と「レビュー」の手順書をスキルとして足せる可能性があります。効きそうなのは、新しいアプリを作る前に全体設計を固める場面と、実装後に別の目でレビューさせる場面です。進め方の一例を挙げます。(1)READMEでスキルの形式を確認します。Claude Codeのスキル形式(SKILL.md)に近ければ、設計用とレビュー用を1つずつ別フォルダにコピーして試せます。(2)公開待ちではない小さな既存案件で、設計レビューだけを1回走らせて精度を見ます。(3)良ければ自分の意思決定原則(全体設計してから小さく出す)に合わせて書き換えます。注意点として、Google流の観点がそのまま自分の事業規模に合うとは限りません。過剰な設計工程が入ると、MVPで素早く出す方針とぶつかる可能性があります。顧客データを扱う案件に使う前に、外部送信の有無も確認したいところです。</div>
+  <div class="hl-action">ブラウザで https://github.com/google/elephant-goldfish-model を開き、README、ライセンス、スキルのフォルダ構成の3点を確認してください。形式がSKILL.md系だと分かれば、`git clone https://github.com/google/elephant-goldfish-model` を作業用の空フォルダに実行します。設計用とレビュー用のスキル本文を読み、自分の既存スキルと重なる部分と足りない部分を見比べてください。</div>
+</div>
+<div class="highlight-card">
+  <div class="hl-badge">ニュース</div>
+  <div class="hl-title"><a href="https://github.com/addyosmani/agent-skills/releases/tag/0.6.14">Addy Osmani: addyosmani/agent-skills</a></div>
+  <div class="hl-desc"><strong>概要</strong>Chrome DevRelのAddy Osmaniさんが公開しているGitHubリポジトリ「addyosmani/agent-skills」で、バージョン0.6.14のリリースが公開されました。AIコーディングエージェント向けの「スキル」(作業手順や指針をまとめた再利用可能な指示セット)を集めたリポジトリです。今回の通知に含まれる情報はリリース公開の事実とバージョン番号だけで、追加・変更されたスキル名、コマンド、フラグ、数値といった変更内容の詳細は記載されていません。何が変わったかはリリースノート本文(URL先)を見ないと分かりません。</div>
+  <div class="hl-link"><a href="https://github.com/addyosmani/agent-skills/releases/tag/0.6.14">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>りゅうさんはClaude CodeとCodexを共有リポジトリで使っているため、他の人が整理したスキルの書き方は、自分の運用を見直す材料になる可能性があります。たとえば、リリースノートに新規スキルがあれば、コードレビュー、仕様の書き出し、テスト先行といった手順が、どんな粒度で書かれているかを確認できます。自分のスキルやルールの文面と見比べて、曖昧な箇所を直すヒントにもなりそうです。やり方としては、リリースページで差分をざっと読み、使えそうなスキルを1つだけ別フォルダに置いて試し、既存のルールと衝突しないかを確認する流れが考えられます。注意点は、今回の通知だけでは中身が分からないことです。外部のスキルをそのまま常設すると、既存のルールや指示と競合して挙動が読みにくくなるため、まず読むだけにして、取り込むかは中身を見てから決めるのが安全です。</div>
+  <div class="hl-action">ブラウザで https://github.com/addyosmani/agent-skills/releases/tag/0.6.14 を開き、「What&#x27;s Changed」にある追加・変更スキルを確認します。気になるものがあれば、リポジトリの該当ファイル(skills配下のSKILL.mdなど)を読み、自分のスキルの書き方と比べてみてください。取り込みは中身を読んだ後で判断すれば十分です。</div>
+</div>
+
+<h2 class="section-heading">Topics</h2>
+<div class="topic">
+  <div class="topic-title">OpenRouter管理ツール</div>
+  <div class="topic-summary">OpenRouterのキー・クレジット・ガードレールなどを管理する26ツール群のMCPサーバー。</div>
+<div class="item">
+  <span class="badge badge-mcp">MCP</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://www.pulsemcp.com/servers/oviron-openrouter-admin">OpenRouter Admin</a></div>
+    <div class="item-desc">Manages OpenRouter accounts with 26 tools for keys, credits, activity analysis, and guardrails.</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">AI設計レビュースキル</div>
+  <div class="topic-summary">AIエージェントでソフトウェア設計とレビューを行うオープンソースのスキル集。</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/google/elephant-goldfish-model">google/elephant-goldfish-model</a></div>
+    <div class="item-desc">Open-source skills for designing and reviewing software with AI agents</div>
+    <div class="item-meta"><span class="stars">5868</span></div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">リポジトリ自動更新</div>
+  <div class="topic-summary">リポジトリのティッカーデータとSVGを更新する自動choreコミットが複数並ぶ。</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/577e8db">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-29</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/f698257">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-29</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/65d5d2a">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-29</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/7a9bbe5">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-29</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/e331fa9">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-29</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/1aafce2">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-29</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/57bcddf">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-29</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/a429612">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-29</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">内容不明の項目</div>
+  <div class="topic-summary">タイトルも説明も空で、内容を判別できない項目。</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/addyosmani/agent-skills/releases/tag/0.6.14">Addy Osmani: addyosmani/agent-skills (ReleaseEvent)</a></div>
+    <div class="item-desc">Release published: Agent Skills 0.6.14</div>
+    <div class="item-meta">2026-10-29</div>
+  </div>
+</div>
+</div>
+
+<footer class="footer">
+  Generated at 2026-10-30 07:56 JST<br>
+  Sources: Claude Code CHANGELOG, GitHub Releases, awesome-claude-code,
+  anthropics/skills, PulseMCP, Claude Plugins, GitHub Trending
+</footer>
+
+</div>
+</body>
+</html>
