@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Weekly Tech Watch — 2026-11-02</title>
+<style>
+:root {
+  --bg: #f8fafc;
+  --bg-card: #ffffff;
+  --bg-highlight: #eff6ff;
+  --text: #1e293b;
+  --text-muted: #64748b;
+  --text-light: #94a3b8;
+  --accent: #3b82f6;
+  --border: #e2e8f0;
+  --shadow: 0 1px 3px rgba(0,0,0,.08);
+  --badge-changelog: #3b82f6;
+  --badge-mcp: #8b5cf6;
+  --badge-trending: #f59e0b;
+  --badge-plugin: #10b981;
+  --badge-awesome: #f43f5e;
+  --badge-skills: #06b6d4;
+}
+@media(prefers-color-scheme:dark){
+:root {
+  --bg: #0f172a;
+  --bg-card: #1e293b;
+  --bg-highlight: #1e3a5f;
+  --text: #e2e8f0;
+  --text-muted: #94a3b8;
+  --text-light: #64748b;
+  --accent: #60a5fa;
+  --border: #334155;
+  --shadow: 0 1px 3px rgba(0,0,0,.3);
+}}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  background:var(--bg);color:var(--text);
+  line-height:1.6;padding:16px;
+}
+.container{max-width:760px;margin:0 auto}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* Header */
+.header{text-align:center;padding:32px 0 24px}
+.header h1{font-size:1.5rem;font-weight:700;letter-spacing:-.02em}
+.header .date-range{color:var(--text-muted);font-size:.875rem;margin-top:4px}
+
+/* Stats */
+.stat-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));
+  gap:8px;margin:0 0 32px;
+}
+.stat-card{
+  background:var(--bg-card);border:1px solid var(--border);border-radius:8px;
+  padding:12px;text-align:center;box-shadow:var(--shadow);
+}
+.stat-card .num{font-size:1.5rem;font-weight:700;color:var(--accent)}
+.stat-card .label{font-size:.75rem;color:var(--text-muted);margin-top:2px}
+
+/* Section heading */
+.section-heading{
+  font-size:1.125rem;font-weight:700;margin:32px 0 16px;
+  padding-bottom:8px;border-bottom:2px solid var(--accent);
+}
+
+/* Highlight cards */
+.highlight-card{
+  background:var(--bg-highlight);border:1px solid var(--border);
+  border-radius:12px;padding:20px;margin-bottom:16px;
+  border-left:4px solid var(--accent);
+}
+.highlight-card .hl-badge{
+  display:inline-block;font-size:.6875rem;font-weight:700;
+  color:var(--accent);background:var(--bg-card);
+  border:1px solid var(--border);border-radius:999px;
+  padding:2px 8px;margin-bottom:8px;
+}
+.highlight-card .hl-title{font-size:1rem;font-weight:700;margin-bottom:8px}
+.highlight-card .hl-title a{color:var(--text)}
+.highlight-card .hl-desc{font-size:.875rem;color:var(--text-muted);margin-bottom:8px}
+.highlight-card .hl-desc strong,
+.highlight-card .hl-scenario strong{
+  display:block;color:var(--text);font-size:.75rem;margin-bottom:2px;
+}
+.highlight-card .hl-link{font-size:.8125rem;margin-bottom:12px}
+.highlight-card .hl-scenario{
+  font-size:.875rem;line-height:1.7;
+  background:var(--bg-card);border-radius:8px;padding:12px;margin-bottom:8px;
+}
+.highlight-card .hl-action{
+  font-size:.8125rem;color:var(--accent);font-weight:600;
+}
+.highlight-card .hl-action::before{content:"→ "}
+
+/* Topic section */
+.topic{
+  background:var(--bg-card);border:1px solid var(--border);
+  border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:var(--shadow);
+}
+.topic-title{font-size:1rem;font-weight:700;margin-bottom:4px}
+.topic-summary{font-size:.8125rem;color:var(--text-muted);margin-bottom:16px}
+
+/* Item list */
+.item{
+  padding:10px 0;border-bottom:1px solid var(--border);
+  display:flex;gap:10px;align-items:flex-start;
+}
+.item:last-child{border-bottom:none;padding-bottom:0}
+.badge{
+  display:inline-block;font-size:.625rem;font-weight:700;
+  color:#fff;padding:2px 8px;border-radius:10px;white-space:nowrap;
+  flex-shrink:0;margin-top:3px;text-transform:uppercase;letter-spacing:.03em;
+}
+.badge-changelog{background:var(--badge-changelog)}
+.badge-mcp{background:var(--badge-mcp)}
+.badge-trending{background:var(--badge-trending)}
+.badge-plugin{background:var(--badge-plugin)}
+.badge-awesome{background:var(--badge-awesome)}
+.badge-skills{background:var(--badge-skills)}
+.item-body{flex:1;min-width:0}
+.item-title{font-size:.875rem;font-weight:600}
+.item-desc{font-size:.8125rem;color:var(--text-muted);margin-top:2px}
+.item-meta{font-size:.75rem;color:var(--text-light);margin-top:4px}
+.item-meta .stars::before{content:"\2B50 "}
+
+/* Footer */
+.footer{
+  text-align:center;color:var(--text-light);font-size:.75rem;
+  padding:32px 0 16px;border-top:1px solid var(--border);margin-top:32px;
+}
+
+/* No items */
+.empty{color:var(--text-light);font-style:italic;font-size:.875rem;padding:8px 0}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header class="header">
+  <h1>Weekly Tech Watch</h1>
+  <div class="date-range">2026-10-29 ~ 2026-11-02</div>
+</header>
+
+<div class="stat-grid">
+<div class="stat-card"><div class="num">2</div><div class="label">Claude Code</div></div>
+<div class="stat-card"><div class="num">1</div><div class="label">MCP</div></div>
+<div class="stat-card"><div class="num">1</div><div class="label">Trending</div></div>
+<div class="stat-card"><div class="num">16</div><div class="label">awesome-cc</div></div>
+</div>
+
+<h2 class="section-heading">Highlights</h2>
+<div class="highlight-card">
+  <div class="hl-badge">深掘り候補</div>
+  <div class="hl-title"><a href="https://code.claude.com/docs/en/changelog">Claude Code v2.1.314</a></div>
+  <div class="hl-desc"><strong>概要</strong>Claude Code v2.1.314 で、新しい設定 `permissions.blockWritesOutsideWorkingDirectories` が追加されました。これを有効にすると、Write・Edit・NotebookEdit の3つのツールが、作業ディレクトリ(working directories)の外にあるパスへの書き込みを、どの権限モードでも拒否します。従来は、権限モードによっては作業ディレクトリ外のファイルも編集できる場合がありました。今回は、自動承認系のモードでも例外にならない書き込み範囲の上限を、設定で固定できます。</div>
+  <div class="hl-link"><a href="https://code.claude.com/docs/en/changelog">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>Claude Codeに長い作業を任せる場面で、書き込み範囲の安全柵として効く可能性があります。たとえば複数のリポジトリや `.claude` ディレクトリを `additionalDirectories` で追加している環境では、意図しない場所へ書き込まれる事故を抑えられそうです。設定は `settings.json` の `permissions` に `&quot;blockWritesOutsideWorkingDirectories&quot;: true` を入れる形が想定されます。特に、承認を省略して連続実行させるモードや、自動実行・定期実行から呼ぶ運用と相性が良いと思います。放置しても、他プロジェクトや設定ファイルを巻き込みにくくなります。注意点として、この制限はWrite・Edit・NotebookEditが対象なので、Bashでの `echo &gt;` や `cp` による書き込みは別の仕組み(sandboxやdenyルール)で守る必要があるかもしれません。また、共有リポジトリの外にある設定やメモリを編集させたい作業では拒否されるため、そうした作業のときだけ設定を外すか、作業ディレクトリに追加する運用が考えられます。</div>
+  <div class="hl-action">まず https://code.claude.com/docs/en/changelog で v2.1.314 の該当行を確認し、`permissions.blockWritesOutsideWorkingDirectories` の記載場所を権限設定のドキュメントでも探してください。次に、テスト用のプロジェクトの `.claude/settings.json` に `{&quot;permissions&quot;: {&quot;blockWritesOutsideWorkingDirectories&quot;: true}}` を入れます。そのうえで、作業ディレクトリ外のファイルを編集させて拒否されるか、Bash経由の書き込みは通るかを確認すると、守れる範囲が分かります。</div>
+</div>
+<div class="highlight-card">
+  <div class="hl-badge">ニュース</div>
+  <div class="hl-title"><a href="https://code.claude.com/docs/en/changelog">Claude Code v2.1.316</a></div>
+  <div class="hl-desc"><strong>概要</strong>Claude Code v2.1.316 のチェンジログで、環境変数 CLAUDE_CODE_DISABLE_ULTRATHINK が追加された。この変数を設定すると、プロンプト内に「ultrathink」というキーワードを書いても拡張思考(深い推論)が発動しなくなり、キーワード機能そのものがオフになる。これまでは、文中にうっかり ultrathink と含めるだけで思考量が増えていたが、その挙動を明示的に無効化できる。出典は公式ドキュメントのチェンジログ。</div>
+  <div class="hl-link"><a href="https://code.claude.com/docs/en/changelog">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>ultrathink が効いてほしくない場面で役立つ可能性があります。たとえば、Codex と Claude Code を共有リポジトリで使い、ドキュメントや議事録、ニュース記事に「ultrathink」という語がそのまま含まれていると、意図せず思考が深くなり、トークン消費や応答時間が増えることがあります。自動実行(スクリプトやcronで claude -p を呼ぶ週次処理など)で入力文に外部テキストが混ざる運用では、コストと所要時間を安定させる目的で、環境変数 CLAUDE_CODE_DISABLE_ULTRATHINK=1 を設定する手があります。設定は ~/.claude/settings.json の env に書くか、実行するシェルで export する形が考えられます。一方、対話中に「ここは深く考えて」と自分で ultrathink を使っている場合は、無効化すると使えなくなるため、常用している人には向きません。まず自動実行用の環境だけに限定して試すのが安全です。</div>
+  <div class="hl-action">手元で影響を確かめるなら、PowerShell で `$env:CLAUDE_CODE_DISABLE_ULTRATHINK=1; claude` と起動し、プロンプトに ultrathink を含めて思考量が変わらないか見る。常用するなら ~/.claude/settings.json の &quot;env&quot; に &quot;CLAUDE_CODE_DISABLE_ULTRATHINK&quot;: &quot;1&quot; を追記する。詳細は https://code.claude.com/docs/en/changelog の v2.1.316 の項を参照。</div>
+</div>
+<div class="highlight-card">
+  <div class="hl-badge">ニュース</div>
+  <div class="hl-title"><a href="https://www.pulsemcp.com/servers/gh-kagan-sh-kagan">MCP: Kagan</a></div>
+  <div class="hl-desc"><strong>概要</strong>PulseMCPに掲載されたMCPサーバー「Kagan」は、ターミナル上で動くカンバンボード型のツールで、自律実行(autonomous)モードと、人が並走するペア(pair)モードの2種類でコーディングエージェントを動かせる。対応するエージェントプロバイダーは14種類。タスクをカード化してボードで管理しつつ、複数のエージェントに振り分けて進捗を一覧できる点が特徴で、Claude CodeやCodexのような異なるエージェントを一つの画面から束ねる「エージェント司令塔」の位置づけにある。リポジトリは gh-kagan-sh/kagan。</div>
+  <div class="hl-link"><a href="https://www.pulsemcp.com/servers/gh-kagan-sh-kagan">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>りゅうさんはCodexとClaude Codeを共有リポジトリで併用しているため、タスクごとにどのエージェントへ何を渡したかをカンバンで一元把握できる可能性があります。たとえば、QuoteBillingの小さな修正やTaskLensの改善といった独立した複数タスクをカード化し、軽い作業は自律モード、仕様判断が絡む作業はペアモードで進める、といった使い分けが考えられます。試すなら、まず使い捨てのテスト用リポジトリでKaganを起動し、既存のClaude Code・Codexを2〜3枚のカードに割り当てて、ボード上で状態が追えるかを確認する流れが無理がありません。注意点として、自律モードは複数エージェントが同じ作業ツリーを触ると衝突しやすいので、ブランチやworktreeが分離されるかを先に確認したほうがよいです。また、現在のbacklogの優先順位が固まっている中で新ツール導入を増やすと着手過多になり得るため、まずは情報収集に留めるのが安全です。</div>
+  <div class="hl-action">ブラウザで https://www.pulsemcp.com/servers/gh-kagan-sh/kagan を開き、対応する14プロバイダーにClaude CodeとCodexが含まれるかと、インストール方法を確認する。次に GitHub の gh-kagan-sh/kagan のREADMEで、worktree分離の有無と自律/ペアモードの切替方法の記述を読む。試す場合は、本番リポジトリではなく空のテスト用リポジトリで行う。</div>
+</div>
+
+<h2 class="section-heading">Topics</h2>
+<div class="topic">
+  <div class="topic-title">Claude Code更新</div>
+  <div class="topic-summary">Claude Codeの新バージョンでultrathink無効化や書き込み制限などの設定・権限機能が追加された。</div>
+<div class="item">
+  <span class="badge badge-changelog">CHANGELOG</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://code.claude.com/docs/en/changelog">v2.1.316</a></div>
+    <div class="item-desc">Added CLAUDE_CODE_DISABLE_ULTRATHINK, which turns the ultrathink keyword off, Added pooled group budgets to the Claude apps gateway: one monthly budget that a group’s members share, on top of each member’s own limit, set with pooled_budget on the spend limits admin API, Added CLAUDE_CODE_DISABLE_LOOPED_CROSS_CERT_DROP to keep system cross-certificates that certify each other in a loop, for servers whose private CA needs one</div>
+    <div class="item-meta">October 31, 2026</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-changelog">CHANGELOG</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://code.claude.com/docs/en/changelog">v2.1.314</a></div>
+    <div class="item-desc">Added permissions.blockWritesOutsideWorkingDirectories: Write, Edit and NotebookEdit refuse paths outside the working directories in every permission mode, Added an optional groups list to Claude apps gateway upstreams: only developers in the listed IdP groups are sent to that upstream, on failover too, Added guardrail_trace to Claude apps gateway Bedrock upstreams, to log which Amazon Bedrock guardrail filter fired on a request, without the matched text</div>
+    <div class="item-meta">October 30, 2026</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">AIエージェント管理</div>
+  <div class="topic-summary">複数プロバイダー対応のコーディングエージェントをターミナルのカンバンで統括するツール。</div>
+<div class="item">
+  <span class="badge badge-mcp">MCP</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://www.pulsemcp.com/servers/gh-kagan-sh-kagan">Kagan</a></div>
+    <div class="item-desc">Terminal Kanban board that orchestrates autonomous and pair-mode coding agents across 14 supported providers.</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">動画DL・文字起こし</div>
+  <div class="topic-summary">1000以上のサイトから動画・音声を取得し、ローカル文字起こしや要約・翻訳ができるツール。</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/nexmoe/VidBee">nexmoe/VidBee</a></div>
+    <div class="item-desc">Download video and audio from 1000+ sites, transcribe locally with speaker labels, and summarize, translate, or chat with your media using your preferred AI provider.</div>
+    <div class="item-meta"><span class="stars">11044</span></div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">リポジトリ自動更新</div>
+  <div class="topic-summary">リポジトリのティッカーデータとSVGを自動更新する定型のchoreコミット群。</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/60d4d92">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-11-01</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/2659ea1">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-11-01</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/6b14db1">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-11-01</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/f84fd21">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-11-01</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/0d309b3">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-11-01</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/d4e110b">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-11-01</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/62aae65">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-11-01</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/522f9bb">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-11-01</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/3681ee2">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-31</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/016266c">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-31</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/66d1d6f">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-31</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/1d05a58">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-31</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/196534f">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-31</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/9322274">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-31</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/6a389ce">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-31</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/b55547c">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-10-31</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">内容不明の項目</div>
+  <div class="topic-summary">タイトルも説明もなく、内容を判別できない空の項目。</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/addyosmani/agent-skills">Addy Osmani: addyosmani/agent-skills (PushEvent)</a></div>
+    <div class="item-desc">[main] New push</div>
+    <div class="item-meta">2026-10-31</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/addyosmani/agent-skills">Addy Osmani: addyosmani/agent-skills (PushEvent)</a></div>
+    <div class="item-desc">[main] New push</div>
+    <div class="item-meta">2026-10-31</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/addyosmani/agent-skills">Addy Osmani: addyosmani/agent-skills (PushEvent)</a></div>
+    <div class="item-desc">[main] New push</div>
+    <div class="item-meta">2026-10-31</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/addyosmani/agent-skills">Addy Osmani: addyosmani/agent-skills (PushEvent)</a></div>
+    <div class="item-desc">[main] New push</div>
+    <div class="item-meta">2026-10-31</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/addyosmani/agent-skills">Addy Osmani: addyosmani/agent-skills (PushEvent)</a></div>
+    <div class="item-desc">[main] New push</div>
+    <div class="item-meta">2026-10-31</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/addyosmani/agent-skills">Addy Osmani: addyosmani/agent-skills (PushEvent)</a></div>
+    <div class="item-desc">[main] New push</div>
+    <div class="item-meta">2026-10-31</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/addyosmani/agent-skills">Addy Osmani: addyosmani/agent-skills (PushEvent)</a></div>
+    <div class="item-desc">[main] New push</div>
+    <div class="item-meta">2026-10-31</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/addyosmani/agent-skills">Addy Osmani: addyosmani/agent-skills (PushEvent)</a></div>
+    <div class="item-desc">[main] New push</div>
+    <div class="item-meta">2026-10-31</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/CybotTM/agent-skills">Addy Osmani: CybotTM/agent-skills (PushEvent)</a></div>
+    <div class="item-desc">[select-behavioral-eval-case] New push</div>
+    <div class="item-meta">2026-10-31</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/addyosmani/agent-skills/releases/tag/0.6.15">Addy Osmani: addyosmani/agent-skills (ReleaseEvent)</a></div>
+    <div class="item-desc">Release published: Agent Skills 0.6.15</div>
+    <div class="item-meta">2026-10-31</div>
+  </div>
+</div>
+</div>
+
+<footer class="footer">
+  Generated at 2026-11-02 07:56 JST<br>
+  Sources: Claude Code CHANGELOG, GitHub Releases, awesome-claude-code,
+  anthropics/skills, PulseMCP, Claude Plugins, GitHub Trending
+</footer>
+
+</div>
+</body>
+</html>
