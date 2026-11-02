@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Weekly Tech Watch — 2026-11-03</title>
+<style>
+:root {
+  --bg: #f8fafc;
+  --bg-card: #ffffff;
+  --bg-highlight: #eff6ff;
+  --text: #1e293b;
+  --text-muted: #64748b;
+  --text-light: #94a3b8;
+  --accent: #3b82f6;
+  --border: #e2e8f0;
+  --shadow: 0 1px 3px rgba(0,0,0,.08);
+  --badge-changelog: #3b82f6;
+  --badge-mcp: #8b5cf6;
+  --badge-trending: #f59e0b;
+  --badge-plugin: #10b981;
+  --badge-awesome: #f43f5e;
+  --badge-skills: #06b6d4;
+}
+@media(prefers-color-scheme:dark){
+:root {
+  --bg: #0f172a;
+  --bg-card: #1e293b;
+  --bg-highlight: #1e3a5f;
+  --text: #e2e8f0;
+  --text-muted: #94a3b8;
+  --text-light: #64748b;
+  --accent: #60a5fa;
+  --border: #334155;
+  --shadow: 0 1px 3px rgba(0,0,0,.3);
+}}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  background:var(--bg);color:var(--text);
+  line-height:1.6;padding:16px;
+}
+.container{max-width:760px;margin:0 auto}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* Header */
+.header{text-align:center;padding:32px 0 24px}
+.header h1{font-size:1.5rem;font-weight:700;letter-spacing:-.02em}
+.header .date-range{color:var(--text-muted);font-size:.875rem;margin-top:4px}
+
+/* Stats */
+.stat-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));
+  gap:8px;margin:0 0 32px;
+}
+.stat-card{
+  background:var(--bg-card);border:1px solid var(--border);border-radius:8px;
+  padding:12px;text-align:center;box-shadow:var(--shadow);
+}
+.stat-card .num{font-size:1.5rem;font-weight:700;color:var(--accent)}
+.stat-card .label{font-size:.75rem;color:var(--text-muted);margin-top:2px}
+
+/* Section heading */
+.section-heading{
+  font-size:1.125rem;font-weight:700;margin:32px 0 16px;
+  padding-bottom:8px;border-bottom:2px solid var(--accent);
+}
+
+/* Highlight cards */
+.highlight-card{
+  background:var(--bg-highlight);border:1px solid var(--border);
+  border-radius:12px;padding:20px;margin-bottom:16px;
+  border-left:4px solid var(--accent);
+}
+.highlight-card .hl-badge{
+  display:inline-block;font-size:.6875rem;font-weight:700;
+  color:var(--accent);background:var(--bg-card);
+  border:1px solid var(--border);border-radius:999px;
+  padding:2px 8px;margin-bottom:8px;
+}
+.highlight-card .hl-title{font-size:1rem;font-weight:700;margin-bottom:8px}
+.highlight-card .hl-title a{color:var(--text)}
+.highlight-card .hl-desc{font-size:.875rem;color:var(--text-muted);margin-bottom:8px}
+.highlight-card .hl-desc strong,
+.highlight-card .hl-scenario strong{
+  display:block;color:var(--text);font-size:.75rem;margin-bottom:2px;
+}
+.highlight-card .hl-link{font-size:.8125rem;margin-bottom:12px}
+.highlight-card .hl-scenario{
+  font-size:.875rem;line-height:1.7;
+  background:var(--bg-card);border-radius:8px;padding:12px;margin-bottom:8px;
+}
+.highlight-card .hl-action{
+  font-size:.8125rem;color:var(--accent);font-weight:600;
+}
+.highlight-card .hl-action::before{content:"→ "}
+
+/* Topic section */
+.topic{
+  background:var(--bg-card);border:1px solid var(--border);
+  border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:var(--shadow);
+}
+.topic-title{font-size:1rem;font-weight:700;margin-bottom:4px}
+.topic-summary{font-size:.8125rem;color:var(--text-muted);margin-bottom:16px}
+
+/* Item list */
+.item{
+  padding:10px 0;border-bottom:1px solid var(--border);
+  display:flex;gap:10px;align-items:flex-start;
+}
+.item:last-child{border-bottom:none;padding-bottom:0}
+.badge{
+  display:inline-block;font-size:.625rem;font-weight:700;
+  color:#fff;padding:2px 8px;border-radius:10px;white-space:nowrap;
+  flex-shrink:0;margin-top:3px;text-transform:uppercase;letter-spacing:.03em;
+}
+.badge-changelog{background:var(--badge-changelog)}
+.badge-mcp{background:var(--badge-mcp)}
+.badge-trending{background:var(--badge-trending)}
+.badge-plugin{background:var(--badge-plugin)}
+.badge-awesome{background:var(--badge-awesome)}
+.badge-skills{background:var(--badge-skills)}
+.item-body{flex:1;min-width:0}
+.item-title{font-size:.875rem;font-weight:600}
+.item-desc{font-size:.8125rem;color:var(--text-muted);margin-top:2px}
+.item-meta{font-size:.75rem;color:var(--text-light);margin-top:4px}
+.item-meta .stars::before{content:"\2B50 "}
+
+/* Footer */
+.footer{
+  text-align:center;color:var(--text-light);font-size:.75rem;
+  padding:32px 0 16px;border-top:1px solid var(--border);margin-top:32px;
+}
+
+/* No items */
+.empty{color:var(--text-light);font-style:italic;font-size:.875rem;padding:8px 0}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header class="header">
+  <h1>Weekly Tech Watch</h1>
+  <div class="date-range">2026-11-01 ~ 2026-11-03</div>
+</header>
+
+<div class="stat-grid">
+<div class="stat-card"><div class="num">2</div><div class="label">Trending</div></div>
+<div class="stat-card"><div class="num">8</div><div class="label">awesome-cc</div></div>
+</div>
+
+<h2 class="section-heading">Highlights</h2>
+<div class="highlight-card">
+  <div class="hl-badge">ニュース</div>
+  <div class="hl-title"><a href="https://github.com/nocobase/nocobase">GitHub: nocobase/nocobase</a></div>
+  <div class="hl-desc"><strong>概要</strong>NocoBaseは、AIを前提に業務システムを「作る・動かす・育てる」ためのオープンソース基盤(GitHubトレンド入り)。説明では「エージェントがコードを書き、実作業を行い、NocoBaseが土台とガバナンス(権限・統制)を提供し、最終判断は人間が行う」という役割分担を掲げている。従来のノーコード/ローコード型の業務アプリ構築基盤を、AIエージェントが操作・拡張する前提へ寄せた位置づけと読める。今回の説明文には、具体的な機能名・コマンド・数値は含まれていない。</div>
+  <div class="hl-link"><a href="https://github.com/nocobase/nocobase">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>クライアントの小規模業務システム(顧客管理、案件管理、見積・申請フローなど)を、スクラッチ開発せず短期間で形にしたい場面で効く可能性があります。たとえば学童運営NPOやPUMPGYMのような相談で、まずNocoBaseをDocker等でローカルに立て、データモデル(顧客・案件・タスク)と権限ロールだけ先に作り、画面はAIに叩き台を作らせる、というMVP的な進め方が考えられます。「全体設計してから小さく出す」「相手が自走できる状態」という方針とも相性がよく、管理画面を相手自身が触れる点が利点です。一方、顧客データや個人情報を載せる場合は、セルフホストの運用(バックアップ、アップデート、認証、VPS負荷)が新たな負担になります。backlogにVPSインフラの緊急課題がある今は、本番導入ではなく検証止まりにし、既存のQuoteBillingなど動いている資産を置き換える使い方は避けた方が安全です。</div>
+  <div class="hl-action">まず https://github.com/nocobase/nocobase のREADMEで、ライセンス(商用利用条件・有料プラグインの範囲)、対応DB、AIエージェント連携(MCPやAPI)の記載箇所を確認する。試すなら公式のDocker Compose手順でローカルに起動し、顧客と案件の2テーブルだけ作って、権限設定と外部APIからの操作のしやすさを30分ほどで見る。</div>
+</div>
+<div class="highlight-card">
+  <div class="hl-badge">ニュース</div>
+  <div class="hl-title"><a href="https://github.com/anomalyco/hex">GitHub: anomalyco/hex</a></div>
+  <div class="hl-desc"><strong>概要</strong>GitHub Trendingに入った anomalyco/hex は、Mac・Windows・Linuxで動く「ローカル音声ディクテーション」ツールです。説明文から確認できるのは、音声入力をクラウドに送らず手元の端末で文字起こしする設計であることと、3つのOSに対応していることまでです。使用モデル、対応言語(日本語を含むか)、認識精度、ライセンス、ホットキーなどの操作方法は、手元の情報だけでは確認できません。採用を考える前にREADMEで確かめる必要があります。</div>
+  <div class="hl-link"><a href="https://github.com/anomalyco/hex">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>効きそうなのは、AIへの指示や長文のたたき台を「話して入力」したい場面です。りゅうさんはClaude CodeやCodexに要件や指示を日常的に出しているので、タイピングの代わりに喋って入れられれば、構造化前の考えをそのまま出す速度が上がる可能性があります。ローカル処理なら、クライアントの商談内容や社内情報を外部に出さずに済む点も利点です。具体的には、Windows機にインストールし、ホットキーで音声をカーソル位置へ入力できるか試すところからです。ただし日本語の精度が使えるかは未確認です。固有名詞(ズケヤマセイラ、濱地心など)の誤変換は、議事録でも実際に起きた問題でした。そのため、機密情報を入れる用途には、先に短い文章で精度を試してからにするのが無難です。</div>
+  <div class="hl-action">ブラウザで https://github.com/anomalyco/hex を開き、READMEの「対応言語」「使用モデル」「Windows版の入手方法」「ライセンス」を確認します。日本語に対応していて、Windowsのビルドがあれば、手元のPCで1〜2分ほど日常の指示文を喋って、誤変換の率を試します。</div>
+</div>
+
+<h2 class="section-heading">Topics</h2>
+<div class="topic">
+  <div class="topic-title">AI業務システム基盤</div>
+  <div class="topic-summary">AIエージェントがコードを書き業務システムを構築・運用するオープンソースのNocoBase。</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/nocobase/nocobase">nocobase/nocobase</a></div>
+    <div class="item-desc">NocoBase is the open-source platform for building, running, and evolving business systems with AI. Agents write the code and do the work, NocoBase provides the foundation and governance, and people make the decisions.</div>
+    <div class="item-meta"><span class="stars">24821</span></div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">ローカル音声入力</div>
+  <div class="topic-summary">Mac・Windows・Linuxで動作するローカル完結型の音声ディクテーションツール。</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/anomalyco/hex">anomalyco/hex</a></div>
+    <div class="item-desc">Local voice dictation for mac, windows and linux</div>
+    <div class="item-meta"><span class="stars">4065</span></div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">リポジトリ自動更新</div>
+  <div class="topic-summary">リポジトリのティッカーデータとSVGを更新する自動choreコミット群。</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/05346e4">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-11-02</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/2afefd6">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-11-02</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/0e91271">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-11-02</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/b8f90c1">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-11-02</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/bbb2ee3">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-11-02</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/b8785f9">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-11-02</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/c03f95d">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-11-02</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/610c2b0">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-11-02</div>
+  </div>
+</div>
+</div>
+
+<footer class="footer">
+  Generated at 2026-11-03 07:55 JST<br>
+  Sources: Claude Code CHANGELOG, GitHub Releases, awesome-claude-code,
+  anthropics/skills, PulseMCP, Claude Plugins, GitHub Trending
+</footer>
+
+</div>
+</body>
+</html>
