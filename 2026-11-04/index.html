@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Weekly Tech Watch — 2026-11-04</title>
+<style>
+:root {
+  --bg: #f8fafc;
+  --bg-card: #ffffff;
+  --bg-highlight: #eff6ff;
+  --text: #1e293b;
+  --text-muted: #64748b;
+  --text-light: #94a3b8;
+  --accent: #3b82f6;
+  --border: #e2e8f0;
+  --shadow: 0 1px 3px rgba(0,0,0,.08);
+  --badge-changelog: #3b82f6;
+  --badge-mcp: #8b5cf6;
+  --badge-trending: #f59e0b;
+  --badge-plugin: #10b981;
+  --badge-awesome: #f43f5e;
+  --badge-skills: #06b6d4;
+}
+@media(prefers-color-scheme:dark){
+:root {
+  --bg: #0f172a;
+  --bg-card: #1e293b;
+  --bg-highlight: #1e3a5f;
+  --text: #e2e8f0;
+  --text-muted: #94a3b8;
+  --text-light: #64748b;
+  --accent: #60a5fa;
+  --border: #334155;
+  --shadow: 0 1px 3px rgba(0,0,0,.3);
+}}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  background:var(--bg);color:var(--text);
+  line-height:1.6;padding:16px;
+}
+.container{max-width:760px;margin:0 auto}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* Header */
+.header{text-align:center;padding:32px 0 24px}
+.header h1{font-size:1.5rem;font-weight:700;letter-spacing:-.02em}
+.header .date-range{color:var(--text-muted);font-size:.875rem;margin-top:4px}
+
+/* Stats */
+.stat-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));
+  gap:8px;margin:0 0 32px;
+}
+.stat-card{
+  background:var(--bg-card);border:1px solid var(--border);border-radius:8px;
+  padding:12px;text-align:center;box-shadow:var(--shadow);
+}
+.stat-card .num{font-size:1.5rem;font-weight:700;color:var(--accent)}
+.stat-card .label{font-size:.75rem;color:var(--text-muted);margin-top:2px}
+
+/* Section heading */
+.section-heading{
+  font-size:1.125rem;font-weight:700;margin:32px 0 16px;
+  padding-bottom:8px;border-bottom:2px solid var(--accent);
+}
+
+/* Highlight cards */
+.highlight-card{
+  background:var(--bg-highlight);border:1px solid var(--border);
+  border-radius:12px;padding:20px;margin-bottom:16px;
+  border-left:4px solid var(--accent);
+}
+.highlight-card .hl-badge{
+  display:inline-block;font-size:.6875rem;font-weight:700;
+  color:var(--accent);background:var(--bg-card);
+  border:1px solid var(--border);border-radius:999px;
+  padding:2px 8px;margin-bottom:8px;
+}
+.highlight-card .hl-title{font-size:1rem;font-weight:700;margin-bottom:8px}
+.highlight-card .hl-title a{color:var(--text)}
+.highlight-card .hl-desc{font-size:.875rem;color:var(--text-muted);margin-bottom:8px}
+.highlight-card .hl-desc strong,
+.highlight-card .hl-scenario strong{
+  display:block;color:var(--text);font-size:.75rem;margin-bottom:2px;
+}
+.highlight-card .hl-link{font-size:.8125rem;margin-bottom:12px}
+.highlight-card .hl-scenario{
+  font-size:.875rem;line-height:1.7;
+  background:var(--bg-card);border-radius:8px;padding:12px;margin-bottom:8px;
+}
+.highlight-card .hl-action{
+  font-size:.8125rem;color:var(--accent);font-weight:600;
+}
+.highlight-card .hl-action::before{content:"→ "}
+
+/* Topic section */
+.topic{
+  background:var(--bg-card);border:1px solid var(--border);
+  border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:var(--shadow);
+}
+.topic-title{font-size:1rem;font-weight:700;margin-bottom:4px}
+.topic-summary{font-size:.8125rem;color:var(--text-muted);margin-bottom:16px}
+
+/* Item list */
+.item{
+  padding:10px 0;border-bottom:1px solid var(--border);
+  display:flex;gap:10px;align-items:flex-start;
+}
+.item:last-child{border-bottom:none;padding-bottom:0}
+.badge{
+  display:inline-block;font-size:.625rem;font-weight:700;
+  color:#fff;padding:2px 8px;border-radius:10px;white-space:nowrap;
+  flex-shrink:0;margin-top:3px;text-transform:uppercase;letter-spacing:.03em;
+}
+.badge-changelog{background:var(--badge-changelog)}
+.badge-mcp{background:var(--badge-mcp)}
+.badge-trending{background:var(--badge-trending)}
+.badge-plugin{background:var(--badge-plugin)}
+.badge-awesome{background:var(--badge-awesome)}
+.badge-skills{background:var(--badge-skills)}
+.item-body{flex:1;min-width:0}
+.item-title{font-size:.875rem;font-weight:600}
+.item-desc{font-size:.8125rem;color:var(--text-muted);margin-top:2px}
+.item-meta{font-size:.75rem;color:var(--text-light);margin-top:4px}
+.item-meta .stars::before{content:"\2B50 "}
+
+/* Footer */
+.footer{
+  text-align:center;color:var(--text-light);font-size:.75rem;
+  padding:32px 0 16px;border-top:1px solid var(--border);margin-top:32px;
+}
+
+/* No items */
+.empty{color:var(--text-light);font-style:italic;font-size:.875rem;padding:8px 0}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header class="header">
+  <h1>Weekly Tech Watch</h1>
+  <div class="date-range">2026-11-02 ~ 2026-11-04</div>
+</header>
+
+<div class="stat-grid">
+<div class="stat-card"><div class="num">1</div><div class="label">Claude Code</div></div>
+<div class="stat-card"><div class="num">2</div><div class="label">Trending</div></div>
+<div class="stat-card"><div class="num">8</div><div class="label">awesome-cc</div></div>
+</div>
+
+<h2 class="section-heading">Highlights</h2>
+<div class="highlight-card">
+  <div class="hl-badge">ニュース</div>
+  <div class="hl-title"><a href="https://code.claude.com/docs/en/changelog">Claude Code v2.1.317</a></div>
+  <div class="hl-desc"><strong>概要</strong>Claude Code v2.1.317 の変更履歴です。/schedule コマンドに警告が追加されました。クラウド上で新しい定期実行タスク(cloud scheduled task)を作成したとき、ユーザーが指定していないコネクタ(Gmail、Slack、Notion などの外部サービス連携)が自動で付いてくる場合があります。その場合に警告が表示され、不要なコネクタの外し方も併せて案内されます。意図しない権限がスケジュール実行のタスクに紛れ込むのを防ぐ、安全面の改善です。</div>
+  <div class="hl-link"><a href="https://code.claude.com/docs/en/changelog">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>定期実行をクラウドで回すときの「権限の持ち込み」を確認する場面で効く可能性があります。たとえば、週次ニュースの要約や議事録の整形のようなルーティンを /schedule で作ると、普段つないでいるGmail、Google Drive、Slack、Notionなどのコネクタが意図せず付与されることがあります。無人で動くタスクに、メール送信やドライブ書き込みといった外向きの権限が付いたままだと、プロンプトの指示ミスや外部文章の混入で想定外の操作が起きるリスクがあります。今後は /schedule 作成時に警告が出たら、そのタスクに本当に必要なコネクタだけを残し、読み取り専用で足りるものは外す、という運用が考えられます。クライアント向けの自動化を組むときも「最小権限で渡す」説明材料になります。注意点として、警告は作成時に出るだけなので、すでに作成済みのスケジュールタスクは自動では見直されません。</div>
+  <div class="hl-action">Claude Code を v2.1.317 以降に更新し(claude update)、/schedule を一度実行して警告の出方を確認してください。すでに作成済みの定期タスクがある場合は /schedule の一覧で、各タスクに付いているコネクタを開き、不要なGmail・Slack・Notion等が残っていないか見直すのが最初の一歩です。詳細は https://code.claude.com/docs/en/changelog の v2.1.317 の項目に載っています。</div>
+</div>
+<div class="highlight-card">
+  <div class="hl-badge">深掘り候補</div>
+  <div class="hl-title"><a href="https://github.com/xerj-org/xerj">GitHub: xerj-org/xerj</a></div>
+  <div class="hl-desc"><strong>概要</strong>GitHub Trendingに登場した「xerj-org/xerj」は、AIエージェント/bot向けの検索エンジン兼MCPサーバーです。Rust製の単一バイナリで、コード、ドキュメント、ログ、JSONL/CSV、PDFをインデックス化し、BM25全文検索、ベクトル検索、ハイブリッド検索に対応します。grepを使わないコード検索、エージェントのメモリ、RAGにも使えます。APIはElasticsearch互換です。さらに「Corpus Hub」から、数百種の参照用メモリコーパスを配信するとされています。なお、上記は説明文に基づく内容で、性能や成熟度は未検証です。</div>
+  <div class="hl-link"><a href="https://github.com/xerj-org/xerj">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>Claude CodeやCodexを共有リポジトリで使う場面で、議事録、ログ、PDF、過去の提案書などを横断検索する「ローカル知識検索層」として試せる可能性があります。たとえば、MeetingMinutesの議事録や、クライアント向け資料のPDF/CSVをインデックス化し、MCPサーバーとして登録すれば、エージェントが「あの商談で何を決めたか」をgrepより意味検索で引ける形が考えられます。単一バイナリなのでVPSにも置きやすく、Elasticsearch互換APIなので既存ツールとつなぎやすい点も利点になりえます。手順は、READMEに沿ってバイナリを取得し、議事録フォルダだけを対象にインデックス化、.mcp.jsonに登録して検索精度をgrepと比べる、という小さな検証が向きます。注意点は、顧客情報や個人情報を含む資料を入れる場合です。Corpus Hubなど外部への通信や送信の有無を確認し、まず機密を含まない公開資料だけで試すのが安全です。新しいプロジェクトで成熟度も不明なため、本番業務への組み込みはまだ早いと思われます。</div>
+  <div class="hl-action">ブラウザで https://github.com/xerj-org/xerj を開き、READMEの「Install」「MCP」「Corpus Hub」の節を読んで、①外部通信の有無、②MCPの登録方法、③ライセンスの3点を確認してください。そのうえで、機密を含まない公開Markdown数十件だけをインデックスし、同じ質問をgrepと比べてみるのが最初の一歩です。</div>
+</div>
+<div class="highlight-card">
+  <div class="hl-badge">ニュース</div>
+  <div class="hl-title"><a href="https://github.com/Neywa-Labs/mlx-audio">GitHub: Neywa-Labs/mlx-audio</a></div>
+  <div class="hl-desc"><strong>概要</strong>Neywa-Labs/mlx-audio は、Appleの機械学習フレームワーク MLX 上に構築された音声ライブラリで、GitHub Trendingに登場した。テキスト読み上げ(TTS)、音声認識(STT)、音声から音声への変換(STS)の3機能を1つのライブラリで扱える。Apple Silicon(Mac の M シリーズ)向けに最適化されており、ローカル環境で効率よく音声解析・生成を実行することを目的としている。クラウドAPIを使わず、手元のMac上でモデルを動かす選択肢を広げる位置づけ。</div>
+  <div class="hl-link"><a href="https://github.com/Neywa-Labs/mlx-audio">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>最も関係しそうなのは議事録の文字起こし(STT)です。現在 MeetingMinutes では Whisper 系で固有名詞の誤変換が課題になっていますが、MLX 版の Whisper 系モデルをローカルで回せれば、外部APIへ音声を送らず、顧客の商談音声を手元で処理できる可能性があります。使い方の一例は、`pip install mlx-audio` で入れ、同梱のCLIやPythonサンプルで既存の会議録音1本(数分)を文字起こしし、現行の結果と固有名詞の精度・処理時間を並べて比較する形です。ただし前提としてApple Silicon搭載のMacが必要で、現在の作業環境はWindows(Windows 10 Home)のため、そのままでは動きません。Mac機を持っていない場合は導入のメリットが出にくく、VPS上の運用にも載せられません。また、TTS/STSには音声クローン機能が含まれる場合があり、顧客利用や公開に使う際は権利・同意の確認が必要です。</div>
+  <div class="hl-action">まず https://github.com/Neywa-Labs/mlx-audio のREADMEを開き、「対応モデル(STTにWhisper系があるか、日本語対応か)」と「動作要件(macOS / Apple Silicon限定か)」の2点だけ確認する。Macが手元にある場合のみ、短い会議音声1本で試す。Windows環境のままなら、今は見送りで問題ない。</div>
+</div>
+
+<h2 class="section-heading">Topics</h2>
+<div class="topic">
+  <div class="topic-title">Claude Code更新</div>
+  <div class="topic-summary">v2.1.317で/scheduleのクラウド定期タスクに関する警告や確認機能が追加された。</div>
+<div class="item">
+  <span class="badge badge-changelog">CHANGELOG</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://code.claude.com/docs/en/changelog">v2.1.317</a></div>
+    <div class="item-desc">Added a warning to /schedule when a new cloud scheduled task gets connectors you did not ask for, with how to remove them, Added a check that asks before a web or shell tool call sends your account email address to the network, Added onFailure: &quot;block&quot; for Agent SDK hook callbacks, so a callback that fails blocks the action instead of letting it run</div>
+    <div class="item-meta">November 3, 2026</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">AI検索エンジン</div>
+  <div class="topic-summary">コードやドキュメント、ログ等をBM25・ベクトル検索で扱うRust製のMCP対応検索エンジン。</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/xerj-org/xerj">xerj-org/xerj</a></div>
+    <div class="item-desc">AI search engine and MCP server for bots and agents. One Rust binary indexes code, docs, logs, JSONL/CSV and PDFs for BM25 full-text, vector and hybrid search, code search without grep, agent memory and RAG. Elasticsearch-compatible API; Corpus Hub serves hundreds of reference memory corpora.</div>
+    <div class="item-meta"><span class="stars">18934</span></div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">Apple MLX音声</div>
+  <div class="topic-summary">Apple MLX上で動作するTTS・STT・STSの音声処理ライブラリ。</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/Neywa-Labs/mlx-audio">Neywa-Labs/mlx-audio</a></div>
+    <div class="item-desc">A text-to-speech (TTS), speech-to-text (STT) and speech-to-speech (STS) library built on Apple&#x27;s MLX framework, providing efficient speech analysis on Apple Silicon.</div>
+    <div class="item-meta"><span class="stars">8192</span></div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">リポジトリ自動更新</div>
+  <div class="topic-summary">リポジトリのティッカーデータとSVGを更新する自動choreコミットが多数並んでいる。</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/87c29fb">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-11-03</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/8a9af6c">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-11-03</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/78efaae">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-11-03</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/ee3f679">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-11-03</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/3fa7ef6">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-11-03</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/48330a3">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-11-03</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/870f764">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-11-03</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/aef26d9">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-11-03</div>
+  </div>
+</div>
+</div>
+
+<footer class="footer">
+  Generated at 2026-11-04 07:56 JST<br>
+  Sources: Claude Code CHANGELOG, GitHub Releases, awesome-claude-code,
+  anthropics/skills, PulseMCP, Claude Plugins, GitHub Trending
+</footer>
+
+</div>
+</body>
+</html>
