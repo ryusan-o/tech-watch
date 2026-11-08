@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Weekly Tech Watch — 2026-11-09</title>
+<style>
+:root {
+  --bg: #f8fafc;
+  --bg-card: #ffffff;
+  --bg-highlight: #eff6ff;
+  --text: #1e293b;
+  --text-muted: #64748b;
+  --text-light: #94a3b8;
+  --accent: #3b82f6;
+  --border: #e2e8f0;
+  --shadow: 0 1px 3px rgba(0,0,0,.08);
+  --badge-changelog: #3b82f6;
+  --badge-mcp: #8b5cf6;
+  --badge-trending: #f59e0b;
+  --badge-plugin: #10b981;
+  --badge-awesome: #f43f5e;
+  --badge-skills: #06b6d4;
+}
+@media(prefers-color-scheme:dark){
+:root {
+  --bg: #0f172a;
+  --bg-card: #1e293b;
+  --bg-highlight: #1e3a5f;
+  --text: #e2e8f0;
+  --text-muted: #94a3b8;
+  --text-light: #64748b;
+  --accent: #60a5fa;
+  --border: #334155;
+  --shadow: 0 1px 3px rgba(0,0,0,.3);
+}}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  background:var(--bg);color:var(--text);
+  line-height:1.6;padding:16px;
+}
+.container{max-width:760px;margin:0 auto}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* Header */
+.header{text-align:center;padding:32px 0 24px}
+.header h1{font-size:1.5rem;font-weight:700;letter-spacing:-.02em}
+.header .date-range{color:var(--text-muted);font-size:.875rem;margin-top:4px}
+
+/* Stats */
+.stat-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));
+  gap:8px;margin:0 0 32px;
+}
+.stat-card{
+  background:var(--bg-card);border:1px solid var(--border);border-radius:8px;
+  padding:12px;text-align:center;box-shadow:var(--shadow);
+}
+.stat-card .num{font-size:1.5rem;font-weight:700;color:var(--accent)}
+.stat-card .label{font-size:.75rem;color:var(--text-muted);margin-top:2px}
+
+/* Section heading */
+.section-heading{
+  font-size:1.125rem;font-weight:700;margin:32px 0 16px;
+  padding-bottom:8px;border-bottom:2px solid var(--accent);
+}
+
+/* Highlight cards */
+.highlight-card{
+  background:var(--bg-highlight);border:1px solid var(--border);
+  border-radius:12px;padding:20px;margin-bottom:16px;
+  border-left:4px solid var(--accent);
+}
+.highlight-card .hl-badge{
+  display:inline-block;font-size:.6875rem;font-weight:700;
+  color:var(--accent);background:var(--bg-card);
+  border:1px solid var(--border);border-radius:999px;
+  padding:2px 8px;margin-bottom:8px;
+}
+.highlight-card .hl-title{font-size:1rem;font-weight:700;margin-bottom:8px}
+.highlight-card .hl-title a{color:var(--text)}
+.highlight-card .hl-desc{font-size:.875rem;color:var(--text-muted);margin-bottom:8px}
+.highlight-card .hl-desc strong,
+.highlight-card .hl-scenario strong{
+  display:block;color:var(--text);font-size:.75rem;margin-bottom:2px;
+}
+.highlight-card .hl-link{font-size:.8125rem;margin-bottom:12px}
+.highlight-card .hl-scenario{
+  font-size:.875rem;line-height:1.7;
+  background:var(--bg-card);border-radius:8px;padding:12px;margin-bottom:8px;
+}
+.highlight-card .hl-action{
+  font-size:.8125rem;color:var(--accent);font-weight:600;
+}
+.highlight-card .hl-action::before{content:"→ "}
+
+/* Topic section */
+.topic{
+  background:var(--bg-card);border:1px solid var(--border);
+  border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:var(--shadow);
+}
+.topic-title{font-size:1rem;font-weight:700;margin-bottom:4px}
+.topic-summary{font-size:.8125rem;color:var(--text-muted);margin-bottom:16px}
+
+/* Item list */
+.item{
+  padding:10px 0;border-bottom:1px solid var(--border);
+  display:flex;gap:10px;align-items:flex-start;
+}
+.item:last-child{border-bottom:none;padding-bottom:0}
+.badge{
+  display:inline-block;font-size:.625rem;font-weight:700;
+  color:#fff;padding:2px 8px;border-radius:10px;white-space:nowrap;
+  flex-shrink:0;margin-top:3px;text-transform:uppercase;letter-spacing:.03em;
+}
+.badge-changelog{background:var(--badge-changelog)}
+.badge-mcp{background:var(--badge-mcp)}
+.badge-trending{background:var(--badge-trending)}
+.badge-plugin{background:var(--badge-plugin)}
+.badge-awesome{background:var(--badge-awesome)}
+.badge-skills{background:var(--badge-skills)}
+.item-body{flex:1;min-width:0}
+.item-title{font-size:.875rem;font-weight:600}
+.item-desc{font-size:.8125rem;color:var(--text-muted);margin-top:2px}
+.item-meta{font-size:.75rem;color:var(--text-light);margin-top:4px}
+.item-meta .stars::before{content:"\2B50 "}
+
+/* Footer */
+.footer{
+  text-align:center;color:var(--text-light);font-size:.75rem;
+  padding:32px 0 16px;border-top:1px solid var(--border);margin-top:32px;
+}
+
+/* No items */
+.empty{color:var(--text-light);font-style:italic;font-size:.875rem;padding:8px 0}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header class="header">
+  <h1>Weekly Tech Watch</h1>
+  <div class="date-range">2026-11-05 ~ 2026-11-09</div>
+</header>
+
+<div class="stat-grid">
+<div class="stat-card"><div class="num">1</div><div class="label">Claude Code</div></div>
+<div class="stat-card"><div class="num">2</div><div class="label">Trending</div></div>
+<div class="stat-card"><div class="num">2</div><div class="label">Plugins</div></div>
+<div class="stat-card"><div class="num">16</div><div class="label">awesome-cc</div></div>
+</div>
+
+<h2 class="section-heading">Highlights</h2>
+<div class="highlight-card">
+  <div class="hl-badge">ニュース</div>
+  <div class="hl-title"><a href="https://code.claude.com/docs/en/changelog">Claude Code v2.1.319</a></div>
+  <div class="hl-desc"><strong>概要</strong>Claude Code v2.1.319 のchangelogで、ターミナル版にMCP tasksのサポートが追加されました。MCPサーバー側がツール呼び出しを「タスク」として実行した場合、Claude Codeはその呼び出しをすぐにバックグラウンドへ移し、完了した時点で結果をClaudeに通知します。これまで長時間かかるMCPツールは、完了まで会話の流れを止めてしまうことがありました。今回の対応で、待たずに次の作業へ進めるようになります。ただしMCPサーバー側がtasksに対応している必要があります。</div>
+  <div class="hl-link"><a href="https://code.claude.com/docs/en/changelog">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>効きそうなのは、時間のかかる処理をMCPツール化している場面です。たとえば議事録の文字起こしや、大量データの取り込み、レシピや画像の一括生成などです。tasks対応のMCPサーバーなら、呼び出し直後にバックグラウンドへ回り、完了時に結果が通知されます。その間は別のファイル修正やレビューを進められる可能性があります。使うには、自作MCPサーバーのツールをtasks形式で返す実装にし、Claude Code側は v2.1.319 以上へ更新します。注意点は、既存のMCPサーバーがtasks非対応だと従来どおり待ち時間が発生することです。また、バックグラウンド完了後の結果が会話に差し込まれるため、顧客データや外部API課金を伴う処理では、完了通知を見落とさないよう運用を決めておくのが無難です。</div>
+  <div class="hl-action">ターミナルで `claude --version` を実行し、2.1.319以上か確認してください。次に https://code.claude.com/docs/en/changelog の v2.1.319 の項目を開き、MCP tasksの記述を読みます。そのうえで、普段使っているMCPサーバーのREADMEに tasks対応の記載があるか探すと、効果が出るサーバーを見分けられます。</div>
+</div>
+<div class="highlight-card">
+  <div class="hl-badge">深掘り候補</div>
+  <div class="hl-title"><a href="https://github.com/OpenMontageInc/OpenMontage">GitHub: OpenMontageInc/OpenMontage</a></div>
+  <div class="hl-desc"><strong>概要</strong>OpenMontageInc/OpenMontageがGitHubのトレンド入りした。「世界初のオープンソースのエージェント型動画制作システム」を名乗り、12の制作パイプライン、100以上のツール、700以上のエージェントスキル/制作ノウハウのファイルを同梱する。手持ちのAIコーディングアシスタント(Claude Codeなど)を、台本・素材・編集・書き出しまで担う動画制作スタジオとして動かす構成。動画制作の手順をスキルファイルとして分解し、エージェントが順に実行する設計と読み取れる。詳細な対応環境や出力品質はREADMEの確認が必要。</div>
+  <div class="hl-link"><a href="https://github.com/OpenMontageInc/OpenMontage">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>りゅうさんは普段からClaude Codeを使っているので、これは「動画制作を仕組み化する」素材として相性が良いかもしれません。例えば、うま藻の料理教室やりゅうさんちの紹介を、撮影素材と台本メモを渡して30〜60秒のSNS用ショートに自動編集させる使い方です。SNS戦略やDevLogSNSで、投稿の「やらなきゃ」を減らす実験になり得ます。まず別フォルダにcloneし、README記載のパイプライン一覧から「ショート動画」系を1本だけ、手元の素材で動かすのがおすすめです。また700超のスキルファイルは、自分の動画用スキルを設計する際の分解の参考にもなりそうです。注意点として、外部の画像・音声・動画生成APIを使う場合は課金が発生し得ます。人物の声や顔を扱う場合は権利面もあるため、まず無料のローカル処理だけで試すのが安全です。顧客向け納品に使うのは品質確認後が良いでしょう。</div>
+  <div class="hl-action">ブラウザで https://github.com/OpenMontageInc/OpenMontage を開き、READMEの「Requirements」「Pipelines」「Quick start」の3節を読む。次に作業用の空フォルダで `git clone https://github.com/OpenMontageInc/OpenMontage` を実行し、スキルファイルの置き場所とライセンス(LICENSE)、必要なAPIキーの有無を確認する。課金が必要なAPIが必須でないかを見てから試す。</div>
+</div>
+<div class="highlight-card">
+  <div class="hl-badge">ニュース</div>
+  <div class="hl-title"><a href="https://github.com/feder-cr/Jobs_Applier_AI_Agent">GitHub: feder-cr/Jobs_Applier_AI_Agent</a></div>
+  <div class="hl-desc"><strong>概要</strong>GitHub Trendingに入った「feder-cr/Jobs_Applier_AI_Agent」は、求人検索から応募までを自動化するオープンソースのAI応募ボットです。説明文には「寝ている間に、履歴書にマッチする求人へ自動応募する」とあります。履歴書や希望条件を読み込んで合う求人を探し、LLMで応募書類や回答欄を埋めて応募します。人手による応募作業を減らす狙いのツールで、AIエージェントが実サイト上でフォーム操作まで担う例として注目されています。ここに書いた以外の細かい仕様(対応サイト、設定ファイル名、必要なAPIキーなど)は、説明文からは確認できません。</div>
+  <div class="hl-link"><a href="https://github.com/feder-cr/Jobs_Applier_AI_Agent">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>りゅうさんの事業に直結する場面は少ないものの、「ブラウザ上の定型フォーム入力をAIエージェントに任せる」設計の参考になる可能性があります。たとえばクライアント向けに、問い合わせ対応や申請書の転記など「やらなきゃいけない入力作業」を自動化する提案をするとき、このリポジトリのREADMEと構成(プロフィール情報の持たせ方、フォームへの回答生成、人の確認を挟む箇所)を見ると、設計の型を掴めるかもしれません。一方で、求人サイトの多くは自動操作を規約で禁じており、アカウント停止のリスクがあります。応募の質が落ちると相手方の信頼も損なうので、実際に動かすより読んで設計を学ぶ使い方が安全です。履歴書などの個人情報を外部LLM APIへ送る点にも注意が必要です。</div>
+  <div class="hl-action">ブラウザで https://github.com/feder-cr/Jobs_Applier_AI_Agent を開き、READMEの「Features」「Configuration」付近を読んでください。見る点は、(1)利用するLLMとAPIキーの扱い、(2)プロフィール情報をどんなファイルで渡すか、(3)送信前に人が確認する仕組みの有無、の3つです。動かすのは、必要になってからで十分です。</div>
+</div>
+
+<h2 class="section-heading">Topics</h2>
+<div class="topic">
+  <div class="topic-title">Claude Code更新</div>
+  <div class="topic-summary">Claude Code v2.1.319でMCPタスクのバックグラウンド実行に対応した。</div>
+<div class="item">
+  <span class="badge badge-changelog">CHANGELOG</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://code.claude.com/docs/en/changelog">v2.1.319</a></div>
+    <div class="item-desc">Added support for MCP tasks in the terminal: when an MCP server runs a tool call as a task, Claude Code moves it to the background right away and tells Claude the result when it finishes, Added the CLAUDE_CODE_DISABLE_MCP_TASK_BACKGROUND environment variable to make Claude Code wait for an MCP task inside its tool call instead of moving it to the background right away, Added permissions.denyInsteadOfPrompting setting: a tool call that would wait on a permission prompt is denied and the turn continues, in terminal sessions, subagents and teammates</div>
+    <div class="item-meta">November 6, 2026</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">Claude Code拡張キット</div>
+  <div class="topic-summary">ハッカソン運営やXcode連携など、Claude Codeの活用を広げるスキルやプラグイン。</div>
+<div class="item">
+  <span class="badge badge-plugin">PLUGIN</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/anthropics/claude-plugins-official/tree/main/plugins/champion-kit">champion-kit</a></div>
+    <div class="item-desc">Help Claude Code champions run hackathons and office hours, find patterns worth sharing, help teammates climb the steps of AI adoption, and write a shareable AI maturity report.</div>
+    <div class="item-meta">productivity</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-plugin">PLUGIN</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://developer.apple.com/xcode/">xcode</a></div>
+    <div class="item-desc">Work with Xcode projects from Claude Code: build, run, and test schemes, render SwiftUI previews, drive simulators and devices, read build logs and diagnostics, and search Apple developer documentation.</div>
+    <div class="item-meta">development</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">動画制作エージェント</div>
+  <div class="topic-summary">動画制作を自動化するオープンソースのエージェント型システム。</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/OpenMontageInc/OpenMontage">OpenMontageInc/OpenMontage</a></div>
+    <div class="item-desc">World&#x27;s first open-source, agentic video production system. 12 production pipelines, 100+ tools, 700+ agent skill and production-knowledge files. Turn your AI coding assistant into a full video production studio.</div>
+    <div class="item-meta"><span class="stars">78652</span></div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">求人応募AIボット</div>
+  <div class="topic-summary">履歴書に合う求人へ自動で応募するAIエージェント。</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/feder-cr/Jobs_Applier_AI_Agent">feder-cr/Jobs_Applier_AI_Agent</a></div>
+    <div class="item-desc">AI job application bot: automated job search and job hunting, auto-apply to resume-matching jobs while you sleep.</div>
+    <div class="item-meta"><span class="stars">32409</span></div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">リポジトリ自動更新</div>
+  <div class="topic-summary">リポジトリのティッカーデータとSVGを更新する定期的な自動コミット。</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/da03912">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-11-08</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/fb458d9">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-11-08</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/cd469bd">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-11-08</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/d45caf7">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-11-08</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/6d6c39a">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-11-08</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/3c41fee">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-11-08</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/acebb7c">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-11-08</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/079a73e">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-11-08</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/d477504">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-11-07</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/b347e01">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-11-07</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/a79b5a8">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-11-07</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/2215c60">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-11-07</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/9fff5d9">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-11-07</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/467c6ee">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-11-07</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/3cb5db8">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-11-07</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/51002ce">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-11-07</div>
+  </div>
+</div>
+</div>
+
+<footer class="footer">
+  Generated at 2026-11-09 07:56 JST<br>
+  Sources: Claude Code CHANGELOG, GitHub Releases, awesome-claude-code,
+  anthropics/skills, PulseMCP, Claude Plugins, GitHub Trending
+</footer>
+
+</div>
+</body>
+</html>
