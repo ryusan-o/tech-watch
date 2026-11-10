@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Weekly Tech Watch — 2026-11-11</title>
+<style>
+:root {
+  --bg: #f8fafc;
+  --bg-card: #ffffff;
+  --bg-highlight: #eff6ff;
+  --text: #1e293b;
+  --text-muted: #64748b;
+  --text-light: #94a3b8;
+  --accent: #3b82f6;
+  --border: #e2e8f0;
+  --shadow: 0 1px 3px rgba(0,0,0,.08);
+  --badge-changelog: #3b82f6;
+  --badge-mcp: #8b5cf6;
+  --badge-trending: #f59e0b;
+  --badge-plugin: #10b981;
+  --badge-awesome: #f43f5e;
+  --badge-skills: #06b6d4;
+}
+@media(prefers-color-scheme:dark){
+:root {
+  --bg: #0f172a;
+  --bg-card: #1e293b;
+  --bg-highlight: #1e3a5f;
+  --text: #e2e8f0;
+  --text-muted: #94a3b8;
+  --text-light: #64748b;
+  --accent: #60a5fa;
+  --border: #334155;
+  --shadow: 0 1px 3px rgba(0,0,0,.3);
+}}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  background:var(--bg);color:var(--text);
+  line-height:1.6;padding:16px;
+}
+.container{max-width:760px;margin:0 auto}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* Header */
+.header{text-align:center;padding:32px 0 24px}
+.header h1{font-size:1.5rem;font-weight:700;letter-spacing:-.02em}
+.header .date-range{color:var(--text-muted);font-size:.875rem;margin-top:4px}
+
+/* Stats */
+.stat-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));
+  gap:8px;margin:0 0 32px;
+}
+.stat-card{
+  background:var(--bg-card);border:1px solid var(--border);border-radius:8px;
+  padding:12px;text-align:center;box-shadow:var(--shadow);
+}
+.stat-card .num{font-size:1.5rem;font-weight:700;color:var(--accent)}
+.stat-card .label{font-size:.75rem;color:var(--text-muted);margin-top:2px}
+
+/* Section heading */
+.section-heading{
+  font-size:1.125rem;font-weight:700;margin:32px 0 16px;
+  padding-bottom:8px;border-bottom:2px solid var(--accent);
+}
+
+/* Highlight cards */
+.highlight-card{
+  background:var(--bg-highlight);border:1px solid var(--border);
+  border-radius:12px;padding:20px;margin-bottom:16px;
+  border-left:4px solid var(--accent);
+}
+.highlight-card .hl-badge{
+  display:inline-block;font-size:.6875rem;font-weight:700;
+  color:var(--accent);background:var(--bg-card);
+  border:1px solid var(--border);border-radius:999px;
+  padding:2px 8px;margin-bottom:8px;
+}
+.highlight-card .hl-title{font-size:1rem;font-weight:700;margin-bottom:8px}
+.highlight-card .hl-title a{color:var(--text)}
+.highlight-card .hl-desc{font-size:.875rem;color:var(--text-muted);margin-bottom:8px}
+.highlight-card .hl-desc strong,
+.highlight-card .hl-scenario strong{
+  display:block;color:var(--text);font-size:.75rem;margin-bottom:2px;
+}
+.highlight-card .hl-link{font-size:.8125rem;margin-bottom:12px}
+.highlight-card .hl-scenario{
+  font-size:.875rem;line-height:1.7;
+  background:var(--bg-card);border-radius:8px;padding:12px;margin-bottom:8px;
+}
+.highlight-card .hl-action{
+  font-size:.8125rem;color:var(--accent);font-weight:600;
+}
+.highlight-card .hl-action::before{content:"→ "}
+
+/* Topic section */
+.topic{
+  background:var(--bg-card);border:1px solid var(--border);
+  border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:var(--shadow);
+}
+.topic-title{font-size:1rem;font-weight:700;margin-bottom:4px}
+.topic-summary{font-size:.8125rem;color:var(--text-muted);margin-bottom:16px}
+
+/* Item list */
+.item{
+  padding:10px 0;border-bottom:1px solid var(--border);
+  display:flex;gap:10px;align-items:flex-start;
+}
+.item:last-child{border-bottom:none;padding-bottom:0}
+.badge{
+  display:inline-block;font-size:.625rem;font-weight:700;
+  color:#fff;padding:2px 8px;border-radius:10px;white-space:nowrap;
+  flex-shrink:0;margin-top:3px;text-transform:uppercase;letter-spacing:.03em;
+}
+.badge-changelog{background:var(--badge-changelog)}
+.badge-mcp{background:var(--badge-mcp)}
+.badge-trending{background:var(--badge-trending)}
+.badge-plugin{background:var(--badge-plugin)}
+.badge-awesome{background:var(--badge-awesome)}
+.badge-skills{background:var(--badge-skills)}
+.item-body{flex:1;min-width:0}
+.item-title{font-size:.875rem;font-weight:600}
+.item-desc{font-size:.8125rem;color:var(--text-muted);margin-top:2px}
+.item-meta{font-size:.75rem;color:var(--text-light);margin-top:4px}
+.item-meta .stars::before{content:"\2B50 "}
+
+/* Footer */
+.footer{
+  text-align:center;color:var(--text-light);font-size:.75rem;
+  padding:32px 0 16px;border-top:1px solid var(--border);margin-top:32px;
+}
+
+/* No items */
+.empty{color:var(--text-light);font-style:italic;font-size:.875rem;padding:8px 0}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header class="header">
+  <h1>Weekly Tech Watch</h1>
+  <div class="date-range">2026-11-09 ~ 2026-11-11</div>
+</header>
+
+<div class="stat-grid">
+<div class="stat-card"><div class="num">1</div><div class="label">Claude Code</div></div>
+<div class="stat-card"><div class="num">1</div><div class="label">Trending</div></div>
+<div class="stat-card"><div class="num">8</div><div class="label">awesome-cc</div></div>
+</div>
+
+<h2 class="section-heading">Highlights</h2>
+<div class="highlight-card">
+  <div class="hl-badge">ニュース</div>
+  <div class="hl-title"><a href="https://code.claude.com/docs/en/changelog">Claude Code v2.1.322</a></div>
+  <div class="hl-desc"><strong>概要</strong>Claude Code v2.1.322 のチェンジログで、Vertex AI 経由で Claude Code を使う場合に fast mode が使えるようになりました。対象リージョンは global、us、eu です。Vertex 側が fast mode を拒否した場合は、エラーで止まらず通常速度(standard speed)に自動でフォールバックします。これまで fast mode は Anthropic 直接のAPI利用が中心でしたが、Google Cloud の Vertex 経由でも高速出力を選べるようになった、というアップデートです。</div>
+  <div class="hl-link"><a href="https://code.claude.com/docs/en/changelog">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>りゅうさんが普段 Anthropic のサブスクリプションや直接APIでClaude Codeを使っているなら、この変更の影響はほぼありません。効くのは、クライアント企業のセキュリティ要件でVertex AI経由の利用を求められる場面です。たとえばAIコンサルで『社内のGoogle Cloud契約の中でClaude Codeを使わせたい』という相談が来たとき、導入パッケージに『Vertex経由でもfast modeが使える(拒否されても標準速度に落ちるだけで止まらない)』と一言添えられます。使い方は、Vertex用の環境変数(CLAUDE_CODE_USE_VERTEX=1 など)を設定した状態で、セッション内の /fast を切り替えるイメージです。注意点として、fast modeは通常より単価が高い設定のことが多いので、Vertex側の料金表とクォータを確認せずに常用すると、クライアントの請求が想定外に増える可能性があります。フォールバックは黙って起きるため、速くなっていると思い込まない点も要注意です。</div>
+  <div class="hl-action">まず https://code.claude.com/docs/en/changelog の v2.1.322 の項目を開いて原文を確認してください。Vertex経由で使う案件が実際に出たら、公式ドキュメントのVertex AI設定ページで対応リージョンと料金を確認し、ターミナルで `claude --version` で2.1.322以上であることを確かめてから、セッション内で `/fast` を試してください。</div>
+</div>
+<div class="highlight-card">
+  <div class="hl-badge">ニュース</div>
+  <div class="hl-title"><a href="https://www.anthropic.com/news/roadshow-launch">Anthropic launches roadshow for proposed initial public offering</a></div>
+  <div class="hl-desc"><strong>概要</strong>Anthropicが、新規株式公開(IPO)に向けたロードショーを開始したと発表しました。ロードショーは、投資家向けに事業内容や成長性を説明して回る手続きで、上場前の最終段階にあたります。提供された情報には説明文がなく、公開価格、上場時期、調達額、上場先といった数値や条件はこの時点では確認できません。公式ニュースのタイトルと URL(anthropic.com/news/roadshow-launch)のみが根拠で、詳細は一次情報の確認が必要です。</div>
+  <div class="hl-link"><a href="https://www.anthropic.com/news/roadshow-launch">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>直接使える新機能ではないため、無理にPJへ結びつけず、次の場面で効く可能性があります。①AIコンサルの提案場面:クライアントから「このAIベンダーに依存して大丈夫か」と聞かれた時、上場による財務開示の増加(目論見書にリスク要因・収益構造・利用規約上の方針が載る)を、ベンダー選定の根拠として説明できます。②自社の依存度整理:Claude Codeを軸に業務を組むなら、価格改定やモデル提供方針の変更に備え、特定モデルに固定しない現在の運用(CodexとClaude Codeの併用)を続ける判断材料になります。③上場後は開示資料が公開されるため、API価格や提供終了ポリシーを事前に読む習慣づけにも使えます。注意点として、株価や上場の話題は投資助言に見えやすいので、クライアント向け資料には事実の引用にとどめ、予測や推奨は書かない方が安全です。</div>
+  <div class="hl-action">まず https://www.anthropic.com/news/roadshow-launch を開き、上場先・時期・調達目的の記載を確認してください。公開後に目論見書(S-1など)が出た場合は、SECのEDGARで「Anthropic」を検索し、Risk Factors の『顧客・提供モデル・価格』に関する項目だけ拾い読みすると、ベンダーリスク説明の材料になります。</div>
+</div>
+<div class="highlight-card">
+  <div class="hl-badge">深掘り候補</div>
+  <div class="hl-title"><a href="https://github.com/alchaincyf/nuwa-skill">GitHub: alchaincyf/nuwa-skill</a></div>
+  <div class="hl-desc"><strong>概要</strong>GitHub Trendingに入った alchaincyf/nuwa-skill は、特定の人物の「考え方」を蒸留してAIに載せるためのスキル(Claude Codeなどのエージェント用プロンプト資産)のリポジトリです。説明文では、蒸留の対象を「心智模型(メンタルモデル)」「決策启发式(意思決定のヒューリスティクス)」「表达DNA(表現の癖・語り口)」の3要素に分解するとしています。キャッチコピーは「次に蒸留したい従業員は、同僚である必要はない」で、著名人や専門家など社外の人物も対象にできる含意があります。内部実装やライセンスは提供された説明文からは読み取れず、中国語圏で注目された、人の思考様式をスキル化する流れの一例です。</div>
+  <div class="hl-link"><a href="https://github.com/alchaincyf/nuwa-skill">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>りゅうさん自身の判断基準を「分解して再構築」する発想と相性がよく、いくつか使い道がありそうです。①自分の議事録・提案書・過去の意思決定ログから、りゅうさんの「判断ルール」「口調」を抽出し、クライアント向けに『りゅうさん流の壁打ち役』スキルを作る、といった形で自走支援の教材にできる可能性があります。②AlgaleXの経営陣など、特定の相手の論点(例:数字重視か、関係性重視か)を整理して提案前の想定問答に使う方法もあります。③リポジトリの『3要素に分ける』構造だけ参考にし、既存のbrand-voiceや意思決定原則をSKILL.md形式に整理し直すのも手です。注意点として、実在の他者を本人の同意なく蒸留・再現すると、信頼やプライバシーの問題になり得ます。クライアントや第三者を対象にする場合は個人情報・同意の扱いを先に決め、まずは自分自身を対象にするのが安全です。</div>
+  <div class="hl-action">まずブラウザで https://github.com/alchaincyf/nuwa-skill を開き、README(中国語なので翻訳をかけて可)と、SKILL.md等のスキル定義ファイルの構成、心智模型・ヒューリスティクス・表現DNAを抽出する手順、ライセンス表記を確認してください。次に別ディレクトリへ `git clone https://github.com/alchaincyf/nuwa-skill` し、中身を読んだうえで、自分の過去文章(ブログや提案書など公開可能なもの)だけを題材に試し、出力が自分らしいかを見るのが安全です。</div>
+</div>
+
+<h2 class="section-heading">Topics</h2>
+<div class="topic">
+  <div class="topic-title">Claude Codeの更新</div>
+  <div class="topic-summary">v2.1.322でVertex上のファストモードが各リージョンで利用可能になった。</div>
+<div class="item">
+  <span class="badge badge-changelog">CHANGELOG</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://code.claude.com/docs/en/changelog">v2.1.322</a></div>
+    <div class="item-desc">Added fast mode on Vertex in the global, us and eu regions, falling back to standard speed if Vertex refuses it</div>
+    <div class="item-meta">November 10, 2026</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">Anthropic IPO</div>
+  <div class="topic-summary">Anthropicが新規株式公開に向けたロードショーを開始した。</div>
+<div class="item">
+  <span class="badge badge-anthropic_news">ANTHROPIC_NEWS</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://www.anthropic.com/news/roadshow-launch">Anthropic launches roadshow for proposed initial public offering</a></div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">人の思考を蒸留するスキル</div>
+  <div class="topic-summary">nuwa-skillは、誰かの思考様式や意思決定の傾向を抽出して再現するOSSプロジェクト。</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/alchaincyf/nuwa-skill">alchaincyf/nuwa-skill</a></div>
+    <div class="item-desc">你想蒸馏的下一个员工，何必是同事。蒸馏任何人的思维方式——心智模型、决策启发式、表达DNA。Distill how anyone thinks.</div>
+    <div class="item-meta"><span class="stars">37993</span></div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">リポジトリの自動更新</div>
+  <div class="topic-summary">ティッカーデータとSVGを更新する定期的な自動コミットが続いている。</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/14b2fa6">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-11-10</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/0553b11">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-11-10</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/20c1f7e">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-11-10</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/5e24375">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-11-10</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/566ce35">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-11-10</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/70b295b">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-11-10</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/9c490e2">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-11-10</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/5aa1730">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-11-10</div>
+  </div>
+</div>
+</div>
+
+<footer class="footer">
+  Generated at 2026-11-11 07:56 JST<br>
+  Sources: Claude Code CHANGELOG, GitHub Releases, awesome-claude-code,
+  anthropics/skills, PulseMCP, Claude Plugins, GitHub Trending
+</footer>
+
+</div>
+</body>
+</html>
