@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Weekly Tech Watch — 2026-11-16</title>
+<style>
+:root {
+  --bg: #f8fafc;
+  --bg-card: #ffffff;
+  --bg-highlight: #eff6ff;
+  --text: #1e293b;
+  --text-muted: #64748b;
+  --text-light: #94a3b8;
+  --accent: #3b82f6;
+  --border: #e2e8f0;
+  --shadow: 0 1px 3px rgba(0,0,0,.08);
+  --badge-changelog: #3b82f6;
+  --badge-mcp: #8b5cf6;
+  --badge-trending: #f59e0b;
+  --badge-plugin: #10b981;
+  --badge-awesome: #f43f5e;
+  --badge-skills: #06b6d4;
+}
+@media(prefers-color-scheme:dark){
+:root {
+  --bg: #0f172a;
+  --bg-card: #1e293b;
+  --bg-highlight: #1e3a5f;
+  --text: #e2e8f0;
+  --text-muted: #94a3b8;
+  --text-light: #64748b;
+  --accent: #60a5fa;
+  --border: #334155;
+  --shadow: 0 1px 3px rgba(0,0,0,.3);
+}}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  background:var(--bg);color:var(--text);
+  line-height:1.6;padding:16px;
+}
+.container{max-width:760px;margin:0 auto}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* Header */
+.header{text-align:center;padding:32px 0 24px}
+.header h1{font-size:1.5rem;font-weight:700;letter-spacing:-.02em}
+.header .date-range{color:var(--text-muted);font-size:.875rem;margin-top:4px}
+
+/* Stats */
+.stat-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));
+  gap:8px;margin:0 0 32px;
+}
+.stat-card{
+  background:var(--bg-card);border:1px solid var(--border);border-radius:8px;
+  padding:12px;text-align:center;box-shadow:var(--shadow);
+}
+.stat-card .num{font-size:1.5rem;font-weight:700;color:var(--accent)}
+.stat-card .label{font-size:.75rem;color:var(--text-muted);margin-top:2px}
+
+/* Section heading */
+.section-heading{
+  font-size:1.125rem;font-weight:700;margin:32px 0 16px;
+  padding-bottom:8px;border-bottom:2px solid var(--accent);
+}
+
+/* Highlight cards */
+.highlight-card{
+  background:var(--bg-highlight);border:1px solid var(--border);
+  border-radius:12px;padding:20px;margin-bottom:16px;
+  border-left:4px solid var(--accent);
+}
+.highlight-card .hl-badge{
+  display:inline-block;font-size:.6875rem;font-weight:700;
+  color:var(--accent);background:var(--bg-card);
+  border:1px solid var(--border);border-radius:999px;
+  padding:2px 8px;margin-bottom:8px;
+}
+.highlight-card .hl-title{font-size:1rem;font-weight:700;margin-bottom:8px}
+.highlight-card .hl-title a{color:var(--text)}
+.highlight-card .hl-desc{font-size:.875rem;color:var(--text-muted);margin-bottom:8px}
+.highlight-card .hl-desc strong,
+.highlight-card .hl-scenario strong{
+  display:block;color:var(--text);font-size:.75rem;margin-bottom:2px;
+}
+.highlight-card .hl-link{font-size:.8125rem;margin-bottom:12px}
+.highlight-card .hl-scenario{
+  font-size:.875rem;line-height:1.7;
+  background:var(--bg-card);border-radius:8px;padding:12px;margin-bottom:8px;
+}
+.highlight-card .hl-action{
+  font-size:.8125rem;color:var(--accent);font-weight:600;
+}
+.highlight-card .hl-action::before{content:"→ "}
+
+/* Topic section */
+.topic{
+  background:var(--bg-card);border:1px solid var(--border);
+  border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:var(--shadow);
+}
+.topic-title{font-size:1rem;font-weight:700;margin-bottom:4px}
+.topic-summary{font-size:.8125rem;color:var(--text-muted);margin-bottom:16px}
+
+/* Item list */
+.item{
+  padding:10px 0;border-bottom:1px solid var(--border);
+  display:flex;gap:10px;align-items:flex-start;
+}
+.item:last-child{border-bottom:none;padding-bottom:0}
+.badge{
+  display:inline-block;font-size:.625rem;font-weight:700;
+  color:#fff;padding:2px 8px;border-radius:10px;white-space:nowrap;
+  flex-shrink:0;margin-top:3px;text-transform:uppercase;letter-spacing:.03em;
+}
+.badge-changelog{background:var(--badge-changelog)}
+.badge-mcp{background:var(--badge-mcp)}
+.badge-trending{background:var(--badge-trending)}
+.badge-plugin{background:var(--badge-plugin)}
+.badge-awesome{background:var(--badge-awesome)}
+.badge-skills{background:var(--badge-skills)}
+.item-body{flex:1;min-width:0}
+.item-title{font-size:.875rem;font-weight:600}
+.item-desc{font-size:.8125rem;color:var(--text-muted);margin-top:2px}
+.item-meta{font-size:.75rem;color:var(--text-light);margin-top:4px}
+.item-meta .stars::before{content:"\2B50 "}
+
+/* Footer */
+.footer{
+  text-align:center;color:var(--text-light);font-size:.75rem;
+  padding:32px 0 16px;border-top:1px solid var(--border);margin-top:32px;
+}
+
+/* No items */
+.empty{color:var(--text-light);font-style:italic;font-size:.875rem;padding:8px 0}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header class="header">
+  <h1>Weekly Tech Watch</h1>
+  <div class="date-range">2026-11-12 ~ 2026-11-16</div>
+</header>
+
+<div class="stat-grid">
+<div class="stat-card"><div class="num">1</div><div class="label">Claude Code</div></div>
+<div class="stat-card"><div class="num">1</div><div class="label">MCP</div></div>
+<div class="stat-card"><div class="num">2</div><div class="label">Plugins</div></div>
+<div class="stat-card"><div class="num">16</div><div class="label">awesome-cc</div></div>
+<div class="stat-card"><div class="num">1</div><div class="label">Skills</div></div>
+</div>
+
+<h2 class="section-heading">Highlights</h2>
+<div class="highlight-card">
+  <div class="hl-badge">ニュース</div>
+  <div class="hl-title"><a href="https://code.claude.com/docs/en/changelog">Claude Code v2.1.325</a></div>
+  <div class="hl-desc"><strong>概要</strong>Claude Code v2.1.325 のチェンジログです。今回の変更は小さく、VS Code などの統合ターミナル上で、Claude が Jupyter ノートブックを読んだり編集したりした後に、スピナー(処理中表示)のヒントとして「ノートブックのセルを再実行する」案内が一度だけ表示されるようになりました。対象はVS Codeおよび同様の統合ターミナルで、ノートブックに触れていない場合は表示されません。新しいコマンドや設定フラグの追加はなく、操作の気づきを促す軽微なUI改善です。</div>
+  <div class="hl-link"><a href="https://code.claude.com/docs/en/changelog">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>りゅうさんの普段の作業はClaude Codeでのリポジトリ運用や業務設計が中心で、Jupyterノートブックを日常的に使う場面は多くなさそうです。そのため直接の恩恵は小さく、基本は把握だけで十分です。効く場面があるとすれば、クライアント向けのAI業務診断で売上・予約データを簡単に集計したり、うま藻関連の数値をグラフ化したりするときに、VS Code上のノートブックをClaudeに編集させる流れです。その際、Claudeが書き換えたセルをユーザー側で再実行しないと画面上の結果が古いままになりがちですが、このヒントがその気づきを補ってくれます。自走支援で非エンジニアのクライアントにノートブックを渡すデモをする時も、操作の流れを説明しやすくなる可能性があります。注意点として、ヒントは一度きりの表示で、セルを自動実行してくれるわけではありません。結果を信用する前に、再実行して出力を確認する習慣は別途必要です。</div>
+  <div class="hl-action">試すなら、VS Codeの統合ターミナルで `claude` を起動し、適当な .ipynb ファイルを指定して「このノートブックのセルを1つ編集して」と依頼すると、スピナー表示にヒントが出るか確認できます。バージョンは `claude --version` で 2.1.325 以上か確認し、必要なら `claude update` を実行してください。詳細は https://code.claude.com/docs/en/changelog の該当バージョンの項目で読めます。</div>
+</div>
+<div class="highlight-card">
+  <div class="hl-badge">ニュース</div>
+  <div class="hl-title"><a href="https://www.pulsemcp.com/servers/sudomock">MCP: SudoMock</a></div>
+  <div class="hl-desc"><strong>概要</strong>PulseMCPに「SudoMock」というMCPサーバーが掲載された。SudoMock APIを経由して、PSDテンプレートからフォトリアルな商品モックアップ(Tシャツ、パッケージ、マグカップ等の見た目合成)を生成する、と説明されている。MCPクライアント(Claude Code等)から、テンプレートに画像を差し込んでモックアップ画像を得る操作をツール呼び出しとして実行できる位置づけ。外部API(SudoMock)を使うため、APIキーの取得や利用プランは別途必要になる見込み。詳細な料金・対応ツール一覧は掲載ページ側で確認する必要がある。</div>
+  <div class="hl-link"><a href="https://www.pulsemcp.com/servers/sudomock">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>商品パッケージやグッズの見た目確認が必要な場面で、可能性として役に立ちそうです。たとえばうま藻関連の商品ラベル、料理教室の配布物、りゅうさんちのオリジナルグッズなどで『実物を作る前に仕上がりイメージを共有したい』時です。手順としては、まずPSDモックアップテンプレートを1枚用意し、MCPサーバーとして登録(`claude mcp add` でSudoMockを追加)、デザイン画像を渡して書き出してもらう流れが考えられます。クライアント提案資料にパッケージ案を数パターン並べる用途にも向きそうです。一方で、外部APIで課金やレート制限があり得ること、未公開のデザインやクライアントの素材を外部サービスへ送ることになる点は注意が必要です。現状は優先課題に直結しないため、急いで導入するより、必要になった時の選択肢として把握しておく程度が妥当かもしれません。</div>
+  <div class="hl-action">https://www.pulsemcp.com/servers/sudomock を開き、必要なAPIキー、料金プラン、無料枠、提供ツール(テンプレート指定・画像差し替え・出力形式)を確認する。試すなら、公開済みで機密のない画像1枚だけを使い、`claude mcp add` でサーバーを登録して1回だけモックアップを生成し、品質とコストを見る。</div>
+</div>
+<div class="highlight-card">
+  <div class="hl-badge">ニュース</div>
+  <div class="hl-title"><a href="https://github.com/addyosmani/agent-skills/releases/tag/0.6.16">Addy Osmani: addyosmani/agent-skills</a></div>
+  <div class="hl-desc"><strong>概要</strong>Addy Osmani(Google Chromeのエンジニアリングリード)が公開しているGitHubリポジトリ「addyosmani/agent-skills」が、リリース 0.6.16 を公開した。AIコーディングエージェント向けに、仕様策定・計画・実装・テスト・レビューといった開発工程ごとの作業手順を「スキル」としてまとめたコレクションである。今回の配信元の説明には「Agent Skills 0.6.16」というリリース公開の事実しか載っておらず、個別の追加スキルや変更点の詳細は確認できない。詳細はリリースノートを見る必要がある。</div>
+  <div class="hl-link"><a href="https://github.com/addyosmani/agent-skills/releases/tag/0.6.16">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>リリースノートの内容は未確認なので、一般的な使い所として考えます。りゅうさんはCodexとClaude Codeを併用しているため、他の人が作り込んだ「工程別の作業手順書」を参考にできる可能性があります。たとえば自分のスキル(.claude/skills配下の SKILL.md 形式)を作る際に、このリポジトリの構成や書き方をお手本にします。「仕様を先に固める→小さく実装→検証してから完了とする」という流れは、りゅうさんの「全体設計してから小さく出す」「実物確認まで進める」という方針と相性が良い見込みです。丸ごと導入せず、良い部分だけを自分のルールに取り込む使い方が向いています。注意点として、外部のスキルは自分の環境の前提(Windows、既存のrules、出荷ゲート運用)と衝突する場合があります。中身を読まずに入れると既存の運用とぶつかるため、必ず読んでから取捨選択するのが安全です。</div>
+  <div class="hl-action">ブラウザで https://github.com/addyosmani/agent-skills/releases/tag/0.6.16 を開き、変更点(新規スキルの追加や修正)を確認します。気になるスキルがあれば、リポジトリのスキル一覧から該当の SKILL.md を読み、自分のスキルに足りない観点(検証手順やレビュー観点など)だけをメモします。今すぐの導入は不要です。</div>
+</div>
+
+<h2 class="section-heading">Topics</h2>
+<div class="topic">
+  <div class="topic-title">Claude Code更新</div>
+  <div class="topic-summary">Claude Code v2.1.325でVS Code等の統合ターミナル向けにJupyterノートブックのセル再実行を促すスピナーヒントが追加された。</div>
+<div class="item">
+  <span class="badge badge-changelog">CHANGELOG</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://code.claude.com/docs/en/changelog">v2.1.325</a></div>
+    <div class="item-desc">Added a spinner tip in VS Code and similar integrated terminals about re-running a notebook cell, shown once Claude has read or edited a Jupyter notebook, Added a line under the error shown when your organization’s policy blocks a request, saying how to continue: run /rewind and change the message, or run /clear, Added a note for Claude when a sandboxed git checkout, git stash or autostash pull cannot update protected files such as those in .claude</div>
+    <div class="item-meta">November 13, 2026</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">新規プラグイン</div>
+  <div class="topic-summary">モックアップ生成、SAP Fiori開発支援、デスクトップアプリのテーマ例など、新しいプラグインやMCPサーバーが登場。</div>
+<div class="item">
+  <span class="badge badge-mcp">MCP</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://www.pulsemcp.com/servers/sudomock">SudoMock</a></div>
+    <div class="item-desc">Generates photorealistic product mockups from PSD templates via the SudoMock API.</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-plugin">PLUGIN</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/SAP/open-ux-tools/tree/main/plugins-coding-agents/fiori">sap-ux-fiori-tools</a></div>
+    <div class="item-desc">MCP server and skills for SAP Fiori development. Build, modify, and test SAP Fiori Elements applications with AI assistance.</div>
+    <div class="item-meta">development</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-plugin">PLUGIN</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/anthropics/claude-plugins-official/tree/main/plugins/theme-examples">theme-examples</a></div>
+    <div class="item-desc">An example plugin to read, copy and change: twenty animated backdrops behind the chat in the Claude desktop app, with frosted-glass panels, one per project or per session. Needs a version of Claude Desktop that draws a plugin&#x27;s backdrop.</div>
+    <div class="item-meta">design</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">スキル更新</div>
+  <div class="topic-summary">docx、pptx、xlsx、pdfの各ドキュメント系スキルが更新された。</div>
+<div class="item">
+  <span class="badge badge-skills">SKILLS</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/anthropics/skills/commit/1780c5e">Update docx, pptx, xlsx, and pdf skills (#2217)</a></div>
+    <div class="item-meta">2026-11-14</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">リポジトリ自動更新</div>
+  <div class="topic-summary">リポジトリのティッカーデータとSVGを更新する自動choreコミットが連続して実行された。</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/c6cbe7b">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-11-15</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/b0e0b63">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-11-15</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/8fe8cb8">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-11-15</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/b290894">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-11-15</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/c7b893c">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-11-15</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/ac65d81">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-11-15</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/8405a34">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-11-15</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/966a231">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-11-15</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/9ae0792">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-11-14</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/04fa0f3">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-11-14</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/31fc4b8">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-11-14</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/1815315">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-11-14</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/3ca3673">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-11-14</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/77e4ada">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-11-14</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/8b9c1c8">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-11-14</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/9d07f7b">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-11-14</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">内容不明の項目</div>
+  <div class="topic-summary">タイトルも説明もなく、内容を判別できない項目群。</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/addyosmani/agent-skills">Addy Osmani: addyosmani/agent-skills (PushEvent)</a></div>
+    <div class="item-desc">[main] New push</div>
+    <div class="item-meta">2026-11-14</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/addyosmani/agent-skills">Addy Osmani: addyosmani/agent-skills (PushEvent)</a></div>
+    <div class="item-desc">[main] New push</div>
+    <div class="item-meta">2026-11-14</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/ayobamiseun/agent-skills">Addy Osmani: ayobamiseun/agent-skills (PushEvent)</a></div>
+    <div class="item-desc">[620-tdd-retune] New push</div>
+    <div class="item-meta">2026-11-14</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/ayobamiseun/agent-skills">Addy Osmani: ayobamiseun/agent-skills (PushEvent)</a></div>
+    <div class="item-desc">[620-review-plain-phrasing] New push</div>
+    <div class="item-meta">2026-11-14</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/addyosmani/agent-skills">Addy Osmani: addyosmani/agent-skills (PushEvent)</a></div>
+    <div class="item-desc">[main] New push</div>
+    <div class="item-meta">2026-11-14</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/addyosmani/agent-skills">Addy Osmani: addyosmani/agent-skills (PushEvent)</a></div>
+    <div class="item-desc">[main] New push</div>
+    <div class="item-meta">2026-11-14</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-developer_voices">DEVELOPER_VOICES</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/addyosmani/agent-skills/releases/tag/0.6.16">Addy Osmani: addyosmani/agent-skills (ReleaseEvent)</a></div>
+    <div class="item-desc">Release published: Agent Skills 0.6.16</div>
+    <div class="item-meta">2026-11-14</div>
+  </div>
+</div>
+</div>
+
+<footer class="footer">
+  Generated at 2026-11-16 07:56 JST<br>
+  Sources: Claude Code CHANGELOG, GitHub Releases, awesome-claude-code,
+  anthropics/skills, PulseMCP, Claude Plugins, GitHub Trending
+</footer>
+
+</div>
+</body>
+</html>
