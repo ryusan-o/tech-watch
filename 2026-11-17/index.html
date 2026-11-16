@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Weekly Tech Watch — 2026-11-17</title>
+<style>
+:root {
+  --bg: #f8fafc;
+  --bg-card: #ffffff;
+  --bg-highlight: #eff6ff;
+  --text: #1e293b;
+  --text-muted: #64748b;
+  --text-light: #94a3b8;
+  --accent: #3b82f6;
+  --border: #e2e8f0;
+  --shadow: 0 1px 3px rgba(0,0,0,.08);
+  --badge-changelog: #3b82f6;
+  --badge-mcp: #8b5cf6;
+  --badge-trending: #f59e0b;
+  --badge-plugin: #10b981;
+  --badge-awesome: #f43f5e;
+  --badge-skills: #06b6d4;
+}
+@media(prefers-color-scheme:dark){
+:root {
+  --bg: #0f172a;
+  --bg-card: #1e293b;
+  --bg-highlight: #1e3a5f;
+  --text: #e2e8f0;
+  --text-muted: #94a3b8;
+  --text-light: #64748b;
+  --accent: #60a5fa;
+  --border: #334155;
+  --shadow: 0 1px 3px rgba(0,0,0,.3);
+}}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  background:var(--bg);color:var(--text);
+  line-height:1.6;padding:16px;
+}
+.container{max-width:760px;margin:0 auto}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* Header */
+.header{text-align:center;padding:32px 0 24px}
+.header h1{font-size:1.5rem;font-weight:700;letter-spacing:-.02em}
+.header .date-range{color:var(--text-muted);font-size:.875rem;margin-top:4px}
+
+/* Stats */
+.stat-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));
+  gap:8px;margin:0 0 32px;
+}
+.stat-card{
+  background:var(--bg-card);border:1px solid var(--border);border-radius:8px;
+  padding:12px;text-align:center;box-shadow:var(--shadow);
+}
+.stat-card .num{font-size:1.5rem;font-weight:700;color:var(--accent)}
+.stat-card .label{font-size:.75rem;color:var(--text-muted);margin-top:2px}
+
+/* Section heading */
+.section-heading{
+  font-size:1.125rem;font-weight:700;margin:32px 0 16px;
+  padding-bottom:8px;border-bottom:2px solid var(--accent);
+}
+
+/* Highlight cards */
+.highlight-card{
+  background:var(--bg-highlight);border:1px solid var(--border);
+  border-radius:12px;padding:20px;margin-bottom:16px;
+  border-left:4px solid var(--accent);
+}
+.highlight-card .hl-badge{
+  display:inline-block;font-size:.6875rem;font-weight:700;
+  color:var(--accent);background:var(--bg-card);
+  border:1px solid var(--border);border-radius:999px;
+  padding:2px 8px;margin-bottom:8px;
+}
+.highlight-card .hl-title{font-size:1rem;font-weight:700;margin-bottom:8px}
+.highlight-card .hl-title a{color:var(--text)}
+.highlight-card .hl-desc{font-size:.875rem;color:var(--text-muted);margin-bottom:8px}
+.highlight-card .hl-desc strong,
+.highlight-card .hl-scenario strong{
+  display:block;color:var(--text);font-size:.75rem;margin-bottom:2px;
+}
+.highlight-card .hl-link{font-size:.8125rem;margin-bottom:12px}
+.highlight-card .hl-scenario{
+  font-size:.875rem;line-height:1.7;
+  background:var(--bg-card);border-radius:8px;padding:12px;margin-bottom:8px;
+}
+.highlight-card .hl-action{
+  font-size:.8125rem;color:var(--accent);font-weight:600;
+}
+.highlight-card .hl-action::before{content:"→ "}
+
+/* Topic section */
+.topic{
+  background:var(--bg-card);border:1px solid var(--border);
+  border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:var(--shadow);
+}
+.topic-title{font-size:1rem;font-weight:700;margin-bottom:4px}
+.topic-summary{font-size:.8125rem;color:var(--text-muted);margin-bottom:16px}
+
+/* Item list */
+.item{
+  padding:10px 0;border-bottom:1px solid var(--border);
+  display:flex;gap:10px;align-items:flex-start;
+}
+.item:last-child{border-bottom:none;padding-bottom:0}
+.badge{
+  display:inline-block;font-size:.625rem;font-weight:700;
+  color:#fff;padding:2px 8px;border-radius:10px;white-space:nowrap;
+  flex-shrink:0;margin-top:3px;text-transform:uppercase;letter-spacing:.03em;
+}
+.badge-changelog{background:var(--badge-changelog)}
+.badge-mcp{background:var(--badge-mcp)}
+.badge-trending{background:var(--badge-trending)}
+.badge-plugin{background:var(--badge-plugin)}
+.badge-awesome{background:var(--badge-awesome)}
+.badge-skills{background:var(--badge-skills)}
+.item-body{flex:1;min-width:0}
+.item-title{font-size:.875rem;font-weight:600}
+.item-desc{font-size:.8125rem;color:var(--text-muted);margin-top:2px}
+.item-meta{font-size:.75rem;color:var(--text-light);margin-top:4px}
+.item-meta .stars::before{content:"\2B50 "}
+
+/* Footer */
+.footer{
+  text-align:center;color:var(--text-light);font-size:.75rem;
+  padding:32px 0 16px;border-top:1px solid var(--border);margin-top:32px;
+}
+
+/* No items */
+.empty{color:var(--text-light);font-style:italic;font-size:.875rem;padding:8px 0}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header class="header">
+  <h1>Weekly Tech Watch</h1>
+  <div class="date-range">2026-11-15 ~ 2026-11-17</div>
+</header>
+
+<div class="stat-grid">
+<div class="stat-card"><div class="num">1</div><div class="label">Claude Code</div></div>
+<div class="stat-card"><div class="num">2</div><div class="label">Trending</div></div>
+<div class="stat-card"><div class="num">8</div><div class="label">awesome-cc</div></div>
+<div class="stat-card"><div class="num">1</div><div class="label">Skills</div></div>
+</div>
+
+<h2 class="section-heading">Highlights</h2>
+<div class="highlight-card">
+  <div class="hl-badge">ニュース</div>
+  <div class="hl-title"><a href="https://code.claude.com/docs/en/changelog">Claude Code v2.1.326</a></div>
+  <div class="hl-desc"><strong>概要</strong>Claude Code v2.1.326のチェンジログです。agent teams(複数のエージェントをチームとして並列に動かす機能)が有効な状態でも、Code Modeをオンにできるようになりました。すでにCode Modeをオンにしている人については、teamsを有効にしたセッションは最初からCode Modeで起動します。これまでは両機能の併用に制約があったため、チーム構成で動かしつつCode Modeの挙動を使いたい場合の障壁が取り除かれた更新です。</div>
+  <div class="hl-link"><a href="https://code.claude.com/docs/en/changelog">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>CodexとClaude Codeを共有リポジトリで使い、複数タスクを並行で進める運用では、agent teamsとCode Modeを併用する場面で効く可能性があります。たとえばクライアント向けの自動化スクリプトや業務システムの改修で、実装担当とレビュー担当のエージェントを分け、全員をCode Modeで動かす使い方が考えられます。手順としては、設定画面かCLIでCode Modeを一度オンにし、agent teamsを有効にしてセッションを開くだけです。以降は自動でCode Modeで始まるので、毎回の切り替えが不要になります。一方、挙動が変わる点には注意が必要です。teams有効のセッションが自動でCode Modeになるため、これまでと違う動きに戸惑う場合があります。重要なリポジトリでいきなり使わず、小さな検証用の作業で動きを見てから広げるのが安全だと思います。</div>
+  <div class="hl-action">公式チェンジログ(https://code.claude.com/docs/en/changelog)のv2.1.326の項目を開き、Code Modeの有効化方法とagent teamsとの関係を確認します。その後 `claude --version` で現在のバージョンを確認し、2.1.326未満なら更新します。検証は影響の小さい作業用ディレクトリで、teams有効のセッションを起動して挙動を見るところから始められます。</div>
+</div>
+<div class="highlight-card">
+  <div class="hl-badge">深掘り候補</div>
+  <div class="hl-title"><a href="https://github.com/obsidianmd/obsidian-skills">GitHub: obsidianmd/obsidian-skills</a></div>
+  <div class="hl-desc"><strong>概要</strong>obsidianmd/obsidian-skills は、Obsidian公式組織(obsidianmd)が公開しているGitHubリポジトリで、AIエージェント向けの「Agent Skills」集です。エージェントに、Obsidian CLIの使い方と、Markdown、Bases、JSON Canvasといったオープンなファイル形式の扱い方を教えるためのスキル定義が入っています。これにより、Claude CodeやCodexのようなエージェントが、Obsidian Vault内のノート、データベース風のビュー(Bases)、図解キャンバス(JSON Canvas)を、独自流儀ではなく正しい作法で読み書きしやすくなります。今週のGitHub trendingに入っています。</div>
+  <div class="hl-link"><a href="https://github.com/obsidianmd/obsidian-skills">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>りゅうさんはClaude CodeとCodexを共有リポジトリで使い、`00_Brain/` のような知識ベースをMarkdownで管理しています。もしVaultをObsidianで開いている、または開く予定があれば、このスキルを導入すると、エージェントがwikilink、frontmatter、Basesの書式を崩さずにノートを追加・更新できる可能性があります。例えば議事録や技術ウォッチの結果をVaultに自動で書き出す場面で、リンク切れや書式崩れを減らす効果が見込めます。具体的には、リポジトリをcloneし、含まれるスキルのフォルダを `.claude/skills/` にコピーして、スキル一覧に出るか確認する流れが考えられます。JSON Canvasは、クライアント向けの業務フロー図やうま藻の事業構造を、エージェントに下書きさせる用途にも合いそうです。注意点として、既存のスキルやrulesと指示が重複・競合することがあるため、まず検証用のコピーで試し、既存ファイルを直接書き換えさせない運用が安全です。</div>
+  <div class="hl-action">ブラウザで https://github.com/obsidianmd/obsidian-skills を開き、README と各スキルの SKILL.md(CLI、Bases、JSON Canvas)を読んで、対応するエージェントとインストール方法を確認する。次に、検証用の空フォルダで `git clone https://github.com/obsidianmd/obsidian-skills` を実行し、中身のスキルを1つだけ `.claude/skills/` に置いて、Claude Codeから呼び出せるか試す。</div>
+</div>
+<div class="highlight-card">
+  <div class="hl-badge">ニュース</div>
+  <div class="hl-title"><a href="https://github.com/yazinsai/OpenOats">GitHub: yazinsai/OpenOats</a></div>
+  <div class="hl-desc"><strong>概要</strong>yazinsai/OpenOats は、Mac向けのミニマルな会議録音アプリ(オープンソース・無料)。「Start」を押して会議し、「Stop」を押すと、ノートと「You/Them」(自分と相手)に話者分離された文字起こしが、1つのMarkdownファイルにまとまって出力される。処理はすべてオンデバイスで完結し、音声や文字起こしを外部クラウドへ送らない設計。GitHubのtrendingに上がった。機能を絞り、録音から議事録Markdown生成までの流れを最短にしている点が特徴。</div>
+  <div class="hl-link"><a href="https://github.com/yazinsai/OpenOats">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>りゅうさんは議事録自動化(MeetingMinutes)を運用しているので、その入力側の選択肢として比較できる可能性があります。特に効くのは、クライアントとのオンライン商談や、うま藻関連の打ち合わせ直後に「議事録を1ファイルで残したい」場面です。使い方の一例として、OpenOatsで会議を録音し、出力されたMarkdown(You/Them分離済み)をClaude Codeやリポジトリのノートに置き、要約・タスク抽出だけを後段のAIに任せる、という分担が考えられます。オンデバイス処理なので、顧客の発言や経営情報を外部の文字起こしAPIへ送りたくない案件では安心材料になるかもしれません。一方で、対応はMacのみです。りゅうさんの実行環境がWindowsなら、そのままは使えません。また、You/Them の2者分離なので、3人以上の会議で話者を区別したい用途には向きません。録音自体は、相手への事前の同意確認も必要です。</div>
+  <div class="hl-action">まず https://github.com/yazinsai/OpenOats のREADMEを開き、対応macOSバージョン、使用している文字起こしモデル、出力Markdownのサンプルを確認してください。手元にMacがあれば、短い雑談を1本録って、出力形式がMeetingMinutesの入力として使えるかを見るのが最初の一歩です。Windowsしかない場合は、対応OSの記述だけ確認すれば十分です。</div>
+</div>
+
+<h2 class="section-heading">Topics</h2>
+<div class="topic">
+  <div class="topic-title">Claude Code更新</div>
+  <div class="topic-summary">Claude Codeのv2.1.326でエージェントチーム有効時にもCode Modeを利用可能にするアップデート。</div>
+<div class="item">
+  <span class="badge badge-changelog">CHANGELOG</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://code.claude.com/docs/en/changelog">v2.1.326</a></div>
+    <div class="item-desc">Added support for turning on Code Mode while agent teams are enabled; if you already turned it on, sessions with teams on now start in Code Mode, Added a startup warning when an --allowedTools, --disallowedTools or --tools value has an entry that doesn’t look like a complete rule, Added a message explaining why MCP servers stop loading when an administrator adds managed-mcp.json during a session</div>
+    <div class="item-meta">November 16, 2026</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">Obsidian連携スキル</div>
+  <div class="topic-summary">ObsidianのCLIやMarkdown、Bases、JSON Canvasなどのオープン形式をエージェントに教えるスキル集。</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/obsidianmd/obsidian-skills">obsidianmd/obsidian-skills</a></div>
+    <div class="item-desc">Agent skills for Obsidian. Teach your agent to use Obsidian CLI and open formats including Markdown, Bases, JSON Canvas.</div>
+    <div class="item-meta"><span class="stars">52948</span></div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">会議録音ツール</div>
+  <div class="topic-summary">Mac向けの最小構成の会議レコーダーで、オンデバイス動作により文字起こしとノートを一つのMarkdownにまとめる。</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/yazinsai/OpenOats">yazinsai/OpenOats</a></div>
+    <div class="item-desc">A minimal meeting recorder for Mac. Press Start, and after Stop you get Notes and a You/Them transcript in one markdown file. On-device, free and open source.</div>
+    <div class="item-meta"><span class="stars">2673</span></div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">Office系スキル更新</div>
+  <div class="topic-summary">docx・pptx・xlsxスキルをzipfile展開やvalidate.py、sofficeなどを使う形に更新。</div>
+<div class="item">
+  <span class="badge badge-skills">SKILLS</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/anthropics/skills/commit/e4bb5d9">Update docx, pptx and xlsx skills: zipfile unpack, zip -y, validate.py and soffi</a></div>
+    <div class="item-meta">2026-11-16</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">リポジトリ自動更新</div>
+  <div class="topic-summary">リポジトリのティッカーデータとSVGを自動更新する定期的なチョアコミット。</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/9889a97">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-11-16</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/27429e2">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-11-16</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/fc9d780">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-11-16</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/f086b05">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-11-16</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/d79768c">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-11-16</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/7dc362c">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-11-16</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/dc3f576">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-11-16</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/7ea9e00">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-11-16</div>
+  </div>
+</div>
+</div>
+
+<footer class="footer">
+  Generated at 2026-11-17 07:56 JST<br>
+  Sources: Claude Code CHANGELOG, GitHub Releases, awesome-claude-code,
+  anthropics/skills, PulseMCP, Claude Plugins, GitHub Trending
+</footer>
+
+</div>
+</body>
+</html>
