@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Weekly Tech Watch — 2026-11-20</title>
+<style>
+:root {
+  --bg: #f8fafc;
+  --bg-card: #ffffff;
+  --bg-highlight: #eff6ff;
+  --text: #1e293b;
+  --text-muted: #64748b;
+  --text-light: #94a3b8;
+  --accent: #3b82f6;
+  --border: #e2e8f0;
+  --shadow: 0 1px 3px rgba(0,0,0,.08);
+  --badge-changelog: #3b82f6;
+  --badge-mcp: #8b5cf6;
+  --badge-trending: #f59e0b;
+  --badge-plugin: #10b981;
+  --badge-awesome: #f43f5e;
+  --badge-skills: #06b6d4;
+}
+@media(prefers-color-scheme:dark){
+:root {
+  --bg: #0f172a;
+  --bg-card: #1e293b;
+  --bg-highlight: #1e3a5f;
+  --text: #e2e8f0;
+  --text-muted: #94a3b8;
+  --text-light: #64748b;
+  --accent: #60a5fa;
+  --border: #334155;
+  --shadow: 0 1px 3px rgba(0,0,0,.3);
+}}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  background:var(--bg);color:var(--text);
+  line-height:1.6;padding:16px;
+}
+.container{max-width:760px;margin:0 auto}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* Header */
+.header{text-align:center;padding:32px 0 24px}
+.header h1{font-size:1.5rem;font-weight:700;letter-spacing:-.02em}
+.header .date-range{color:var(--text-muted);font-size:.875rem;margin-top:4px}
+
+/* Stats */
+.stat-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));
+  gap:8px;margin:0 0 32px;
+}
+.stat-card{
+  background:var(--bg-card);border:1px solid var(--border);border-radius:8px;
+  padding:12px;text-align:center;box-shadow:var(--shadow);
+}
+.stat-card .num{font-size:1.5rem;font-weight:700;color:var(--accent)}
+.stat-card .label{font-size:.75rem;color:var(--text-muted);margin-top:2px}
+
+/* Section heading */
+.section-heading{
+  font-size:1.125rem;font-weight:700;margin:32px 0 16px;
+  padding-bottom:8px;border-bottom:2px solid var(--accent);
+}
+
+/* Highlight cards */
+.highlight-card{
+  background:var(--bg-highlight);border:1px solid var(--border);
+  border-radius:12px;padding:20px;margin-bottom:16px;
+  border-left:4px solid var(--accent);
+}
+.highlight-card .hl-badge{
+  display:inline-block;font-size:.6875rem;font-weight:700;
+  color:var(--accent);background:var(--bg-card);
+  border:1px solid var(--border);border-radius:999px;
+  padding:2px 8px;margin-bottom:8px;
+}
+.highlight-card .hl-title{font-size:1rem;font-weight:700;margin-bottom:8px}
+.highlight-card .hl-title a{color:var(--text)}
+.highlight-card .hl-desc{font-size:.875rem;color:var(--text-muted);margin-bottom:8px}
+.highlight-card .hl-desc strong,
+.highlight-card .hl-scenario strong{
+  display:block;color:var(--text);font-size:.75rem;margin-bottom:2px;
+}
+.highlight-card .hl-link{font-size:.8125rem;margin-bottom:12px}
+.highlight-card .hl-scenario{
+  font-size:.875rem;line-height:1.7;
+  background:var(--bg-card);border-radius:8px;padding:12px;margin-bottom:8px;
+}
+.highlight-card .hl-action{
+  font-size:.8125rem;color:var(--accent);font-weight:600;
+}
+.highlight-card .hl-action::before{content:"→ "}
+
+/* Topic section */
+.topic{
+  background:var(--bg-card);border:1px solid var(--border);
+  border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:var(--shadow);
+}
+.topic-title{font-size:1rem;font-weight:700;margin-bottom:4px}
+.topic-summary{font-size:.8125rem;color:var(--text-muted);margin-bottom:16px}
+
+/* Item list */
+.item{
+  padding:10px 0;border-bottom:1px solid var(--border);
+  display:flex;gap:10px;align-items:flex-start;
+}
+.item:last-child{border-bottom:none;padding-bottom:0}
+.badge{
+  display:inline-block;font-size:.625rem;font-weight:700;
+  color:#fff;padding:2px 8px;border-radius:10px;white-space:nowrap;
+  flex-shrink:0;margin-top:3px;text-transform:uppercase;letter-spacing:.03em;
+}
+.badge-changelog{background:var(--badge-changelog)}
+.badge-mcp{background:var(--badge-mcp)}
+.badge-trending{background:var(--badge-trending)}
+.badge-plugin{background:var(--badge-plugin)}
+.badge-awesome{background:var(--badge-awesome)}
+.badge-skills{background:var(--badge-skills)}
+.item-body{flex:1;min-width:0}
+.item-title{font-size:.875rem;font-weight:600}
+.item-desc{font-size:.8125rem;color:var(--text-muted);margin-top:2px}
+.item-meta{font-size:.75rem;color:var(--text-light);margin-top:4px}
+.item-meta .stars::before{content:"\2B50 "}
+
+/* Footer */
+.footer{
+  text-align:center;color:var(--text-light);font-size:.75rem;
+  padding:32px 0 16px;border-top:1px solid var(--border);margin-top:32px;
+}
+
+/* No items */
+.empty{color:var(--text-light);font-style:italic;font-size:.875rem;padding:8px 0}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header class="header">
+  <h1>Weekly Tech Watch</h1>
+  <div class="date-range">2026-11-18 ~ 2026-11-20</div>
+</header>
+
+<div class="stat-grid">
+<div class="stat-card"><div class="num">2</div><div class="label">Claude Code</div></div>
+<div class="stat-card"><div class="num">1</div><div class="label">MCP</div></div>
+<div class="stat-card"><div class="num">1</div><div class="label">Trending</div></div>
+<div class="stat-card"><div class="num">8</div><div class="label">awesome-cc</div></div>
+</div>
+
+<h2 class="section-heading">Highlights</h2>
+<div class="highlight-card">
+  <div class="hl-badge">深掘り候補</div>
+  <div class="hl-title"><a href="https://code.claude.com/docs/en/changelog">Claude Code v2.1.328</a></div>
+  <div class="hl-desc"><strong>概要</strong>Claude Code v2.1.328 で、Amazon Bedrock、Google Cloud の Agent Platform、Microsoft Foundry、Claude apps gateway 上の Claude Opus 4.6 と Sonnet 4.6 に auto mode が追加されました。これまで auto mode は Anthropic の直接提供環境が中心でしたが、主要クラウド経由の利用でも使えるようになります。また、権限モードを指定していない対話セッションは、この auto mode で開始されます。毎回の許可確認を減らし、AIが自律的に作業を進める挙動が、既定の起動状態になる変更です。</div>
+  <div class="hl-link"><a href="https://code.claude.com/docs/en/changelog">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>効くのは、Bedrock や Foundry 経由で Claude Code を使うクライアント企業に導入支援をする場面です。これまでは許可確認が頻繁に出て、「結局AIに任せきれない」という不満が出やすい部分でした。auto mode が既定になれば、ファイル整理や定型スクリプト作成のような低リスクの作業は、確認なしでテンポよく進められる可能性があります。使い方としては、クラウド経由の環境でセッションを開始し、起動直後の表示がどのモードになっているかを確認します。そのうえで、プロジェクトの settings.json に deny ルールを書き、削除、push、本番設定の変更などを明示的に止める構成が考えられます。注意点は、権限モード未指定のセッションが自動的に auto mode になることです。自分の環境で、これまで確認が出ていた操作が出なくなる可能性があります。既存のリポジトリや顧客環境では、先に deny と allow の設定を見直したほうが安全です。</div>
+  <div class="hl-action">公式の変更履歴 https://code.claude.com/docs/en/changelog を開き、v2.1.328 の項目と auto mode の説明ページを読んでください。そのうえで、テスト用の空フォルダで claude を起動し、Shift+Tab などで現在の権限モードを確認します。続けて、rm や git push のような操作を試して、確認が出るか、止まるかを見てください。確認後、必要なら settings.json の permissions.deny にルールを追加します。</div>
+</div>
+<div class="highlight-card">
+  <div class="hl-badge">ニュース</div>
+  <div class="hl-title"><a href="https://code.claude.com/docs/en/changelog">Claude Code v2.1.329</a></div>
+  <div class="hl-desc"><strong>概要</strong>Claude Code v2.1.329 のチェンジログで、信頼ダイアログ(trust dialog)に警告が追加された。フォルダを初めて開いて信頼確認が出る際、そのフォルダのフック(hooks)がどこで宣言されているか(どの設定ファイルに書かれているか)が警告文に明示される。フックは任意のシェルコマンドを自動実行できるため、リポジトリ側の設定にあるフックを知らずに許可してしまうリスクを減らす狙いと読める。今回の説明にはこの1点のみが記載されている。</div>
+  <div class="hl-link"><a href="https://code.claude.com/docs/en/changelog">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>第三者のリポジトリやクライアントから受け取ったフォルダをClaude Codeで開く場面で効く可能性があります。たとえばクライアントの共有フォルダ、GitHubで拾ったテンプレート、zipで受け取ったプロジェクトなどです。信頼ダイアログが出たら、警告に書かれた宣言場所(プロジェクトの .claude/settings.json か、ユーザー設定かなど)を読み、プロジェクト側にフックがあれば実際にそのファイルを開いて中のコマンドを確認してから許可する、という運用が考えられます。自分が作ったリポジトリ以外では、確認せずに Yes を押す習慣を避けるだけでも安全性が上がります。AIコンサルとして「クライアントへ導入する時の安全確認手順」の一項目にも使えます。注意点として、警告が出ても中身の安全性を判定してくれるわけではないので、内容の確認自体は人が行う必要があります。</div>
+  <div class="hl-action">まず `claude --version` でバージョンが v2.1.329 以上か確認し、古ければ更新します。次に、テスト用の空フォルダへ `.claude/settings.json` を作り、無害なフック(例: SessionStart で echo を実行)を書いてから、そのフォルダで claude を起動してみてください。信頼ダイアログに宣言場所が表示されるかを実際に見られます。詳細は https://code.claude.com/docs/en/changelog の v2.1.329 の項を参照してください。</div>
+</div>
+<div class="highlight-card">
+  <div class="hl-badge">ニュース</div>
+  <div class="hl-title"><a href="https://www.anthropic.com/news/anthropic-prices-initial-public-offering">Anthropic prices initial public offering</a></div>
+  <div class="hl-desc"><strong>概要</strong>Anthropicが公式ニュースとして「Anthropic prices initial public offering」(新規株式公開の価格決定)を発表しました。タイトルから分かるのは、IPOの公開価格が決まったという点です。ただし今回の入力では説明文が空で、公開価格、調達額、上場市場、上場日、ティッカーなどの具体的な数値や条件は確認できていません。そのため、ここでは数値を補わず、価格決定の発表があったという事実だけを記します。詳細は原文のURLで確認する必要があります。</div>
+  <div class="hl-link"><a href="https://www.anthropic.com/news/anthropic-prices-initial-public-offering">詳細を見る</a></div>
+  <div class="hl-scenario"><strong>活用案</strong>直接使える新機能の話ではありません。ただ、AIコンサルとして効く場面はあります。第一に、上場企業になるとAPI価格、利用規約、データ取り扱い、サポート体制などの開示や方針が変わる可能性があります。クライアントにAnthropic製品を提案するときは、財務の安定性や継続性を説明する材料になるかもしれません。第二に、提案書や「AI経営スキル講座」の資料で、ベンダー選定の観点(価格改定リスク、モデルの継続提供、ロックイン)を話す具体例として使えそうです。具体的には、既存の契約・料金管理ファイル(subscriptions.yaml)でAnthropic関連の項目を見直す際に、価格改定や規約変更の告知が出ていないかを確認するチェック項目に加える使い方があります。注意点として、IPOの報道だけで利用料金や契約条件が変わると決めつけず、公式の発表や規約の更新を確認してから判断するのが安全です。投資や株の売買判断に結びつけるのも、この通知の範囲外です。</div>
+  <div class="hl-action">ブラウザで https://www.anthropic.com/news/anthropic-prices-initial-public-offering を開き、公開価格、調達額、上場市場、上場日、資金使途を確認してください。あわせて https://www.anthropic.com/legal の利用規約・プライバシー関連ページの更新日と、API料金ページ(anthropic.com/pricing)に変更がないかを見ておくと、クライアントへの説明材料になります。</div>
+</div>
+
+<h2 class="section-heading">Topics</h2>
+<div class="topic">
+  <div class="topic-title">Claude Code更新</div>
+  <div class="topic-summary">v2.1.329/v2.1.328で信頼ダイアログの警告追加やBedrock等でのオートモード対応が行われた。</div>
+<div class="item">
+  <span class="badge badge-changelog">CHANGELOG</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://code.claude.com/docs/en/changelog">v2.1.329</a></div>
+    <div class="item-desc">Added a trust dialog warning that says where a folder’s hooks are declared, Added a warning in the conversation, in Claude Desktop and other non-interactive hosts, when hooks in managed settings fail to load, Added this session’s scheduled tasks, /loop wakeups, the goal and this conversation’s forks to /tasks; x stops one after asking</div>
+    <div class="item-meta">November 19, 2026</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-changelog">CHANGELOG</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://code.claude.com/docs/en/changelog">v2.1.328</a></div>
+    <div class="item-desc">Added auto mode for Claude Opus 4.6 and Sonnet 4.6 on Amazon Bedrock, Google Cloud’s Agent Platform, Microsoft Foundry and Claude apps gateway; interactive sessions with no permission mode start in it, Added &quot;onFailure&quot;: &quot;block&quot; for mcp_tool hooks, as for command and HTTP hooks: a hook whose call fails blocks the action, Added a warning when a message from a session that skips permission prompts may be held and dropped by a cloud session</div>
+    <div class="item-meta">November 19, 2026</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">MCP・スキル拡張</div>
+  <div class="topic-summary">Solana向けMCPサーバーや、Skillを自律的に進化させるdarwin-skillが登場した。</div>
+<div class="item">
+  <span class="badge badge-mcp">MCP</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://www.pulsemcp.com/servers/tenzro-solana">Tenzro Solana</a></div>
+    <div class="item-desc">MCP server for Solana blockchain operations on Tenzro Network: Jupiter swaps, SPL transfers, Metaplex NFTs, SNS...</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-trending">TRENDING</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/alchaincyf/darwin-skill">alchaincyf/darwin-skill</a></div>
+    <div class="item-desc">达尔文.skill —— 一个让你的Skill无限进化的系统：评估→改进→测试→保留或回滚 | Autoresearch-inspired autonomous skill optimization for Claude Code. Evaluate, improve, test, keep or revert.</div>
+    <div class="item-meta"><span class="stars">7001</span></div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">リポジトリ自動更新</div>
+  <div class="topic-summary">リポジトリのティッカーデータとSVGを更新する自動choreコミットが連続している。</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/948a89c">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-11-19</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/01f905c">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-11-19</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/963c64d">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-11-19</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/e354daf">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-11-19</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/e24ee9b">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-11-19</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/1daed43">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-11-19</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/cbd2a5e">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-11-19</div>
+  </div>
+</div>
+<div class="item">
+  <span class="badge badge-awesome">AWESOME</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://github.com/hesreallyhim/awesome-claude-code/commit/32310db">chore: update repo ticker data and SVGs [skip ci]</a></div>
+    <div class="item-meta">2026-11-19</div>
+  </div>
+</div>
+</div>
+<div class="topic">
+  <div class="topic-title">Anthropic IPO</div>
+  <div class="topic-summary">Anthropicが新規株式公開(IPO)の価格を決定したとの報道。</div>
+<div class="item">
+  <span class="badge badge-anthropic_news">ANTHROPIC_NEWS</span>
+  <div class="item-body">
+    <div class="item-title"><a href="https://www.anthropic.com/news/anthropic-prices-initial-public-offering">Anthropic prices initial public offering</a></div>
+  </div>
+</div>
+</div>
+
+<footer class="footer">
+  Generated at 2026-11-20 07:56 JST<br>
+  Sources: Claude Code CHANGELOG, GitHub Releases, awesome-claude-code,
+  anthropics/skills, PulseMCP, Claude Plugins, GitHub Trending
+</footer>
+
+</div>
+</body>
+</html>
